@@ -10,7 +10,7 @@ use Yii;
  * @property integer $id
  * @property string $no_reg
  * @property integer $pasienId
- * @property string $registrasi_date
+ * @property string $tanggal_registrasi
  * @property string $status_pelayanan
  * @property string $status_rawat
  * @property string $dr_penanggung_jawab
@@ -42,14 +42,16 @@ class Registrasi extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public $pasienNama;
+    public $tanggal_registrasi_format;
     public function rules()
     {
         return [
             [['no_reg', 'pasienId', 'status_pelayanan'], 'required'],
             [['pasienId', 'icdx_id'], 'integer'],
-            [['registrasi_date', 'asuransi_tgl_lahir'], 'safe'],
+            [['tanggal_registrasi', 'asuransi_tgl_lahir'], 'safe'],
             [['status_pelayanan', 'status_rawat', 'status_asuransi', 'catatan'], 'string'],
-            [['no_reg', 'asuransi_noreg', 'asuransi_notelp'], 'string', 'max' => 15],
+            [['no_reg', 'asuransi_noreg','asuransi_noreg_other', 'asuransi_notelp'], 'string', 'max' => 15],
             [['dr_penanggung_jawab', 'asuransi_nama'], 'string', 'max' => 25],
             [['asuransi_status_jaminan', 'asuransi_penanggung_jawab', 'asuransi_alamat'], 'string', 'max' => 30]
         ];
@@ -62,22 +64,23 @@ class Registrasi extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'no_reg' => 'No Reg',
-            'pasienId' => 'Pasien ID',
-            'registrasi_date' => 'Registrasi Date',
+            'no_reg' => 'No Registrasi',
+            'pasienId' => 'Pasien',
+            'tanggal_registrasi' => 'Tanggal Registrasi',
             'status_pelayanan' => 'Status Pelayanan',
             'status_rawat' => 'Status Rawat',
-            'dr_penanggung_jawab' => 'Dr Penanggung Jawab',
-            'icdx_id' => 'Icdx ID',
+            'dr_penanggung_jawab' => 'Dokter Penanggung Jawab',
+            'icdx_id' => 'Kode ICD X',
             'status_asuransi' => 'Status Asuransi',
             'catatan' => 'Catatan',
-            'asuransi_noreg' => 'Asuransi Noreg',
-            'asuransi_nama' => 'Asuransi Nama',
-            'asuransi_tgl_lahir' => 'Asuransi Tgl Lahir',
-            'asuransi_status_jaminan' => 'Asuransi Status Jaminan',
-            'asuransi_penanggung_jawab' => 'Asuransi Penanggung Jawab',
-            'asuransi_alamat' => 'Asuransi Alamat',
-            'asuransi_notelp' => 'Asuransi Notelp',
+            'asuransi_noreg' => 'No Reg Asuransi',
+            'asuransi_noreg_other' => 'No Reg Asuransi',
+            'asuransi_nama' => 'Nama Asuransi',
+            'asuransi_tgl_lahir' => 'Tanggal Lahir',
+            'asuransi_status_jaminan' => 'Status Jaminan',
+            'asuransi_penanggung_jawab' => 'Penanggung Jawab',
+            'asuransi_alamat' => 'Alamat',
+            'asuransi_notelp' => 'No Telepon/HP',
         ];
     }
 

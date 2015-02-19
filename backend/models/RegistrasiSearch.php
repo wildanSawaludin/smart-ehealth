@@ -8,7 +8,7 @@ use yii\data\ActiveDataProvider;
 use backend\models\Registrasi;
 
 /**
- * RegistrasiSearch represents the model behind the search form about `app\models\Registrasi`.
+ * RegistrasiSearch represents the model behind the search form about `backend\models\Registrasi`.
  */
 class RegistrasiSearch extends Registrasi
 {
@@ -19,7 +19,7 @@ class RegistrasiSearch extends Registrasi
     {
         return [
             [['id', 'pasienId', 'icdx_id'], 'integer'],
-            [['no_reg', 'registrasi_date', 'status_pelayanan', 'status_rawat', 'dr_penanggung_jawab', 'status_asuransi', 'catatan', 'asuransi_noreg', 'asuransi_nama', 'asuransi_tgl_lahir', 'asuransi_status_jaminan', 'asuransi_penanggung_jawab', 'asuransi_alamat', 'asuransi_notelp'], 'safe'],
+            [['no_reg', 'tanggal_registrasi', 'status_pelayanan', 'status_rawat', 'dr_penanggung_jawab', 'status_asuransi', 'catatan', 'asuransi_noreg', 'asuransi_nama', 'asuransi_tgl_lahir', 'asuransi_status_jaminan', 'asuransi_penanggung_jawab', 'asuransi_alamat', 'asuransi_notelp','pasienNama','tanggal_registrasi_format'], 'safe'],
         ];
     }
 
@@ -41,7 +41,15 @@ class RegistrasiSearch extends Registrasi
      */
     public function search($params)
     {
-        $query = Registrasi::find();
+        $query = Registrasi::find()
+        ->joinWith(['pasien']);
+
+        $items = $query
+            ->select([
+                'pasien.nama as pasienNama',
+                'date_format(registrasi.tanggal_registrasi,"%d-%m-%Y %H:%i:%s") as tanggal_registrasi_format',
+                'registrasi.*'])
+            ->all();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -58,7 +66,7 @@ class RegistrasiSearch extends Registrasi
         $query->andFilterWhere([
             'id' => $this->id,
             'pasienId' => $this->pasienId,
-            'registrasi_date' => $this->registrasi_date,
+            'tanggal_registrasi' => $this->tanggal_registrasi,
             'icdx_id' => $this->icdx_id,
             'asuransi_tgl_lahir' => $this->asuransi_tgl_lahir,
         ]);
@@ -74,7 +82,8 @@ class RegistrasiSearch extends Registrasi
             ->andFilterWhere(['like', 'asuransi_status_jaminan', $this->asuransi_status_jaminan])
             ->andFilterWhere(['like', 'asuransi_penanggung_jawab', $this->asuransi_penanggung_jawab])
             ->andFilterWhere(['like', 'asuransi_alamat', $this->asuransi_alamat])
-            ->andFilterWhere(['like', 'asuransi_notelp', $this->asuransi_notelp]);
+            ->andFilterWhere(['like', 'asuransi_notelp', $this->asuransi_notelp])
+            ->andFilterWhere(['like', 'pasien.nama', $this->pasienNama]);
 
         return $dataProvider;
     }

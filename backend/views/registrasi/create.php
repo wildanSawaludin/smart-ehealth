@@ -4,10 +4,12 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Registrasi */
+/* @var $model backend\models\Registrasi */
 
-$this->title = 'Create Registrasi';
-$this->params['breadcrumbs'][] = ['label' => 'Registrasis', 'url' => ['index']];
+$this->title = Yii::t('app', 'Create {modelClass}', [
+    'modelClass' => 'Registrasi',
+]);
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Registrasis'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="registrasi-create">

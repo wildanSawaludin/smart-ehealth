@@ -1,39 +1,61 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\RegistrasiSearch */
+/* @var $searchModel backend\models\RegistrasiSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Registrasis';
+$this->title = Yii::t('app', 'Registrasi Pendaftaran');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="registrasi-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?php //Html::encode($this->title)  ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
+    <?=
+    $this->render('_form', [
+        'model' => $model,
+        'pId' => $pId,
+    ])
+    ?>
+
     <p>
-        <?= Html::a('Create Registrasi', ['create'], ['class' => 'btn btn-success']) ?>
+        <?php
+//            Html::a(Yii::t('app', 'Create {modelClass}', [
+//                'modelClass' => 'Registrasi',
+//            ]), ['create'], ['class' => 'btn btn-success']) 
+        ?>
     </p>
 
-    <?= GridView::widget([
+    <?=
+    GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'pjax' => true,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
             'no_reg',
-            'pasienId',
-            'registrasi_date',
+            [
+                'attribute' => 'pasienNama',
+                'value' => $model->pasienNama
+            ],
+            [
+                'attribute' => 'tanggal_registrasi',
+                'filterType' => GridView::FILTER_DATE,
+                'format' => 'raw',
+                'width' => '100px',
+                'filterWidgetOptions' => [
+                    'pluginOptions' => ['format' => 'dd-mm-yyyy']
+                ],
+            ],
             'status_pelayanan',
             // 'status_rawat',
             // 'dr_penanggung_jawab',
             // 'icdx_id',
-            // 'status_asuransi',
+            'status_asuransi',
             // 'catatan:ntext',
             // 'asuransi_noreg',
             // 'asuransi_nama',
@@ -42,9 +64,13 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'asuransi_penanggung_jawab',
             // 'asuransi_alamat',
             // 'asuransi_notelp',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view} {delete}',
+                'buttons' => ['view', 'delete']
+            ]
         ],
-    ]); ?>
+    ]);
+    ?>
 
 </div>
