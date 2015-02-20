@@ -84,12 +84,13 @@ class SiteController extends Controller {
         $datas = [];
         for ($j = 1; $j <= $iterate; $j++) {
             for ($i = 1; $i <= $row; $i++) {
+                $jkl = $faker->randomElement(['Laki-laki','Perempuan']);
                 $datas[$i] = [
                     $faker->numberBetween($min = 10000, $max = 90000),
-                    $faker->name, 
+                    ($jkl == 'Laki-laki' ? $faker->name('Male') : $faker->name('Female')), 
                     $faker->city, 
                     $faker->dateTimeThisCentury->format('Y-m-d'), 
-                    $faker->randomElement(['Laki-laki','Perempuan']), 
+                    $jkl, 
                     $faker->randomElement(['A', 'B', 'AB', 'O']), 
                     $faker->randomElement(['Islam','Kristen Protestan','Kristen Katholik','Budha','Hindu','Konghucu']), 
                     $faker->randomElement(['PNS','Swasta','Wiraswasta','Pelajar/Mahasiswa','TNI','POLRI']), 
