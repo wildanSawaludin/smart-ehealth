@@ -22,20 +22,20 @@ class RegistrasiController extends Controller {
 
     public function behaviors() {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'actions' => ['pasien-list', 'error'],
-                        'allow' => true,
-                    ],
-                    [
-                        'actions' => ['index', 'create', 'update', 'delete', 'mdaddpasien'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
+//            'access' => [
+//                'class' => AccessControl::className(),
+//                'rules' => [
+//                    [
+//                        'actions' => ['pasien-list', 'error'],
+//                        'allow' => true,
+//                    ],
+//                    [
+//                        'actions' => ['index', 'create', 'update', 'delete', 'mdaddpasien'],
+//                        'allow' => true,
+//                        'roles' => ['@'],
+//                    ],
+//                ],
+//            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

@@ -28,6 +28,23 @@ return [
             'class' => '\kartik\grid\Module',
         // other module settings
         ],
+        'rbac' => [
+            'class' => 'mdm\admin\Module',
+            'controllerMap' => [
+                'assignment' => [
+                    'class' => 'mdm\admin\controllers\AssignmentController',
+                    'userClassName' => 'common\models\User',
+                    'idField' => 'id', // id field of model User
+                ]
+            ],
+            'mainLayout' => '@app/views/layouts/main.php',
+            'layout' => 'left-menu', // default null. other avaliable value 'right-menu' and 'top-menu'
+            'menus' => [
+                'assignment' => [
+                    'label' => 'Assignment' // change label
+                ],
+            ],
+        ]
     ],
     'components' => [
         'cache' => [
@@ -49,5 +66,17 @@ return [
             'dateFormat' => 'dd.MM.y',
             'datetimeFormat' => 'HH:mm:ss dd.MM.y'
         ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager', // or use 'yii\rbac\DbManager'
+        ]
+    ],
+    'as access' => [
+        'class' => 'mdm\admin\components\AccessControl',
+        'allowActions' => [
+            'rbac/*', // add or remove allowed actions to this list
+            'site/login',
+            'site/error',
+            'debug/*'
+        ]
     ],
 ];

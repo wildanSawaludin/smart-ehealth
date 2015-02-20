@@ -1,6 +1,6 @@
 <?php
 return [
-    'language'=>'id',
+//    'language'=>'en',
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
