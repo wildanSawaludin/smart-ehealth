@@ -30,7 +30,7 @@ class RegistrasiController extends Controller {
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['index', 'create', 'update', 'delete'],
+                        'actions' => ['index', 'create', 'update', 'delete', 'mdaddpasien'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
