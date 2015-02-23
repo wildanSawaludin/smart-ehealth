@@ -30,6 +30,7 @@ class AsuransiProvider extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public $pasienNama;
     public function rules()
     {
         return [
@@ -52,9 +53,9 @@ class AsuransiProvider extends \yii\db\ActiveRecord
             'pasien_id' => Yii::t('app', 'Pasien ID'),
             'alamat' => Yii::t('app', 'Alamat'),
             'penanggung_jawab' => Yii::t('app', 'Penanggung Jawab'),
-            'no_pks' => Yii::t('app', 'No Pks'),
-            'tgl_mulai_ks' => Yii::t('app', 'Tgl Mulai Ks'),
-            'tgl_selesai_ks' => Yii::t('app', 'Tgl Selesai Ks'),
+            'no_pks' => Yii::t('app', 'No Perjanjian'),
+            'tgl_mulai_ks' => Yii::t('app', 'Mulai Kerjasama'),
+            'tgl_selesai_ks' => Yii::t('app', 'Selesai Kerjasama'),
         ];
     }
 

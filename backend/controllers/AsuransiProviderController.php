@@ -36,7 +36,7 @@ class AsuransiProviderController extends Controller
      * Lists all AsuransiProvider models.
      * @return mixed
      */
-    public function actionIndex($pId = null)
+    public function actionIndex()
     {
         $searchModel = new AsuransiProviderSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -45,16 +45,17 @@ class AsuransiProviderController extends Controller
 
             $model->load(Yii::$app->request->post());
 //            $model->registrasi_date = date('Y-m-d');
-//            if ($model->asuransi_tgl_lahir)
-//                $model->asuransi_tgl_lahir = Yii::$app->get('helper')->dateFormatingStrip($model->asuransi_tgl_lahir);
-//            $model->save();
+            if ($model->tgl_mulai_ks){
+                $model->tgl_mulai_ks = Yii::$app->get('helper')->dateFormatingStrip($model->tgl_mulai_ks);}
+            if ($model->tgl_selesai_ks){
+                $model->tgl_selesai_ks = Yii::$app->get('helper')->dateFormatingStrip($model->tgl_selesai_ks);}
+            $model->save();
             //if($model->save())return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'pId' => $pId,
             'model' => $model,
         ]);
     }
@@ -79,12 +80,23 @@ class AsuransiProviderController extends Controller
     public function actionCreate()
     {
         $model = new AsuransiProvider();
+        
+        if (Yii::$app->request->post()) {
+            $model->load(Yii::$app->request->post());
+            
+            if ($model->tgl_mulai_ks){
+                $model->tgl_mulai_ks = Yii::$app->get('helper')->dateFormatingStrip($model->tgl_mulai_ks);}
+            if ($model->tgl_selesai_ks){
+                $model->tgl_selesai_ks = Yii::$app->get('helper')->dateFormatingStrip($model->tgl_selesai_ks);}
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->save()) {
+                return $this->render('create', [
+                            'model' => $model,
+                ]);
+            }
         } else {
             return $this->render('create', [
-                'model' => $model,
+                        'model' => $model,
             ]);
         }
     }

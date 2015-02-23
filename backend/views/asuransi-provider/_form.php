@@ -6,12 +6,19 @@ use kartik\builder\Form;
 use kartik\widgets\Select2;
 use backend\models\Pasien;
 use yii\helpers\ArrayHelper;
+use kartik\datecontrol\DateControl;
 use kartik\widgets\DatePicker;
 use yii\web\JsExpression;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\AsuransiProvider */
 /* @var $form yii\widgets\ActiveForm */
+if ($model->tgl_mulai_ks){
+    $model->tgl_mulai_ks = Yii::$app->get('helper')->dateFormatingAppStrip($model->tgl_mulai_ks);
+}
+if ($model->tgl_selesai_ks){
+    $model->tgl_selesai_ks = Yii::$app->get('helper')->dateFormatingAppStrip($model->tgl_selesai_ks);
+}
 ?>
 <style>
     .form-horizontal .control-label {
@@ -21,7 +28,6 @@ use yii\web\JsExpression;
     }
 </style>
 
-<div class="asuransi-provider-form">
 
     <?php
     $form = ActiveForm::begin([
@@ -31,7 +37,6 @@ use yii\web\JsExpression;
                     'deviceSize' => ActiveForm::SIZE_SMALL
                 ]
     ]);
-    $model->pasien_id = $pId;
 
     // The controller action that will render the list
     $url = \yii\helpers\Url::to(['pasien-list']);
@@ -49,7 +54,7 @@ function (element, callback) {
 SCRIPT;
         
     ?>
-    <!-- Tab panes -->
+
             <?php echo $form->errorSummary($model); ?>
             <?php
             echo Form::widget([
@@ -60,14 +65,14 @@ SCRIPT;
                     'address_detail' => [
                         'label' => 'Pasien',
                         'labelSpan' => 2,
-                        'columns' => 3,
+                        'columns' => 2,
                         'attributes' => [
                             'pasien_id' => [
                                 'type' => Form::INPUT_WIDGET,
                                 'widgetClass' => '\kartik\widgets\Select2',
                                 'options' => [
 //                                    'data' => ArrayHelper::map(Pasien::find()->asArray()->all(), 'id', 'nama'),
-                                    'options' => ['placeholder' => 'Cari dan pilih pasien ...'],
+                                    'options' => ['placeholder' => 'Cari dan pilih pasien ...','style' => 'width:60%;'],
                                     'pluginOptions' => [
                                         'allowClear' => true,
                                         'minimumInputLength' => 3,
@@ -80,7 +85,7 @@ SCRIPT;
                                         'initSelection' => new JsExpression($initScript)
                                     ],
                                 ],
-                                'columnOptions' => ['colspan' => 2, 'class' => 'col-sm-7'],
+                                'columnOptions' => ['colspan' => 2],
                             ],
                         ]
                     ]
@@ -89,20 +94,34 @@ SCRIPT;
             //$form->field($model, 'pasienId')->textInput(); 
             ?>
 
-    <?= $form->field($model, 'alamat')->textInput(['maxlength' => 200]) ?>
+    <?= $form->field($model, 'alamat')->textarea(['rows' => 2,'style' => 'width:60%;']) ?>
 
-    <?= $form->field($model, 'penanggung_jawab')->textInput(['maxlength' => 100]) ?>
+    <?= $form->field($model, 'penanggung_jawab')->textInput(['maxlength' => 100,'style' => 'width:60%;']) ?>
 
-    <?= $form->field($model, 'no_pks')->textInput(['maxlength' => 50]) ?>
+    <?= $form->field($model, 'no_pks')->textInput(['maxlength' => 50,'style' => 'width:60%;']) ?>
+    
+    <?php
+                echo $form->field($model, 'tgl_mulai_ks')->widget(DatePicker::classname(), [
+                    'options' => ['placeholder' => 'Masukan Tanggal Mulai Kerjasama ...','style' => 'width:40%;'],
+                    'pluginOptions' => [
+                        'autoclose' => true, 'format' => 'dd-mm-yyyy'
+                    ],
+                ]);
+    ?>
+    
+    <?php
+                echo $form->field($model, 'tgl_selesai_ks')->widget(DatePicker::classname(), [
+                    'options' => ['placeholder' => 'Masukan Tanggal Selesai Kerjasama ...','style' => 'width:40%;'],
+                    'pluginOptions' => [
+                        'autoclose' => true, 'format' => 'dd-mm-yyyy'
+                    ],
+                ]);
+    ?>
 
-    <?= $form->field($model, 'tgl_mulai_ks')->textInput() ?>
-
-    <?= $form->field($model, 'tgl_selesai_ks')->textInput() ?>
-
-    <div class="form-group">
+    <div class="form-group" style="padding-left: 15px">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
-</div>
+
     <?php ActiveForm::end(); ?>
 
 

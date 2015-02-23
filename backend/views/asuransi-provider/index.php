@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\AsuransiProviderSearch */
@@ -18,7 +18,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <?=
     $this->render('_form', [
         'model' => $model,
-        'pId' => $pId,
     ])
     ?>
 
@@ -33,18 +32,44 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'pjax' => true,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'pasien_id',
+            [
+                'attribute' => 'pasienNama',
+                'value' => $model->pasienNama
+            ],
+            
             'alamat',
             'penanggung_jawab',
             'no_pks',
+            [
+                'attribute' => 'tgl_mulai_ks',
+                'filterType' => GridView::FILTER_DATE,
+                'format' => 'raw',
+                'width' => '100px',
+                'filterWidgetOptions' => [
+                    'pluginOptions' => ['format' => 'dd-mm-yyyy']
+                ],
+            ],
+            [
+                'attribute' => 'tgl_selesai_ks',
+                'filterType' => GridView::FILTER_DATE,
+                'format' => 'raw',
+                'width' => '100px',
+                'filterWidgetOptions' => [
+                    'pluginOptions' => ['format' => 'dd-mm-yyyy']
+                ],
+            ],
             // 'tgl_mulai_ks',
             // 'tgl_selesai_ks',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view}{update} {delete}',
+                'buttons' => ['view', 'update' , 'delete']
+                ],
         ],
     ]); ?>
 

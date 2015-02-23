@@ -41,8 +41,15 @@ class AsuransiProviderSearch extends AsuransiProvider
      */
     public function search($params)
     {
-        $query = AsuransiProvider::find();
-
+        $query = AsuransiProvider::find()
+        ->joinWith(['pasien']);
+        
+        $items = $query
+            ->select([
+                'pasien.nama as pasienNama',
+                'asuransi_provider.*'])
+            ->all();
+        
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -64,7 +71,8 @@ class AsuransiProviderSearch extends AsuransiProvider
 
         $query->andFilterWhere(['like', 'alamat', $this->alamat])
             ->andFilterWhere(['like', 'penanggung_jawab', $this->penanggung_jawab])
-            ->andFilterWhere(['like', 'no_pks', $this->no_pks]);
+            ->andFilterWhere(['like', 'no_pks', $this->no_pks])
+            ->andFilterWhere(['like', 'pasien.nama', $this->pasienNama]);
 
         return $dataProvider;
     }
