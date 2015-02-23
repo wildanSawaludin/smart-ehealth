@@ -1,15 +1,15 @@
 <?php
 /* @var $this yii\web\View */
-$this->title = 'My Yii Application';
+$this->title = Yii::$app->name;
 ?>
 <div class="site-index">
 
     <div class="jumbotron">
-        <h1>Congratulations!</h1>
+        <h1>Selamat datang di <?= Yii::$app->name?></h1>
 
-        <p class="lead">You have successfully created your Yii-powered application.</p>
+        <p class="lead">Kami adalah layanan pintar untuk kehidupan yang lebih baik</p>
 
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
+        <p><a class="btn btn-lg btn-success">Smart health for better life</a></p>
     </div>
 
     <div class="body-content">
