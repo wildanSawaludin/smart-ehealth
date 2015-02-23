@@ -153,7 +153,7 @@ class RegistrasiController extends Controller {
             }
             //return $this->redirect(['view', 'id' => $model->id]);
         }
-        return $this->renderAjax('popup\_addPasien', [
+        return $this->renderAjax('popup/_addPasien', [
                     'model' => $model,
         ]);
     }
