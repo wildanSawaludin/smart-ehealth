@@ -1,4 +1,5 @@
 <?php
+
 return [
 //    'language'=>'en',
     'components' => [
@@ -15,7 +16,15 @@ return [
             // send all mails to a file by default. You have to set
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
-            'useFileTransport' => true,
+            'useFileTransport' => false,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.gmail.com',
+                'username' => 'aman.rohiman@gmail.com',
+                'password' => 'b!smill4h161183',
+                'port' => '587',
+                'encryption' => 'tls',
+            ],
         ],
         'helper' => [
             'class' => 'backend\components\Helper',
@@ -23,13 +32,13 @@ return [
         ],
     ],
     'modules' => [
-        'gridview' =>  [
-             'class' => '\kartik\grid\Module'
-             // enter optional module parameters below - only if you need to  
-             // use your own export download action or custom translation 
-             // message source
-             // 'downloadAction' => 'gridview/export/download',
-             // 'i18n' => []
-         ]
-     ]
+        'gridview' => [
+            'class' => '\kartik\grid\Module'
+        // enter optional module parameters below - only if you need to  
+        // use your own export download action or custom translation 
+        // message source
+        // 'downloadAction' => 'gridview/export/download',
+        // 'i18n' => []
+        ]
+    ]
 ];

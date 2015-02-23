@@ -3,6 +3,13 @@
 return [
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'modules' => [
+        'user' => [
+            'class' => 'dektrium\user\Module',
+            'enableUnconfirmedLogin' => true,
+            'confirmWithin' => 21600,
+            'cost' => 12,
+            'admins' => ['admin']
+        ],
         'datecontrol' => [
             'class' => 'kartik\datecontrol\Module',
             // format settings for displaying each date attribute
@@ -74,9 +81,9 @@ return [
         'class' => 'mdm\admin\components\AccessControl',
         'allowActions' => [
             'rbac/*', // add or remove allowed actions to this list
-            'site/login',
+            'user/*',
             'site/error',
-            'debug/*'
+            'debug/*',
         ]
     ],
 ];

@@ -471,13 +471,20 @@ CREATE TABLE IF NOT EXISTS `migration` (
   PRIMARY KEY (`version`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table smart_ehealth_db.migration: ~3 rows (approximately)
+-- Dumping data for table smart_ehealth_db.migration: ~10 rows (approximately)
 DELETE FROM `migration`;
 /*!40000 ALTER TABLE `migration` DISABLE KEYS */;
 INSERT INTO `migration` (`version`, `apply_time`) VALUES
 	('m000000_000000_base', 1424452211),
+	('m140209_132017_init', 1424707430),
+	('m140403_174025_create_account_table', 1424707430),
+	('m140504_113157_update_tables', 1424707430),
+	('m140504_130429_create_token_table', 1424707430),
 	('m140506_102106_rbac_init', 1424452531),
-	('m140602_111327_create_menu_table', 1424452849);
+	('m140602_111327_create_menu_table', 1424452849),
+	('m140830_171933_fix_ip_field', 1424707430),
+	('m140830_172703_change_account_table_name', 1424707430),
+	('m141222_110026_update_ip_field', 1424707430);
 /*!40000 ALTER TABLE `migration` ENABLE KEYS */;
 
 
@@ -505,7 +512,7 @@ CREATE TABLE IF NOT EXISTS `pasien` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10001 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table smart_ehealth_db.pasien: ~10,150 rows (approximately)
+-- Dumping data for table smart_ehealth_db.pasien: ~10,107 rows (approximately)
 DELETE FROM `pasien`;
 /*!40000 ALTER TABLE `pasien` DISABLE KEYS */;
 INSERT INTO `pasien` (`id`, `no_rm`, `nama`, `tempat_lahir`, `tgl_lahir`, `jenkel`, `goldar`, `agama`, `pekerjaan`, `warga_negara`, `alamat`, `notelp`, `nama_ayah`, `pekerjaan_ayah`, `nama_ibu`, `pekerjaan_ibu`, `marital_status`, `nama_pasangan`, `pekerjaan_pasangan`) VALUES
@@ -10527,6 +10534,28 @@ DELETE FROM `penjelasan`;
 /*!40000 ALTER TABLE `penjelasan` ENABLE KEYS */;
 
 
+-- Dumping structure for table smart_ehealth_db.profile
+CREATE TABLE IF NOT EXISTS `profile` (
+  `user_id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `public_email` varchar(255) DEFAULT NULL,
+  `gravatar_email` varchar(255) DEFAULT NULL,
+  `gravatar_id` varchar(32) DEFAULT NULL,
+  `location` varchar(255) DEFAULT NULL,
+  `website` varchar(255) DEFAULT NULL,
+  `bio` text,
+  PRIMARY KEY (`user_id`),
+  CONSTRAINT `fk_user_profile` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table smart_ehealth_db.profile: ~1 rows (approximately)
+DELETE FROM `profile`;
+/*!40000 ALTER TABLE `profile` DISABLE KEYS */;
+INSERT INTO `profile` (`user_id`, `name`, `public_email`, `gravatar_email`, `gravatar_id`, `location`, `website`, `bio`) VALUES
+	(1, 'Aman Rohiman', 'aman.rohiman@gmail.com', 'aman.rohiman@gmail.com', 'da4189462d91a0bfafd308a70bfd81ef', 'Indonesia', 'http://www.garudatekno.com', '');
+/*!40000 ALTER TABLE `profile` ENABLE KEYS */;
+
+
 -- Dumping structure for table smart_ehealth_db.propinsi
 CREATE TABLE IF NOT EXISTS `propinsi` (
   `id` int(11) NOT NULL,
@@ -10592,25 +10621,65 @@ DELETE FROM `riwayat_pengobatan`;
 /*!40000 ALTER TABLE `riwayat_pengobatan` ENABLE KEYS */;
 
 
+-- Dumping structure for table smart_ehealth_db.social_account
+CREATE TABLE IF NOT EXISTS `social_account` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `provider` varchar(255) NOT NULL,
+  `client_id` varchar(255) NOT NULL,
+  `data` text,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `account_unique` (`provider`,`client_id`),
+  KEY `fk_user_account` (`user_id`),
+  CONSTRAINT `fk_user_account` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table smart_ehealth_db.social_account: ~0 rows (approximately)
+DELETE FROM `social_account`;
+/*!40000 ALTER TABLE `social_account` DISABLE KEYS */;
+/*!40000 ALTER TABLE `social_account` ENABLE KEYS */;
+
+
+-- Dumping structure for table smart_ehealth_db.token
+CREATE TABLE IF NOT EXISTS `token` (
+  `user_id` int(11) NOT NULL,
+  `code` varchar(32) NOT NULL,
+  `created_at` int(11) NOT NULL,
+  `type` smallint(6) NOT NULL,
+  UNIQUE KEY `token_unique` (`user_id`,`code`,`type`),
+  CONSTRAINT `fk_user_token` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table smart_ehealth_db.token: ~0 rows (approximately)
+DELETE FROM `token`;
+/*!40000 ALTER TABLE `token` DISABLE KEYS */;
+/*!40000 ALTER TABLE `token` ENABLE KEYS */;
+
+
 -- Dumping structure for table smart_ehealth_db.user
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `auth_key` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-  `password_hash` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `password_reset_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `status` smallint(6) NOT NULL DEFAULT '10',
+  `username` varchar(25) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password_hash` varchar(60) NOT NULL,
+  `auth_key` varchar(32) NOT NULL,
+  `confirmed_at` int(11) DEFAULT NULL,
+  `unconfirmed_email` varchar(255) DEFAULT NULL,
+  `blocked_at` int(11) DEFAULT NULL,
+  `registration_ip` varchar(45) DEFAULT NULL,
   `created_at` int(11) NOT NULL,
   `updated_at` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `flags` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_unique_username` (`username`),
+  UNIQUE KEY `user_unique_email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table smart_ehealth_db.user: ~1 rows (approximately)
 DELETE FROM `user`;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`) VALUES
-	(1, 'admin', '6UtwSRGacmCq1Jm2aM6PU3PVIWjILDSH', '$2y$13$vvYBTz1QEk9GoQuCyU613uN0eXiru3wD9nWvrUkWHW.kmfpPokKhi', NULL, 'aman.rohiman@gmail.com', 10, 1423301880, 1423301880);
+INSERT INTO `user` (`id`, `username`, `email`, `password_hash`, `auth_key`, `confirmed_at`, `unconfirmed_email`, `blocked_at`, `registration_ip`, `created_at`, `updated_at`, `flags`) VALUES
+	(1, 'admin', 'aman.rohiman@gmail.com', '$2y$12$uuH0reqnYdge3EPgjZXJOe.k2up8zVleqgQM82oGoOr4SBkwYvtp6', 'DMg5hYRFi5YzlAoU3GhMGVcK28kTUMvL', 1424709039, NULL, NULL, '127.0.0.1', 1424709012, 1424709039, 0);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;

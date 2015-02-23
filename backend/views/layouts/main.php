@@ -40,11 +40,12 @@ AppAsset::register($this);
                 ['label' => 'RBAC', 'url' => ['/rbac']],
             ];
             if (Yii::$app->user->isGuest) {
-                $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+                $menuItems[] = ['label' => 'Login', 'url' => ['/user/security/login']];
             } else {
+                $menuItems[] = ['label' => 'Setting', 'url' => ['/user/settings/profile']];
                 $menuItems[] = [
                     'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-                    'url' => ['/site/logout'],
+                    'url' => ['/user/security/logout'],
                     'linkOptions' => ['data-method' => 'post']
                 ];
             }
