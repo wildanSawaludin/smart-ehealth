@@ -11,7 +11,6 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 -- Dumping structure for table smart_ehealth_db.anamnesa
-DROP TABLE IF EXISTS `anamnesa`;
 CREATE TABLE IF NOT EXISTS `anamnesa` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `parent_id` int(11) DEFAULT NULL,
@@ -201,64 +200,156 @@ DELETE FROM `anamnesa`;
 
 
 -- Dumping structure for table smart_ehealth_db.auth_assignment
-DROP TABLE IF EXISTS `auth_assignment`;
 CREATE TABLE IF NOT EXISTS `auth_assignment` (
   `item_name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `user_id` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` int(11) DEFAULT NULL,
   PRIMARY KEY (`item_name`,`user_id`),
-  CONSTRAINT `auth_assignment_ibfk_1` FOREIGN KEY (`item_name`) REFERENCES `auth_item` (`name`)
+  CONSTRAINT `auth_assignment_ibfk_1` FOREIGN KEY (`item_name`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table smart_ehealth_db.auth_assignment: ~0 rows (approximately)
+-- Dumping data for table smart_ehealth_db.auth_assignment: ~1 rows (approximately)
 DELETE FROM `auth_assignment`;
 /*!40000 ALTER TABLE `auth_assignment` DISABLE KEYS */;
+INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
+	('Administrator', '1', 1424453230);
 /*!40000 ALTER TABLE `auth_assignment` ENABLE KEYS */;
 
 
 -- Dumping structure for table smart_ehealth_db.auth_item
-DROP TABLE IF EXISTS `auth_item`;
 CREATE TABLE IF NOT EXISTS `auth_item` (
   `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `type` int(11) NOT NULL,
-  `description` longtext COLLATE utf8_unicode_ci,
+  `description` text COLLATE utf8_unicode_ci,
   `rule_name` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `data` longtext COLLATE utf8_unicode_ci,
+  `data` text COLLATE utf8_unicode_ci,
   `created_at` int(11) DEFAULT NULL,
   `updated_at` int(11) DEFAULT NULL,
   PRIMARY KEY (`name`),
   KEY `rule_name` (`rule_name`),
-  CONSTRAINT `auth_item_ibfk_1` FOREIGN KEY (`rule_name`) REFERENCES `auth_rule` (`name`)
+  KEY `idx-auth_item-type` (`type`),
+  CONSTRAINT `auth_item_ibfk_1` FOREIGN KEY (`rule_name`) REFERENCES `auth_rule` (`name`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table smart_ehealth_db.auth_item: ~0 rows (approximately)
+-- Dumping data for table smart_ehealth_db.auth_item: ~88 rows (approximately)
 DELETE FROM `auth_item`;
 /*!40000 ALTER TABLE `auth_item` DISABLE KEYS */;
+INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES
+	('/*', 2, NULL, NULL, NULL, 1424453216, 1424453216),
+	('/datecontrol/*', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/datecontrol/parse/*', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/datecontrol/parse/convert', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/debug/*', 2, NULL, NULL, NULL, 1424453216, 1424453216),
+	('/debug/default/*', 2, NULL, NULL, NULL, 1424453216, 1424453216),
+	('/debug/default/download-mail', 2, NULL, NULL, NULL, 1424453216, 1424453216),
+	('/debug/default/index', 2, NULL, NULL, NULL, 1424453216, 1424453216),
+	('/debug/default/toolbar', 2, NULL, NULL, NULL, 1424453216, 1424453216),
+	('/debug/default/view', 2, NULL, NULL, NULL, 1424453216, 1424453216),
+	('/dynagrid/*', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/dynagrid/settings/*', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/dynagrid/settings/get-config', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/gii/*', 2, NULL, NULL, NULL, 1424453216, 1424453216),
+	('/gii/default/*', 2, NULL, NULL, NULL, 1424453216, 1424453216),
+	('/gii/default/action', 2, NULL, NULL, NULL, 1424453216, 1424453216),
+	('/gii/default/diff', 2, NULL, NULL, NULL, 1424453216, 1424453216),
+	('/gii/default/index', 2, NULL, NULL, NULL, 1424453216, 1424453216),
+	('/gii/default/preview', 2, NULL, NULL, NULL, 1424453216, 1424453216),
+	('/gii/default/view', 2, NULL, NULL, NULL, 1424453216, 1424453216),
+	('/gridview/*', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/gridview/export/*', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/gridview/export/download', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/pasien/*', 2, NULL, NULL, NULL, 1424453216, 1424453216),
+	('/pasien/create', 2, NULL, NULL, NULL, 1424453216, 1424453216),
+	('/pasien/delete', 2, NULL, NULL, NULL, 1424453216, 1424453216),
+	('/pasien/index', 2, NULL, NULL, NULL, 1424453216, 1424453216),
+	('/pasien/update', 2, NULL, NULL, NULL, 1424453216, 1424453216),
+	('/pasien/view', 2, NULL, NULL, NULL, 1424453216, 1424453216),
+	('/rbac/*', 2, NULL, NULL, NULL, 1424453216, 1424453216),
+	('/rbac/assignment/*', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/rbac/assignment/assign', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/rbac/assignment/index', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/rbac/assignment/role-search', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/rbac/assignment/view', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/rbac/default/*', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/rbac/default/index', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/rbac/menu/*', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/rbac/menu/create', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/rbac/menu/delete', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/rbac/menu/index', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/rbac/menu/update', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/rbac/menu/view', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/rbac/permission/*', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/rbac/permission/assign', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/rbac/permission/create', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/rbac/permission/delete', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/rbac/permission/index', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/rbac/permission/role-search', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/rbac/permission/update', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/rbac/permission/view', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/rbac/role/*', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/rbac/role/assign', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/rbac/role/create', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/rbac/role/delete', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/rbac/role/index', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/rbac/role/role-search', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/rbac/role/update', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/rbac/role/view', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/rbac/route/*', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/rbac/route/assign', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/rbac/route/create', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/rbac/route/index', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/rbac/route/route-search', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/rbac/rule/*', 2, NULL, NULL, NULL, 1424453216, 1424453216),
+	('/rbac/rule/create', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/rbac/rule/delete', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/rbac/rule/index', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/rbac/rule/update', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/rbac/rule/view', 2, NULL, NULL, NULL, 1424453215, 1424453215),
+	('/registrasi/*', 2, NULL, NULL, NULL, 1424453216, 1424453216),
+	('/registrasi/create', 2, NULL, NULL, NULL, 1424453216, 1424453216),
+	('/registrasi/delete', 2, NULL, NULL, NULL, 1424453216, 1424453216),
+	('/registrasi/index', 2, NULL, NULL, NULL, 1424453216, 1424453216),
+	('/registrasi/mdaddpasien', 2, NULL, NULL, NULL, 1424453216, 1424453216),
+	('/registrasi/pasien-list', 2, NULL, NULL, NULL, 1424453216, 1424453216),
+	('/registrasi/update', 2, NULL, NULL, NULL, 1424453216, 1424453216),
+	('/registrasi/view', 2, NULL, NULL, NULL, 1424453216, 1424453216),
+	('/site/*', 2, NULL, NULL, NULL, 1424453216, 1424453216),
+	('/site/error', 2, NULL, NULL, NULL, 1424453216, 1424453216),
+	('/site/generate', 2, NULL, NULL, NULL, 1424453216, 1424453216),
+	('/site/index', 2, NULL, NULL, NULL, 1424453216, 1424453216),
+	('/site/login', 2, NULL, NULL, NULL, 1424453216, 1424453216),
+	('/site/logout', 2, NULL, NULL, NULL, 1424453216, 1424453216),
+	('Administrator', 1, 'Web Administrator', NULL, NULL, 1424452901, 1424452901),
+	('Dokter', 1, 'Dokter', NULL, NULL, 1424665841, 1424665841),
+	('Perawat', 1, 'Perawat', NULL, NULL, 1424665861, 1424665861),
+	('Verifikator', 1, 'Verifikator', NULL, NULL, 1424665748, 1424665748);
 /*!40000 ALTER TABLE `auth_item` ENABLE KEYS */;
 
 
 -- Dumping structure for table smart_ehealth_db.auth_item_child
-DROP TABLE IF EXISTS `auth_item_child`;
 CREATE TABLE IF NOT EXISTS `auth_item_child` (
   `parent` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `child` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`parent`,`child`),
   KEY `child` (`child`),
-  CONSTRAINT `auth_item_child_ibfk_1` FOREIGN KEY (`child`) REFERENCES `auth_item` (`name`),
-  CONSTRAINT `auth_item_child_ibfk_2` FOREIGN KEY (`parent`) REFERENCES `auth_item` (`name`)
+  CONSTRAINT `auth_item_child_ibfk_1` FOREIGN KEY (`parent`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `auth_item_child_ibfk_2` FOREIGN KEY (`child`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table smart_ehealth_db.auth_item_child: ~0 rows (approximately)
+-- Dumping data for table smart_ehealth_db.auth_item_child: ~3 rows (approximately)
 DELETE FROM `auth_item_child`;
 /*!40000 ALTER TABLE `auth_item_child` DISABLE KEYS */;
+INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
+	('Administrator', '/*'),
+	('Verifikator', '/pasien/*'),
+	('Verifikator', '/registrasi/*');
 /*!40000 ALTER TABLE `auth_item_child` ENABLE KEYS */;
 
 
 -- Dumping structure for table smart_ehealth_db.auth_rule
-DROP TABLE IF EXISTS `auth_rule`;
 CREATE TABLE IF NOT EXISTS `auth_rule` (
   `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `data` longtext COLLATE utf8_unicode_ci,
+  `data` text COLLATE utf8_unicode_ci,
   `created_at` int(11) DEFAULT NULL,
   `updated_at` int(11) DEFAULT NULL,
   PRIMARY KEY (`name`)
@@ -271,7 +362,6 @@ DELETE FROM `auth_rule`;
 
 
 -- Dumping structure for table smart_ehealth_db.faktor_pencetus
-DROP TABLE IF EXISTS `faktor_pencetus`;
 CREATE TABLE IF NOT EXISTS `faktor_pencetus` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nama` varchar(50) DEFAULT NULL,
@@ -286,7 +376,6 @@ DELETE FROM `faktor_pencetus`;
 
 
 -- Dumping structure for table smart_ehealth_db.icdx
-DROP TABLE IF EXISTS `icdx`;
 CREATE TABLE IF NOT EXISTS `icdx` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `kode` varchar(10) NOT NULL,
@@ -303,7 +392,6 @@ DELETE FROM `icdx`;
 
 
 -- Dumping structure for table smart_ehealth_db.kabkota
-DROP TABLE IF EXISTS `kabkota`;
 CREATE TABLE IF NOT EXISTS `kabkota` (
   `id` int(11) NOT NULL,
   `propinsi_id` int(11) DEFAULT NULL,
@@ -320,7 +408,6 @@ DELETE FROM `kabkota`;
 
 
 -- Dumping structure for table smart_ehealth_db.kebiasaan_obat
-DROP TABLE IF EXISTS `kebiasaan_obat`;
 CREATE TABLE IF NOT EXISTS `kebiasaan_obat` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `anamnesa_id` int(11) DEFAULT NULL,
@@ -342,7 +429,6 @@ DELETE FROM `kebiasaan_obat`;
 
 
 -- Dumping structure for table smart_ehealth_db.lookup
-DROP TABLE IF EXISTS `lookup`;
 CREATE TABLE IF NOT EXISTS `lookup` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
@@ -360,15 +446,17 @@ DELETE FROM `lookup`;
 
 
 -- Dumping structure for table smart_ehealth_db.menu
-DROP TABLE IF EXISTS `menu`;
 CREATE TABLE IF NOT EXISTS `menu` (
-  `id` int(11) NOT NULL,
-  `name` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(128) NOT NULL,
   `parent` int(11) DEFAULT NULL,
-  `route` text COLLATE utf8_unicode_ci,
+  `route` varchar(256) DEFAULT NULL,
   `order` int(11) DEFAULT NULL,
-  `data` longtext COLLATE utf8_unicode_ci
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `data` text,
+  PRIMARY KEY (`id`),
+  KEY `parent` (`parent`),
+  CONSTRAINT `menu_ibfk_1` FOREIGN KEY (`parent`) REFERENCES `menu` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Dumping data for table smart_ehealth_db.menu: ~0 rows (approximately)
 DELETE FROM `menu`;
@@ -377,21 +465,23 @@ DELETE FROM `menu`;
 
 
 -- Dumping structure for table smart_ehealth_db.migration
-DROP TABLE IF EXISTS `migration`;
 CREATE TABLE IF NOT EXISTS `migration` (
   `version` varchar(180) COLLATE utf8_unicode_ci NOT NULL,
   `apply_time` int(11) DEFAULT NULL,
   PRIMARY KEY (`version`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table smart_ehealth_db.migration: ~0 rows (approximately)
+-- Dumping data for table smart_ehealth_db.migration: ~3 rows (approximately)
 DELETE FROM `migration`;
 /*!40000 ALTER TABLE `migration` DISABLE KEYS */;
+INSERT INTO `migration` (`version`, `apply_time`) VALUES
+	('m000000_000000_base', 1424452211),
+	('m140506_102106_rbac_init', 1424452531),
+	('m140602_111327_create_menu_table', 1424452849);
 /*!40000 ALTER TABLE `migration` ENABLE KEYS */;
 
 
 -- Dumping structure for table smart_ehealth_db.pasien
-DROP TABLE IF EXISTS `pasien`;
 CREATE TABLE IF NOT EXISTS `pasien` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `no_rm` varchar(15) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
@@ -415,7 +505,7 @@ CREATE TABLE IF NOT EXISTS `pasien` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10001 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table smart_ehealth_db.pasien: ~0 rows (approximately)
+-- Dumping data for table smart_ehealth_db.pasien: ~10,150 rows (approximately)
 DELETE FROM `pasien`;
 /*!40000 ALTER TABLE `pasien` DISABLE KEYS */;
 INSERT INTO `pasien` (`id`, `no_rm`, `nama`, `tempat_lahir`, `tgl_lahir`, `jenkel`, `goldar`, `agama`, `pekerjaan`, `warga_negara`, `alamat`, `notelp`, `nama_ayah`, `pekerjaan_ayah`, `nama_ibu`, `pekerjaan_ibu`, `marital_status`, `nama_pasangan`, `pekerjaan_pasangan`) VALUES
@@ -10425,7 +10515,6 @@ INSERT INTO `pasien` (`id`, `no_rm`, `nama`, `tempat_lahir`, `tgl_lahir`, `jenke
 
 
 -- Dumping structure for table smart_ehealth_db.penjelasan
-DROP TABLE IF EXISTS `penjelasan`;
 CREATE TABLE IF NOT EXISTS `penjelasan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nama` varchar(100) DEFAULT NULL,
@@ -10439,7 +10528,6 @@ DELETE FROM `penjelasan`;
 
 
 -- Dumping structure for table smart_ehealth_db.propinsi
-DROP TABLE IF EXISTS `propinsi`;
 CREATE TABLE IF NOT EXISTS `propinsi` (
   `id` int(11) NOT NULL,
   `nama` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
@@ -10453,7 +10541,6 @@ DELETE FROM `propinsi`;
 
 
 -- Dumping structure for table smart_ehealth_db.registrasi
-DROP TABLE IF EXISTS `registrasi`;
 CREATE TABLE IF NOT EXISTS `registrasi` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `no_reg` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
@@ -10487,7 +10574,6 @@ DELETE FROM `registrasi`;
 
 
 -- Dumping structure for table smart_ehealth_db.riwayat_pengobatan
-DROP TABLE IF EXISTS `riwayat_pengobatan`;
 CREATE TABLE IF NOT EXISTS `riwayat_pengobatan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `anamnesa_id` int(11) DEFAULT NULL,
@@ -10507,7 +10593,6 @@ DELETE FROM `riwayat_pengobatan`;
 
 
 -- Dumping structure for table smart_ehealth_db.user
-DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
