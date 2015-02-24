@@ -66,8 +66,8 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'asuransi_notelp',
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {delete}',
-                'buttons' => ['view', 'delete']
+                'template' => '{delete}',
+                'buttons' => ['delete']
             ]
         ],
     ]);

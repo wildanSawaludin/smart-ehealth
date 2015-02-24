@@ -27,8 +27,8 @@ $this->params['breadcrumbs'][] = $model->no_reg;
     </p>
     <?php
         $model->pasienId = Pasien::findOne($model->pasienId)->nama;
-        $date=date_create($model->registrasi_date);
-        $model->registrasi_date = date_format($date,"d-m-Y H:i:s");
+        $date=date_create($model->tanggal_registrasi);
+        $model->tanggal_registrasi = date_format($date,"d-m-Y H:i:s");
     ?>
     <?= DetailView::widget([
         'model' => $model,
@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $model->no_reg;
             'id',
             'no_reg',
             'pasienId',
-            'registrasi_date',
+            'tanggal_registrasi',
             'status_pelayanan',
             'status_rawat',
             'dr_penanggung_jawab',

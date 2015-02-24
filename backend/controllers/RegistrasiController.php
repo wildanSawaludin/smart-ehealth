@@ -56,7 +56,7 @@ class RegistrasiController extends Controller {
         if (Yii::$app->request->post()) {
 
             $model->load(Yii::$app->request->post());
-            $model->registrasi_date = date('Y-m-d');
+            $model->tanggal_registrasi = date('Y-m-d');
             if ($model->asuransi_tgl_lahir)
                 $model->asuransi_tgl_lahir = Yii::$app->get('helper')->dateFormatingStrip($model->asuransi_tgl_lahir);
             $model->save();
@@ -94,7 +94,7 @@ class RegistrasiController extends Controller {
             $model->load(Yii::$app->request->post());
             var_dump($model->pasienId);
             exit;
-            $model->registrasi_date = date('Y-m-d H:i:s');
+            $model->tanggal_registrasi = date('Y-m-d H:i:s');
             if ($model->asuransi_tgl_lahir)
                 $model->asuransi_tgl_lahir = Yii::$app->get('helper')->dateFormatingStrip($model->asuransi_tgl_lahir);
 
