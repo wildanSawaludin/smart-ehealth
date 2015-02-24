@@ -161,7 +161,7 @@ class AsuransiProviderController extends Controller
             $data = $command->queryAll();
             $out['results'] = array_values($data);
         } elseif ($id > 0) {
-            $out['results'] = ['id' => $id, 'text' => Pasien::find($id)->nama];
+            $out['results'] = ['id' => $id, 'text' => Pasien::findOne($id)->nama];
         } else {
             $out['results'] = ['id' => 0, 'text' => 'Pasien tidak ditemukan'];
         }
