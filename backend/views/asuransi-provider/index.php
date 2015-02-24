@@ -35,12 +35,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'pjax' => true,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
             [
                 'attribute' => 'pasienNama',
-                'value' => $model->pasienNama
+                'value' => $model->pasienNama,
             ],
-            
             'alamat',
             'penanggung_jawab',
             'no_pks',

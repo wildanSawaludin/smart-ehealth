@@ -19,7 +19,7 @@ class AsuransiProviderSearch extends AsuransiProvider
     {
         return [
             [['id', 'pasien_id'], 'integer'],
-            [['alamat', 'penanggung_jawab', 'no_pks', 'tgl_mulai_ks', 'tgl_selesai_ks'], 'safe'],
+            [['alamat', 'penanggung_jawab', 'no_pks', 'tgl_mulai_ks', 'pasienNama', 'tgl_selesai_ks'], 'safe'],
         ];
     }
 
