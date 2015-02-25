@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use kartik\widgets\ActiveForm;
 use kartik\builder\Form;
+use backend\models\Lookup;
 
 
 /* @var $this yii\web\View */
@@ -17,7 +18,7 @@ use kartik\builder\Form;
                 'formConfig' => ['labelSpan' => 1, 'spanSize' => ActiveForm::SIZE_SMALL,'showLabels'=>false]
                 ]); 
     ?>
-        <ul class="nav nav-tabs" id="tabs-cnt" style="padding-top:0px;margin-bottom: 0px">
+        <ul class="nav nav-tabs" id="tabs-cnt" style="padding-top:0px;margin-bottom: 10px">
             <li class="active"><a href="#eluh" data-toggle="tab">Keluhan </a></li>
             <li ><a href="#wayat" data-toggle="tab">Riwayat</a></li>
             <li ><a href="#biasa" data-toggle="tab">Kebiasaan</a></li>
@@ -99,27 +100,45 @@ use kartik\builder\Form;
                 </div>
             
                 <div class="tab-pane fade" id="psiko">
-                 <?php
-                 echo Form::widget([
-                        'model' => $model,
-                        'form' => $form,
-                        'columns' => 1,
-                        'attributes' => [
-                            'address_detail' => [
-                                'labelSpan' => 2,
-                                'columns' => 3,
-                                'attributes' => [
-                                    'psikososial_hubkel_pil' => [
-                                        'type' => Form::INPUT_CHECKBOX,
-                                        'coloumnOptions' => ['']
-                                        ]
-                                    ]
-                                ]
-                            ]
-                     ])
-                ?>
+                    <div class="row">
+                        <div class="col-sm-3">
                         <?= $form->field($model, 'psikososial_hubkel_pil')->checkbox(); ?>
+                        </div>
+                        <div class="col-sm-3">
                         <?= $form->field($model, 'psikososial_hubkel')->dropDownList([ 'Baik/harmonis' => 'Baik/harmonis', 'Cukup baik' => 'Cukup baik', 'Kurang baik' => 'Kurang baik', 'Renggang' => 'Renggang', 'Berjauhan' => 'Berjauhan', 'Tidak memiliki keluarga' => 'Tidak memiliki keluarga', ], ['prompt' => '']) ?>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                        <?= $form->field($model, 'psikososial_temting_pil')->checkbox(); ?>
+                        </div>
+                        <div class="col-sm-3">
+                        <?= $form->field($model, 'psikososial_temting')->dropDownList([ 'Rumah sendiri' => 'Rumah sendiri', 'Rumah orang tua/keluarga' => 'Rumah orang tua/keluarga', 'Rumah kontrak' => 'Rumah kontrak', 'Kos-kosan' => 'Kos-kosan', ], ['prompt' => '']) ?>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <?php
+                            $list7 = ['Sendri' => 'Sendri', 'Orang Tua' => 'Orang Tua', 'Saudara' => 'Saudara', 'Anak' => 'Anak',
+                                      'Keluarga' => 'Keluarga',
+                            ];
+                            $list8 = ['Suami/Istri' => 'Suami/Istri', 'Mertua' => 'Mertua', 'Menantu' => 'Menantu', 'Teman/Orang Lain' => 'Teman/Orang Lain',
+                            ];
+                        ?>
+                        <div class="col-sm-3">
+                        <?= $form->field($model, 'psikososial_tingber_pil')->checkbox(); ?>
+                        </div>
+                        <div class="col-sm-7">
+                            <div class="col-sm-3">
+                                <?= $form->field($model, 'psikososial_tingber')->checkboxList($list7); ?>
+                            </div>
+                            <div class="col-sm-4">
+                                <?= $form->field($model, 'psikososial_tingber')->checkboxList($list8); ?>
+                            </div>
+                            <div class="col-sm-4">
+                                <?= $form->field($model, 'keluhan_rincian')->checkboxList(Lookup::items('Sakit','keluhan_rincian')); ?>
+                            </div>
+                        </div>
+                    </div>
                 </div>
         </div>
     <?php ActiveForm::end(); ?>
