@@ -135,7 +135,9 @@ use backend\models\Lookup;
                                 <?= $form->field($model, 'psikososial_tingber')->checkboxList($list8); ?>
                             </div>
                             <div class="col-sm-4">
-                                <?= $form->field($model, 'keluhan_rincian')->checkboxList(Lookup::items('Sakit','keluhan_rincian')); ?>
+                                <?php $ambil = Lookup::items('Sakit','keluhan_rincian');
+                                        ?>
+                                <?= $form->field($model, 'keluhan_rincian')->checkbox(); ?>
                             </div>
                         </div>
                     </div>
@@ -144,3 +146,13 @@ use backend\models\Lookup;
     <?php ActiveForm::end(); ?>
 
 </div>
+<script>
+    $(document).ready(function () {
+        $('input[name="Anamnesa[keluhan]"]').change(function () {
+        if ($(this).val() == 'Sakit') {
+            alert('Y');
+             // first button.
+        }
+    });
+    });
+</script>
