@@ -6,6 +6,7 @@ use yii\bootstrap\Modal;
 use kartik\builder\Form;
 use kartik\widgets\Select2;
 use backend\models\Pasien;
+use backend\models\AsuransiProvider;
 use yii\helpers\ArrayHelper;
 use kartik\widgets\DatePicker;
 use yii\web\JsExpression;
@@ -82,7 +83,7 @@ SCRIPT;
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="dataumum" style="padding:20px">
             <?php echo $form->errorSummary($model); ?>
-            <?= $form->field($model, 'no_reg')->textInput(['maxlength' => 15, 'style' => 'width:70%;']) ?>
+            <?php // $form->field($model, 'no_reg')->textInput(['maxlength' => 15, 'style' => 'width:70%;']) ?>
             <?php
             echo Form::widget([
                 'model' => $model,
@@ -126,7 +127,7 @@ SCRIPT;
             ]);
             //$form->field($model, 'pasienId')->textInput(); 
             ?>
-            <?= $form->field($model, 'status_pelayanan')->dropDownList([ 'Rawat Jalan' => 'Rawat Jalan', 'Inap' => 'Inap',], ['prompt' => '', 'style' => 'width:70%;']) ?>
+            <?= $form->field($model, 'status_pelayanan')->dropDownList([ 'Rawat Jalan' => 'Rawat Jalan', 'Rawat Inap' => 'Rawat Inap',], ['prompt' => '', 'style' => 'width:70%;']) ?>
         </div>
         <div role="tabpanel" class="tab-pane" id="statasur" style="padding:20px">
             <?= $form->field($model, 'status_asuransi')->radioList([ 'Umum' => 'Umum', 'BPJS Kesehatan' => 'BPJS Kesehatan', 'BPJS Ketenagakerjaan' => 'BPJS Ketenagakerjaan', 'Asuransi Lainnya' => 'Asuransi Lainnya',], ['inline' => true]) ?>
@@ -144,7 +145,8 @@ SCRIPT;
                 <?= $form->field($model, 'asuransi_status_jaminan')->textInput(['maxlength' => 30]) ?>
             </div>
             <div id="el-2" style="<?= $style2 ?>">
-                <?= $form->field($model, 'asuransi_noreg_other')->textInput(['maxlength' => 15]) ?>
+                <?php //$form->field($model, 'asuransi_noreg_other')->textInput(['maxlength' => 15]) ?>
+                <?= $form->field($model, 'asuransi_provider_id')->dropDownList(ArrayHelper::map(AsuransiProvider::find()->asArray()->all(), 'id', 'nama'), ['prompt' => 'Select Asuransi', 'style' => 'width:70%;']) ?>
                 <?= $form->field($model, 'asuransi_penanggung_jawab')->textInput(['maxlength' => 30]) ?>
                 <?= $form->field($model, 'asuransi_alamat')->textInput(['maxlength' => 30]) ?>
                 <?= $form->field($model, 'asuransi_notelp')->textInput(['maxlength' => 15]) ?>

@@ -60,6 +60,8 @@ class RegistrasiController extends Controller {
             if ($model->asuransi_tgl_lahir)
                 $model->asuransi_tgl_lahir = Yii::$app->get('helper')->dateFormatingStrip($model->asuransi_tgl_lahir);
             $model->save();
+            $model->no_reg= (string)sprintf('%08d', $model->id);
+            $model->save();
             //if($model->save())return $this->redirect(['view', 'id' => $model->id]);
         }
         return $this->render('index', [
