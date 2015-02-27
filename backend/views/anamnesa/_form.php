@@ -147,12 +147,13 @@ use backend\models\Lookup;
 
 </div>
 <script>
-    $(document).ready(function () {
-        $('input[name="Anamnesa[keluhan]"]').change(function () {
-        if ($(this).val() == 'Sakit') {
-            alert('Y');
+//    $(document).ready(function () {
+//        $('input[name="Anamnesa[keluhan]"]').change(function () {
+            
+//        if ($(this).val() == 'Sakit') {
+//            alert('Y');
              // first button.
-        }
-    });
-    });
+//        }
+//    });
+//    });
 </script>
