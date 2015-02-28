@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use kartik\widgets\ActiveForm;
 use kartik\builder\Form;
 use backend\models\Lookup;
+use yii\bootstrap\Modal;
 
 
 /* @var $this yii\web\View */
@@ -146,14 +147,10 @@ use backend\models\Lookup;
     <?php ActiveForm::end(); ?>
 
 </div>
-<script>
-//    $(document).ready(function () {
-//        $('input[name="Anamnesa[keluhan]"]').change(function () {
-            
-//        if ($(this).val() == 'Sakit') {
-//            alert('Y');
-             // first button.
-//        }
-//    });
-//    });
-</script>
+<?php
+Modal::begin([
+    'id' => 'm_keluhanDetail',
+//    'header' => '<h7>Tambah Pasien</h7>'
+]);
+Modal::end();
+?>

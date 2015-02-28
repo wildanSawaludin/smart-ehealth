@@ -8,6 +8,9 @@ use backend\models\AnamnesaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Json;
+use yii\db\Query;
+use yii\web\Response;
 
 /**
  * AnamnesaController implements the CRUD actions for Anamnesa model.
@@ -103,13 +106,19 @@ class AnamnesaController extends Controller
         return $this->redirect(['index']);
     }
     
-    public function actionPopupKeluhan($id) {
+    public function actionPopupkeluhan($id) {
         $model = $this->findModel($id);
-        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+       if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
             Yii::$app->response->format = Response::FORMAT_JSON;
             return ActiveForm::validate($model);
         }
-        
+//        if ($_POST) {
+//            $model->load(Yii::$app->request->post());
+//            if ($model->save()) {
+//                return $this->redirect(['index', 'pasienId' => $model->id]);
+//            }
+//            //return $this->redirect(['view', 'id' => $model->id]);
+//        }
         return $this->renderAjax('popup/_keluhanDetail', [
                     'model' => $model,
         ]);
