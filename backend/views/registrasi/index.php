@@ -36,7 +36,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'pjax' => true,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            [
+                'class' => 'kartik\grid\SerialColumn',
+                'contentOptions' => ['class' => 'kartik-sheet-style'],
+                'width' => '40px',
+                'header' => '',
+                'headerOptions' => ['class' => 'kartik-sheet-style']
+            ],
             'no_reg',
             [
                 'attribute' => 'pasienNama',
