@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use Yii;
+use yii\filters\AccessControl;
 use backend\models\Anamnesa;
 use backend\models\AnamnesaSearch;
 use yii\web\Controller;
@@ -106,8 +107,8 @@ class AnamnesaController extends Controller
         return $this->redirect(['index']);
     }
     
-    public function actionPopupkeluhan($id) {
-        $model = $this->findModel($id);
+    public function actionPopupKeluhan($id) {
+       $model = $this->findModel($id);
        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
             Yii::$app->response->format = Response::FORMAT_JSON;
             return ActiveForm::validate($model);
