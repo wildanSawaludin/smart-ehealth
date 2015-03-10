@@ -37,8 +37,14 @@ use backend\models\Lookup;
             
             <div class="tab-content">
                  <div class="tab-pane fade in active" id="rinci">    
-                            
-                            <?= $form->field($model, 'faktor_resiko_kebiasaan')->checkboxList(Lookup::items('Sakit','keluhan_rincian')); ?>
+                            <?php 
+                            $keluh = str_replace("_"," ",$_GET['param']);
+                            $rinci = Lookup::items($keluh,'keluhan_rincian');
+                            var_dump($rinci[1],$rinci[2],$rinci[3]);
+                            exit();
+                            ?>
+                                 
+                            <?= $form->field($model, 'faktor_resiko_kebiasaan')->radioList($rinci); ?>
                  </div>       
             </div>
         <?php ActiveForm::end(); ?>
