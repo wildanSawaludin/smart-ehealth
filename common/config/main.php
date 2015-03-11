@@ -5,6 +5,7 @@ return [
     'name' => 'doktor-oto',
     'modules' => [
         'user' => [
+//            'identityClass' => 'dektrium\user\models\User',
             'class' => 'dektrium\user\Module',
             'enableUnconfirmedLogin' => true,
             'confirmWithin' => 21600,
@@ -78,13 +79,5 @@ return [
             'class' => 'yii\rbac\DbManager', // or use 'yii\rbac\DbManager'
         ]
     ],
-    'as access' => [
-        'class' => 'mdm\admin\components\AccessControl',
-        'allowActions' => [
-            'rbac/*', // add or remove allowed actions to this list
-            'user/*',
-            'site/error',
-            'debug/*',
-        ]
-    ],
+    
 ];
