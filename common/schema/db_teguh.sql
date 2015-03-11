@@ -189,13 +189,15 @@ CREATE TABLE IF NOT EXISTS `anamnesa` (
   CONSTRAINT `FK_anamnesa_kebiasaan_obat` FOREIGN KEY (`kebiasaan_obat_id`) REFERENCES `kebiasaan_obat` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_anamnesa_kode_icdx` FOREIGN KEY (`riwayatsakit_icdx_id`) REFERENCES `icdx` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_anamnesa_kode_icdx_2` FOREIGN KEY (`riwayatkel_icdx_id`) REFERENCES `icdx` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_anamnesa_registrasi` FOREIGN KEY (`registrasi_id`) REFERENCES `registrasi` (`id`),
+  CONSTRAINT `FK_anamnesa_registrasi` FOREIGN KEY (`registrasi_id`) REFERENCES `registrasi_lama` (`id`),
   CONSTRAINT `FK_anamnesa_riwayat_pengobatan` FOREIGN KEY (`riwayat_pengobatan_id`) REFERENCES `riwayat_pengobatan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_anamnesa_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- Dumping data for table ehealth.anamnesa: ~0 rows (approximately)
+-- Dumping data for table ehealth.anamnesa: ~1 rows (approximately)
 /*!40000 ALTER TABLE `anamnesa` DISABLE KEYS */;
+REPLACE INTO `anamnesa` (`id`, `parent_id`, `registrasi_id`, `user_id`, `keluhan`, `keluhan_rincian`, `keluhan_lokasi`, `keluhan_lokasi_umum`, `keluhan_sub_lokasi`, `keluhan_berlangsung_nil`, `keluhan_berlangsung_lama`, `keluhan_faktor_pencetus`, `keluhan_durasi_nil`, `keluhan_durasi_lama`, `keluhan_durasi_jenis`, `keluhan_durasi_pereda`, `keluhan_durasi_pemberat`, `keluhan_menjalar_pil`, `keljalar_kepala_pil`, `keljalar_kepala`, `keljalar_wajah_pil`, `keljalar_wajah`, `keljalar_mata_pil`, `keljalar_mata`, `keljalar_hidung_pil`, `keljalar_mulut_pil`, `keljalar_mulut`, `keljalar_telinga_pil`, `keljalar_telinga`, `keljalar_leher_pil`, `keljalar_leher`, `keljalar_tenggorokan_pil`, `keljalar_bahu_pil`, `keljalar_bahu`, `keljalar_tangan_pil`, `keljalar_tangan`, `keljalar_dada_pil`, `keljalar_dada`, `keljalar_perut_pil`, `keljalar_perut`, `keljalar_pinggang_pil`, `keljalar_punggung_pil`, `keljalar_punggung`, `keljalar_kelamin_pil`, `keljalar_kelamin`, `keljalar_kaki_pil`, `keljalar_kaki`, `keljalar_seltub_pil`, `kel_tembus_pil`, `kel_punkel_nil`, `kel_punkel_lama`, `kel_kemunculan`, `kel_kemunculan_saat`, `kel_penjelasan_awal`, `kel_penjelasan_kemudian`, `kel_penjelasan_saat`, `riwayat_penyakit_pil`, `riwayatsakit_icdx_id`, `riwayat_penyakit_nama`, `riwayat_penyakit_nil`, `riwayat_penyakit_lama`, `riwayat_perawatan_pil`, `riwayat_perawatan_waktu`, `riwayat_perawatan_tempat`, `riwayat_perawatan_nil`, `riwayat_perawatan_lama`, `riwayat_pengobatan_pil`, `riwayat_pengobatan_id`, `riwayat_keluarga_pil`, `riwayatkel_icdx_id`, `riwayat_lainnya_pil`, `riwayat_alergi_pil`, `alergi_obat_pil`, `alergi_obat_jenis`, `alergi_makanan_pil`, `alergi_makanan`, `alergi_sabun_pil`, `alergi_sabun`, `alergi_udara_pil`, `alergi_udara`, `alergi_debu_pil`, `alergi_lainnya_pil`, `alergi_lainnya`, `riwayat_transfusi_pil`, `transfusi_wb_pil`, `transfusi_wb_waktu`, `transfusi_wb_jumlah`, `transfusi_wb_ukuran`, `transfusi_trombosit_pil`, `transfusi_trombosit_waktu`, `transfusi_trombosit_jumlah`, `transfusi_trombosit_ukuran`, `transfusi_eritrosit_pil`, `transfusi_eritrosit_waktu`, `transfusi_eritrosit_jumlah`, `transfusi_eritrosit_ukuran`, `riwayat_imunisasi_pil`, `riwayat_imunisasi`, `kebiasaan_obat_pil`, `kebiasaan_obat_id`, `kebiasaan_rokok_pil`, `kebiasaan_rokok_jmlh`, `kebiasaan_rokok_satuan`, `kebiasaan_rokok_nil`, `kebiasaan_rokok_lama`, `kebiasaan_rokok_awal`, `kebiasaan_rokok_berhenti`, `kebiasaan_rokok_jenis`, `kebiasaan_alkohol_pil`, `kebiasaan_alkohol_nil`, `kebiasaan_alkohol_lama`, `kebiasaan_alkohol_awal`, `kebiasaan_alkohol_berhenti`, `kebiasaan_alkohol_jenis`, `kebiasaan_perawatan_pil`, `perawatan_mandi_pil`, `perawatan_mandi_jmlh`, `perawatan_mandi_lama`, `perawatan_mandi_oleh`, `perawatan_rambut_pil`, `perawatan_rambut_jmlh`, `perawatan_rambut_lama`, `perawatan_rambut_oleh`, `perawatan_kuku_pil`, `perawatan_kuku_jmlh`, `perawatan_kuku_lama`, `perawatan_kuku_oleh`, `perawatan_tidur_pil`, `perawatan_tidur_jmlh`, `perawatan_tidur_lama`, `perawatan_tidur_oleh`, `kebiasaan_nutrisi_pil`, `nutrisi_selera_pil`, `nutrisi_selera_makan`, `makan_frekuensi_pil`, `makan_frekuensi`, `makan_pembatasan_pil`, `makan_pembatasan_asupan`, `makan_menu_pil`, `makan_menu_pokok`, `makan_menu_lauk`, `makan_menu_sayur`, `makan_menu_buah`, `minum_jenis_pil`, `minum_jenis`, `minum_frekuensi_pil`, `minum_frekuensi`, `minum_cara_pil`, `minum_cara_pemenuhan`, `kebiasan_olahraga_pil`, `olahraga_jenis`, `olahraga_frekuensi_kali`, `olahraga_frekuensi_lama`, `kebiasaan_kegiatan_pil`, `kegiatan_jenis`, `kegiatan_frekuensi_kali`, `kegiatan_frekuensi_lama`, `faktor_resiko_riwayat`, `faktor_resiko_kebiasaan`, `psikososial_hubkel_pil`, `psikososial_hubkel`, `psikososial_temting_pil`, `psikososial_temting`, `psikososial_tingber_pil`, `psikososial_tingber`) VALUES
+	(1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000-00-00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 /*!40000 ALTER TABLE `anamnesa` ENABLE KEYS */;
 
 
@@ -203,21 +205,17 @@ CREATE TABLE IF NOT EXISTS `anamnesa` (
 DROP TABLE IF EXISTS `asuransi_provider`;
 CREATE TABLE IF NOT EXISTS `asuransi_provider` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `pasien_id` int(11) NOT NULL,
+  `nama` varchar(50) NOT NULL,
   `alamat` varchar(200) DEFAULT NULL,
   `penanggung_jawab` varchar(100) NOT NULL,
   `no_pks` varchar(50) NOT NULL,
   `tgl_mulai_ks` date DEFAULT NULL,
   `tgl_selesai_ks` date DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `pasien_id` (`pasien_id`),
-  CONSTRAINT `FK_asuransi_provider_pasien` FOREIGN KEY (`pasien_id`) REFERENCES `pasien` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin2;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin2;
 
--- Dumping data for table ehealth.asuransi_provider: ~1 rows (approximately)
+-- Dumping data for table ehealth.asuransi_provider: ~0 rows (approximately)
 /*!40000 ALTER TABLE `asuransi_provider` DISABLE KEYS */;
-REPLACE INTO `asuransi_provider` (`id`, `pasien_id`, `alamat`, `penanggung_jawab`, `no_pks`, `tgl_mulai_ks`, `tgl_selesai_ks`) VALUES
-	(1, 228, 'aaa', 'vvv', 'sss', '2015-01-25', '2015-02-20');
 /*!40000 ALTER TABLE `asuransi_provider` ENABLE KEYS */;
 
 
@@ -253,10 +251,24 @@ CREATE TABLE IF NOT EXISTS `auth_item` (
   CONSTRAINT `auth_item_ibfk_1` FOREIGN KEY (`rule_name`) REFERENCES `auth_rule` (`name`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table ehealth.auth_item: ~88 rows (approximately)
+-- Dumping data for table ehealth.auth_item: ~135 rows (approximately)
 /*!40000 ALTER TABLE `auth_item` DISABLE KEYS */;
 REPLACE INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES
 	('/*', 2, NULL, NULL, NULL, 1424453216, 1424453216),
+	('/anamnesa/*', 2, NULL, NULL, NULL, 1425116017, 1425116017),
+	('/anamnesa/create', 2, NULL, NULL, NULL, 1425116017, 1425116017),
+	('/anamnesa/delete', 2, NULL, NULL, NULL, 1425116017, 1425116017),
+	('/anamnesa/index', 2, NULL, NULL, NULL, 1425116016, 1425116016),
+	('/anamnesa/popupkeluhan', 2, NULL, NULL, NULL, 1425116017, 1425116017),
+	('/anamnesa/update', 2, NULL, NULL, NULL, 1425116017, 1425116017),
+	('/anamnesa/view', 2, NULL, NULL, NULL, 1425116016, 1425116016),
+	('/asuransi-provider/*', 2, NULL, NULL, NULL, 1425116017, 1425116017),
+	('/asuransi-provider/create', 2, NULL, NULL, NULL, 1425116017, 1425116017),
+	('/asuransi-provider/delete', 2, NULL, NULL, NULL, 1425116017, 1425116017),
+	('/asuransi-provider/index', 2, NULL, NULL, NULL, 1425116017, 1425116017),
+	('/asuransi-provider/pasien-list', 2, NULL, NULL, NULL, 1425116017, 1425116017),
+	('/asuransi-provider/update', 2, NULL, NULL, NULL, 1425116017, 1425116017),
+	('/asuransi-provider/view', 2, NULL, NULL, NULL, 1425116017, 1425116017),
 	('/datecontrol/*', 2, NULL, NULL, NULL, 1424453215, 1424453215),
 	('/datecontrol/parse/*', 2, NULL, NULL, NULL, 1424453215, 1424453215),
 	('/datecontrol/parse/convert', 2, NULL, NULL, NULL, 1424453215, 1424453215),
@@ -340,6 +352,39 @@ REPLACE INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `c
 	('/site/index', 2, NULL, NULL, NULL, 1424453216, 1424453216),
 	('/site/login', 2, NULL, NULL, NULL, 1424453216, 1424453216),
 	('/site/logout', 2, NULL, NULL, NULL, 1424453216, 1424453216),
+	('/user/*', 2, NULL, NULL, NULL, 1425116016, 1425116016),
+	('/user/admin/*', 2, NULL, NULL, NULL, 1425116015, 1425116015),
+	('/user/admin/assignments', 2, NULL, NULL, NULL, 1425116015, 1425116015),
+	('/user/admin/block', 2, NULL, NULL, NULL, 1425116015, 1425116015),
+	('/user/admin/confirm', 2, NULL, NULL, NULL, 1425116015, 1425116015),
+	('/user/admin/create', 2, NULL, NULL, NULL, 1425116015, 1425116015),
+	('/user/admin/delete', 2, NULL, NULL, NULL, 1425116015, 1425116015),
+	('/user/admin/index', 2, NULL, NULL, NULL, 1425116015, 1425116015),
+	('/user/admin/info', 2, NULL, NULL, NULL, 1425116015, 1425116015),
+	('/user/admin/update', 2, NULL, NULL, NULL, 1425116015, 1425116015),
+	('/user/admin/update-profile', 2, NULL, NULL, NULL, 1425116015, 1425116015),
+	('/user/profile/*', 2, NULL, NULL, NULL, 1425116016, 1425116016),
+	('/user/profile/index', 2, NULL, NULL, NULL, 1425116016, 1425116016),
+	('/user/profile/show', 2, NULL, NULL, NULL, 1425116016, 1425116016),
+	('/user/recovery/*', 2, NULL, NULL, NULL, 1425116016, 1425116016),
+	('/user/recovery/request', 2, NULL, NULL, NULL, 1425116016, 1425116016),
+	('/user/recovery/reset', 2, NULL, NULL, NULL, 1425116016, 1425116016),
+	('/user/registration/*', 2, NULL, NULL, NULL, 1425116016, 1425116016),
+	('/user/registration/confirm', 2, NULL, NULL, NULL, 1425116016, 1425116016),
+	('/user/registration/connect', 2, NULL, NULL, NULL, 1425116016, 1425116016),
+	('/user/registration/register', 2, NULL, NULL, NULL, 1425116016, 1425116016),
+	('/user/registration/resend', 2, NULL, NULL, NULL, 1425116016, 1425116016),
+	('/user/security/*', 2, NULL, NULL, NULL, 1425116016, 1425116016),
+	('/user/security/auth', 2, NULL, NULL, NULL, 1425116016, 1425116016),
+	('/user/security/login', 2, NULL, NULL, NULL, 1425116016, 1425116016),
+	('/user/security/logout', 2, NULL, NULL, NULL, 1425116016, 1425116016),
+	('/user/settings/*', 2, NULL, NULL, NULL, 1425116016, 1425116016),
+	('/user/settings/account', 2, NULL, NULL, NULL, 1425116016, 1425116016),
+	('/user/settings/confirm', 2, NULL, NULL, NULL, 1425116016, 1425116016),
+	('/user/settings/connect', 2, NULL, NULL, NULL, 1425116016, 1425116016),
+	('/user/settings/disconnect', 2, NULL, NULL, NULL, 1425116016, 1425116016),
+	('/user/settings/networks', 2, NULL, NULL, NULL, 1425116016, 1425116016),
+	('/user/settings/profile', 2, NULL, NULL, NULL, 1425116016, 1425116016),
 	('Administrator', 1, 'Web Administrator', NULL, NULL, 1424452901, 1424452901),
 	('Dokter', 1, 'Dokter', NULL, NULL, 1424665841, 1424665841),
 	('Perawat', 1, 'Perawat', NULL, NULL, 1424665861, 1424665861),
@@ -540,7 +585,7 @@ CREATE TABLE IF NOT EXISTS `icdx` (
   UNIQUE KEY `kode` (`kode`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12031 DEFAULT CHARSET=utf8;
 
--- Dumping data for table ehealth.icdx: ~12,796 rows (approximately)
+-- Dumping data for table ehealth.icdx: ~12,169 rows (approximately)
 /*!40000 ALTER TABLE `icdx` DISABLE KEYS */;
 REPLACE INTO `icdx` (`id`, `kode`, `inggris`, `indonesia`) VALUES
 	(1, 'A00', 'Cholera', 'Kolera'),
@@ -12625,7 +12670,7 @@ CREATE TABLE IF NOT EXISTS `lookup` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=821 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table ehealth.lookup: ~859 rows (approximately)
+-- Dumping data for table ehealth.lookup: ~951 rows (approximately)
 /*!40000 ALTER TABLE `lookup` DISABLE KEYS */;
 REPLACE INTO `lookup` (`id`, `type`, `grup`, `name`, `code`, `child`) VALUES
 	(1, 'Sakit', 'keluhan_rincian', 'Sakit kepala (Sefalgi)', 1, NULL),
@@ -13509,7 +13554,7 @@ CREATE TABLE IF NOT EXISTS `pasien` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10001 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table ehealth.pasien: ~10,085 rows (approximately)
+-- Dumping data for table ehealth.pasien: ~9,526 rows (approximately)
 /*!40000 ALTER TABLE `pasien` DISABLE KEYS */;
 REPLACE INTO `pasien` (`id`, `no_rm`, `nama`, `tempat_lahir`, `tgl_lahir`, `jenkel`, `goldar`, `agama`, `pekerjaan`, `warga_negara`, `alamat`, `notelp`, `nama_ayah`, `pekerjaan_ayah`, `nama_ibu`, `pekerjaan_ibu`, `marital_status`, `nama_pasangan`, `pekerjaan_pasangan`) VALUES
 	(1, '36493', 'Gilda Palastri', 'Tomohon', '1983-03-10', 'Perempuan', 'O', 'Kristen Protestan', 'Wiraswasta', 'Indonesia', 'Dk. Barasak No. 900, Semarang 72624, Maluku', '0495 9709 1049', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -23599,6 +23644,28 @@ REPLACE INTO `penjelasan` (`id`, `nama`) VALUES
 /*!40000 ALTER TABLE `penjelasan` ENABLE KEYS */;
 
 
+-- Dumping structure for table ehealth.profile
+DROP TABLE IF EXISTS `profile`;
+CREATE TABLE IF NOT EXISTS `profile` (
+  `user_id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `public_email` varchar(255) DEFAULT NULL,
+  `gravatar_email` varchar(255) DEFAULT NULL,
+  `gravatar_id` varchar(32) DEFAULT NULL,
+  `location` varchar(255) DEFAULT NULL,
+  `website` varchar(255) DEFAULT NULL,
+  `bio` text,
+  PRIMARY KEY (`user_id`),
+  CONSTRAINT `fk_user_profile` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table ehealth.profile: ~1 rows (approximately)
+/*!40000 ALTER TABLE `profile` DISABLE KEYS */;
+REPLACE INTO `profile` (`user_id`, `name`, `public_email`, `gravatar_email`, `gravatar_id`, `location`, `website`, `bio`) VALUES
+	(1, 'Aman Rohiman', 'aman.rohiman@gmail.com', 'aman.rohiman@gmail.com', 'da4189462d91a0bfafd308a70bfd81ef', 'Indonesia', 'http://www.garudatekno.com', '');
+/*!40000 ALTER TABLE `profile` ENABLE KEYS */;
+
+
 -- Dumping structure for table ehealth.profiles
 DROP TABLE IF EXISTS `profiles`;
 CREATE TABLE IF NOT EXISTS `profiles` (
@@ -23636,16 +23703,17 @@ CREATE TABLE IF NOT EXISTS `propinsi` (
 DROP TABLE IF EXISTS `registrasi`;
 CREATE TABLE IF NOT EXISTS `registrasi` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `no_reg` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `no_reg` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
   `pasienId` int(11) NOT NULL,
   `tanggal_registrasi` datetime DEFAULT NULL,
-  `status_pelayanan` enum('Rawat Jalan','Inap') COLLATE utf8_unicode_ci NOT NULL,
+  `status_pelayanan` enum('Rawat Jalan','Rawat Inap') COLLATE utf8_unicode_ci NOT NULL,
   `status_rawat` enum('Biasa','Persalinan') COLLATE utf8_unicode_ci DEFAULT NULL,
   `dr_penanggung_jawab` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
   `icdx_id` int(11) DEFAULT NULL,
   `status_asuransi` enum('Umum','BPJS Kesehatan','BPJS Ketenagakerjaan','Asuransi Lainnya') COLLATE utf8_unicode_ci DEFAULT NULL,
   `catatan` text COLLATE utf8_unicode_ci,
   `asuransi_noreg` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `asuransi_provider_id` int(11) DEFAULT NULL,
   `asuransi_noreg_other` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
   `asuransi_nama` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
   `asuransi_tgl_lahir` date DEFAULT NULL,
@@ -23656,6 +23724,8 @@ CREATE TABLE IF NOT EXISTS `registrasi` (
   PRIMARY KEY (`id`),
   KEY `FK_registrasi_pasien` (`pasienId`),
   KEY `FK_registrasi_icdx` (`icdx_id`),
+  KEY `FK_registrasi_asuransi_provider` (`asuransi_provider_id`),
+  CONSTRAINT `FK_registrasi_asuransi_provider` FOREIGN KEY (`asuransi_provider_id`) REFERENCES `asuransi_provider` (`id`),
   CONSTRAINT `FK_registrasi_icdx` FOREIGN KEY (`icdx_id`) REFERENCES `icdx` (`id`),
   CONSTRAINT `FK_registrasi_pasien` FOREIGN KEY (`pasienId`) REFERENCES `pasien` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -23684,25 +23754,65 @@ CREATE TABLE IF NOT EXISTS `riwayat_pengobatan` (
 /*!40000 ALTER TABLE `riwayat_pengobatan` ENABLE KEYS */;
 
 
+-- Dumping structure for table ehealth.social_account
+DROP TABLE IF EXISTS `social_account`;
+CREATE TABLE IF NOT EXISTS `social_account` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `provider` varchar(255) NOT NULL,
+  `client_id` varchar(255) NOT NULL,
+  `data` text,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `account_unique` (`provider`,`client_id`),
+  KEY `fk_user_account` (`user_id`),
+  CONSTRAINT `fk_user_account` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table ehealth.social_account: ~0 rows (approximately)
+/*!40000 ALTER TABLE `social_account` DISABLE KEYS */;
+/*!40000 ALTER TABLE `social_account` ENABLE KEYS */;
+
+
+-- Dumping structure for table ehealth.token
+DROP TABLE IF EXISTS `token`;
+CREATE TABLE IF NOT EXISTS `token` (
+  `user_id` int(11) NOT NULL,
+  `code` varchar(32) NOT NULL,
+  `created_at` int(11) NOT NULL,
+  `type` smallint(6) NOT NULL,
+  UNIQUE KEY `token_unique` (`user_id`,`code`,`type`),
+  CONSTRAINT `fk_user_token` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table ehealth.token: ~0 rows (approximately)
+/*!40000 ALTER TABLE `token` DISABLE KEYS */;
+/*!40000 ALTER TABLE `token` ENABLE KEYS */;
+
+
 -- Dumping structure for table ehealth.user
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `auth_key` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-  `password_hash` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `password_reset_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `status` smallint(6) NOT NULL DEFAULT '10',
+  `username` varchar(25) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password_hash` varchar(60) NOT NULL,
+  `auth_key` varchar(32) NOT NULL,
+  `confirmed_at` int(11) DEFAULT NULL,
+  `unconfirmed_email` varchar(255) DEFAULT NULL,
+  `blocked_at` int(11) DEFAULT NULL,
+  `registration_ip` varchar(45) DEFAULT NULL,
   `created_at` int(11) NOT NULL,
   `updated_at` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `flags` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_unique_username` (`username`),
+  UNIQUE KEY `user_unique_email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table ehealth.user: ~1 rows (approximately)
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-REPLACE INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`) VALUES
-	(1, 'admin', '6UtwSRGacmCq1Jm2aM6PU3PVIWjILDSH', '$2y$13$vvYBTz1QEk9GoQuCyU613uN0eXiru3wD9nWvrUkWHW.kmfpPokKhi', NULL, 'aman.rohiman@gmail.com', 10, 1423301880, 1423301880);
+REPLACE INTO `user` (`id`, `username`, `email`, `password_hash`, `auth_key`, `confirmed_at`, `unconfirmed_email`, `blocked_at`, `registration_ip`, `created_at`, `updated_at`, `flags`) VALUES
+	(1, 'admin', 'aman.rohiman@gmail.com', '$2y$12$uuH0reqnYdge3EPgjZXJOe.k2up8zVleqgQM82oGoOr4SBkwYvtp6', 'DMg5hYRFi5YzlAoU3GhMGVcK28kTUMvL', 1424709039, NULL, NULL, '127.0.0.1', 1424709012, 1424709039, 0);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
 
