@@ -6,6 +6,7 @@ use yii\bootstrap\Modal;
 use kartik\builder\Form;
 use kartik\widgets\Select2;
 use backend\models\Pasien;
+use backend\models\AsuransiProvider;
 use yii\helpers\ArrayHelper;
 use kartik\widgets\DatePicker;
 use yii\web\JsExpression;
@@ -65,6 +66,7 @@ switch ($model->status_asuransi) {
 
     // The controller action that will render the list
     $url = \yii\helpers\Url::to(['pasien-list']);
+    $urlIcdx = \yii\helpers\Url::to(['icdx-list']);
 
 // Script to initialize the selection based on the value of the select2 element
     $initScript = <<< SCRIPT
@@ -77,12 +79,22 @@ function (element, callback) {
     }
 }
 SCRIPT;
+$initScriptIcdx = <<< SCRIPT
+function (element, callback) {
+    var id=\$(element).val();
+    if (id !== "") {
+        \$.ajax("{$urlIcdx}?id=" + id, {
+            dataType: "json"
+        }).done(function(data) { callback(data.results);});
+    }
+}
+SCRIPT;
     ?>
     <!-- Tab panes -->
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="dataumum" style="padding:20px">
             <?php echo $form->errorSummary($model); ?>
-            <?= $form->field($model, 'no_reg')->textInput(['maxlength' => 15, 'style' => 'width:70%;']) ?>
+            <?php // $form->field($model, 'no_reg')->textInput(['maxlength' => 15, 'style' => 'width:70%;']) ?>
             <?php
             echo Form::widget([
                 'model' => $model,
@@ -124,9 +136,56 @@ SCRIPT;
                     ]
                 ]
             ]);
-            //$form->field($model, 'pasienId')->textInput(); 
+            
+            echo Form::widget([
+                'model' => $model,
+                'form' => $form,
+                'columns' => 2,
+                'attributes' => [
+                    'stat_pel' => [
+                        'label' => 'Status Pelayanan',
+                        'labelSpan' => 2,
+                        'columns' => 3,
+                        'attributes' => [
+                            'status_pelayanan' => [
+                                'type' => Form::INPUT_DROPDOWN_LIST,
+                                'items'=>[ 'Rawat Jalan' => 'Rawat Jalan', 'Rawat Inap' => 'Rawat Inap',],
+                                'options' => ['prompt' => '',],
+                                'columnOptions' => ['colspan' => 2, 'class' => 'col-sm-7'],
+                            ],
+                            'actions' => [
+                                'type' => Form::INPUT_RAW,
+                                'value' => '<div style="">' .
+                                Html::button('<span class="glyphicon glyphicon-envelope"></span> Surat Pengantar', ['type' => 'button', 'id' => 'sp_opname', 'class' => 'btn btn-primary']) .
+                                '</div>'
+                            ],
+                        ]
+                    ]
+                ]
+            ]);
+            Modal::begin([
+                'id' => 'md_spo',
+                'header' => '<h4>Surat Pengantar Opname</h4>',
+            ]);
+            echo $form->field($model, 'status_rawat')->dropDownList([ 'Biasa' => 'Biasa', 'Persalinan' => 'Persalinan',], ['prompt' => '']);
+            echo $form->field($model, 'dr_penanggung_jawab')->textInput(['maxlength' => 25]);
+            echo $form->field($model, 'icdx_id')->widget(Select2::classname(), [
+                'options' => ['placeholder' => 'Select ICDX ...'],
+                'pluginOptions' => [
+                    'allowClear' => true,
+                    'minimumInputLength' => 3,
+                    'ajax' => [
+                        'url' => $urlIcdx,
+                        'dataType' => 'json',
+                        'data' => new JsExpression('function(term,page) { return {search:term}; }'),
+                        'results' => new JsExpression('function(data,page) { return {results:data.results}; }'),
+                    ],
+                    'initSelection' => new JsExpression($initScriptIcdx)
+                ],
+            ]);
+            echo $form->field($model, 'catatan')->textarea(['rows' => 6]);
+            Modal::end();
             ?>
-            <?= $form->field($model, 'status_pelayanan')->dropDownList([ 'Rawat Jalan' => 'Rawat Jalan', 'Inap' => 'Inap',], ['prompt' => '', 'style' => 'width:70%;']) ?>
         </div>
         <div role="tabpanel" class="tab-pane" id="statasur" style="padding:20px">
             <?= $form->field($model, 'status_asuransi')->radioList([ 'Umum' => 'Umum', 'BPJS Kesehatan' => 'BPJS Kesehatan', 'BPJS Ketenagakerjaan' => 'BPJS Ketenagakerjaan', 'Asuransi Lainnya' => 'Asuransi Lainnya',], ['inline' => true]) ?>
@@ -144,7 +203,8 @@ SCRIPT;
                 <?= $form->field($model, 'asuransi_status_jaminan')->textInput(['maxlength' => 30]) ?>
             </div>
             <div id="el-2" style="<?= $style2 ?>">
-                <?= $form->field($model, 'asuransi_noreg_other')->textInput(['maxlength' => 15]) ?>
+                <?php //$form->field($model, 'asuransi_noreg_other')->textInput(['maxlength' => 15]) ?>
+                <?= $form->field($model, 'asuransi_provider_id')->dropDownList(ArrayHelper::map(AsuransiProvider::find()->asArray()->all(), 'id', 'nama'), ['prompt' => 'Select Asuransi', 'style' => 'width:70%;']) ?>
                 <?= $form->field($model, 'asuransi_penanggung_jawab')->textInput(['maxlength' => 30]) ?>
                 <?= $form->field($model, 'asuransi_alamat')->textInput(['maxlength' => 30]) ?>
                 <?= $form->field($model, 'asuransi_notelp')->textInput(['maxlength' => 15]) ?>
@@ -156,24 +216,15 @@ SCRIPT;
     </div>
 </div>
 <hr/>
-<?php ActiveForm::end(); ?>
 <?php
-Modal::begin([
-    'id' => 'md_spo',
-    'header' => '<h4>Surat Pengantar Opname</h4>',
-]);
-echo $form->field($model, 'status_rawat')->dropDownList([ 'Biasa' => 'Biasa', 'Persalinan' => 'Persalinan',], ['prompt' => '']);
-echo $form->field($model, 'dr_penanggung_jawab')->textInput(['maxlength' => 25]);
-echo $form->field($model, 'icdx_id')->textInput();
-echo $form->field($model, 'catatan')->textarea(['rows' => 6]);
-Modal::end();
-
 Modal::begin([
     'id' => 'md_add_pasien',
     'header' => '<h7>Tambah Pasien</h7>'
 ]);
 Modal::end();
 ?>
+<?php ActiveForm::end(); ?>
+
 <script>
     $(document).ready(function () {
         $('input[name="Registrasi[status_asuransi]"]').change(function () {
@@ -209,6 +260,14 @@ Modal::end();
             $('#md_add_pasien').modal('show');
             $("#md_pasien .modal-content").css({
                 "width": "750px",
+                "margin": "0px 0 0 -10%"
+            });
+        });
+        
+        $('#sp_opname').click(function () {
+            $('#md_spo').modal('show');
+            $("#md_spo .modal-content").css({
+                "width": "750px","height":"450px",
                 "margin": "0px 0 0 -10%"
             });
         });

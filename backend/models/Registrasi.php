@@ -47,8 +47,8 @@ class Registrasi extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['no_reg', 'pasienId', 'status_pelayanan'], 'required'],
-            [['pasienId', 'icdx_id'], 'integer'],
+            [['pasienId', 'status_pelayanan'], 'required'],
+            [['pasienId','asuransi_provider_id', 'icdx_id'], 'integer'],
             [['tanggal_registrasi', 'asuransi_tgl_lahir'], 'safe'],
             [['status_pelayanan', 'status_rawat', 'status_asuransi', 'catatan'], 'string'],
             [['no_reg', 'asuransi_noreg','asuransi_noreg_other', 'asuransi_notelp'], 'string', 'max' => 15],
@@ -81,6 +81,7 @@ class Registrasi extends \yii\db\ActiveRecord
             'asuransi_penanggung_jawab' => 'Penanggung Jawab',
             'asuransi_alamat' => 'Alamat',
             'asuransi_notelp' => 'No Telepon/HP',
+            'asuransi_provider_id' => 'Asuransi',
         ];
     }
 

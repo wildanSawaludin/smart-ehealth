@@ -5,6 +5,7 @@ namespace backend\controllers;
 use Yii;
 use yii\filters\AccessControl;
 use backend\models\Registrasi;
+use backend\models\Icdx;
 use backend\models\RegistrasiSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -59,6 +60,8 @@ class RegistrasiController extends Controller {
             $model->tanggal_registrasi = date('Y-m-d');
             if ($model->asuransi_tgl_lahir)
                 $model->asuransi_tgl_lahir = Yii::$app->get('helper')->dateFormatingStrip($model->asuransi_tgl_lahir);
+            $model->save();
+            $model->no_reg= (string)sprintf('%08d', $model->id);
             $model->save();
             //if($model->save())return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -177,9 +180,9 @@ class RegistrasiController extends Controller {
         $out = ['more' => false];
         if (!is_null($search)) {
             $query = new Query;
-            $query->select('id, nama AS text')
+            $query->select(['id', 'concat(nama,"||",no_rm) as text'])
                     ->from('pasien')
-                    ->where('nama LIKE "%' . $search . '%"')
+                    ->where('concat(nama,"||",no_rm) LIKE "%' . $search . '%"')
                     ->limit(20);
             $command = $query->createCommand();
             $data = $command->queryAll();
@@ -188,6 +191,25 @@ class RegistrasiController extends Controller {
             $out['results'] = ['id' => $id, 'text' => Pasien::find($id)->nama];
         } else {
             $out['results'] = ['id' => 0, 'text' => 'Pasien tidak ditemukan'];
+        }
+        echo Json::encode($out);
+    }
+    
+    public function actionIcdxList($search = null, $id = null) {
+        $out = ['more' => false];
+        if (!is_null($search)) {
+            $query = new Query;
+            $query->select(['id', 'concat(kode,"||",inggris) as text'])
+                    ->from('icdx')
+                    ->where('concat(kode,"||",inggris) LIKE "%' . $search . '%"')
+                    ->limit(20);
+            $command = $query->createCommand();
+            $data = $command->queryAll();
+            $out['results'] = array_values($data);
+        } elseif ($id > 0) {
+            $out['results'] = ['id' => $id, 'text' => Icdx::find($id)->nama];
+        } else {
+            $out['results'] = ['id' => 0, 'text' => 'Icdx tidak ditemukan'];
         }
         echo Json::encode($out);
     }
