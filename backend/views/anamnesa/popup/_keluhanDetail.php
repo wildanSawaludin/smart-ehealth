@@ -40,8 +40,8 @@ use backend\models\Lookup;
                             <?php 
                             $keluh = str_replace("_"," ",$_GET['param']);
                             $rinci = Lookup::items($keluh,'keluhan_rincian');
-                            var_dump($rinci[1],$rinci[2],$rinci[3]);
-                            exit();
+//                            var_dump($rinci[1],$rinci[2],$rinci[3]);
+//                            exit();
                             ?>
                                  
                             <?= $form->field($model, 'faktor_resiko_kebiasaan')->radioList($rinci); ?>
