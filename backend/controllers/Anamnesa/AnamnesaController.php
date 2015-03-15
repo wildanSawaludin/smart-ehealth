@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\controllers;
+namespace backend\controllers\Anamnesa;
 
 use Yii;
 use yii\filters\AccessControl;
