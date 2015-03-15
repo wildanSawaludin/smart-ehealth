@@ -124,6 +124,24 @@ class AnamnesaController extends Controller
                     'model' => $model,
         ]);
     }
+    
+     public function actionKeluhanLokasi($id) {
+       $model = $this->findModel($id);
+       if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
+//        if ($_POST) {
+//            $model->load(Yii::$app->request->post());
+//            if ($model->save()) {
+//                return $this->redirect(['index', 'pasienId' => $model->id]);
+//            }
+//            //return $this->redirect(['view', 'id' => $model->id]);
+//        }
+        return $this->renderAjax('popup/_keluhanDetail', [
+                    'model' => $model,
+        ]);
+    }
 
     /**
      * Finds the Anamnesa model based on its primary key value.

@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use kartik\widgets\ActiveForm;
 use kartik\builder\Form;
+use kartik\tabs\TabsX;
 use backend\models\Lookup;
 
 
@@ -15,47 +16,51 @@ use backend\models\Lookup;
 </div>
 
 <div class="modal-body">
-        <ul class="nav nav-tabs" id="tabs-rinci" style="padding-top:0px;margin-bottom: 10px">
-                <li class="active"><a href="#rinci" data-toggle="tab">Rincian </a></li>
-                <li ><a href="#lks" data-toggle="tab">Lokasi</a></li>
-                <li ><a href="#anter" data-toggle="tab">Anamnesa Terpimpin</a></li>
 
-            </ul>
-        <?php $form = ActiveForm::begin([
-                    'id' => 'keluhanDetail-form',
-                    'enableAjaxValidation' => false,
-                    'enableClientValidation' => true,
-                    'type' => ActiveForm::TYPE_HORIZONTAL,
-                    'formConfig' => [
-                        'deviceSize' => ActiveForm::SIZE_SMALL,
-                        'labelSpan' => 1,
-                        'showLabels'=>false
-                        
-                    ]
-                    ]); 
-        ?>
-            
-            <div class="tab-content">
-                 <div class="tab-pane fade in active" id="rinci">    
-                            <?php 
-                            $keluh = str_replace("_"," ",$_GET['param']);
-                            $rinci = Lookup::items($keluh,'keluhan_rincian');
-//                            var_dump($rinci[1],$rinci[2],$rinci[3]);
-//                            exit();
-                            ?>
-                                 
-                            <?= $form->field($model, 'faktor_resiko_kebiasaan')->radioList($rinci); ?>
-                 </div>       
-            </div>
-        <?php ActiveForm::end(); ?>
+    <?php
+    $items = [
+    [
+        'label'=>'<i class="glyphicon glyphicon-home"></i> Rincian',
+        'content'=>yii\base\View::render('_keluhanRincian',['model'=>$model]),
+        'active'=>true
+    ],
+    [
+        'label'=>'<i class="glyphicon glyphicon-user"></i> Lokasi',
+        'content'=>'test3',
+        'linkOptions'=>['data-url'=>\yii\helpers\Url::to(['/anamnesa/keluhanLokasi'])]
+    ],
+    [
+        'label'=>'<i class="glyphicon glyphicon-list-alt"></i> Dropdown',
+        'items'=>[
+             [
+                 'label'=>'<i class="glyphicon glyphicon-chevron-right"></i> Option 1',
+                 'encode'=>false,
+                 'content'=>'test4',
+             ],
+             [
+                 'label'=>'<i class="glyphicon glyphicon-chevron-right"></i> Option 2',
+                 'encode'=>false,
+                 'content'=>'content4',
+             ],
+        ],
+    ],
+];
+    
+    echo TabsX::widget([
+    'items'=>$items,
+    'position'=>TabsX::POS_ABOVE,
+    'bordered'=>true,
+    'encodeLabels'=>false
+]);
+    ?>
 </div>
 <div class="modal-footer">
-    <div class="form-group">
-        <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
-    </div>
+
 
 </div>
-</div>
-            
+
+
+    
+     
+    </div>            
 
