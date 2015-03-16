@@ -29,22 +29,27 @@ use yii\helpers\Url;
                     ]
                     ]); 
         ?>
-<?php
-$url = Url::to(['Anamnesa/anamnesa-riwayat/icdx-list']);
-// Script to initialize the selection based on the value of the select2 element
-$initScript = <<< SCRIPT
-    function (element, callback) {
-    var id=\$(element).val();
-    if (id !== "") {
-       \$.ajax("{$url}?id=" + id, {
-         dataType: "json"
-       }).done(function(data) { callback(data.results);});
-    }
-}
+        <?php
+        $url = Url::to(['Anamnesa/anamnesa-riwayat/icdx-list']);
+        // Script to initialize the selection based on the value of the select2 element
+        $initScript = <<< SCRIPT
+            function (element, callback) {
+            var id=\$(element).val();
+            if (id !== "") {
+               \$.ajax("{$url}?id=" + id, {
+                 dataType: "json"
+               }).done(function(data) { callback(data.results);});
+            }
+
+        }
 SCRIPT;
-                    
-            echo $form->field($model, 'kode')->widget(Select2::classname(), [
-                    'options' => ['placeholder' => 'Search for a city ...'],
+        ?>
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="Diagnosa">Diagnosa :</label>
+            <div class="col-md-8">
+                <?php
+                echo $form->field($model, 'kode')->widget(Select2::classname(), [
+                    'options' => ['placeholder' => 'Kode ICD X'],
                     'pluginOptions' => [
                         'allowClear' => true,
                         'minimumInputLength' => 3,
@@ -56,19 +61,14 @@ SCRIPT;
                         ],
                         'initSelection' => new JsExpression($initScript)
                     ],
-            ]);
-            
-            $data = ['aaa','fff'];
-            echo $form->field($model, 'kode')->widget(TypeaheadBasic::classname(), [
-            'data' => ['aaa','fff'],
-            'options' => ['placeholder' => 'Filter as you type ...'],
-            'pluginOptions' => ['highlight'=>true],
-            
-            ]);
-        ?>
+                ]);
+                ?>
+            </div>
+        </div>
         <?php ActiveForm::end(); ?>
     </div>
 </div>
-            
+<script>var id = '<?php echo $_GET['id']; ?>' </script>
+<script src="/admin/js/riwayatPenyakit.js"></script>
 
     

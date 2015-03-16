@@ -153,6 +153,18 @@ Modal::begin([
 //    'header' => '<h7>Tambah Pasien</h7>'
 ]);
 Modal::end();
+
+Modal::begin([
+    'id' => 'm_riwayatpenyakit',
+//    'header' => '<h7>Tambah Pasien</h7>'
+]);
+Modal::end();
+
+Modal::begin([
+    'id' => 'm_riwayatperawatan',
+//    'header' => '<h7>Tambah Pasien</h7>'
+]);
+Modal::end();
 ?>
 <script>var id = '<?php echo $_GET['id']; ?>' </script>  
 <script src="/admin/js/popupFunction.js"></script>  

@@ -49,7 +49,7 @@ class AnamnesaRiwayatController extends AnamnesaController {
             $query = new Query;
             $query->select(['id', 'concat(kode,"||",inggris) as text'])
                 ->from('icdx')
-                ->where('concat(kode,"||",inggris) LIKE "%' . $search . '%"')
+                ->where('concat(kode,"||",inggris,"||",indonesia) LIKE "%' . $search . '%"')
                 ->limit(20);
             $command = $query->createCommand();
             $data = $command->queryAll();
