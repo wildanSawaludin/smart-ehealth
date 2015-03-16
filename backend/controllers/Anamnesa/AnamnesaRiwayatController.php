@@ -17,21 +17,27 @@ use yii\helpers\Json;
 class AnamnesaRiwayatController extends AnamnesaController {
 
 
-    public function actionUpdate($id)
+    public function actionUpdatePenyakit($id)
     {
         $model = $this->findModel($id);
 
-        if(isset($_POST['param'])){
-            $model->riwayat_penyakit_pil = $_POST['param'];
+        if(isset($_POST['riwayat_penyakit_pil'])){
+            $model->riwayat_penyakit_pil = $_POST['riwayat_penyakit_pil'];
+            $model->riwayatsakit_icdx_id = $_POST['riwayatsakit_icdx_id'];
+            $model->riwayat_penyakit_nil = $_POST['riwayat_penyakit_nil'];
+            $model->riwayat_penyakit_lama = $_POST['riwayat_penyakit_lama'];
+            $model->riwayat_penyakit_nama = $_POST['riwayat_penyakit_nama'];
             $model->save();
         }
     }
 
-    public function actionPopupRiwayat()
+    public function actionPopupRiwayat($id = 1)
     {
         $model = new Icdx();
+        $modelAnamnesa = Anamnesa::findOne($id);
         return $this->renderAjax('_riwayatDetail', [
             'model' => $model,
+            'modelAnamnesa' => $modelAnamnesa,
         ]);
     }
 
