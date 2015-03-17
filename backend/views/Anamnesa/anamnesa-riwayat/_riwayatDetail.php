@@ -5,7 +5,7 @@ use kartik\widgets\ActiveForm;
 use kartik\builder\Form;
 use kartik\widgets\Select2;
 use yii\web\JsExpression;
-use kartik\widgets\TypeaheadBasic;
+use kartik\widgets\Typeahead;
 use yii\helpers\Url;
 
 ?>
@@ -45,35 +45,44 @@ use yii\helpers\Url;
 SCRIPT;
         ?>
         <div class="form-group">
-            <label class="col-lg-3 control-label" for="Diagnosa">Diagnosa :</label>
-            <div class="col-lg-9">
+            <label class="col-md-3 control-label" for="Diagnosa">Diagnosa :</label>
+            <div class="col-md-2">
                 <?php
-                echo $form->field($model, 'id')->widget(Select2::classname(), [
-                    'options' => ['placeholder' => 'Kode ICD X'],
-                    'pluginOptions' => [
-                        'allowClear' => true,
-                        'minimumInputLength' => 3,
-                        'ajax' => [
-                            'url' => $url,
-                            'dataType' => 'json',
-                            'data' => new JsExpression('function(term,page) { return {search:term}; }'),
-                            'results' => new JsExpression('function(data,page) { return {results:data.results}; }'),
-                        ],
-                        'initSelection' => new JsExpression($initScript)
+                echo $form->field($modelAnamnesa->riwayatsakitIcdx, 'kode')->widget(Typeahead::classname(), [
+                    'options' => ['placeholder' => 'ICD X', 'id' => 'kode'],
+                    'pluginOptions' => ['highlight'=>true],
+                    'dataset' => [
+                        [
+                            'remote' => Url::to(['Anamnesa/anamnesa-riwayat/type-ahead-kode']) . '?q=%QUERY',
+                            'limit' => 10
+                        ]
                     ],
+                    'pluginEvents' => [
+                        "typeahead:selected" => "function(obj, datum, name) { \$(nama).val(datum.nama); \$(idicdx).val(datum.id); }",
+                    ]
+                ]);
+                ?>
+            </div>
+            <div class="col-md-7">
+                <?php
+                echo $form->field($modelAnamnesa->riwayatsakitIcdx, 'inggris')->widget(Typeahead::classname(), [
+                    'options' => ['placeholder' => 'Nama Penyakit', 'id' => 'nama'],
+                    'pluginOptions' => ['highlight'=>true],
+                    'dataset' => [
+                        [
+                            'remote' => Url::to(['Anamnesa/anamnesa-riwayat/type-ahead-name']) . '?q=%QUERY',
+                            'limit' => 10
+                        ]
+                    ],
+                    'pluginEvents' => [
+                        "typeahead:selected" => "function(obj, datum, name) { \$(kode).val(datum.kode); \$(idicdx).val(datum.id); }",
+                    ]
                 ]);
                 ?>
             </div>
         </div>
-        <div class="form-group">
-            <label class="col-lg-3 control-label" for="lama_perlangsungan">&nbsp;</label>
-            <div class="col-lg-2">
-                <?= $form->field($modelAnamnesa->riwayatsakitIcdx, 'kode')->textInput(['readonly' => true]) ?>
-            </div>
-            <div class="col-lg-7">
-                <?= $form->field($modelAnamnesa->riwayatsakitIcdx, 'inggris')->textInput(['readonly' => true]) ?>
-            </div>
-        </div>
+        <input type="hidden" id="idicdx">
+        
         <div class="form-group">
             <label class="col-lg-3 control-label" for="lama_perlangsungan">Lama Perlangsungan :</label>
             <div class="col-lg-2">
