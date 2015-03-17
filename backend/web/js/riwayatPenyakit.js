@@ -13,7 +13,8 @@ $(document).ready(function () {
                     "&riwayat_penyakit_lama="+$('#anamnesa-riwayat_penyakit_lama').val()+
                     "&riwayat_penyakit_nama="+nama_penyakit[1],
             success:function(data){
-                console.log(data);
+                alert('Success Update Data');
+                $("#m_riwayatpenyakit").modal('hide');
             }
         });
     });
