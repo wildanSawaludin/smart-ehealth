@@ -29,6 +29,19 @@ class AnamnesaRiwayatController extends AnamnesaController {
             $model->save();
         }
     }
+    
+    public function actionUpdatePerawatan($id)
+    {
+        $model = $this->findModel($id);
+        if(isset($_POST['riwayat_perawatan_pil'])){
+            $model->riwayat_perawatan_pil = $_POST['riwayat_perawatan_pil'];
+            //$model->riwayat_perawatan_waktu = $_POST['riwayat_perawatan_waktu'];
+            $model->riwayat_perawatan_tempat = $_POST['riwayat_perawatan_tempat'];
+            $model->riwayat_perawatan_nil = $_POST['anamnesa-riwayat_perawatan_nil'];
+            $model->riwayat_perawatan_lama = $_POST['anamnesa-riwayat_perawatan_lama'];
+            $model->save();
+        }
+    }
 
     public function actionPopupRiwayat($id = 1)
     {
@@ -40,9 +53,9 @@ class AnamnesaRiwayatController extends AnamnesaController {
         ]);
     }
 
-    public function actionPopupRiwayatPerawatan()
+    public function actionPopupRiwayatPerawatan($id = 1)
     {
-        $model = new Anamnesa();
+        $model = Anamnesa::findOne($id);
         return $this->renderAjax('riwayatPerawatan', [
             'model' => $model,
         ]);
