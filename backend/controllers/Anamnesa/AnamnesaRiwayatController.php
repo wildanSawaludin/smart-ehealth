@@ -26,7 +26,6 @@ class AnamnesaRiwayatController extends AnamnesaController {
             $model->riwayatsakit_icdx_id = $_POST['riwayatsakit_icdx_id'];
             $model->riwayat_penyakit_nil = $_POST['riwayat_penyakit_nil'];
             $model->riwayat_penyakit_lama = $_POST['riwayat_penyakit_lama'];
-            $model->riwayat_penyakit_nama = $_POST['riwayat_penyakit_nama'];
             $model->save();
         }
     }
