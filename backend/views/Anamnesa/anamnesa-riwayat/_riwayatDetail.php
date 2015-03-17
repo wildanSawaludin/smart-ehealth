@@ -17,7 +17,7 @@ use yii\helpers\Url;
 
     <div class="modal-body">
         <?php $form = ActiveForm::begin([
-                    'id' => 'keluhanDetail-form',
+                    'id' => 'riwayatPenyakit-form',
                     'enableAjaxValidation' => false,
                     'enableClientValidation' => true,
                     'type' => ActiveForm::TYPE_HORIZONTAL,
