@@ -67,18 +67,34 @@ class AnamnesaRiwayatController extends AnamnesaController {
         echo Json::encode($out);
     }
 
-    public function actionTypeAhead($q = null)
+    public function actionTypeAheadKode($q = null)
     {
         $query = new Query;
-        $query->select(['id', 'concat(kode,"||",inggris) as text'])
+        $query->select(['id','kode','inggris'])
             ->from('icdx')
-            ->where('concat(kode,"||",inggris) LIKE "%' . $q . '%"')
+            ->where('kode LIKE "%' . $q . '%"')
             ->orderBy('kode');
         $command = $query->createCommand();
         $data = $command->queryAll();
         $out = [];
         foreach ($data as $d) {
-            $out[] = ['value' => $d['kode']];
+            $out[] = ['value' => $d['kode'], 'nama' => $d['inggris'], 'id' => $d['id']];
+        }
+        echo Json::encode($out);
+    }
+    
+    public function actionTypeAheadName($q = null)
+    {
+        $query = new Query;
+        $query->select(['id','kode','inggris'])
+            ->from('icdx')
+            ->where('concat(inggris,"||",indonesia) LIKE "%' . $q . '%"')
+            ->orderBy('kode');
+        $command = $query->createCommand();
+        $data = $command->queryAll();
+        $out = [];
+        foreach ($data as $d) {
+            $out[] = ['value' => $d['inggris'], 'kode' => $d['kode'], 'id' => $d['id']];
         }
         echo Json::encode($out);
     }
