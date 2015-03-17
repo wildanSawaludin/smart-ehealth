@@ -45,10 +45,10 @@ use yii\helpers\Url;
 SCRIPT;
         ?>
         <div class="form-group">
-            <label class="col-md-2 control-label" for="Diagnosa">Diagnosa :</label>
-            <div class="col-md-8">
+            <label class="col-lg-3 control-label" for="Diagnosa">Diagnosa :</label>
+            <div class="col-lg-9">
                 <?php
-                echo $form->field($model, 'kode')->widget(Select2::classname(), [
+                echo $form->field($model, 'id')->widget(Select2::classname(), [
                     'options' => ['placeholder' => 'Kode ICD X'],
                     'pluginOptions' => [
                         'allowClear' => true,
@@ -63,6 +63,29 @@ SCRIPT;
                     ],
                 ]);
                 ?>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-3 control-label" for="lama_perlangsungan">&nbsp;</label>
+            <div class="col-lg-2">
+                <?= $form->field($modelAnamnesa->riwayatsakitIcdx, 'kode')->textInput(['readonly' => true]) ?>
+            </div>
+            <div class="col-lg-7">
+                <?= $form->field($modelAnamnesa->riwayatsakitIcdx, 'inggris')->textInput(['readonly' => true]) ?>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-3 control-label" for="lama_perlangsungan">Lama Perlangsungan :</label>
+            <div class="col-lg-2">
+                <?= $form->field($modelAnamnesa, 'riwayat_penyakit_nil') ?>
+            </div>
+            <div class="col-lg-4">
+                <?= $form->field($modelAnamnesa, 'riwayat_penyakit_lama')->dropDownList(['hari' => 'hari', 'minggu' => 'minggu', 'bulan' => 'bulan', 'tahun' => 'tahun']) ?>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-9">
+                <input id="btnOk" type="button" class="btn btn-primary" value="OK">
             </div>
         </div>
         <?php ActiveForm::end(); ?>
