@@ -32,5 +32,11 @@ $(document).ready(function () {
          }); */
     });
 
+    $('#anamnesa-riwayat_pengobatan_pil').change(function(){
+        $('#m_riwayatpengobatan').html('');
+        $('#m_riwayatpengobatan').load(baseurl + '/Anamnesa/anamnesa-riwayat/popup-riwayat-pengobatan?id='+id+'&param='+$(this).val());
+        $('#m_riwayatpengobatan').modal('show');
+    });
+
 
 });
