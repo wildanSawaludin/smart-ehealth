@@ -29,6 +29,7 @@ use kartik\widgets\DatePicker;
                 <?php
                     echo $form->field($model, 'riwayat_perawatan_waktu')->widget(DatePicker::classname(), [
                         'options' => ['placeholder' => ''],
+                        'convertFormat' => true,
                         'pluginOptions' => [
                             'autoclose'=>true,
                             'format' => 'dd-MM-yyyy'
