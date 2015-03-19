@@ -11,6 +11,7 @@ use yii\web\Response;
 use backend\controllers\Anamnesa\AnamnesaController;
 use backend\models\Icdx;
 use backend\models\Anamnesa;
+use backend\models\RiwayatPengobatan;
 use yii\db\Query;
 use yii\helpers\Json;
 
@@ -34,8 +35,9 @@ class AnamnesaRiwayatController extends AnamnesaController {
     {
         $model = $this->findModel($id);
         if(isset($_POST['riwayat_perawatan_pil'])){
+            $tanggal = date('Y-m-d', strtotime($_POST['anamnesa-riwayat_perawatan_waktu']));
             $model->riwayat_perawatan_pil = $_POST['riwayat_perawatan_pil'];
-            //$model->riwayat_perawatan_waktu = $_POST['riwayat_perawatan_waktu'];
+            $model->riwayat_perawatan_waktu = $tanggal;
             $model->riwayat_perawatan_tempat = $_POST['riwayat_perawatan_tempat'];
             $model->riwayat_perawatan_nil = $_POST['anamnesa-riwayat_perawatan_nil'];
             $model->riwayat_perawatan_lama = $_POST['anamnesa-riwayat_perawatan_lama'];
@@ -43,7 +45,38 @@ class AnamnesaRiwayatController extends AnamnesaController {
         }
     }
 
-    public function actionPopupRiwayat($id = 1)
+    public function actionUpdatePengobatan($id)
+    {
+        $model = $this->findModel($id);
+
+
+        //print_r($_POST['RiwayatPengobatan']['nama_obat']);
+        //echo count($_POST);
+        if (isset($_POST)) {
+            $nama_obat = $_POST['RiwayatPengobatan']['nama_obat'];
+            $frekuensi = $_POST['RiwayatPengobatan']['frekuensi'];
+            $lama_pengobatan = $_POST['RiwayatPengobatan']['lama_pengobatan'];
+            $lama_pengobatan_waktu = $_POST['RiwayatPengobatan']['lama_pengobatan_waktu'];
+
+            $deletePengobatan = RiwayatPengobatan::deleteAll(['anamnesa_id' => $id]);
+
+            $model->riwayat_pengobatan_pil = '1';
+            $model->save();
+
+            for($i = 0; $i < count($nama_obat); $i++){
+                $m_riwayatPengobatan = new RiwayatPengobatan();
+                $m_riwayatPengobatan->anamnesa_id = $id;
+                $m_riwayatPengobatan->nama_obat = $nama_obat[$i];
+                $m_riwayatPengobatan->frekuensi = $frekuensi[$i];
+                $m_riwayatPengobatan->lama_pengobatan = $lama_pengobatan[$i];
+                $m_riwayatPengobatan->lama_pengobatan_waktu = $lama_pengobatan_waktu[$i];
+                $m_riwayatPengobatan->save();
+            }
+
+        }
+    }
+
+    public function actionPopupRiwayat($id)
     {
         $model = new Icdx();
         $modelAnamnesa = Anamnesa::findOne($id);
@@ -53,11 +86,21 @@ class AnamnesaRiwayatController extends AnamnesaController {
         ]);
     }
 
-    public function actionPopupRiwayatPerawatan($id = 1)
+    public function actionPopupRiwayatPerawatan($id)
     {
         $model = Anamnesa::findOne($id);
         return $this->renderAjax('riwayatPerawatan', [
             'model' => $model,
+        ]);
+    }
+
+    public function actionPopupRiwayatPengobatan($id)
+    {
+        $model = Anamnesa::findOne($id);
+        $modelPengobatan = RiwayatPengobatan::findAll(['anamnesa_id' => $id]);
+        return $this->renderAjax('riwayatPengobatan',[
+           'model' => $model,
+           'modelPengobatan' => $modelPengobatan,
         ]);
     }
 
