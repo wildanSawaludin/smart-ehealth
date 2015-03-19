@@ -35,21 +35,13 @@ $(document).ready(function(){
        i++;
    });
 
-
+    $('input[name="RiwayatPengobatan[lama_pengobatan][]"]').keypress(function(e){
+        if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+            return false;
+        }
+    });
 
     $('#btnOk').click(function(){
-        /*$.ajax({
-            type: "POST",
-            url: baseurl + '/Anamnesa/anamnesa-riwayat/update-pengobatan?id='+id,
-            data: "riwayat_penyakit_pil=1&riwayatsakit_icdx_id="+$('#idicdx').val()+
-            "&riwayat_penyakit_nil="+$('#anamnesa-riwayat_penyakit_nil').val()+
-            "&riwayat_penyakit_lama="+$('#anamnesa-riwayat_penyakit_lama').val(),
-            success:function(data){
-                alert('Success Update Data');
-                $("#m_riwayatpenyakit").modal('hide');
-            }
-        }) ;*/
-        //console.log($('.form-control.obat').map(function() {return this.value}).get());
         $.ajax({
             type: "POST",
             url: baseurl + '/Anamnesa/anamnesa-riwayat/update-pengobatan?id='+id,
