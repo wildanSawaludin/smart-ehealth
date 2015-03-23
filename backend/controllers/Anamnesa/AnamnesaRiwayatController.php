@@ -22,11 +22,22 @@ class AnamnesaRiwayatController extends AnamnesaController {
     {
         $model = $this->findModel($id);
 
-        if(isset($_POST['riwayat_penyakit_pil'])){
+        if(isset($_POST)){
             $model->riwayat_penyakit_pil = $_POST['riwayat_penyakit_pil'];
             $model->riwayatsakit_icdx_id = $_POST['riwayatsakit_icdx_id'];
             $model->riwayat_penyakit_nil = $_POST['riwayat_penyakit_nil'];
             $model->riwayat_penyakit_lama = $_POST['riwayat_penyakit_lama'];
+            $model->save();
+        }
+    }
+
+    public function actionUpdateKeluarga($id)
+    {
+        $model = $this->findModel($id);
+
+        if(isset($_POST)){
+            $model->riwayat_keluarga_pil = $_POST['riwayat_keluarga_pil'];
+            $model->riwayatkel_icdx_id = $_POST['riwayatkel_icdx_id'];
             $model->save();
         }
     }
