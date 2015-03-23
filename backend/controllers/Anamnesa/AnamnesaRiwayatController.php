@@ -76,6 +76,8 @@ class AnamnesaRiwayatController extends AnamnesaController {
         }
     }
 
+
+
     public function actionPopupRiwayat($id)
     {
         $model = new Icdx();
@@ -103,6 +105,16 @@ class AnamnesaRiwayatController extends AnamnesaController {
            'modelPengobatan' => $modelPengobatan,
         ]);
     }
+
+    public function actionPopupRiwayatKeluarga($id)
+    {
+        $model = Anamnesa::findOne($id);
+        return $this->renderAjax('riwayatKeluarga',[
+           'model' => $model
+        ]);
+    }
+
+
 
     public function actionIcdxList($search = null, $id = null) {
         $out = ['more' => false];
