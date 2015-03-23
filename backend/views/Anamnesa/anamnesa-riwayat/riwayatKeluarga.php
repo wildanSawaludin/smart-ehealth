@@ -35,8 +35,8 @@ use yii\helpers\Url;
             <label class="col-md-3 control-label" for="Diagnosa">Diagnosa :</label>
             <div class="col-md-2">
                 <?php
-                echo $form->field($model->riwayatsakitIcdx, 'kode')->widget(Typeahead::classname(), [
-                    'options' => ['placeholder' => 'ICD X', 'id' => 'kode'],
+                echo $form->field($model, 'riwayatkel_icdx_id')->widget(Typeahead::classname(), [
+                    'options' => ['placeholder' => 'ICD X', 'id' => 'kode', 'value' => $model->riwayatsakitIcdxKel->kode],
                     'pluginOptions' => ['highlight'=>true],
                     'dataset' => [
                         [
@@ -52,8 +52,8 @@ use yii\helpers\Url;
             </div>
             <div class="col-md-7">
                 <?php
-                echo $form->field($model->riwayatsakitIcdx, 'inggris')->widget(Typeahead::classname(), [
-                    'options' => ['placeholder' => 'Nama Penyakit', 'id' => 'nama'],
+                echo $form->field($model, 'riwayatkel_icdx_id')->widget(Typeahead::classname(), [
+                    'options' => ['placeholder' => 'Nama Penyakit', 'id' => 'nama', 'value' => $model->riwayatsakitIcdxKel->inggris],
                     'pluginOptions' => ['highlight'=>true],
                     'dataset' => [
                         [
