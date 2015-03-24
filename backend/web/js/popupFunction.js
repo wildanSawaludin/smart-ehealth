@@ -6,42 +6,37 @@ $(document).ready(function () {
 
     });
     $('#anamnesa-riwayat_penyakit_pil').change(function(){
-        $('#m_riwayatpenyakit').html('');
-        $('#m_riwayatpenyakit').load(baseurl + '/Anamnesa/anamnesa-riwayat/popup-riwayat?id='+id+'&param='+$(this).val());
-        $('#m_riwayatpenyakit').modal('show');
-        /*$.ajax({
-         type: "POST",
-         url: baseurl + '/anamnesa/anamnesa-riwayat/update?id='+id,
-         data: "param="+$('#anamnesa-riwayat_penyakit_pil').val(),
-         success:function(data){
-         console.log(data);
-         }
-         }); */
+        if($('#anamnesa-riwayat_penyakit_pil').prop( "checked" )){
+            $('#m_riwayatpenyakit').html('');
+            $('#m_riwayatpenyakit').load(baseurl + '/Anamnesa/anamnesa-riwayat/popup-riwayat?id='+id+'&param='+$(this).val());
+            $('#m_riwayatpenyakit').modal('show');
+        }
     });
     $('#anamnesa-riwayat_perawatan_pil').change(function(){
-        $('#m_riwayatperawatan').html('');
-        $('#m_riwayatperawatan').load(baseurl + '/Anamnesa/anamnesa-riwayat/popup-riwayat-perawatan?id='+id+'&param='+$(this).val());
-        $('#m_riwayatperawatan').modal('show');
-        /*$.ajax({
-         type: "POST",
-         url: baseurl + '/anamnesa/anamnesa-riwayat/update?id='+id,
-         data: "param="+$('#anamnesa-riwayat_penyakit_pil').val(),
-         success:function(data){
-         console.log(data);
-         }
-         }); */
+        if($('#anamnesa-riwayat_perawatan_pil').prop( "checked" )) {
+            $('#m_riwayatperawatan').html('');
+            $('#m_riwayatperawatan').load(baseurl + '/Anamnesa/anamnesa-riwayat/popup-riwayat-perawatan?id=' + id + '&param=' + $(this).val());
+            $('#m_riwayatperawatan').modal('show');
+        }
+
     });
 
     $('#anamnesa-riwayat_pengobatan_pil').change(function(){
-        $('#m_riwayatpengobatan').html('');
-        $('#m_riwayatpengobatan').load(baseurl + '/Anamnesa/anamnesa-riwayat/popup-riwayat-pengobatan?id='+id+'&param='+$(this).val());
-        $('#m_riwayatpengobatan').modal('show');
+        if($('#anamnesa-riwayat_pengobatan_pil').prop( "checked" )) {
+            $('#m_riwayatpengobatan').html('');
+            $('#m_riwayatpengobatan').load(baseurl + '/Anamnesa/anamnesa-riwayat/popup-riwayat-pengobatan?id='+id+'&param='+$(this).val());
+            $('#m_riwayatpengobatan').modal('show');
+        }
+
     });
 
     $('#anamnesa-riwayat_keluarga_pil').change(function(){
-        $('#m_riwayatkeluarga').html('');
-        $('#m_riwayatkeluarga').load(baseurl + '/Anamnesa/anamnesa-riwayat/popup-riwayat-keluarga?id='+id+'&param='+$(this).val());
-        $('#m_riwayatkeluarga').modal('show');
+        if($('#anamnesa-riwayat_keluarga_pil').prop( "checked" )) {
+            $('#m_riwayatkeluarga').html('');
+            $('#m_riwayatkeluarga').load(baseurl + '/Anamnesa/anamnesa-riwayat/popup-riwayat-keluarga?id='+id+'&param='+$(this).val());
+            $('#m_riwayatkeluarga').modal('show');
+        }
+
     });
 
     $('#anamnesa-riwayat_lainnya_pil').change(function(){
