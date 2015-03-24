@@ -5,6 +5,7 @@ use kartik\widgets\ActiveForm;
 use kartik\builder\Form;
 use kartik\tabs\TabsX;
 use backend\models\Lookup;
+use yii\helpers\Url;
 
 
 
@@ -14,10 +15,11 @@ use backend\models\Lookup;
 	<a class="close" data-dismiss="modal">&times;</a>
 <!--	<h4><?php // echo $model->getAttributeLabel($_GET['title']); ?></h4>-->
 </div>
-
+<input type="text" value="" id="namakeluhan" name="namakeluhan">
 <div class="modal-body">
 
     <?php
+    
     $items = [
     [
         'label'=>'<i class="glyphicon glyphicon-home"></i> Rincian',
@@ -26,8 +28,17 @@ use backend\models\Lookup;
     ],
     [
         'label'=>'<i class="glyphicon glyphicon-user"></i> Lokasi',
-        'content'=>'test3',
-        'linkOptions'=>['data-url'=>\yii\helpers\Url::to(['/anamnesa/keluhanLokasi'])]
+     //   'content'=>yii\base\View::render('_keluhanLokasi',['model'=>$model]),
+        'id'=>'tabs-keluhanlokasi',
+        'content'=>'<div id="tablokasi"></div>',
+        'linkOptions'=>['data-enable-cache'=>false,'data-url'=>\yii\helpers\Url::to(['/Anamnesa/anamnesa/popup-lokasi',['id'=>$_GET['id'],'datakeluhan'=>str_replace("_"," ",$_GET['param'])]])],
+    ],
+    [
+        'label'=>'<i class="glyphicon glyphicon-user"></i> Anamnesa Terpimpin',
+     //   'content'=>yii\base\View::render('_keluhanLokasi',['model'=>$model]),
+        'id'=>'tabs-keluhanterpimpin',
+        'content'=>'<div id="tabanamnesa_terpimpin"></div>',
+        'linkOptions'=>['data-enable-cache'=>false,'data-url'=>\yii\helpers\Url::to(['/Anamnesa/anamnesa/anamnesa-terpimpin'])],
     ],
     [
         'label'=>'<i class="glyphicon glyphicon-list-alt"></i> Dropdown',
@@ -50,10 +61,20 @@ use backend\models\Lookup;
     'items'=>$items,
     'position'=>TabsX::POS_ABOVE,
     'bordered'=>true,
-    'encodeLabels'=>false
+    'encodeLabels'=>false,
+    'id'=>'tabs-keluhan',
+    'pluginOptions' =>  ['enableCache'=>false],
+  //  'enableCache'=>false,
+   //  'pluginEvents' => ["tabsX.beforeSend" => "$('#tabs-keluhanlokasi').on('tabsX.beforeSend', function (event) {
+  //  alert('test);
+//});"], 
 ]);
     ?>
+    
+  
+    
 </div>
+
 <div class="modal-footer">
 
 
@@ -62,5 +83,6 @@ use backend\models\Lookup;
 
     
      
-    </div>            
+    </div>   
+
 
