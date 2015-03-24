@@ -402,6 +402,14 @@ class Anamnesa extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getRiwayatsakitIcdxKel()
+    {
+        return $this->hasOne(Icdx::className(), ['id' => 'riwayatkel_icdx_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getRiwayatkelIcdx()
     {
         return $this->hasOne(Icdx::className(), ['id' => 'riwayatkel_icdx_id']);
