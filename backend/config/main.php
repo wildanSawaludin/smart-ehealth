@@ -38,5 +38,14 @@ return [
             'errorAction' => 'site/error',
         ],
     ],
+    'as access' => [
+        'class' => 'mdm\admin\components\AccessControl',
+        'allowActions' => [
+            'rbac/*', // add or remove allowed actions to this list
+            'user/*',
+            'site/error',
+            'debug/*',
+        ]
+    ],
     'params' => $params,
 ];
