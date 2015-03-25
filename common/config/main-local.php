@@ -7,7 +7,7 @@ return [
             'class' => 'yii\db\Connection',
             'dsn' => 'mysql:host=localhost;dbname=smart_ehealth_db',
             'username' => 'root',
-            'password' => '',
+            'password' => 'b!smill4h',
             'charset' => 'utf8',
         ],
         'mailer' => [

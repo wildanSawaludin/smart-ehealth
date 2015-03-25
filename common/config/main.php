@@ -2,7 +2,7 @@
 
 return [
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
-    'name' => 'doktor-oto',
+    'name' => 'Dottoro\'ta',
     'modules' => [
         'user' => [
 //            'identityClass' => 'dektrium\user\models\User',
@@ -47,7 +47,7 @@ return [
                 ]
             ],
             'mainLayout' => '@app/views/layouts/main.php',
-            'layout' => 'left-menu', // default null. other avaliable value 'right-menu' and 'top-menu'
+            'layout' => null, // default null. other avaliable value 'right-menu' and 'top-menu'
             'menus' => [
                 'assignment' => [
                     'label' => 'Assignment' // change label
@@ -77,7 +77,15 @@ return [
         ],
         'authManager' => [
             'class' => 'yii\rbac\DbManager', // or use 'yii\rbac\DbManager'
-        ]
+        ],
+        'view' => [
+            'theme' => [
+                'pathMap' => [
+                    '@app/views' => '@webroot/themes/material-default'
+                ],
+                'baseUrl' => '@web/themes/material-default'
+            ],
+        ],
     ],
     
 ];

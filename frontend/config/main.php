@@ -35,6 +35,14 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        'view' => [
+            'theme' => [
+                'pathMap' => [
+                    '@app/views' => '@webroot/themes/material-default'
+                ],
+                'baseUrl' => '@web/themes/material-default'
+            ],
+        ],
     ],
     'params' => $params,
 ];
