@@ -6,7 +6,9 @@ use kartik\builder\Form;
 use backend\models\Lookup;
 use yii\bootstrap\Modal;
 
+use frontend\assets\AppAsset;
 
+AppAsset::register($this);
 /* @var $this yii\web\View */
 /* @var $model app\models\Anamnesa */
 /* @var $form yii\widgets\ActiveForm */
@@ -54,9 +56,29 @@ use yii\bootstrap\Modal;
                         <?= $form->field($model, 'riwayat_pengobatan_pil',['template'=>'{label}{input}'])->checkbox(); ?>
                         <?= $form->field($model, 'riwayat_keluarga_pil',['template'=>'{label}{input}'])->checkbox(); ?>
                         <?= $form->field($model, 'riwayat_lainnya_pil',['template'=>'{label}{input}'])->checkbox(); ?>                        
-                        <?= $form->field($model, 'riwayat_alergi_pil',['template'=>'{label}{input}'])->checkbox(); ?>                        
-                        <?= $form->field($model, 'riwayat_transfusi_pil',['template'=>'{label}{input}'])->checkbox(); ?>                        
-                        <?= $form->field($model, 'riwayat_imunisasi_pil',['template'=>'{label}{input}'])->checkbox(); ?>                        
+                        <div id="riwayat_lain_hide" style="display: none; margin-left: 20px;">
+                            <div class="form-group field-anamnesa-riwayat_alergi_pil has-success">
+                                <div class="col-md-12">
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" value="1" <?= ($model->riwayat_alergi_pil == $model->riwayat_alergi_pil) ? 'checked=true':'' ?> name="Anamnesa[riwayat_alergi_pil]" id="anamnesa-riwayat_alergi_pil"> Riwayat Alergi </label>&nbsp;&nbsp;<span class="glyphicon glyphicon-edit riwayat_alergi" style="display: none" aria-hidden="true"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group field-anamnesa-riwayat_transfusi_pil has-success">
+                                <div class="col-md-12">
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" value="1" <?= ($model->riwayat_transfusi_pil == $model->riwayat_transfusi_pil) ? 'checked=true':'' ?> name="Anamnesa[riwayat_transfusi_pil]" id="anamnesa-riwayat_transfusi_pil"> Riwayat Transfusi </label>&nbsp;&nbsp;<span class="glyphicon glyphicon-edit riwayat_transfusi" style="display: none" aria-hidden="true"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group field-anamnesa-riwayat_imunisasi_pil">
+                                <div class="col-md-12">
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" value="1" <?= ($model->riwayat_imunisasi_pil == $model->riwayat_imunisasi_pil) ? 'checked=true':'' ?> name="Anamnesa[riwayat_imunisasi_pil]" id="anamnesa-riwayat_imunisasi_pil"> Riwayat Imunisasi</label>&nbsp;&nbsp;<span class="glyphicon glyphicon-edit riwayat_imunisasi" style="display: none" aria-hidden="true"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="biasa">
@@ -153,6 +175,49 @@ Modal::begin([
 //    'header' => '<h7>Tambah Pasien</h7>'
 ]);
 Modal::end();
+
+Modal::begin([
+    'id' => 'm_riwayatpenyakit',
+//    'header' => '<h7>Tambah Pasien</h7>'
+]);
+Modal::end();
+
+Modal::begin([
+    'id' => 'm_riwayatperawatan',
+//    'header' => '<h7>Tambah Pasien</h7>'
+]);
+Modal::end();
+
+Modal::begin([
+    'id' => 'm_riwayatpengobatan',
+//    'header' => '<h7>Tambah Pasien</h7>'
+]);
+Modal::end();
+
+Modal::begin([
+    'id' => 'm_riwayatkeluarga',
+//    'header' => '<h7>Tambah Pasien</h7>'
+]);
+Modal::end();
+
+Modal::begin([
+    'id' => 'm_riwayatalergi',
+    'header' => '<h7>Riwayat Alergi</h7>'
+]);
+Modal::end();
+
+Modal::begin([
+    'id' => 'm_riwayattransfusi',
+    'header' => '<h7>Riwayat Transfusi</h7>'
+]);
+Modal::end();
+
+Modal::begin([
+    'id' => 'm_riwayatimunisasi',
+    'header' => '<h7>Riwayat Imunisasi</h7>'
+]);
+Modal::end();
 ?>
 <script>var id = '<?php echo $_GET['id']; ?>' </script>  
-<script src="/admin/js/popupFunction.js"></script>  
+<?php $this->registerJsFile('/admin/js/popupKeluhan.js'); ?>
+<?php $this->registerJsFile('/admin/js/popupFunction.js'); ?>

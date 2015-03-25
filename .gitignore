@@ -18,6 +18,8 @@ Thumbs.db
 # composer vendor dir
 /vendor
 
+/backend/config/main-local.php
+
 # composer itself is not needed
 composer.phar
 
