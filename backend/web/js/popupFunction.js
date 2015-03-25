@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    var baseurl = window.location.protocol+'//'+window.location.host+'/admin/';
     $('input[name="Anamnesa[keluhan]"]').change(function () {
         $('#m_keluhanDetail').html('');
         $('#m_keluhanDetail').load(baseurl + '/anamnesa/popup-keluhan?id='+id+'&param='+$(this).val());
