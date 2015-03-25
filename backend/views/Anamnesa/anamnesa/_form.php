@@ -6,7 +6,9 @@ use kartik\builder\Form;
 use backend\models\Lookup;
 use yii\bootstrap\Modal;
 
+use frontend\assets\AppAsset;
 
+AppAsset::register($this);
 /* @var $this yii\web\View */
 /* @var $model app\models\Anamnesa */
 /* @var $form yii\widgets\ActiveForm */
@@ -217,4 +219,4 @@ Modal::begin([
 Modal::end();
 ?>
 <script>var id = '<?php echo $_GET['id']; ?>' </script>  
-<script src="/admin/js/popupFunction.js"></script>  
+<?php $this->registerJsFile('/admin/js/popupKeluhan.js'); ?>

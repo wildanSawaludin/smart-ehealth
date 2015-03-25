@@ -6,12 +6,14 @@ use Yii;
 use yii\filters\AccessControl;
 use backend\models\Anamnesa;
 use backend\models\AnamnesaSearch;
+use backend\models\Lookup;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\helpers\Json;
 use yii\db\Query;
 use yii\web\Response;
+
 
 /**
  * AnamnesaController implements the CRUD actions for Anamnesa model.
@@ -120,17 +122,43 @@ class AnamnesaController extends Controller
 //            }
 //            //return $this->redirect(['view', 'id' => $model->id]);
 //        }
-        return $this->renderAjax('popup/_keluhanDetail', [
+        return $this->renderAjax('popup\_keluhanDetail', [
                     'model' => $model,
         ]);
     }
     
-     public function actionKeluhanLokasi($id) {
+    
+     public function actionPopupRincilokasi($id,$param,$keluhan) {
+        // $id = $_GET[0]['id'];
+        $model = $this->findModel($id);
+      
+       $dataLokasi = str_replace("_"," ",$_GET['param']);
+      
+        return $this->renderAjax('popup\_keluhanRincilokasi', [
+                    'model' => $model,
+                    'dataLokasi' => $dataLokasi,
+        ]);
+    }
+    
+    
+     public function actionPopupLokasi() {
+       
+        $id = $_GET[0]['id'];
        $model = $this->findModel($id);
-       if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            return ActiveForm::validate($model);
-        }
+       Yii::$app->response->format = Response::FORMAT_JSON;
+      // if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
+    
+     //  if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+         
+       //    $model->save();
+        //    return $this->redirect(['update', 'id' => $model->id]);
+          // return ActiveForm::validate($model);
+        //}else{ //echo "2";
+           return $this->renderAjax('popup\_keluhanLokasi', [
+                    'model' => $model,
+        ]); 
+        //}
+       // 
 //        if ($_POST) {
 //            $model->load(Yii::$app->request->post());
 //            if ($model->save()) {
@@ -138,11 +166,111 @@ class AnamnesaController extends Controller
 //            }
 //            //return $this->redirect(['view', 'id' => $model->id]);
 //        }
-        return $this->renderAjax('popup/_keluhanDetail', [
-                    'model' => $model,
-        ]);
+        
     }
+   // public $datakeluhan2 ;
+    public function actionLokasiDetail($datakeluhan2,$id) {
+       // $id = $_GET[0]['id'];
+        $model = $this->findModel($id);
+       //   $model = new Anamnesa;
+    //$datakeluhan =  $app->getRequest()->getQueryParam('keluhan');
+          $datakeluhan="";
+          if (Yii::$app->request->post()) {
+             $data = Yii::$app->request->post();
+          //   var_dump($data);exit();
+            $datakeluhan = $data['keluhan_'];
+          //  echo "testtttttttttttt2".$datakeluhan;
+}
+       //   echo "testtttttttttttt1".$datakeluhan;exit();
+        // $datakeluhan2 = $_POST['keluhan'];
+           // Yii::$app->response->format = Response::FORMAT_JSON;
+        $datalokasi = $this->renderAjax('popup\_lokasiDetail',['model'=> $model, 'datakeluhan'=>$datakeluhan,'datakeluhan2'=>$datakeluhan2]);
+        return Json::encode($datalokasi);
+    }
+    
+    public function actionSaveLokasi($id) {
+        $model = $this->findModel($id);
+       //   $model = new Anamnesa;
+        $return =0;
+        $model->keluhan_lokasi_umum ="";
+        $model->keluhan_sub_lokasi = "";
+         //  $model->keluhan = Lookup::findOne(['name'=>  $_POST['Anamnesa']['keluhan_rincian'] ])->type;
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+$model->save();
 
+            $return=1; 
+        }
+    //$datakeluhan =  $app->getRequest()->getQueryParam('keluhan');
+        
+         
+        return Json::encode($return);
+    }
+    
+    public function actionSaveLokasiumum($id) {
+        $model = $this->findModel($id);
+        $model->keluhan_rincian ="";
+        $model->keluhan_lokasi = "";
+        $return =0;
+       //    $model->keluhan = Lookup::findOne(['name'=>  $_POST['Anamnesa']['keluhan_rincian'] ])->type;
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+$model->save();
+
+            $return=1; 
+        }
+    //$datakeluhan =  $app->getRequest()->getQueryParam('keluhan');
+        
+         
+        return Json::encode($return);
+    }
+    
+     public function actionSaveKeluhan($id) {
+        $model = $this->findModel($id);
+        $model->keluhan_rincian ="";
+        $model->keluhan_lokasi = "";
+        $return =0;
+       //    $model->keluhan = Lookup::findOne(['name'=>  $_POST['Anamnesa']['keluhan_rincian'] ])->type;
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+$model->save();
+
+            $return=1; 
+        }
+    //$datakeluhan =  $app->getRequest()->getQueryParam('keluhan');
+        
+         
+        return Json::encode($return);
+    }
+    
+      public function actionAnamnesaTerpimpin($id)
+    {
+          $model = $this->findModel($id);
+        //  $model = new Anamnesa;
+           Yii::$app->response->format = Response::FORMAT_JSON;
+    //    if ($model->load(Yii::$app->request->post()) && $model->save()) {
+     //       return $this->redirect(['view', 'id' => $model->id]);
+     //   } else {
+            return $this->renderAjax('popup\anamnesaterpimpin', [
+                'model' => $model,
+            ]);
+      //  }
+    }
+    
+     public function actionSifatKelangsungan($id)
+    {
+          $model = $this->findModel($id);
+        //  $model = new Anamnesa;
+           Yii::$app->response->format = Response::FORMAT_JSON;
+    //    if ($model->load(Yii::$app->request->post()) && $model->save()) {
+     //       return $this->redirect(['view', 'id' => $model->id]);
+     //   } else {
+            return $this->renderAjax('popup\_sifatkelangsungan', [
+                'model' => $model,
+            ]);
+      //  }
+    }
+    
+    
+    
+    
     /**
      * Finds the Anamnesa model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
