@@ -48,8 +48,9 @@ SCRIPT;
             <label class="col-md-3 control-label" for="Diagnosa">Diagnosa :</label>
             <div class="col-md-2">
                 <?php
-                echo $form->field($modelAnamnesa->riwayatsakitIcdx, 'kode')->widget(Typeahead::classname(), [
-                    'options' => ['placeholder' => 'ICD X', 'id' => 'kode'],
+                ;
+                echo $form->field($modelAnamnesa, 'riwayatsakit_icdx_id')->widget(Typeahead::classname(), [
+                    'options' => ['placeholder' => 'ICD X', 'id' => 'kode', 'value' => ($modelAnamnesa->riwayatsakit_icdx_id != null) ? $modelAnamnesa->riwayatsakitIcdx->kode : ''],
                     'pluginOptions' => ['highlight'=>true],
                     'dataset' => [
                         [
@@ -65,8 +66,8 @@ SCRIPT;
             </div>
             <div class="col-md-7">
                 <?php
-                echo $form->field($modelAnamnesa->riwayatsakitIcdx, 'inggris')->widget(Typeahead::classname(), [
-                    'options' => ['placeholder' => 'Nama Penyakit', 'id' => 'nama'],
+                echo $form->field($modelAnamnesa, 'riwayatsakit_icdx_id')->widget(Typeahead::classname(), [
+                    'options' => ['placeholder' => 'Nama Penyakit', 'id' => 'nama',  'value' => ($modelAnamnesa->riwayatsakit_icdx_id != null) ? $modelAnamnesa->riwayatsakitIcdx->inggris : ''],
                     'pluginOptions' => ['highlight'=>true],
                     'dataset' => [
                         [
@@ -101,6 +102,29 @@ SCRIPT;
     </div>
 </div>
 <script>var id = '<?php echo $_GET['id']; ?>' </script>
-<script src="/admin/js/riwayatPenyakit.js"></script>
+<!--<script src="/admin/js/riwayatPenyakit.js"></script>-->
+<script>
+    $(document).ready(function () {
+        $('#kode').mousedown(function(){
+            $('#kode').val("");
+        });
+        $('#nama').mousedown(function(){
+            $('#nama').val("");
+        });
+        $('#btnOk').click(function(){
+            $.ajax({
+                type: "POST",
+                url: baseurl + '/Anamnesa/anamnesa-riwayat/update-penyakit?id='+id,
+                data: "riwayat_penyakit_pil=1&riwayatsakit_icdx_id="+$('#idicdx').val()+
+                "&riwayat_penyakit_nil="+$('#anamnesa-riwayat_penyakit_nil').val()+
+                "&riwayat_penyakit_lama="+$('#anamnesa-riwayat_penyakit_lama').val(),
+                success:function(data){
+                    alert('Success Update Data');
+                    $("#m_riwayatpenyakit").modal('hide');
+                }
+            });
+        });
+    });
+</script>
 
     
