@@ -200,7 +200,7 @@ Modal::end();
 
 Modal::begin([
     'id' => 'm_riwayatalergi',
-//    'header' => '<h7>Tambah Pasien</h7>'
+    'header' => '<h7>Riwayat Alergi</h7>'
 ]);
 Modal::end();
 
