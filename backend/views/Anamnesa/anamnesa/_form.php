@@ -220,3 +220,4 @@ Modal::end();
 ?>
 <script>var id = '<?php echo $_GET['id']; ?>' </script>  
 <?php $this->registerJsFile('/admin/js/popupKeluhan.js'); ?>
+<?php $this->registerJsFile('/admin/js/popupFunction.js'); ?>
