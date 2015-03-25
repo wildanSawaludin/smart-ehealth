@@ -5,7 +5,7 @@ return [
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=smart_ehealth_db',
+            'dsn' => 'mysql:host=localhost;dbname=ehealth',
             'username' => 'root',
             'password' => '',
             'charset' => 'utf8',

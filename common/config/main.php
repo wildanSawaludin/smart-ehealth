@@ -41,7 +41,7 @@ return [
             'controllerMap' => [
                 'assignment' => [
                     'class' => 'mdm\admin\controllers\AssignmentController',
-                    'userClassName' => 'common\models\User',
+                    'userClassName' => 'dektrium\user\models\User',
                     'idField' => 'id', // id field of model User
                 ]
             ],

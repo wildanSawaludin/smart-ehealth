@@ -4,9 +4,7 @@ use yii\helpers\Html;
 use kartik\widgets\ActiveForm;
 use kartik\builder\Form;
 use backend\models\Lookup;
-
-
-
+$this->registerJsFile('/admin/js/coba.js');
 ?>
 <div class="modal-content" style="width: 750px;margin-left: 400px;margin-top: 100px">
 <div class="modal-header">
@@ -39,12 +37,13 @@ use backend\models\Lookup;
                  <div class="tab-pane fade in active" id="rinci">    
                             <?php 
                             $keluh = str_replace("_"," ",$_GET['param']);
+                            if($keluh != ''){
                             $rinci = Lookup::items($keluh,'keluhan_rincian');
 //                            var_dump($rinci[1],$rinci[2],$rinci[3]);
 //                            exit();
-                            ?>
+                            
                                  
-                            <?= $form->field($model, 'faktor_resiko_kebiasaan')->radioList($rinci); ?>
+                            echo $form->field($model, 'faktor_resiko_kebiasaan')->radioList($rinci);}?>
                  </div>       
             </div>
         <?php ActiveForm::end(); ?>

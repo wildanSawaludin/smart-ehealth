@@ -31,7 +31,7 @@
         "kartik-v/yii2-money": "*",
         "2amigos/yii2-file-upload-widget": "*",
         "mongosoft/yii2-upload-behavior": "*",
-        "mdmsoft/yii2-admin": "dev-master",
+        "mdmsoft/yii2-admin": "*",
         "dektrium/yii2-user": "*"
     },
     "require-dev": {
