@@ -122,7 +122,7 @@ class AnamnesaController extends Controller
 //            }
 //            //return $this->redirect(['view', 'id' => $model->id]);
 //        }
-        return $this->renderAjax('popup\_keluhanDetail', [
+        return $this->renderAjax('popup/_keluhanDetail', [
                     'model' => $model,
         ]);
     }
@@ -134,7 +134,7 @@ class AnamnesaController extends Controller
       
        $dataLokasi = str_replace("_"," ",$_GET['param']);
       
-        return $this->renderAjax('popup\_keluhanRincilokasi', [
+        return $this->renderAjax('popup/_keluhanRincilokasi', [
                     'model' => $model,
                     'dataLokasi' => $dataLokasi,
         ]);
@@ -154,7 +154,7 @@ class AnamnesaController extends Controller
         //    return $this->redirect(['update', 'id' => $model->id]);
           // return ActiveForm::validate($model);
         //}else{ //echo "2";
-           return $this->renderAjax('popup\_keluhanLokasi', [
+           return $this->renderAjax('popup/_keluhanLokasi', [
                     'model' => $model,
         ]); 
         //}
@@ -184,7 +184,7 @@ class AnamnesaController extends Controller
        //   echo "testtttttttttttt1".$datakeluhan;exit();
         // $datakeluhan2 = $_POST['keluhan'];
            // Yii::$app->response->format = Response::FORMAT_JSON;
-        $datalokasi = $this->renderAjax('popup\_lokasiDetail',['model'=> $model, 'datakeluhan'=>$datakeluhan,'datakeluhan2'=>$datakeluhan2]);
+        $datalokasi = $this->renderAjax('popup/_lokasiDetail',['model'=> $model, 'datakeluhan'=>$datakeluhan,'datakeluhan2'=>$datakeluhan2]);
         return Json::encode($datalokasi);
     }
     
@@ -248,7 +248,7 @@ $model->save();
     //    if ($model->load(Yii::$app->request->post()) && $model->save()) {
      //       return $this->redirect(['view', 'id' => $model->id]);
      //   } else {
-            return $this->renderAjax('popup\anamnesaterpimpin', [
+            return $this->renderAjax('popup/anamnesaterpimpin', [
                 'model' => $model,
             ]);
       //  }
@@ -262,7 +262,7 @@ $model->save();
     //    if ($model->load(Yii::$app->request->post()) && $model->save()) {
      //       return $this->redirect(['view', 'id' => $model->id]);
      //   } else {
-            return $this->renderAjax('popup\_sifatkelangsungan', [
+            return $this->renderAjax('popup/_sifatkelangsungan', [
                 'model' => $model,
             ]);
       //  }
