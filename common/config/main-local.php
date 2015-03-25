@@ -1,13 +1,11 @@
 <?php
-
 return [
-//    'language'=>'en',
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
             'dsn' => 'mysql:host=localhost;dbname=smart_ehealth_db',
             'username' => 'root',
-            'password' => '',
+            'password' => 'root',
             'charset' => 'utf8',
         ],
         'mailer' => [
@@ -34,8 +32,8 @@ return [
     'modules' => [
         'gridview' => [
             'class' => '\kartik\grid\Module'
-        // enter optional module parameters below - only if you need to  
-        // use your own export download action or custom translation 
+        // enter optional module parameters below - only if you need to
+        // use your own export download action or custom translation
         // message source
         // 'downloadAction' => 'gridview/export/download',
         // 'i18n' => []
