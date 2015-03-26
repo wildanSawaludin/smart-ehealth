@@ -217,6 +217,20 @@ Modal::begin([
     'header' => '<h7>Riwayat Imunisasi</h7>'
 ]);
 Modal::end();
+
+Modal::begin([
+    'id' => 'm_kebiasaanobat',
+    //'header' => '<h7>Obat-obatan</h7>'
+]);
+
+Modal::end();
+
+Modal::begin([
+    'id' => 'm_kebiasaanrokok',
+    //'header' => '<h7>Obat-obatan</h7>'
+]);
+Modal::end();
+
 ?>
 <script>var id = '<?php echo $_GET['id']; ?>' </script>  
 <?php $this->registerJsFile('/admin/js/popupKeluhan.js'); ?>
