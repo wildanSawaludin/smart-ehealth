@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    var baseurl = window.location.protocol+'//'+window.location.host+'/admin/';
     $('input[name="Anamnesa[keluhan]"]').change(function () {
         $('#m_keluhanDetail').html('');
         $('#m_keluhanDetail').load(baseurl + '/anamnesa/popup-keluhan?id='+id+'&param='+$(this).val());
@@ -109,6 +108,20 @@ $(document).ready(function () {
     });
 
 
+    $('#anamnesa-kebiasaan_obat_pil').change(function(){
+        if($('#anamnesa-kebiasaan_obat_pil').prop( "checked" )){
+            $('#m_kebiasaanobat').html('');
+            $('#m_kebiasaanobat').load(baseurl + '/Anamnesa/anamnesa-kebiasaan/popup-kebiasaan?id='+id+'&param='+$(this).val());
+            $('#m_kebiasaanobat').modal('show');
+        }
+    });
 
+    $('#anamnesa-kebiasaan_rokok_pil').change(function(){
+        if($('#anamnesa-kebiasaan_rokok_pil').prop( "checked" )){
+            $('#m_kebiasaanrokok').html('');
+            $('#m_kebiasaanrokok').load(baseurl + '/Anamnesa/anamnesa-kebiasaan/popup-rokok?id='+id+'&param='+$(this).val());
+            $('#m_kebiasaanrokok').modal('show');
+        }
+    });
 
 });
