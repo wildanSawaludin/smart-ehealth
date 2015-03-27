@@ -233,10 +233,18 @@ AppAsset::register($this);
                 } else {
                     ?>
                     <li class="dropdown user user-menu">
+                        <!--
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="glyphicon glyphicon-user"></i>
                             <span><?= @Yii::$app->user->identity->username ?> <i class="caret"></i></span>
                         </a>
+                    -->
+
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                          <img src="<?= $directoryAsset ?>/img/avatar5.png" class="user-image" alt="User Image">
+                          <span class="hidden-xs"><?= @Yii::$app->user->identity->username ?></span>
+                        </a>
+
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header bg-light-blue">

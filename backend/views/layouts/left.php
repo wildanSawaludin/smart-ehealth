@@ -4,7 +4,7 @@ use mdm\admin\components\MenuHelper;
 use yii\bootstrap\Nav;
 ?>
 
-<aside class="left-side sidebar-offcanvas">
+<aside class="main-sidebar">
 
     <section class="sidebar">
         <?php if (!Yii::$app->user->isGuest) : ?>
