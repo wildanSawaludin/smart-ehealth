@@ -3,10 +3,10 @@
 use mdm\admin\components\MenuHelper;
 use yii\bootstrap\Nav;
 ?>
+
 <aside class="left-side sidebar-offcanvas">
 
     <section class="sidebar">
-
         <?php if (!Yii::$app->user->isGuest) : ?>
             <div class="user-panel">
                 <div class="pull-left image">
@@ -34,33 +34,31 @@ use yii\bootstrap\Nav;
         <ul class="sidebar-menu">
             <li class="treeview">
                 <a href="#" class="navbar-link">
-                    <i class="fa fa-dashboard"></i> <span class="text-info">RBAC</span>
+                    <i class="fa fa-dashboard"></i><span class="text-info">RBAC</span>
+                    <i class="fa fa-angle-left pull-right"></i>
                 </a>
-            </li>
+                <?php
+                    $callback = function($menu) {
+                        $data = eval($menu['data']);
+                        return [
+                            'label' => '<i class="fa fa-circle-o"></i> '.$menu['name'],
+                            'url' => $menu['route'],
+            //                'options' => $data
+            //                'items' => $menu['children']
+                        ];
+                    };
+
+                    $items = MenuHelper::getAssignedMenu(Yii::$app->user->id, 1, $callback);
+                    
+                    echo Nav::widget(
+                        [
+                            'encodeLabels' => false,
+                            'options' => ['class' => 'treeview-menu'],
+                            'items' => $items,
+                        ]
+                    );
+                    ?>
+            </li>                    
         </ul>
-
-        <?php
-        $callback = function($menu) {
-            $data = eval($menu['data']);
-            return [
-                'label' => '<span class="fa fa-angle-right"></span>' . $menu['name'],
-                'url' => $menu['route'],
-//                'options' => $data
-//                'items' => $menu['children']
-            ];
-        };
-
-        $items = MenuHelper::getAssignedMenu(Yii::$app->user->id, 1, $callback);
-        
-        echo Nav::widget(
-            [
-                'encodeLabels' => false,
-                'options' => ['class' => 'sidebar-menu'],
-                'items' => $items,
-            ]
-        );
-        ?>
-
     </section>
-
 </aside>
