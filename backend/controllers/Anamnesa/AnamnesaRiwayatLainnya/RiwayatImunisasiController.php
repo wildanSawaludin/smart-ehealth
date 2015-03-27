@@ -17,8 +17,10 @@ class RiwayatImunisasiController extends AnamnesaController{
     public function actionPopupRiwayatImunisasi($id)
     {
         $model = Anamnesa::findOne($id);
+        $riwayat_imunisasi = explode(',', $model->riwayat_imunisasi);
         return $this->renderAjax('//Anamnesa/anamnesa-riwayat/riwayat-imunisasi/riwayatImunisasi', [
             'model' => $model,
+            'riwayat_imunisasi' => $riwayat_imunisasi,
         ]);
 
     }
