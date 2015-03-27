@@ -1,3 +1,10 @@
+Configuring Composer
+====================
+
+After the application template is installed it's a good idea to adjust default `composer.json` that can be found in the root
+directory:
+
+```json
 {
     "name": "yiisoft/yii2-app-advanced",
     "description": "Yii 2 Advanced Application Template",
@@ -17,24 +24,7 @@
         "php": ">=5.4.0",
         "yiisoft/yii2": "*",
         "yiisoft/yii2-bootstrap": "*",
-        "yiisoft/yii2-swiftmailer": "*@dev",
-        "kartik-v/yii2-builder": "dev-master",
-        "kartik-v/yii2-dynagrid": "*",
-        "kartik-v/yii2-krajee-base": "*",
-        "kartik-v/yii2-widget-activeform": "*",
-        "kartik-v/yii2-widgets": "*",
-        "kartik-v/yii2-datecontrol": "dev-master",
-        "kartik-v/yii2-detail-view": "*",
-        "kartik-v/yii2-export": "*",
-        "kartik-v/yii2-mpdf": "*",
-        "kartik-v/yii2-grid": "*",
-        "kartik-v/yii2-money": "*",
-        "kartik-v/yii2-tabs-x": "*",
-        "2amigos/yii2-file-upload-widget": "*",
-        "mongosoft/yii2-upload-behavior": "*",
-        "mdmsoft/yii2-admin": "*",
-        "dektrium/yii2-user": "*",
-        "dmstr/yii2-adminlte-asset": "2.*@dev"
+        "yiisoft/yii2-swiftmailer": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
@@ -52,3 +42,13 @@
         }
     }
 }
+```
+
+First we're updating basic information. Change `name`, `description`, `keywords`, `homepage` and `support` to match
+your project.
+
+Now the interesting part. You can add more packages your application needs to the `require` section.
+All these packages are coming from [packagist.org](https://packagist.org/) so feel free to browse the website for useful code.
+
+After your `composer.json` is changed you can run `composer update --prefer-dist`, wait till packages are downloaded and
+installed and then just use them. Autoloading of classes will be handled automatically.
