@@ -17,6 +17,11 @@ Thumbs.db
 
 # composer vendor dir
 /vendor
+<<<<<<< HEAD
+=======
+backend/web/assets
+composer.lock
+>>>>>>> bdfa81b0fd702c7017415b2ecabd56e84b3bdee9
 
 # composer itself is not needed
 composer.phar
