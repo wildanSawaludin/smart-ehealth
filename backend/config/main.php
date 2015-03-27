@@ -12,10 +12,10 @@ return [
     'modules' => [],
     'defaultRoute' => 'registrasi/index',
     'components' => [
-        'user' => [
-            'identityClass' => 'common\models\User',
-            'enableAutoLogin' => true,
-        ],
+//        'user' => [
+//            'identityClass' => 'common\models\User',
+//            'enableAutoLogin' => true,
+//        ],
         'request' => [
             'class' => 'common\components\Request',
             'web' => '/backend/web',
