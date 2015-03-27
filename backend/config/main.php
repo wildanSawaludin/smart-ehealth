@@ -12,10 +12,10 @@ return [
     'modules' => [],
     'defaultRoute' => 'registrasi/index',
     'components' => [
-//        'user' => [
-//            'identityClass' => 'common\models\User',
-//            'enableAutoLogin' => true,
-//        ],
+        'user' => [
+            'identityClass' => 'common\models\User',
+            'enableAutoLogin' => true,
+        ],
         'request' => [
             'class' => 'common\components\Request',
             'web' => '/backend/web',
@@ -37,6 +37,15 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+    ],
+    'as access' => [
+        'class' => 'mdm\admin\components\AccessControl',
+        'allowActions' => [
+            'rbac/*', // add or remove allowed actions to this list
+            'user/*',
+            'site/error',
+            'debug/*',
+        ]
     ],
     'params' => $params,
 ];
