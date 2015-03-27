@@ -5,7 +5,6 @@ use yii\bootstrap\Nav;
 ?>
 
 <aside class="main-sidebar">
-
     <section class="sidebar">
         <?php if (!Yii::$app->user->isGuest) : ?>
             <div class="user-panel">
@@ -25,8 +24,9 @@ use yii\bootstrap\Nav;
             <div class="input-group">
                 <input type="text" name="q" class="form-control" placeholder="Search..."/>
                 <span class="input-group-btn">
-                    <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i
-                            class="fa fa-search"></i></button>
+                    <button type='submit' name='search' id='search-btn' class="btn btn-flat">
+                        <i class="fa fa-search"></i>
+                    </button>
                 </span>
             </div>
         </form>
@@ -34,19 +34,21 @@ use yii\bootstrap\Nav;
         <ul class="sidebar-menu">
             <li class="treeview">
                 <a href="#" class="navbar-link">
-                    <i class="fa fa-dashboard"></i><span class="text-info">RBAC</span>
+                    <i class="fa fa-dashboard"></i>
+                    <span class="text-info">RBAC</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <?php
                     $callback = function($menu) {
-                        $data = eval($menu['data']);
-                        return [
-                            'label' => '<i class="fa fa-circle-o"></i> '.$menu['name'],
-                            'url' => $menu['route'],
-            //                'options' => $data
-            //                'items' => $menu['children']
-                        ];
-                    };
+                                    $data = eval($menu['data']);
+                        
+                                    return [
+                                        'label' => '<i class="fa fa-circle-o"></i> '.$menu['name'],
+                                        'url' => $menu['route'],
+                        //                'options' => $data
+                        //                'items' => $menu['children']
+                                    ];
+                                };
 
                     $items = MenuHelper::getAssignedMenu(Yii::$app->user->id, 1, $callback);
                     

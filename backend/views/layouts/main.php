@@ -29,20 +29,22 @@ if (Yii::$app->controller->action->id === 'login') {
             <?php $this->beginBody() ?>
             
             <?= $this->render(
-                'header.php',
-                ['directoryAsset' => $directoryAsset]
-            ) ?>
+                    'header.php',
+                    ['directoryAsset' => $directoryAsset]
+                ) 
+            ?>
 
-                <?= $this->render(
+            <?= $this->render(
                     'left.php',
                     ['directoryAsset' => $directoryAsset]
                 )
-                ?>
+            ?>
 
-                <?= $this->render(
+            <?= $this->render(
                     'content.php',
                     ['content' => $content, 'directoryAsset' => $directoryAsset]
-                ) ?>
+                )
+            ?>
 
             <?php $this->endBody() ?>
         </div>
