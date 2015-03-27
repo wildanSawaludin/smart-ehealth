@@ -17,6 +17,9 @@ Thumbs.db
 
 # composer vendor dir
 /vendor
+backend/web/assets
+composer.lock
+advanced
 
 # composer itself is not needed
 composer.phar
