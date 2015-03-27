@@ -124,4 +124,40 @@ $(document).ready(function () {
         }
     });
 
+    $('#anamnesa-kebiasaan_alkohol_pil').change(function(){
+        if($('#anamnesa-kebiasaan_alkohol_pil').prop( "checked" )){
+            $('#m_kebiasaanalkohol').html('');
+            $('#m_kebiasaanalkohol').load(baseurl + '/Anamnesa/anamnesa-kebiasaan/popup-alkohol?id='+id+'&param='+$(this).val());
+            $('#m_kebiasaanalkohol').modal('show');
+        }else{
+            $.ajax({
+                type: "POST",
+                url: baseurl + '/Anamnesa/anamnesa-kebiasaan/update-kebiasaan-alkohol?id='+id,
+                data: "kebiasaan_alkohol_pil_uncheck=0",
+                success:function(data){
+                    //alert('Success Update Data');
+                    //$("#m_lamapemakaianalkohol").modal('hide');
+                }
+            });
+        }
+    });
+
+    $('#anamnesa-kebiasaan_perawatan_pil').change(function(){
+        if($('#anamnesa-kebiasaan_perawatan_pil').prop( "checked" )){
+            $('#m_kebiasaanperawatandiri').html('');
+            $('#m_kebiasaanperawatandiri').load(baseurl + '/Anamnesa/anamnesa-kebiasaan/popup-perawatan-diri?id='+id+'&param='+$(this).val());
+            $('#m_kebiasaanperawatandiri').modal('show');
+        }else{
+            $.ajax({
+                type: "POST",
+                url: baseurl + '/Anamnesa/anamnesa-kebiasaan/update-kebiasaan-perawatan?id='+id,
+                data: "kebiasaan_perawatan_pil_uncheck=0",
+                success:function(data){
+                    //alert('Success Update Data');
+                    //$("#m_lamapemakaianalkohol").modal('hide');
+                }
+            });
+        }
+    });
+
 });
