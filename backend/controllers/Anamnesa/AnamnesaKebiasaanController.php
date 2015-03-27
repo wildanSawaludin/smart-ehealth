@@ -49,6 +49,14 @@ class AnamnesaKebiasaanController extends AnamnesaController{
         ]);
     }
 
+    public function actionPopupNutrisi($id)
+    {
+        $model = Anamnesa::findOne($id);
+        return $this->renderAjax('kebiasaanNutrisi', [
+           'model' => $model
+        ]);
+    }
+
     public function actionUpdateKebiasaanPengobatan($id)
     {
         $model = $this->findModel($id);
