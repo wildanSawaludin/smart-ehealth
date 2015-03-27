@@ -36,7 +36,7 @@ use yii\helpers\Url;
             <div class="col-md-2">
                 <?php
                 echo $form->field($model, 'riwayatkel_icdx_id')->widget(Typeahead::classname(), [
-                    'options' => ['placeholder' => 'ICD X', 'id' => 'kode', 'value' => $model->riwayatsakitIcdxKel->kode],
+                    'options' => ['placeholder' => 'ICD X', 'id' => 'kode', 'value' => ($model->riwayatkel_icdx_id != null) ? $model->riwayatsakitIcdxKel->kode : ''],
                     'pluginOptions' => ['highlight'=>true],
                     'dataset' => [
                         [
@@ -53,7 +53,7 @@ use yii\helpers\Url;
             <div class="col-md-7">
                 <?php
                 echo $form->field($model, 'riwayatkel_icdx_id')->widget(Typeahead::classname(), [
-                    'options' => ['placeholder' => 'Nama Penyakit', 'id' => 'nama', 'value' => $model->riwayatsakitIcdxKel->inggris],
+                    'options' => ['placeholder' => 'Nama Penyakit', 'id' => 'nama', 'value' => ($model->riwayatkel_icdx_id != null) ? $model->riwayatsakitIcdxKel->inggris : ''],
                     'pluginOptions' => ['highlight'=>true],
                     'dataset' => [
                         [
@@ -80,4 +80,29 @@ use yii\helpers\Url;
     </div>
 </div>
 <script>var id = '<?php echo $_GET['id']; ?>' </script>
-<script src="/admin/js/riwayatKeluarga.js"></script>
+<!--<script src="/admin/js/riwayatKeluarga.js"></script>-->
+<script>
+    $(document).ready(function () {
+        $('#kode').mousedown(function(){
+            $('#kode').val("");
+        });
+        $('#nama').mousedown(function(){
+            $('#nama').val("");
+        });
+        $('#btnOk').click(function(){
+            var riwayat_keluarga = $("input:checkbox[name='Anamnesa[riwayat_keluarga_pil]']:checked").map(function()
+            {
+                return $(this).val();
+            }).get();
+            $.ajax({
+                type: "POST",
+                url: baseurl + '/Anamnesa/anamnesa-riwayat/update-keluarga?id='+id,
+                data: "riwayat_keluarga_pil="+riwayat_keluarga+"&riwayatkel_icdx_id="+$('#idicdx').val(),
+                success:function(data){
+                    alert('Success Update Data');
+                    $("#m_riwayatkeluarga").modal('hide');
+                }
+            });
+        });
+    });
+</script>

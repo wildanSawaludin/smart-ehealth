@@ -17,8 +17,8 @@ Thumbs.db
 
 # composer vendor dir
 /vendor
-
-/backend/config/main-local.php
+backend/web/assets
+composer.lock
 
 # composer itself is not needed
 composer.phar
