@@ -160,4 +160,22 @@ $(document).ready(function () {
         }
     });
 
+    $('#anamnesa-kebiasaan_nutrisi_pill').change(function(){
+        if($('#anamnesa-kebiasaan_nutrisi_pil').prop( "checked" )){
+            $('#m_kebiasaannutrisi').html('');
+            $('#m_kebiasaannutrisi').load(baseurl + '/Anamnesa/anamnesa-kebiasaan/popup-nutrisi?id='+id+'&param='+$(this).val());
+            $('#m_kebiasaannutrisi').modal('show');
+        }else{
+            /*$.ajax({
+                type: "POST",
+                url: baseurl + '/Anamnesa/anamnesa-kebiasaan/update-kebiasaan-perawatan?id='+id,
+                data: "kebiasaan_perawatan_pil_uncheck=0",
+                success:function(data){
+                    //alert('Success Update Data');
+                    //$("#m_lamapemakaianalkohol").modal('hide');
+                }
+            });*/
+        }
+    });
+
 });

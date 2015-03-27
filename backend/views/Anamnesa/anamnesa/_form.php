@@ -244,6 +244,12 @@ Modal::begin([
 ]);
 Modal::end();
 
+Modal::begin([
+    'id' => 'm_kebiasaannutrisi',
+    //'header' => '<h7>Obat-obatan</h7>'
+]);
+Modal::end();
+
 ?>
 <script>var id = '<?php echo $_GET['id']; ?>' </script>  
 <?php $this->registerJsFile('/admin/js/popupKeluhan.js'); ?>
