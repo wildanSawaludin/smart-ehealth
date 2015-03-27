@@ -16,6 +16,7 @@ return [
 //            'identityClass' => 'common\models\User',
 //            'enableAutoLogin' => true,
 //        ],
+      
         'request' => [
             'class' => 'common\components\Request',
             'web' => '/backend/web',

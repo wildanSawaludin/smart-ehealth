@@ -29,14 +29,14 @@ use yii\helpers\BaseHtml;
                          
                             <?php 
                            
-                            $rinci = Lookup::items($dataLokasi,'lokum_sublokasi');
+                            $rinci = Lookup::items2($dataLokasi,'lokum_sublokasi');
 //                            var_dump($rinci[1],$rinci[2],$rinci[3]);
 //                            exit();
                             ?>
                                  
                             <?= 
-                          //  $form->field($model, 'faktor_resiko_kebiasaan')->radioList($rinci);
-                            $form->field($model, 'keluhan_sub_lokasi')->radioList($rinci,[
+                            $form->field($model, 'keluhan_sub_lokasi')->radioList($rinci);
+                        /*    $form->field($model, 'keluhan_sub_lokasi')->radioList($rinci,[
                                 'item' => function($index, $label, $name, $checked, $value) {
 
                                     $return = '<div class="radio"><label>';
@@ -46,7 +46,7 @@ use yii\helpers\BaseHtml;
 
                                     return $return;
                                 }
-                            ]); ?>
+                            ]);*/ ?>
                 <div class="form-group">
         <?= Html::Button('Submit', ['class' => 'btn btn-primary','id'=>'submitrincilokasi']) ?>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  

@@ -39,6 +39,13 @@ class Lookup extends \yii\db\ActiveRecord
      self::loadItems($type,$grup);
      return self::$_items[$type];
      }
+     
+     public static function items2($type,$grup)
+     {
+     if(!isset(self::$_items[$type]))
+     self::loadItems2($type,$grup);
+     return self::$_items[$type];
+     }
 
     /**
      * Returns the item name for the specified type and code.
@@ -71,6 +78,23 @@ class Lookup extends \yii\db\ActiveRecord
 //                        exit();
         foreach($models as $model)
         self::$_items[$type][$model->code]=$model->name;
+     }
+     
+     
+        private static function loadItems2($type,$grup)
+     {
+        self::$_items[$type]=[];
+        $models= self::findAll([
+              'type'=>$type,
+              'grup'=>$grup,
+//            'condition'=>'type=:type',
+//            'params'=>[':type'=>$type],
+//            'order'=>'position',
+            ]);
+//            var_dump($models);
+//                        exit();
+        foreach($models as $model)
+        self::$_items[$type][$model->name]=$model->name;
      }
 }
 

@@ -60,6 +60,15 @@ use kartik\builder\Form;
                         <?= $form->field($model, 'keluhan_durasi_jenis')->textInput()?>
                     </div>
                     </div>
+            
+             <div class="form-group">  
+                         <label class="col-lg-4 control-label" for="frekuensi">Penyebaran :</label>
+                          <div class="col-sm-4">
+                        
+                        
+                        <?= $form->field($model, 'keluhan_durasi_jenis')->textInput()?>
+                    </div>
+                    </div>
              
         </div>
     <?php ActiveForm::end(); ?>

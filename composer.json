@@ -32,7 +32,9 @@
         "2amigos/yii2-file-upload-widget": "*",
         "mongosoft/yii2-upload-behavior": "*",
         "mdmsoft/yii2-admin": "dev-master",
-        "dektrium/yii2-user": "*"
+        "dektrium/yii2-user": "*",
+        "kartik-v/yii2-tabs-x": "*",
+        "kartik-v/yii2-popover-x": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
