@@ -120,7 +120,7 @@ use yii\bootstrap\Modal;
 
             $.ajax({
                 type: "POST",
-                url: baseurl + '/Anamnesa/AnamnesaRiwayatLainnya/riwayat-imunisasi/update-imunisasi?id=' + id,
+                url: baseurl + '/Anamnesa/riwayat-imunisasi/update-imunisasi?id=' + id,
                 data: 'nama_jenis=' + value + '&imunisasi_pil=' + imunisasi,
                 success: function (data) {
                     alert('Success Update Data');

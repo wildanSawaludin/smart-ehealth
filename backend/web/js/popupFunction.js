@@ -91,19 +91,19 @@ $(document).ready(function () {
 
     $('.riwayat_alergi').click(function(){
         $('#m_riwayatalergi').html('');
-        $('#m_riwayatalergi').load(baseurl + '/Anamnesa/AnamnesaRiwayatLainnya/riwayat-alergi/popup-riwayat-alergi?id='+id+'&param='+$(this).val());
+        $('#m_riwayatalergi').load(baseurl + '/Anamnesa/riwayat-alergi/popup-riwayat-alergi?id='+id+'&param='+$(this).val());
         $('#m_riwayatalergi').modal('show');
     });
 
     $('.riwayat_transfusi').click(function(){
         $('#m_riwayattransfusi').html('');
-        $('#m_riwayattransfusi').load(baseurl + '/Anamnesa/AnamnesaRiwayatLainnya/riwayat-transfusi/popup-riwayat-transfusi?id='+id+'&param='+$(this).val());
+        $('#m_riwayattransfusi').load(baseurl + '/Anamnesa/riwayat-transfusi/popup-riwayat-transfusi?id='+id+'&param='+$(this).val());
         $('#m_riwayattransfusi').modal('show');
     });
 
     $('.riwayat_imunisasi').click(function(){
         $('#m_riwayatimunisasi').html('');
-        $('#m_riwayatimunisasi').load(baseurl + '/Anamnesa/AnamnesaRiwayatLainnya/riwayat-imunisasi/popup-riwayat-imunisasi?id='+id+'&param='+$(this).val());
+        $('#m_riwayatimunisasi').load(baseurl + '/Anamnesa/riwayat-imunisasi/popup-riwayat-imunisasi?id='+id+'&param='+$(this).val());
         $('#m_riwayatimunisasi').modal('show');
     });
 
@@ -160,7 +160,8 @@ $(document).ready(function () {
         }
     });
 
-    $('#anamnesa-kebiasaan_nutrisi_pill').change(function(){
+    $('#anamnesa-kebiasaan_nutrisi_pil').change(function(){
+
         if($('#anamnesa-kebiasaan_nutrisi_pil').prop( "checked" )){
             $('#m_kebiasaannutrisi').html('');
             $('#m_kebiasaannutrisi').load(baseurl + '/Anamnesa/anamnesa-kebiasaan/popup-nutrisi?id='+id+'&param='+$(this).val());

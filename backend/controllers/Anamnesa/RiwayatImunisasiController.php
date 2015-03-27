@@ -6,7 +6,7 @@
  * Time: 20:38
  */
 
-namespace backend\controllers\Anamnesa\AnamnesaRiwayatLainnya;
+namespace backend\controllers\Anamnesa;
 
 
 use backend\controllers\Anamnesa\AnamnesaController;
