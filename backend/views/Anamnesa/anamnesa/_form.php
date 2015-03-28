@@ -217,8 +217,6 @@ Modal::begin([
     'header' => '<h7>Riwayat Imunisasi</h7>'
 ]);
 Modal::end();
-<<<<<<< HEAD:backend/views/Anamnesa/anamnesa/_form.php
-=======
 
 Modal::begin([
     'id' => 'm_kebiasaanobat',
@@ -246,7 +244,6 @@ Modal::begin([
 ]);
 Modal::end();
 
->>>>>>> 17b684ff8f416be6ec21f1b16da2295302220282:backend/views/Anamnesa/anamnesa/_form.php
 ?>
 <script>var id = '<?php echo $_GET['id']; ?>' </script>  
 <?php $this->registerJsFile('/admin/js/popupKeluhan.js'); ?>
