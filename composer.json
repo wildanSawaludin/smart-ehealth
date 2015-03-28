@@ -36,6 +36,7 @@
         "dektrium/yii2-user": "*",
         "swiftmailer/swiftmailer": "@stable",
         "dmstr/yii2-adminlte-asset": "2.*@dev",
+	"cebe/yii2-gravatar": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

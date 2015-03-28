@@ -119,11 +119,11 @@ use yii\bootstrap\Nav;
                             'items' => [
                                 [
                                     'label' => '<i class="fa fa-circle-o"></i>  Tambah User',
-                                    'url' => 'user/admin/create'
+                                    'url' => Yii::$app->urlManager->createAbsoluteUrl('user/admin/create'),
                                 ],
                                 [
                                     'label' => '<i class="fa fa-circle-o"></i>  Setting User',
-                                    'url' => 'user/admin/index'
+                                    'url' => Yii::$app->urlManager->createAbsoluteUrl('user/admin/index')
                                 ]
                             ],
                         ]
