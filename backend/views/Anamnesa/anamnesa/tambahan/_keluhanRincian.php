@@ -27,14 +27,14 @@ use backend\models\Lookup;
                  <div  id="rinci">    
                             <?php 
                             $keluh = str_replace("_"," ",$_GET['param']);
-                            $rinci = Lookup::items($keluh,'keluhan_rincian');
+                            $rinci = Lookup::items2($keluh,'keluhan_rincian');
 //                            var_dump($rinci[1],$rinci[2],$rinci[3]);
 //                            exit();
                             ?>
                                  
                             <?= 
-                          //  $form->field($model, 'faktor_resiko_kebiasaan')->radioList($rinci);
-                            $form->field($model, 'keluhan_rincian')->radioList($rinci,[
+                           $form->field($model, 'keluhan_rincian')->radioList($rinci);
+                         /*   $form->field($model, 'keluhan_rincian')->radioList($rinci,[
                                 'item' => function($index, $label, $name, $checked, $value) {
 
                                     $return = '<div class="radio"><label>';
@@ -44,7 +44,7 @@ use backend\models\Lookup;
 
                                     return $return;
                                 }
-                            ]); ?>
+                            ]);*/ ?>
                  </div>       
             </div>
         <?php ActiveForm::end(); ?>
@@ -60,7 +60,7 @@ use backend\models\Lookup;
 //$this->registerJsFile('/admin/js/popupRincian.js', ['depends' => [yii\web\YiiAsset::className()]]);
 $this->registerJs("$(document).ready(function () {
    $('input[name=\"Anamnesa[keluhan_rincian]\"]').change(function () {
-       $('#namakeluhan').val( $('input:radio[name=\"Anamnesa[keluhan_rincian]\"]:checked').attr('data-value'));
+       $('#namakeluhan').val( $('input:radio[name=\"Anamnesa[keluhan_rincian]\"]:checked').val());
    }); 
    
    $('#submitkeluhan').click(function(){
