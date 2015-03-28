@@ -83,13 +83,13 @@ AppAsset::register($this);
                 </div>
                 <div class="tab-pane fade" id="biasa">
                     <div class="col-sm-3">
-                        <?= $form->field($model, 'kebiasaan_obat_pil',['template'=>'{label}{input}'])->checkbox(); ?>
-                        <?= $form->field($model, 'kebiasaan_rokok_pil',['template'=>'{label}{input}'])->checkbox(); ?>
-                        <?= $form->field($model, 'kebiasaan_alkohol_pil',['template'=>'{label}{input}'])->checkbox(); ?>
-                        <?= $form->field($model, 'kebiasaan_perawatan_pil',['template'=>'{label}{input}'])->checkbox(); ?>
-                        <?= $form->field($model, 'kebiasaan_nutrisi_pil',['template'=>'{label}{input}'])->checkbox(); ?>                        
-                        <?= $form->field($model, 'kebiasan_olahraga_pil',['template'=>'{label}{input}'])->checkbox(); ?>                        
-                        <?= $form->field($model, 'kebiasaan_kegiatan_pil',['template'=>'{label}{input}'])->checkbox(); ?>                        
+                        <?= $form->field($model, 'kebiasaan_obat_pil',['template'=>'{label}{input}'])->checkbox(['label' => 'Obat-obatan']); ?>
+                        <?= $form->field($model, 'kebiasaan_rokok_pil',['template'=>'{label}{input}'])->checkbox(['label' => 'Rokok']); ?>
+                        <?= $form->field($model, 'kebiasaan_alkohol_pil',['template'=>'{label}{input}'])->checkbox(['label' => 'Alkohol']); ?>
+                        <?= $form->field($model, 'kebiasaan_perawatan_pil',['template'=>'{label}{input}'])->checkbox(['label' => 'Perawatan diri']); ?>
+                        <?= $form->field($model, 'kebiasaan_nutrisi_pil',['template'=>'{label}{input}'])->checkbox(['label' => 'Nutrisi']); ?>
+                        <?= $form->field($model, 'kebiasan_olahraga_pil',['template'=>'{label}{input}'])->checkbox(['label' => 'Olahraga']); ?>
+                        <?= $form->field($model, 'kebiasaan_kegiatan_pil',['template'=>'{label}{input}'])->checkbox(['label' => 'Kegiatan waktu senggang']); ?>
                     </div>
                 </div>
             
@@ -202,7 +202,7 @@ Modal::end();
 
 Modal::begin([
     'id' => 'm_riwayatalergi',
-//    'header' => '<h7>Tambah Pasien</h7>'
+    'header' => '<h7>Riwayat Alergi</h7>'
 ]);
 Modal::end();
 
@@ -217,6 +217,34 @@ Modal::begin([
     'header' => '<h7>Riwayat Imunisasi</h7>'
 ]);
 Modal::end();
+
+Modal::begin([
+    'id' => 'm_kebiasaanobat',
+    //'header' => '<h7>Obat-obatan</h7>'
+]);
+
+Modal::end();
+
+Modal::begin([
+    'id' => 'm_kebiasaanrokok',
+    //'header' => '<h7>Obat-obatan</h7>'
+]);
+Modal::end();
+
+Modal::begin([
+    'id' => 'm_kebiasaanalkohol',
+    //'header' => '<h7>Obat-obatan</h7>'
+]);
+Modal::end();
+
+
+Modal::begin([
+    'id' => 'm_kebiasaanperawatandiri',
+    //'header' => '<h7>Obat-obatan</h7>'
+]);
+Modal::end();
+
 ?>
 <script>var id = '<?php echo $_GET['id']; ?>' </script>  
 <?php $this->registerJsFile('/admin/js/popupKeluhan.js'); ?>
+<?php $this->registerJsFile('/admin/js/popupFunction.js'); ?>

@@ -2,9 +2,10 @@
 
 return [
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
-    'name' => 'doktor-oto',
+    'name' => 'Dottoro\'ta',
     'modules' => [
         'user' => [
+//            'identityClass' => 'dektrium\user\models\User',
             'class' => 'dektrium\user\Module',
             'enableUnconfirmedLogin' => true,
             'confirmWithin' => 21600,
@@ -41,12 +42,12 @@ return [
             'controllerMap' => [
                 'assignment' => [
                     'class' => 'mdm\admin\controllers\AssignmentController',
-                    'userClassName' => 'common\models\User',
+                    'userClassName' => 'dektrium\user\models\User',
                     'idField' => 'id', // id field of model User
                 ]
             ],
             'mainLayout' => '@app/views/layouts/main.php',
-            'layout' => 'left-menu', // default null. other avaliable value 'right-menu' and 'top-menu'
+            'layout' => null, // default null. other avaliable value 'right-menu' and 'top-menu'
             'menus' => [
                 'assignment' => [
                     'label' => 'Assignment' // change label
@@ -76,15 +77,15 @@ return [
         ],
         'authManager' => [
             'class' => 'yii\rbac\DbManager', // or use 'yii\rbac\DbManager'
-        ]
+        ],
+        'view' => [
+            'theme' => [
+                'pathMap' => [
+                    '@app/views' => '@webroot/themes/material-default'
+                ],
+                'baseUrl' => '@web/themes/material-default'
+            ],
+        ],
     ],
-    'as access' => [
-        'class' => 'mdm\admin\components\AccessControl',
-        'allowActions' => [
-            'rbac/*', // add or remove allowed actions to this list
-            'user/*',
-            'site/error',
-            'debug/*',
-        ]
-    ],
+    
 ];
