@@ -9,7 +9,25 @@ use yii\bootstrap\Nav;
         <?php if (!Yii::$app->user->isGuest) : ?>
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="<?= $directoryAsset ?>/img/avatar5.png" class="img-circle" alt="User Image"/>
+                    
+                    <?php
+
+                                $email = Yii::$app->user->identity->email;
+
+                                if(isset($email)) {
+                                     echo \cebe\gravatar\Gravatar::widget([
+                                        'email' => $email,
+                                        'options' => [
+                                            'alt' => 'Carsten Brandt'
+                                        ],
+                                        'size' => 32
+                                    ]); 
+                                }
+                                else {
+                                    echo '<img src="<?= $directoryAsset ?>/img/avatar5.png" class="img-circle" alt="User Image"/>';
+                                } 
+                    ?>
+
                 </div>
                 <div class="pull-left info">
                     <p>Hello, <?= @Yii::$app->user->identity->username ?></p>
