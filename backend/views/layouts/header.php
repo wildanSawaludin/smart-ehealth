@@ -180,7 +180,8 @@ AppAsset::register($this);
                                         <div class="progress xs">
                                             <div class="progress-bar progress-bar-green" style="width: 40%" role="progressbar"
                                                  aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                <span class="sr-only">40% Complete</span>
+           
+                                     <span class="sr-only">40% Complete</span>
                                             </div>
                                         </div>
                                     </a>
@@ -251,22 +252,11 @@ AppAsset::register($this);
                                 <img src="<?= $directoryAsset ?>/img/avatar5.png" class="img-circle" alt="User Image"/>
 
                                 <p>
-    <?= @Yii::$app->user->identity->username ?> - Web Developer
+                                    <?= @Yii::$app->user->identity->username ?> - Web Developer
                                     <small>Member since Nov. 2012</small>
                                 </p>
                             </li>
-                            <!-- Menu Body -->
-                            <li class="user-body">
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Followers</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Sales</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Friends</a>
-                                </div>
-                            </li>
+                            
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">

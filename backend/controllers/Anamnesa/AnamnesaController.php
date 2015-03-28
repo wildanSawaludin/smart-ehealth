@@ -20,6 +20,8 @@ use yii\web\Response;
  */
 class AnamnesaController extends Controller
 {
+    public $layout = 'middle';
+
     public function behaviors()
     {
         return [
