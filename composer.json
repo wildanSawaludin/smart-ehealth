@@ -34,6 +34,7 @@
         "mongosoft/yii2-upload-behavior": "*",
         "mdmsoft/yii2-admin": "*",
         "dektrium/yii2-user": "*",
+        "swiftmailer/swiftmailer": "@stable",
         "dmstr/yii2-adminlte-asset": "2.*@dev"
     },
     "require-dev": {

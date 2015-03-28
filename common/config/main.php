@@ -78,14 +78,15 @@ return [
         'authManager' => [
             'class' => 'yii\rbac\DbManager', // or use 'yii\rbac\DbManager'
         ],
-        'view' => [
-            'theme' => [
-                'pathMap' => [
-                    '@app/views' => '@webroot/themes/material-default'
-                ],
-                'baseUrl' => '@web/themes/material-default'
-            ],
-        ],
+
+//        'view' => [
+//            'theme' => [
+//                'pathMap' => [
+//                    '@app/views' => '@webroot/themes/material-default'
+//                ],
+//                'baseUrl' => '@web/themes/material-default'
+//            ],
+//        ],
     ],
     
 ];

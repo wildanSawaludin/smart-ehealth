@@ -52,8 +52,10 @@ class AnamnesaKebiasaanController extends AnamnesaController{
     public function actionPopupNutrisi($id)
     {
         $model = Anamnesa::findOne($id);
+        $pembatasan_asupan = explode(',', $model->makan_pembatasan_asupan);
         return $this->renderAjax('kebiasaanNutrisi', [
-           'model' => $model
+           'model' => $model,
+            'pembatasan_asupan' => $pembatasan_asupan
         ]);
     }
 
@@ -164,6 +166,32 @@ class AnamnesaKebiasaanController extends AnamnesaController{
 
             $model->save();
 
+        }
+    }
+
+    public function actionUpdateKebiasaanNutrisi($id)
+    {
+        $model = $this->findModel($id);
+
+        if(Yii::$app->request->post('Anamnesa')){
+            $post = Yii::$app->request->post('Anamnesa');
+
+            $pembatasan_asupan = implode(',', $post['makan_pembatasan_asupan']);
+
+            $model->nutrisi_selera_pil = $post['nutrisi_selera_pil'];
+            $model->nutrisi_selera_makan = $post['nutrisi_selera_makan'];
+            $model->makan_frekuensi_pil = $post['makan_frekuensi_pil'];
+            $model->makan_frekuensi = $post['makan_frekuensi'];
+            $model->makan_pembatasan_pil = $post['makan_pembatasan_pil'];
+            $model->makan_pembatasan_asupan = $pembatasan_asupan;
+            $model->makan_menu_pil = $post['makan_menu_pil'];
+            $model->minum_jenis_pil = $post['minum_jenis_pil'];
+            $model->minum_jenis = $post['minum_jenis'];
+            $model->minum_frekuensi_pil = $post['minum_frekuensi_pil'];
+            $model->minum_frekuensi = $post['minum_frekuensi'];
+            $model->minum_cara_pil = $post['minum_cara_pil'];
+            $model->minum_cara_pemenuhan = $post['minum_cara_pemenuhan'];
+            $model->save();
         }
     }
 }

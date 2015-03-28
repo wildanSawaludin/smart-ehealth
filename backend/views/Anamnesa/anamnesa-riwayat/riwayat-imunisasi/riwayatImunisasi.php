@@ -52,15 +52,7 @@ use yii\bootstrap\Modal;
                         $model->riwayat_imunisasi = $riwayat_imunisasi;
                         echo $form->field($model, 'riwayat_imunisasi')->checkboxList($list);
                     ?>
-                    <div class="col-sm-12"><input type="hidden" value="" name="Anamnesa[riwayat_imunisasi]">
-                    <div id="anamnesa-riwayat_imunisasi"><div class="checkbox"><label><input type="checkbox" id="chkbox6" value="Hepatitis A" <?= ($model->riwayat_imunisasi == 'Hepatitis A') ? 'checked=true':'' ?> name="Anamnesa[riwayat_imunisasi][]"> Hepatitis A</label></div>
-                    <div class="checkbox"><label><input type="checkbox" id="chkbox7" value="MMR" <?= ($model->riwayat_imunisasi == 'MMR') ? 'checked=true':'' ?> name="Anamnesa[riwayat_imunisasi][]"> MMR</label></div>
-                    <div class="checkbox"><label><input type="checkbox" id="chkbox8" value="Tifoid" <?= ($model->riwayat_imunisasi == 'Tifoid') ? 'checked=true':'' ?> name="Anamnesa[riwayat_imunisasi][]"> Tifoid</label></div>
-                    <div class="checkbox"><label><input type="checkbox" id="chkbox9" value="Varisela" <?= ($model->riwayat_imunisasi == 'Varisela') ? 'checked=true':'' ?> name="Anamnesa[riwayat_imunisasi][]"> Varisela</label></div>
-                    <div class="checkbox"><label><input type="checkbox" id="chkbox10" value="Influenza" <?= ($model->riwayat_imunisasi == 'Influenza') ? 'checked=true':'' ?> name="Anamnesa[riwayat_imunisasi][]"> Influenza</label></div>
-                    <div class="checkbox"><label><input type="checkbox" id="chkbox11" value="Tetanus" <?= ($model->riwayat_imunisasi == 'Tetanus') ? 'checked=true':'' ?> name="Anamnesa[riwayat_imunisasi][]"> Tetanus</label></div></div></div>
 
-                    <div class="col-sm-12"><div class="help-block"></div></div>
                 </div>
             </div>
         </div>
