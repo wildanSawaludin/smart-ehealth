@@ -20,6 +20,7 @@ Thumbs.db
 backend/web/assets
 composer.lock
 advanced
+common/config/main-local.php
 
 # composer itself is not needed
 composer.phar

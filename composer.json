@@ -38,7 +38,8 @@
         "kartik-v/yii2-popover-x": "*",
         "mdmsoft/yii2-admin": "*",
         "dektrium/yii2-user": "*",
-        "dmstr/yii2-adminlte-asset": "2.*@dev"
+        "swiftmailer/swiftmailer": "@stable",
+        "dmstr/yii2-adminlte-asset": "2.*@dev",
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

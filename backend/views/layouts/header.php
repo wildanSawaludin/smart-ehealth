@@ -180,7 +180,8 @@ AppAsset::register($this);
                                         <div class="progress xs">
                                             <div class="progress-bar progress-bar-green" style="width: 40%" role="progressbar"
                                                  aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                <span class="sr-only">40% Complete</span>
+           
+                                     <span class="sr-only">40% Complete</span>
                                             </div>
                                         </div>
                                     </a>
@@ -233,32 +234,29 @@ AppAsset::register($this);
                 } else {
                     ?>
                     <li class="dropdown user user-menu">
+                        <!--
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="glyphicon glyphicon-user"></i>
                             <span><?= @Yii::$app->user->identity->username ?> <i class="caret"></i></span>
                         </a>
+                    -->
+
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                          <img src="<?= $directoryAsset ?>/img/avatar5.png" class="user-image" alt="User Image">
+                          <span class="hidden-xs"><?= @Yii::$app->user->identity->username ?></span>
+                        </a>
+
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header bg-light-blue">
                                 <img src="<?= $directoryAsset ?>/img/avatar5.png" class="img-circle" alt="User Image"/>
 
                                 <p>
-    <?= @Yii::$app->user->identity->username ?> - Web Developer
+                                    <?= @Yii::$app->user->identity->username ?> - Web Developer
                                     <small>Member since Nov. 2012</small>
                                 </p>
                             </li>
-                            <!-- Menu Body -->
-                            <li class="user-body">
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Followers</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Sales</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Friends</a>
-                                </div>
-                            </li>
+                            
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
