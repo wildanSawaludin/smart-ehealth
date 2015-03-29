@@ -117,94 +117,110 @@ use yii\helpers\Url;
                 </div>
             </div>
         </div>
-            <?php
-                Modal::begin([
-                    'id' => 'm_nutrisimenu',
-                    'header' => 'Menu Makan'
-                ]);
-            ?>
-                <ul class="nav nav-tabs" id="tabs-cnt" style="padding-top:0px;margin-bottom: 10px">
-                    <li class="active"><a href="#makanan_pokok" data-toggle="tab">Makanan Pokok </a></li>
-                    <li ><a href="#lauk_pauk" data-toggle="tab">Lauk Pauk</a></li>
-                    <li ><a href="#sayuran" data-toggle="tab">Sayuran</a></li>
-                    <li ><a href="#buah_buahan" data-toggle="tab">Buah-Buahan</a></li>
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane fade in active" id="makanan_pokok">
-                        <div class="form-group">
-                            <div class="col-md-4">
-                                <?php
-                                    $listMakananPokok = ['Nasi' => 'Nasi', 'Roti' => 'Roti', 'Jagung' => 'Jagung', 'Singkong' => 'Singkong', 'Sagu' => 'Sagu'];
-                                    echo $form->field($model, 'makan_menu_pokok')->checkboxList($listMakananPokok);
-                                    //echo $form->field($model, 'makan_menu_pokok')->checkbox(['label' => '']);
-                                ?>
-                                <div class="checkbox"><label><input type="checkbox" name="Anamnesa[makan_menu_pokok][]"> <?= $form->field($model, 'makan_menu_pokok')->textInput(['placeholder' => 'Lainnya']) ?></label></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="lauk_pauk">
-                        <div class="form-group">
-                            <div class="col-md-4">
-                                <?php
-                                $listLaukPauk = ['Ikan' => 'Ikan', 'Daging' => 'Daging', 'Telur' => 'Telur', 'Tempe' => 'Tempe', 'Tahu' => 'Tahu'];
-                                echo $form->field($model, 'makan_menu_lauk')->checkboxList($listLaukPauk);
-                                //echo $form->field($model, 'makan_menu_pokok')->checkbox(['label' => '']);
-                                ?>
-                                <div class="checkbox"><label><input type="checkbox" name="Anamnesa[makan_menu_lauk][]"> <?= $form->field($model, 'makan_menu_lauk')->textInput(['placeholder' => 'Lainnya']) ?></label></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="sayuran">
-                        <div class="form-group">
-                            <div class="col-md-4">
-                                <?php
-                                $listSayuran = ['Kangkung' => 'Kangkung', 'Bayam' => 'Bayam', 'Wortel' => 'Wortel', 'Kentang' => 'Kentang', 'Daun kelor' => 'Daun kelor', 'Daun ubi' => 'Daun ubi'];
-                                echo $form->field($model, 'makan_menu_sayur')->checkboxList($listSayuran);
 
-                                ?>
-                            </div>
-                            <div class="col-md-4">
-                                <?php
-                                $listSayuran1 = ['Daun Pakis' => 'Daun Pakis', 'Daun kacang' => 'Daun kacang', 'Daun Singkong' => 'Daun Singkong', 'Kubis/kol' => 'Kubis/kol', 'Brokoli' => 'Brokoli'];
-                                echo $form->field($model, 'makan_menu_sayur')->checkboxList($listSayuran1);
-
-                                ?>
-                                <div class="checkbox"><label><input type="checkbox" name="Anamnesa[makan_menu_sayur][]"> <?= $form->field($model, 'makan_menu_sayur')->textInput(['placeholder' => 'Lainnya']) ?></label></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="buah_buahan">
-                        <div class="form-group">
-                            <div class="col-md-4">
-                                <?php
-                                $listSayuran = ['Apel' => 'Apel', 'Jeruk' => 'Jeruk', 'Anggur' => 'Anggur', 'Pepaya' => 'Pepaya', 'Jambu' => 'Jambu', 'Mangga' => 'Mangga'];
-                                echo $form->field($model, 'makan_menu_sayur')->checkboxList($listSayuran);
-
-                                ?>
-                            </div>
-                            <div class="col-md-4">
-                                <?php
-                                $listSayuran1 = ['Pisang' => 'Pisang', 'Alpukat' => 'Alpukat', 'Semangka' => 'Semangka', 'Durian' => 'Durian', 'Rambutan' => 'Rambutan', 'Salak' => 'Salak'];
-                                echo $form->field($model, 'makan_menu_sayur')->checkboxList($listSayuran1);
-
-                                ?>
-
-                            </div>
-                            <div class="col-md-4">
-                                <?php
-                                $listSayuran2 = ['Kelapa' => 'Kelapa', 'Melon' => 'Melon', 'Nangka' => 'Nangka', 'Pir' => 'Pir', 'Langsat' => 'langsat'];
-                                echo $form->field($model, 'makan_menu_sayur')->checkboxList($listSayuran1);
-
-                                ?>
-                                <div class="checkbox"><label><input type="checkbox" name="Anamnesa[makan_menu_buah][]"> <?= $form->field($model, 'makan_menu_buah')->textInput(['placeholder' => 'Lainnya']) ?></label></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            <?php Modal::end(); ?>
         <?php ActiveForm::end(); ?>
     </div>
 </div>
+
+<?php
+Modal::begin([
+    'id' => 'm_nutrisimenu',
+    'header' => 'Menu Makan'
+]);
+?>
+<!--<div class="modal-content" style="width: 950px;margin-left: 260px;margin-top: 100px">-->
+    <div class="modal-body">
+        <?php $form = ActiveForm::begin([
+            'id' => 'menu-makan-form',
+            'enableAjaxValidation' => false,
+            'enableClientValidation' => true,
+            'type' => ActiveForm::TYPE_HORIZONTAL,
+            'formConfig' => [
+                'deviceSize' => ActiveForm::SIZE_SMALL,
+                'labelSpan' => 1,
+                'showLabels'=>false
+
+            ]
+        ]);
+        ?>
+        <ul class="nav nav-tabs" id="tabs-cnt" style="padding-top:0px;margin-bottom: 10px">
+            <li class="active"><a href="#makanan_pokok" data-toggle="tab">Makanan Pokok </a></li>
+            <li ><a href="#lauk_pauk" data-toggle="tab">Lauk Pauk</a></li>
+            <li ><a href="#sayuran" data-toggle="tab">Sayuran</a></li>
+            <li ><a href="#buah_buahan" data-toggle="tab">Buah-Buahan</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade in active" id="makanan_pokok">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <?php
+                        $model->makan_menu_pokok = $makan_pokok;
+                        $model->makan_menu_lauk = $lauk;
+                        $model->makan_menu_sayur = $sayuran;
+                        $model->makan_menu_buah = $buah;
+
+                        $listMakananPokok = ['Nasi' => 'Nasi', 'Roti' => 'Roti', 'Jagung' => 'Jagung', 'Singkong' => 'Singkong', 'Sagu' => 'Sagu'];
+                        echo $form->field($model, 'makan_menu_pokok')->checkboxList($listMakananPokok);
+                        //echo $form->field($model, 'makan_menu_pokok')->checkbox(['label' => '']);
+                        ?>
+                        <?= $form->field($model, 'makan_pokok_lainnya_pil')->checkbox(['label' => '']) ?>
+                        <?= $form->field($model, 'makan_pokok_lainnya')->textInput(['placeholder' => 'Lainnya']) ?>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="lauk_pauk">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <?php
+                        $listLaukPauk = ['Ikan' => 'Ikan', 'Daging' => 'Daging', 'Telur' => 'Telur', 'Tempe' => 'Tempe', 'Tahu' => 'Tahu'];
+                        echo $form->field($model, 'makan_menu_lauk')->checkboxList($listLaukPauk);
+                        //echo $form->field($model, 'makan_menu_pokok')->checkbox(['label' => '']);
+                        ?>
+                        <?= $form->field($model, 'makan_lauk_lainnya_pil')->checkbox(['label' => '']) ?>
+                        <?= $form->field($model, 'makan_lauk_lainnya')->textInput(['placeholder' => 'Lainnya']) ?>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="sayuran">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <?php
+                        $listSayuran = ['Kangkung' => 'Kangkung', 'Bayam' => 'Bayam', 'Wortel' => 'Wortel', 'Kentang' => 'Kentang', 'Daun kelor' => 'Daun kelor', 'Daun ubi' => 'Daun ubi',
+                            'Daun Pakis' => 'Daun Pakis', 'Daun kacang' => 'Daun kacang', 'Daun Singkong' => 'Daun Singkong', 'Kubis/kol' => 'Kubis/kol', 'Brokoli' => 'Brokoli'];
+                        echo $form->field($model, 'makan_menu_sayur')->checkboxList($listSayuran);
+
+                        ?>
+                        <?= $form->field($model, 'makan_sayuran_lainnya_pil')->checkbox(['label' => '']) ?>
+                        <?= $form->field($model, 'makan_sayuran_lainnya')->textInput(['placeholder' => 'Lainnya']) ?>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="buah_buahan">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <?php
+                        $listBuah = ['Apel' => 'Apel', 'Jeruk' => 'Jeruk', 'Anggur' => 'Anggur', 'Pepaya' => 'Pepaya', 'Jambu' => 'Jambu', 'Mangga' => 'Mangga',
+                            'Pisang' => 'Pisang', 'Alpukat' => 'Alpukat', 'Semangka' => 'Semangka', 'Durian' => 'Durian', 'Rambutan' => 'Rambutan', 'Salak' => 'Salak',
+                            'Kelapa' => 'Kelapa', 'Melon' => 'Melon', 'Nangka' => 'Nangka', 'Pir' => 'Pir', 'Langsat' => 'langsat'];
+                        echo $form->field($model, 'makan_menu_buah')->checkboxList($listBuah);
+
+                        ?>
+                        <?= $form->field($model, 'makan_buah_lainnya_pil')->checkbox(['label' => '']) ?>
+                        <?= $form->field($model, 'makan_buah_lainnya')->textInput(['placeholder' => 'Lainnya']) ?>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-9">
+                    <input id="btnMenuMakanOk" type="button" class="btn btn-primary" value="OK">
+                </div>
+            </div>
+
+        </div>
+        <?php ActiveForm::end(); ?>
+    </div>
+<!--</div>-->
+<?php Modal::end(); ?>
 
 <script>var id = '<?php echo $_GET['id']; ?>' </script>
 <script>
@@ -229,20 +245,20 @@ use yii\helpers\Url;
                 url: baseurl + 'Anamnesa/anamnesa-kebiasaan/update-kebiasaan-nutrisi?id='+id,
                 data: $('#kebiasaanNutrisi-form').serialize(),
                 success:function(data){
-                    //alert('Success Update Data');
-                    //$("#m_kebiasaanalkohol").modal('hide');
+                    alert('Success Update Data');
+                    $("#m_kebiasaannutrisi").modal('hide');
                 }
             })
         });
 
-        $('#btnLamaPemakaian').click(function(){
+        $('#btnMenuMakanOk').click(function(){
             $.ajax({
                 type: "POST",
-                url: baseurl + '/Anamnesa/anamnesa-kebiasaan/update-kebiasaan-alkohol?id='+id,
-                data: "kebiasaan_alkohol_awal="+$('#anamnesa-kebiasaan_alkohol_awal').val()+"&kebiasaan_alkohol_berhenti="+$('#anamnesa-kebiasaan_alkohol_berhenti').val(),
+                url: baseurl + 'Anamnesa/anamnesa-kebiasaan/update-kebiasaan-nutrisi-makan?id='+id,
+                data: $('#menu-makan-form').serialize(),
                 success:function(data){
                     alert('Success Update Data');
-                    $("#m_lamapemakaianalkohol").modal('hide');
+                    $("#m_nutrisimenu").modal('hide');
                 }
             })
         });
