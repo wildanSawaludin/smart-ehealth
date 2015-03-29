@@ -4,6 +4,7 @@ use backend\assets\AppAsset;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use dektrium\user\models\User;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -180,7 +181,8 @@ AppAsset::register($this);
                                         <div class="progress xs">
                                             <div class="progress-bar progress-bar-green" style="width: 40%" role="progressbar"
                                                  aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                <span class="sr-only">40% Complete</span>
+           
+                                     <span class="sr-only">40% Complete</span>
                                             </div>
                                         </div>
                                     </a>
@@ -233,36 +235,64 @@ AppAsset::register($this);
                 } else {
                     ?>
                     <li class="dropdown user user-menu">
+                        <!--
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="glyphicon glyphicon-user"></i>
                             <span><?= @Yii::$app->user->identity->username ?> <i class="caret"></i></span>
                         </a>
+                    -->
+
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                          
+                          <?php
+
+                                $email = Yii::$app->user->identity->email;
+
+                                if(isset($email)) {
+                                     echo \cebe\gravatar\Gravatar::widget([
+                                        'email' => $email,
+                                        'options' => [
+                                            'alt' => 'Carsten Brandt'
+                                        ],
+                                        'size' => 32
+                                    ]); 
+                                }
+                                else {
+                                    echo '<img src="<?= $directoryAsset ?>/img/avatar5.png" class="img-circle" alt="User Image"/>';
+                                } ?>
+
+                          <span class="hidden-xs"><?= @Yii::$app->user->identity->username ?></span>
+                        </a>
+
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header bg-light-blue">
-                                <img src="<?= $directoryAsset ?>/img/avatar5.png" class="img-circle" alt="User Image"/>
+                                <?php
 
+                                $email = Yii::$app->user->identity->email;
+
+                                if(isset($email)) {
+                                     echo \cebe\gravatar\Gravatar::widget([
+                                        'email' => $email,
+                                        'options' => [
+                                            'alt' => 'Carsten Brandt'
+                                        ],
+                                        'size' => 32
+                                    ]); 
+                                }
+                                else {
+                                    echo '<img src="<?= $directoryAsset ?>/img/avatar5.png" class="img-circle" alt="User Image"/>';
+                                } ?>
                                 <p>
-    <?= @Yii::$app->user->identity->username ?> - Web Developer
-                                    <small>Member since Nov. 2012</small>
+                                    <?= @Yii::$app->user->identity->username ?> - Web Developer
+                                    <small>Member since <?= Yii::t('user', '{0, date, MMMM dd, YYYY HH:mm}', [Yii::$app->user->identity->created_at]) ?></small>
                                 </p>
                             </li>
-                            <!-- Menu Body -->
-                            <li class="user-body">
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Followers</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Sales</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Friends</a>
-                                </div>
-                            </li>
+                            
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                    <a href="<?php echo Yii::$app->urlManager->createAbsoluteUrl('user/admin/update-profile?id='.Yii::$app->user->id); ?>" class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-right">
                                     <?=

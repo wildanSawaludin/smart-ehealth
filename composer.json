@@ -32,10 +32,15 @@
         "kartik-v/yii2-tabs-x": "*",
         "2amigos/yii2-file-upload-widget": "*",
         "mongosoft/yii2-upload-behavior": "*",
+        "mdmsoft/yii2-admin": "dev-master",
+        "dektrium/yii2-user": "*",
+        "kartik-v/yii2-tabs-x": "*",
+        "kartik-v/yii2-popover-x": "*",
         "mdmsoft/yii2-admin": "*",
         "dektrium/yii2-user": "*",
         "swiftmailer/swiftmailer": "@stable",
-        "dmstr/yii2-adminlte-asset": "2.*@dev"
+        "dmstr/yii2-adminlte-asset": "2.*@dev",
+	"cebe/yii2-gravatar": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

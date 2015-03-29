@@ -21,20 +21,22 @@ use yii\helpers\BaseHtml;
 
 
 if(!empty($datakeluhan)) { ?>
- <div class="tab-pane fade in active" id="rinci">    
+<div class="form-group">
+       <div class="content">
                             <?php 
                            
                        //    echo "testttt".$datakeluhan;
                         //    echo "testttt".$datakeluhan."testtttttttttttt2".$this->datakeluhan2;
-                           // $keluh = str_replace("_"," ",$datakeluhan);
-                            $rinci = Lookup::items($datakeluhan,'rincian_lokasi');
+                            $keluh = str_replace('','',$datakeluhan);
+                           
+                            $rinci = Lookup::items2($datakeluhan,'rincian_lokasi');
                           //  var_dump($rinci);
 //                            exit();
                             ?>
      
        <?= 
-                          //  $form->field($model, 'faktor_resiko_kebiasaan')->radioList($rinci);
-                          \yii\helpers\BaseHtml::activeRadioList($model, 'keluhan_lokasi',$rinci,[
+                            \yii\helpers\BaseHtml::activeRadioList($model, 'keluhan_lokasi',$rinci);
+                      /*    \yii\helpers\BaseHtml::activeRadioList($model, 'keluhan_lokasi',$rinci,[
                                 'item' => function($index, $label, $name, $checked, $value) {
 
                                     $return = '<div class="radio"><label>';
@@ -45,10 +47,10 @@ if(!empty($datakeluhan)) { ?>
                                     return $return;
                                 }
                             ]);
-                            
+                            */
            
 
-                            ?>
+                            ?></div></div>
                             
 <?php } else {
     
@@ -57,13 +59,13 @@ if(!empty($datakeluhan)) { ?>
              
              
              ?>
-    <div class="tab-pane fade in active" id="rinci">    
+    <div class="form-group">    
 
-            
+        <div class="content">   
            
              <?= 
-                          //  $form->field($model, 'faktor_resiko_kebiasaan')->radioList($rinci);
-                          \yii\helpers\BaseHtml::activeRadioList($model, 'keluhan_lokasi_umum',$rinci,[
+                           \yii\helpers\BaseHtml::activeRadioList($model, 'keluhan_lokasi_umum',$rinci);
+                       /*   \yii\helpers\BaseHtml::activeRadioList($model, 'keluhan_lokasi_umum',$rinci,[
                                 'item' => function($index, $label, $name, $checked, $value) {
 
                                     $return = '<div class="radio"><label>';
@@ -73,12 +75,9 @@ if(!empty($datakeluhan)) { ?>
 
                                     return $return;
                                 }
-                            ]);
-                            
-           
-
-            
-}       ?>     
+                            ]);*/
+                      
+             }       ?>     </div></div>
                 
                           
                  </div> 

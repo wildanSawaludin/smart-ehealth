@@ -5,10 +5,11 @@ use kartik\widgets\ActiveForm;
 use kartik\builder\Form;
 use backend\models\Lookup;
 use yii\bootstrap\Modal;
+use kartik\tabs\TabsX;
 
-use frontend\assets\AppAsset;
+//use frontend\assets\AppAsset;
 
-AppAsset::register($this);
+//AppAsset::register($this);
 /* @var $this yii\web\View */
 /* @var $model app\models\Anamnesa */
 /* @var $form yii\widgets\ActiveForm */
@@ -31,23 +32,29 @@ AppAsset::register($this);
         </ul>
         <div class="tab-content">
 		<div class="tab-pane fade in active" id="eluh">    
-                    <?php
-                        $list = ['Sakit' => 'Sakit', 'Batuk' => 'Batuk', 'Luka' => 'Luka', 'Lemah'=>'Lemah','Demam'=>'Demam','Gangguan_Makan/Minum'=>'Gangguan Makan/Minum',
-                                 'Gangguan_Buang_Air_Besar'=>'Gangguan Buang Air Besar','Gangguan_Buang_Air_Kecil'=>'Gangguan Buang Air Kecil','Gangguan_Tenggorokan'=>'Gangguan Tenggorokan',
-                                 'Gangguan_pada_Sendi'=>'Gangguan pada Sendi','Masalah_pada_Kulit'=>'Masalah pada Kulit'
-                            ];
-                        $list2 = ['Masalah_pada_Mata' => 'Masalah pada Mata', 'gangguan_penglihatan' => 'gangguan penglihatan', 'Masalah_pada_Telinga' => 'Masalah pada Telinga', 'Masalah pada Mulut'=>'Masalah pada Mulut','Kelainan Suhu Tubuh'=>'Kelainan Suhu Tubuh',
-                                 'Masalah_pada_Hidung/Pernapasan'=>'Masalah pada Hidung/Pernapasan',
-                                 'Masalah pada_Jantung'=>'Masalah pada Jantung','Masalah_pada_Perut'=>'Masalah pada Perut','Masalah_Kewanitaan'=>'Masalah Kewanitaan',
-                                 'Masalah_Reproduksi_Pria'=>'Masalah Reproduksi Pria','Lainnya'=>'Lainnya'
-                            ]; 
-                    ?>
-                    <div class="col-sm-3">
-                        <?= $form->field($model, 'keluhan')->radioList($list); ?>
-                    </div>
-                    <div class="col-sm-3">
-                        <?= $form->field($model, 'keluhan')->radioList($list2); ?>
-                    </div>
+                   <?php
+                     $items = [
+    [
+        'label'=>'<i class="glyphicon glyphicon-home"></i> Keluhan Utama',
+        'content'=>yii\base\View::render('popup/_formkeluhanutama',['model'=>$model,'id'=>$_GET['id']]),
+        'active'=>true
+    ],
+    
+     [
+        'label'=>'<i class="glyphicon glyphicon-home"></i> Rincian',
+        'content'=>yii\base\View::render('tambahan/_formkeluhantambahan',['model'=>$model,'id'=>$_GET['id']]),
+        
+    ],
+   
+];
+                     echo TabsX::widget([
+    'items'=>$items,
+    'position'=>TabsX::POS_LEFT,
+    'sideways'=>true,
+    'encodeLabels'=>false
+]);
+                     
+                   ?>
                 </div>
                 <div class="tab-pane fade" id="wayat">
                     <div class="col-sm-3">

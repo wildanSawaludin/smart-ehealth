@@ -9,7 +9,7 @@ use yii\helpers\BaseHtml;
 
 
 ?>
-
+  <div class="form-group">  
   <?php $form = ActiveForm::begin([
                     'id' => 'keluhanRincilokasi-form',
                     'enableAjaxValidation' => false,
@@ -24,19 +24,21 @@ use yii\helpers\BaseHtml;
                    
                     ]); 
         ?>
-  <?=   \yii\helpers\BaseHtml::activeHiddenInput($model, 'keluhan',['id'=>'id_datakeluhan','value'=>$_GET['keluhan']]); ?>     
+   <div class="content">
+                 <div  id="rinci">  
+   
 <?=   \yii\helpers\BaseHtml::activeHiddenInput($model, 'keluhan_lokasi_umum',['id'=>'idrincilokasi','value'=>$dataLokasi]); ?>
                          
                             <?php 
                            
-                            $rinci = Lookup::items($dataLokasi,'lokum_sublokasi');
+                            $rinci = Lookup::items2($dataLokasi,'lokum_sublokasi');
 //                            var_dump($rinci[1],$rinci[2],$rinci[3]);
 //                            exit();
                             ?>
                                  
                             <?= 
-                          //  $form->field($model, 'faktor_resiko_kebiasaan')->radioList($rinci);
-                            $form->field($model, 'keluhan_sub_lokasi')->radioList($rinci,[
+                            $form->field($model, 'keluhan_sub_lokasi')->radioList($rinci);
+                        /*    $form->field($model, 'keluhan_sub_lokasi')->radioList($rinci,[
                                 'item' => function($index, $label, $name, $checked, $value) {
 
                                     $return = '<div class="radio"><label>';
@@ -46,42 +48,18 @@ use yii\helpers\BaseHtml;
 
                                     return $return;
                                 }
-                            ]); ?>
+                            ]);*/ ?>
+                 </div>
+   </div>
                 <div class="form-group">
         <?= Html::Button('Submit', ['class' => 'btn btn-primary','id'=>'submitrincilokasi']) ?>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
     </div>  
            
         <?php ActiveForm::end(); ?>
+                 </div>
 
 
-  <?php
-//$this->registerJsFile('/admin/js/popupLokasi.js');
-$this->registerJs("$(document).ready(function () {
-   
-     
-    
-   $('#submitrincilokasi').click(function(){
-   $.ajax({
-        type     :'POST',
-        cache    : false,
-        dataType : 'json',
-        data    : $('#keluhanRincilokasi-form').serialize(),
-        url  : 'save-lokasiumum?id='+".$_GET['id'].",
-            success  : function(response) {
-               alert('data berhasil disimpan');
-    }
-    });
-});
-    
- 
- 
-
-   
-   
-
-    });");
-?>
 
 
 
