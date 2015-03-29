@@ -48,7 +48,7 @@ class Registrasi extends \yii\db\ActiveRecord
     {
         return [
             [['pasienId', 'status_pelayanan'], 'required'],
-            [['pasienId','asuransi_provider_id', 'icdx_id'], 'integer'],
+            [['pasienId','asuransi_provider_id', 'icdx_id', 'no_antrian'], 'integer'],
             [['tanggal_registrasi', 'asuransi_tgl_lahir'], 'safe'],
             [['status_pelayanan', 'status_rawat', 'status_asuransi', 'catatan'], 'string'],
             [['no_reg', 'asuransi_noreg','asuransi_noreg_other', 'asuransi_notelp'], 'string', 'max' => 15],
