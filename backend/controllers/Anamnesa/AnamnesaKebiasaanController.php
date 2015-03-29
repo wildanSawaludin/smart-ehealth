@@ -53,9 +53,18 @@ class AnamnesaKebiasaanController extends AnamnesaController{
     {
         $model = Anamnesa::findOne($id);
         $pembatasan_asupan = explode(',', $model->makan_pembatasan_asupan);
+        $makan_pokok = explode(',', $model->makan_menu_pokok);
+        $lauk = explode(',', $model->makan_menu_lauk);
+        $sayuran = explode(',', $model->makan_menu_sayur);
+        $buah = explode(',', $model->makan_menu_buah);
+
         return $this->renderAjax('kebiasaanNutrisi', [
            'model' => $model,
-            'pembatasan_asupan' => $pembatasan_asupan
+            'pembatasan_asupan' => $pembatasan_asupan,
+            'makan_pokok' => $makan_pokok,
+            'lauk' => $lauk,
+            'sayuran' => $sayuran,
+            'buah' => $buah
         ]);
     }
 
@@ -191,6 +200,32 @@ class AnamnesaKebiasaanController extends AnamnesaController{
             $model->minum_frekuensi = $post['minum_frekuensi'];
             $model->minum_cara_pil = $post['minum_cara_pil'];
             $model->minum_cara_pemenuhan = $post['minum_cara_pemenuhan'];
+            $model->save();
+        }
+    }
+
+    public function actionUpdateKebiasaanNutrisiMakan($id)
+    {
+        $model = $this->findModel($id);
+        if(Yii::$app->request->post('Anamnesa')){
+            $post = Yii::$app->request->post('Anamnesa');
+            $makanan_pokok = implode(',', $post['makan_menu_pokok']);
+            $lauk = implode(',', $post['makan_menu_lauk']);
+            $sayuran = implode(',', $post['makan_menu_sayur']);
+            $buah = implode(',', $post['makan_menu_buah']);
+
+            $model->makan_menu_pokok = $makanan_pokok;
+            $model->makan_menu_lauk = $lauk;
+            $model->makan_menu_sayur = $sayuran;
+            $model->makan_menu_buah = $buah;
+            $model->makan_pokok_lainnya_pil = $post['makan_pokok_lainnya_pil'];
+            $model->makan_pokok_lainnya = $post['makan_pokok_lainnya'];
+            $model->makan_lauk_lainnya_pil = $post['makan_lauk_lainnya_pil'];
+            $model->makan_lauk_lainnya = $post['makan_lauk_lainnya'];
+            $model->makan_sayuran_lainnya_pil = $post['makan_sayuran_lainnya_pil'];
+            $model->makan_sayuran_lainnya = $post['makan_sayuran_lainnya'];
+            $model->makan_buah_lainnya_pil = $post['makan_buah_lainnya_pil'];
+            $model->makan_buah_lainnya = $post['makan_buah_lainnya'];
             $model->save();
         }
     }
