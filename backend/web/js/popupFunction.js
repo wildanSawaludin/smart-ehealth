@@ -167,15 +167,15 @@ $(document).ready(function () {
             $('#m_kebiasaannutrisi').load(baseurl + '/Anamnesa/anamnesa-kebiasaan/popup-nutrisi?id='+id+'&param='+$(this).val());
             $('#m_kebiasaannutrisi').modal('show');
         }else{
-            /*$.ajax({
+            $.ajax({
                 type: "POST",
-                url: baseurl + '/Anamnesa/anamnesa-kebiasaan/update-kebiasaan-perawatan?id='+id,
-                data: "kebiasaan_perawatan_pil_uncheck=0",
+                url: baseurl + '/Anamnesa/anamnesa-kebiasaan/update-kebiasaan-nutrisi?id='+id,
+                data: "kebiasaan_nutrisi_pil_uncheck=0",
                 success:function(data){
                     //alert('Success Update Data');
                     //$("#m_lamapemakaianalkohol").modal('hide');
                 }
-            });*/
+            });
         }
     });
 

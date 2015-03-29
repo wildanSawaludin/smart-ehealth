@@ -182,11 +182,16 @@ class AnamnesaKebiasaanController extends AnamnesaController{
     {
         $model = $this->findModel($id);
 
+        if(isset($_POST['kebiasaan_nutrisi_pil_uncheck'])){
+            $model->kebiasaan_nutrisi_pil = $_POST['kebiasaan_nutrisi_pil_uncheck'];
+        }
+
         if(Yii::$app->request->post('Anamnesa')){
             $post = Yii::$app->request->post('Anamnesa');
 
-            $pembatasan_asupan = implode(',', $post['makan_pembatasan_asupan']);
+            $pembatasan_asupan = ($post['makan_pembatasan_asupan'] != null ) ? implode(',', $post['makan_pembatasan_asupan']) : 'null';
 
+            $model->kebiasaan_nutrisi_pil = '1';
             $model->nutrisi_selera_pil = $post['nutrisi_selera_pil'];
             $model->nutrisi_selera_makan = $post['nutrisi_selera_makan'];
             $model->makan_frekuensi_pil = $post['makan_frekuensi_pil'];

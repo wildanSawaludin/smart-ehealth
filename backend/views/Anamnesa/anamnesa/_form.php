@@ -131,7 +131,7 @@ use kartik\tabs\TabsX;
             
                 <div class="tab-pane fade" id="psiko">
                     <div class="row">
-                        <div class="col-sm-3">
+                        <div class="col-sm-5">
                         <?= $form->field($model, 'psikososial_hubkel_pil')->checkbox(); ?>
                         </div>
                         <div class="col-sm-3">
@@ -139,7 +139,7 @@ use kartik\tabs\TabsX;
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-3">
+                        <div class="col-sm-5">
                         <?= $form->field($model, 'psikososial_temting_pil')->checkbox(); ?>
                         </div>
                         <div class="col-sm-3">
@@ -154,7 +154,7 @@ use kartik\tabs\TabsX;
                             $list8 = ['Suami/Istri' => 'Suami/Istri', 'Mertua' => 'Mertua', 'Menantu' => 'Menantu', 'Teman/Orang Lain' => 'Teman/Orang Lain',
                             ];
                         ?>
-                        <div class="col-sm-3">
+                        <div class="col-sm-5">
                         <?= $form->field($model, 'psikososial_tingber_pil')->checkbox(); ?>
                         </div>
                         <div class="col-sm-7">

@@ -65,7 +65,6 @@ use Yii;
  * @property string $kel_penjelasan_saat
  * @property integer $riwayat_penyakit_pil
  * @property integer $riwayatsakit_icdx_id
- * @property string $riwayat_penyakit_nama
  * @property integer $riwayat_penyakit_nil
  * @property string $riwayat_penyakit_lama
  * @property integer $riwayat_perawatan_pil
@@ -74,7 +73,6 @@ use Yii;
  * @property integer $riwayat_perawatan_nil
  * @property string $riwayat_perawatan_lama
  * @property integer $riwayat_pengobatan_pil
- * @property integer $riwayat_pengobatan_id
  * @property integer $riwayat_keluarga_pil
  * @property integer $riwayatkel_icdx_id
  * @property integer $riwayat_lainnya_pil
@@ -106,7 +104,6 @@ use Yii;
  * @property integer $riwayat_imunisasi_pil
  * @property string $riwayat_imunisasi
  * @property integer $kebiasaan_obat_pil
- * @property integer $kebiasaan_obat_id
  * @property integer $kebiasaan_rokok_pil
  * @property integer $kebiasaan_rokok_jmlh
  * @property string $kebiasaan_rokok_satuan
@@ -198,11 +195,11 @@ class Anamnesa extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['parent_id', 'registrasi_id', 'user_id', 'keluhan_berlangsung_nil', 'keluhan_durasi_nil', 'keluhan_menjalar_pil', 'keljalar_kepala_pil', 'keljalar_wajah_pil', 'keljalar_mata_pil', 'keljalar_hidung_pil', 'keljalar_mulut_pil', 'keljalar_telinga_pil', 'keljalar_leher_pil', 'keljalar_tenggorokan_pil', 'keljalar_bahu_pil', 'keljalar_tangan_pil', 'keljalar_dada_pil', 'keljalar_perut_pil', 'keljalar_pinggang_pil', 'keljalar_punggung_pil', 'keljalar_kelamin_pil', 'keljalar_kaki_pil', 'keljalar_seltub_pil', 'kel_tembus_pil', 'kel_punkel_nil', 'riwayat_penyakit_pil', 'riwayatsakit_icdx_id', 'riwayat_penyakit_nil', 'riwayat_perawatan_pil', 'riwayat_perawatan_nil', 'riwayat_pengobatan_pil', 'riwayat_pengobatan_id', 'riwayat_keluarga_pil', 'riwayatkel_icdx_id', 'riwayat_lainnya_pil', 'riwayat_alergi_pil', 'alergi_obat_pil', 'alergi_makanan_pil', 'alergi_sabun_pil', 'alergi_udara_pil', 'alergi_debu_pil', 'alergi_lainnya_pil', 'riwayat_transfusi_pil', 'transfusi_wb_pil', 'transfusi_wb_jumlah', 'transfusi_trombosit_pil', 'transfusi_trombosit_jumlah', 'transfusi_eritrosit_pil', 'transfusi_eritrosit_jumlah', 'riwayat_imunisasi_pil', 'kebiasaan_obat_pil', 'kebiasaan_obat_id', 'kebiasaan_rokok_pil', 'kebiasaan_rokok_jmlh', 'kebiasaan_rokok_nil', 'kebiasaan_alkohol_pil', 'kebiasaan_alkohol_nil', 'perawatan_mandi_pil', 'perawatan_mandi_jmlh', 'perawatan_rambut_pil', 'perawatan_rambut_jmlh', 'perawatan_kuku_pil', 'perawatan_kuku_jmlh', 'perawatan_tidur_pil', 'perawatan_tidur_jmlh', 'kebiasaan_nutrisi_pil', 'nutrisi_selera_pil', 'makan_frekuensi_pil', 'makan_pembatasan_pil', 'makan_menu_pil', 'makan_pokok_lainnya_pil', 'makan_lauk_lainnya_pil', 'makan_sayuran_lainnya_pil', 'makan_buah_lainnya_pil', 'minum_jenis_pil', 'minum_frekuensi_pil', 'minum_cara_pil', 'kebiasan_olahraga_pil', 'olahraga_frekuensi_kali', 'kebiasaan_kegiatan_pil', 'kegiatan_frekuensi_kali', 'psikososial_hubkel_pil', 'psikososial_temting_pil', 'psikososial_tingber_pil'], 'integer'],
+            [['parent_id', 'registrasi_id', 'user_id', 'keluhan_berlangsung_nil', 'keluhan_durasi_nil', 'keluhan_menjalar_pil', 'keljalar_kepala_pil', 'keljalar_wajah_pil', 'keljalar_mata_pil', 'keljalar_hidung_pil', 'keljalar_mulut_pil', 'keljalar_telinga_pil', 'keljalar_leher_pil', 'keljalar_tenggorokan_pil', 'keljalar_bahu_pil', 'keljalar_tangan_pil', 'keljalar_dada_pil', 'keljalar_perut_pil', 'keljalar_pinggang_pil', 'keljalar_punggung_pil', 'keljalar_kelamin_pil', 'keljalar_kaki_pil', 'keljalar_seltub_pil', 'kel_tembus_pil', 'kel_punkel_nil', 'riwayat_penyakit_pil', 'riwayatsakit_icdx_id', 'riwayat_penyakit_nil', 'riwayat_perawatan_pil', 'riwayat_perawatan_nil', 'riwayat_pengobatan_pil', 'riwayat_keluarga_pil', 'riwayatkel_icdx_id', 'riwayat_lainnya_pil', 'riwayat_alergi_pil', 'alergi_obat_pil', 'alergi_makanan_pil', 'alergi_sabun_pil', 'alergi_udara_pil', 'alergi_debu_pil', 'alergi_lainnya_pil', 'riwayat_transfusi_pil', 'transfusi_wb_pil', 'transfusi_wb_jumlah', 'transfusi_trombosit_pil', 'transfusi_trombosit_jumlah', 'transfusi_eritrosit_pil', 'transfusi_eritrosit_jumlah', 'riwayat_imunisasi_pil', 'kebiasaan_obat_pil', 'kebiasaan_rokok_pil', 'kebiasaan_rokok_jmlh', 'kebiasaan_rokok_nil', 'kebiasaan_alkohol_pil', 'kebiasaan_alkohol_nil', 'perawatan_mandi_pil', 'perawatan_mandi_jmlh', 'perawatan_rambut_pil', 'perawatan_rambut_jmlh', 'perawatan_kuku_pil', 'perawatan_kuku_jmlh', 'perawatan_tidur_pil', 'perawatan_tidur_jmlh', 'kebiasaan_nutrisi_pil', 'nutrisi_selera_pil', 'makan_frekuensi_pil', 'makan_pembatasan_pil', 'makan_menu_pil', 'makan_pokok_lainnya_pil', 'makan_lauk_lainnya_pil', 'makan_sayuran_lainnya_pil', 'makan_buah_lainnya_pil', 'minum_jenis_pil', 'minum_frekuensi_pil', 'minum_cara_pil', 'kebiasan_olahraga_pil', 'olahraga_frekuensi_kali', 'kebiasaan_kegiatan_pil', 'kegiatan_frekuensi_kali', 'psikososial_hubkel_pil', 'psikososial_temting_pil', 'psikososial_tingber_pil'], 'integer'],
             [['keluhan_berlangsung_lama', 'keluhan_durasi_lama', 'kel_punkel_lama', 'kel_kemunculan', 'riwayat_penyakit_lama', 'riwayat_perawatan_tempat', 'riwayat_perawatan_lama', 'transfusi_wb_ukuran', 'transfusi_trombosit_ukuran', 'transfusi_eritrosit_ukuran', 'kebiasaan_rokok_satuan', 'kebiasaan_rokok_lama', 'kebiasaan_rokok_awal', 'kebiasaan_rokok_berhenti', 'kebiasaan_alkohol_lama', 'kebiasaan_alkohol_awal', 'kebiasaan_alkohol_berhenti', 'perawatan_mandi_lama', 'perawatan_mandi_oleh', 'perawatan_rambut_lama', 'perawatan_rambut_oleh', 'perawatan_kuku_lama', 'perawatan_kuku_oleh', 'perawatan_tidur_lama', 'perawatan_tidur_oleh', 'nutrisi_selera_makan', 'makan_frekuensi', 'minum_jenis', 'minum_frekuensi', 'olahraga_frekuensi_lama', 'kegiatan_frekuensi_lama', 'psikososial_hubkel', 'psikososial_temting'], 'string'],
             [['riwayat_perawatan_waktu', 'transfusi_wb_waktu', 'transfusi_trombosit_waktu', 'transfusi_eritrosit_waktu'], 'safe'],
             [['transfusi_wb_waktu'], 'required'],
-            [['keluhan', 'keluhan_rincian', 'keluhan_lokasi', 'keluhan_lokasi_umum', 'keluhan_sub_lokasi', 'keluhan_durasi_jenis', 'keluhan_durasi_pereda', 'keluhan_durasi_pemberat', 'riwayat_penyakit_nama', 'makan_menu_pokok', 'makan_menu_lauk', 'makan_menu_sayur', 'makan_menu_buah', 'minum_cara_pemenuhan', 'psikososial_tingber', 'makan_pokok_lainnya', 'makan_lauk_lainnya', 'makan_sayuran_lainnya', 'makan_buah_lainnya'], 'string', 'max' => 50],
+            [['keluhan', 'keluhan_rincian', 'keluhan_lokasi', 'keluhan_lokasi_umum', 'keluhan_sub_lokasi', 'keluhan_durasi_jenis', 'keluhan_durasi_pereda', 'keluhan_durasi_pemberat', 'makan_menu_pokok', 'makan_menu_lauk', 'makan_menu_sayur', 'makan_menu_buah', 'minum_cara_pemenuhan', 'psikososial_tingber', 'makan_pokok_lainnya', 'makan_lauk_lainnya', 'makan_sayuran_lainnya', 'makan_buah_lainnya'], 'string', 'max' => 50],
             [['keluhan_faktor_pencetus'], 'string', 'max' => 200],
             [['keljalar_kepala', 'keljalar_wajah', 'keljalar_mata', 'keljalar_mulut', 'keljalar_telinga', 'keljalar_leher', 'keljalar_bahu', 'keljalar_tangan', 'keljalar_dada', 'keljalar_perut', 'keljalar_punggung', 'keljalar_kelamin', 'keljalar_kaki', 'kel_kemunculan_saat', 'kel_penjelasan_awal', 'kel_penjelasan_kemudian', 'kel_penjelasan_saat', 'alergi_obat_jenis', 'alergi_makanan', 'alergi_sabun', 'alergi_udara', 'alergi_lainnya', 'riwayat_imunisasi', 'makan_pembatasan_asupan', 'olahraga_jenis', 'faktor_resiko_riwayat', 'faktor_resiko_kebiasaan'], 'string', 'max' => 100],
             [['kebiasaan_rokok_jenis', 'kebiasaan_alkohol_jenis', 'kebiasaan_perawatan_pil', 'kegiatan_jenis'], 'string', 'max' => 30]
@@ -273,7 +270,6 @@ class Anamnesa extends \yii\db\ActiveRecord
             'kel_penjelasan_saat' => Yii::t('app', 'Kel Penjelasan Saat'),
             'riwayat_penyakit_pil' => Yii::t('app', 'Riwayat Penyakit Pil'),
             'riwayatsakit_icdx_id' => Yii::t('app', 'Riwayatsakit Icdx ID'),
-            'riwayat_penyakit_nama' => Yii::t('app', 'Riwayat Penyakit Nama'),
             'riwayat_penyakit_nil' => Yii::t('app', 'Riwayat Penyakit Nil'),
             'riwayat_penyakit_lama' => Yii::t('app', 'Riwayat Penyakit Lama'),
             'riwayat_perawatan_pil' => Yii::t('app', 'Riwayat Perawatan Pil'),
@@ -282,7 +278,6 @@ class Anamnesa extends \yii\db\ActiveRecord
             'riwayat_perawatan_nil' => Yii::t('app', 'Riwayat Perawatan Nil'),
             'riwayat_perawatan_lama' => Yii::t('app', 'Riwayat Perawatan Lama'),
             'riwayat_pengobatan_pil' => Yii::t('app', 'Riwayat Pengobatan Pil'),
-            'riwayat_pengobatan_id' => Yii::t('app', 'Riwayat Pengobatan ID'),
             'riwayat_keluarga_pil' => Yii::t('app', 'Riwayat Keluarga Pil'),
             'riwayatkel_icdx_id' => Yii::t('app', 'Riwayatkel Icdx ID'),
             'riwayat_lainnya_pil' => Yii::t('app', 'Riwayat Lainnya Pil'),
@@ -314,7 +309,6 @@ class Anamnesa extends \yii\db\ActiveRecord
             'riwayat_imunisasi_pil' => Yii::t('app', 'Riwayat Imunisasi Pil'),
             'riwayat_imunisasi' => Yii::t('app', 'Riwayat Imunisasi'),
             'kebiasaan_obat_pil' => Yii::t('app', 'Kebiasaan Obat Pil'),
-            'kebiasaan_obat_id' => Yii::t('app', 'Kebiasaan Obat ID'),
             'kebiasaan_rokok_pil' => Yii::t('app', 'Kebiasaan Rokok Pil'),
             'kebiasaan_rokok_jmlh' => Yii::t('app', 'Kebiasaan Rokok Jmlh'),
             'kebiasaan_rokok_satuan' => Yii::t('app', 'Kebiasaan Rokok Satuan'),
@@ -378,11 +372,11 @@ class Anamnesa extends \yii\db\ActiveRecord
             'kegiatan_frekuensi_lama' => Yii::t('app', 'Kegiatan Frekuensi Lama'),
             'faktor_resiko_riwayat' => Yii::t('app', 'Faktor Resiko Riwayat'),
             'faktor_resiko_kebiasaan' => Yii::t('app', 'Faktor Resiko Kebiasaan'),
-            'psikososial_hubkel_pil' => Yii::t('app', 'Psikososial Hubkel Pil'),
+            'psikososial_hubkel_pil' => Yii::t('app', 'Hubungan dengan keluarga'),
             'psikososial_hubkel' => Yii::t('app', 'Psikososial Hubkel'),
-            'psikososial_temting_pil' => Yii::t('app', 'Psikososial Temting Pil'),
+            'psikososial_temting_pil' => Yii::t('app', 'Tempat tinggal'),
             'psikososial_temting' => Yii::t('app', 'Psikososial Temting'),
-            'psikososial_tingber_pil' => Yii::t('app', 'Psikososial Tingber Pil'),
+            'psikososial_tingber_pil' => Yii::t('app', 'Tinggal bersama'),
             'psikososial_tingber' => Yii::t('app', 'Psikososial Tingber'),
         ];
     }
