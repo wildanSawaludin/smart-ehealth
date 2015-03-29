@@ -68,6 +68,24 @@ class AnamnesaKebiasaanController extends AnamnesaController{
         ]);
     }
 
+    public function actionPopupOlahraga($id)
+    {
+        $model = Anamnesa::findOne($id);
+        $olahraga_jenis = explode(',', $model->olahraga_jenis);
+        return $this->renderAjax('kebiasaanOlahraga', [
+           'model' => $model,
+            'olahraga_jenis' => $olahraga_jenis
+        ]);
+    }
+
+    public function actionPopupKegiatan($id)
+    {
+        $model = Anamnesa::findOne($id);
+        return $this->renderAjax('kebiasaanKegiatan', [
+            'model' => $model
+        ]);
+    }
+
     public function actionUpdateKebiasaanPengobatan($id)
     {
         $model = $this->findModel($id);
@@ -184,6 +202,7 @@ class AnamnesaKebiasaanController extends AnamnesaController{
 
         if(isset($_POST['kebiasaan_nutrisi_pil_uncheck'])){
             $model->kebiasaan_nutrisi_pil = $_POST['kebiasaan_nutrisi_pil_uncheck'];
+            $model->save();
         }
 
         if(Yii::$app->request->post('Anamnesa')){
@@ -214,10 +233,10 @@ class AnamnesaKebiasaanController extends AnamnesaController{
         $model = $this->findModel($id);
         if(Yii::$app->request->post('Anamnesa')){
             $post = Yii::$app->request->post('Anamnesa');
-            $makanan_pokok = implode(',', $post['makan_menu_pokok']);
-            $lauk = implode(',', $post['makan_menu_lauk']);
-            $sayuran = implode(',', $post['makan_menu_sayur']);
-            $buah = implode(',', $post['makan_menu_buah']);
+            $makanan_pokok = ($post['makan_menu_pokok'] != null ) ? implode(',', $post['makan_menu_pokok']) : 'null';
+            $lauk = ($post['makan_menu_lauk'] != null ) ? implode(',', $post['makan_menu_lauk']) : 'null';
+            $sayuran = ($post['makan_menu_sayur'] != null ) ? implode(',', $post['makan_menu_sayur']) : 'null';
+            $buah = ($post['makan_menu_buah'] != null ) ? implode(',', $post['makan_menu_buah']) : 'null';
 
             $model->makan_menu_pokok = $makanan_pokok;
             $model->makan_menu_lauk = $lauk;
@@ -231,6 +250,47 @@ class AnamnesaKebiasaanController extends AnamnesaController{
             $model->makan_sayuran_lainnya = $post['makan_sayuran_lainnya'];
             $model->makan_buah_lainnya_pil = $post['makan_buah_lainnya_pil'];
             $model->makan_buah_lainnya = $post['makan_buah_lainnya'];
+            $model->save();
+        }
+    }
+
+    public function actionUpdateKebiasaanOlahraga($id)
+    {
+        $model = $this->findModel($id);
+
+        if(isset($_POST['kebiasaan_olahraga_pil_uncheck'])){
+            $model->kebiasaan_olahraga_pil = $_POST['kebiasaan_olahraga_pil_uncheck'];
+            $model->save();
+        }
+
+        if(Yii::$app->request->post('Anamnesa')){
+            $post = Yii::$app->request->post('Anamnesa');
+            $olahraga_jenis = ($post['olahraga_jenis'] != null ) ? implode(',', $post['olahraga_jenis']) : 'null';
+
+            $model->kebiasaan_olahraga_pil = '1';
+            $model->olahraga_jenis = $olahraga_jenis;
+            $model->olahraga_frekuensi_kali = $post['olahraga_frekuensi_kali'];
+            $model->olahraga_frekuensi_lama = $post['olahraga_frekuensi_lama'];
+            $model->save();
+        }
+    }
+
+    public function actionUpdateKebiasaanKegiatan($id)
+    {
+        $model = $this->findModel($id);
+
+        if(isset($_POST['kebiasaan_kegiatan_pil_uncheck'])){
+            $model->kebiasaan_kegiatan_pil = $_POST['kebiasaan_kegiatan_pil_uncheck'];
+            $model->save();
+        }
+
+        if(Yii::$app->request->post('Anamnesa')){
+            $post = Yii::$app->request->post('Anamnesa');
+
+            $model->kebiasaan_kegiatan_pil = '1';
+            $model->kegiatan_jenis = $post['kegiatan_jenis'];
+            $model->kegiatan_frekuensi_kali = $post['kegiatan_frekuensi_kali'];
+            $model->kegiatan_frekuensi_lama = $post['kegiatan_frekuensi_lama'];
             $model->save();
         }
     }

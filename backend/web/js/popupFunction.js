@@ -179,4 +179,42 @@ $(document).ready(function () {
         }
     });
 
+    $('#anamnesa-kebiasaan_olahraga_pil').change(function(){
+
+        if($('#anamnesa-kebiasaan_olahraga_pil').prop( "checked" )){
+            $('#m_kebiasaanolahraga').html('');
+            $('#m_kebiasaanolahraga').load(baseurl + '/Anamnesa/anamnesa-kebiasaan/popup-olahraga?id='+id+'&param='+$(this).val());
+            $('#m_kebiasaanolahraga').modal('show');
+        }else{
+            $.ajax({
+                type: "POST",
+                url: baseurl + '/Anamnesa/anamnesa-kebiasaan/update-kebiasaan-olahraga?id='+id,
+                data: "kebiasaan_olahraga_pil_uncheck=0",
+                success:function(data){
+                    //alert('Success Update Data');
+                    //$("#m_lamapemakaianalkohol").modal('hide');
+                }
+            });
+        }
+    });
+
+    $('#anamnesa-kebiasaan_kegiatan_pil').change(function(){
+
+        if($('#anamnesa-kebiasaan_kegiatan_pil').prop( "checked" )){
+            $('#m_kebiasaaanWaktuSenggang').html('');
+            $('#m_kebiasaaanWaktuSenggang').load(baseurl + '/Anamnesa/anamnesa-kebiasaan/popup-kegiatan?id='+id+'&param='+$(this).val());
+            $('#m_kebiasaaanWaktuSenggang').modal('show');
+        }else{
+            $.ajax({
+                type: "POST",
+                url: baseurl + '/Anamnesa/anamnesa-kebiasaan/update-kebiasaan-kegiatan?id='+id,
+                data: "kebiasaan_kegiatan_pil_uncheck=0",
+                success:function(data){
+                    //alert('Success Update Data');
+                    //$("#m_lamapemakaianalkohol").modal('hide');
+                }
+            });
+        }
+    });
+
 });

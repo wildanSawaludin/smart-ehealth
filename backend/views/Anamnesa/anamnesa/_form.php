@@ -89,13 +89,13 @@ use kartik\tabs\TabsX;
                     </div>
                 </div>
                 <div class="tab-pane fade" id="biasa">
-                    <div class="col-sm-3">
+                    <div class="col-sm-4">
                         <?= $form->field($model, 'kebiasaan_obat_pil',['template'=>'{label}{input}'])->checkbox(['label' => 'Obat-obatan']); ?>
                         <?= $form->field($model, 'kebiasaan_rokok_pil',['template'=>'{label}{input}'])->checkbox(['label' => 'Rokok']); ?>
                         <?= $form->field($model, 'kebiasaan_alkohol_pil',['template'=>'{label}{input}'])->checkbox(['label' => 'Alkohol']); ?>
                         <?= $form->field($model, 'kebiasaan_perawatan_pil',['template'=>'{label}{input}'])->checkbox(['label' => 'Perawatan diri']); ?>
                         <?= $form->field($model, 'kebiasaan_nutrisi_pil',['template'=>'{label}{input}'])->checkbox(['label' => 'Nutrisi']); ?>
-                        <?= $form->field($model, 'kebiasan_olahraga_pil',['template'=>'{label}{input}'])->checkbox(['label' => 'Olahraga']); ?>
+                        <?= $form->field($model, 'kebiasaan_olahraga_pil',['template'=>'{label}{input}'])->checkbox(['label' => 'Olahraga']); ?>
                         <?= $form->field($model, 'kebiasaan_kegiatan_pil',['template'=>'{label}{input}'])->checkbox(['label' => 'Kegiatan waktu senggang']); ?>
                     </div>
                 </div>
@@ -257,6 +257,17 @@ Modal::begin([
 ]);
 Modal::end();
 
+Modal::begin([
+    'id' => 'm_kebiasaanolahraga',
+    //'header' => '<h7>Obat-obatan</h7>'
+]);
+Modal::end();
+
+Modal::begin([
+    'id' => 'm_kebiasaaanWaktuSenggang',
+    //'header' => '<h7>Obat-obatan</h7>'
+]);
+Modal::end();
 ?>
 <script>var id = '<?php echo $_GET['id']; ?>' </script>  
 <?php $this->registerJsFile('/admin/js/popupKeluhan.js'); ?>
