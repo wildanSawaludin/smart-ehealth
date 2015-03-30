@@ -217,4 +217,32 @@ $(document).ready(function () {
         }
     });
 
+    $('#btnFaktorResikoOk').click(function(){
+        var value = $('#form-faktor-resiko').serialize();
+
+        $.ajax({
+            type: "POST",
+            url: baseurl + '/Anamnesa/faktor-resiko/update-faktor-resiko?id='+id,
+            data: value,
+            success:function(data){
+                alert('Success Update Data');
+                //$("#m_lamapemakaianalkohol").modal('hide');
+            }
+        });
+    });
+
+    $('#btnPsikososialOk').click(function(){
+        var value = $('#form-psikososial').serialize();
+
+        $.ajax({
+            type: "POST",
+            url: baseurl + '/Anamnesa/status-psikososial/update-psikososial?id='+id,
+            data: value,
+            success:function(data){
+                alert('Success Update Data');
+                //$("#m_lamapemakaianalkohol").modal('hide');
+            }
+        });
+    });
+
 });
