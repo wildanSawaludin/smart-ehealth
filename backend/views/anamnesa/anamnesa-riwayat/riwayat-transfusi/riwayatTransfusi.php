@@ -194,11 +194,11 @@ use yii\bootstrap\Modal;
 
             $.ajax({
                 type: "POST",
-                url: baseurl + '/Anamnesa/AnamnesaRiwayatLainnya/riwayat-transfusi/update-transfusi?id='+id,
+                url: baseurl + '/Anamnesa/riwayat-transfusi/update-transfusi?id='+id,
                 data: $('#riwayatTransfusi-form').serialize() + "&transfusi_pil=" + transfusi,
                 success:function(data){
-                    //alert('Success Update Data');
-                    //$("#m_riwayatperawatan").modal('hide');
+                    alert('Success Update Data');
+                    $("#m_riwayattransfusi").modal('hide');
                 }
             });
         });

@@ -69,12 +69,13 @@ class AnamnesaController extends Controller
     public function actionCreate()
     {
         $model = new Anamnesa();
-
+       
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                
             ]);
         }
     }
@@ -88,12 +89,13 @@ class AnamnesaController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                
             ]);
         }
     }
@@ -329,4 +331,14 @@ $model->save();
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+    
+     protected function findModelTambahan($id)
+    {
+        if (($model = Anamnesa::findOne(['parent_id'=>$id])) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+    
 }

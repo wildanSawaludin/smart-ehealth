@@ -39,6 +39,13 @@ use kartik\tabs\TabsX;
         'content'=>yii\base\View::render('popup/_formkeluhanutama',['model'=>$model,'id'=>$_GET['id']]),
         'active'=>true
     ],
+    [
+        'label'=>'<i class="glyphicon glyphicon-user"></i> Keluhan Tambahan',
+     //   'content'=>yii\base\View::render('_keluhanLokasi',['model'=>$model]),
+        'id'=>'tabs-keluhanlokasi',
+        'content'=>'<div id="tablokasi"></div>',
+        'linkOptions'=>['data-enable-cache'=>false,'data-url'=>\yii\helpers\Url::to(['../tambahan/',['id'=>$_GET['id']]])],
+    ],
     
      [
         'label'=>'<i class="glyphicon glyphicon-home"></i> Rincian',

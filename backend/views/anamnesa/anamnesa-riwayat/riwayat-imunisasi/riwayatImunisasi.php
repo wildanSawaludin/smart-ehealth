@@ -38,34 +38,21 @@ use yii\bootstrap\Modal;
             <div class="col-md-4">
                 <div class="form-group field-anamnesa-riwayat_imunisasi has-success">
                     <?php
-                        $riwayat_imunisasi = explode(',', $model->riwayat_imunisasi);
-                        foreach ($riwayat_imunisasi as $index => $value) {
-
+                        $list = ['Lengkap' => 'Lengkap', 'Hepatitis B' => 'Hepatitis B', 'BCG' => 'BCG', 'Polio' => 'Polio', 'DPT' => 'DPT', 'Campak' => 'Campak'];
+                        $model->riwayat_imunisasi = $riwayat_imunisasi;
+                        echo $form->field($model, 'riwayat_imunisasi')->checkboxList($list);
                     ?>
-                        <?php } ?>
-                    <div class="col-sm-12"><input type="hidden" value="" name="Anamnesa[riwayat_imunisasi]">
-                    <div id="anamnesa-riwayat_imunisasi"><div class="checkbox"><label><input type="checkbox" id="chkbox0" value="Lengkap" <?= ($model->riwayat_imunisasi == 'Lengkap') ? 'checked=true':'' ?> name="Anamnesa[riwayat_imunisasi][]"> Lengkap</label></div>
-                    <div class="checkbox"><label><input type="checkbox" id="chkbox1" value="Hepatitis B" <?= ($model->riwayat_imunisasi == 'Hepatitis B') ? 'checked=true':'' ?> name="Anamnesa[riwayat_imunisasi][]"> Hepatitis B</label></div>
-                    <div class="checkbox"><label><input type="checkbox" id="chkbox2" value="BCG" <?= ($model->riwayat_imunisasi == 'BCG') ? 'checked=true':'' ?> name="Anamnesa[riwayat_imunisasi][]"> BCG</label></div>
-                    <div class="checkbox"><label><input type="checkbox" id="chkbox3" value="Polio" <?= ($model->riwayat_imunisasi == 'Polio') ? 'checked=true':'' ?> name="Anamnesa[riwayat_imunisasi][]"> Polio</label></div>
-                    <div class="checkbox"><label><input type="checkbox" id="chkbox4" value="DPT" <?= ($model->riwayat_imunisasi == 'DPT') ? 'checked=true':'' ?> name="Anamnesa[riwayat_imunisasi][]"> DPT</label></div>
-                    <div class="checkbox"><label><input type="checkbox" id="chkbox5" value="Campak" <?= ($model->riwayat_imunisasi == 'Campak') ? 'checked=true':'' ?> name="Anamnesa[riwayat_imunisasi][]"> Campak</label></div></div></div>
 
-                    <div class="col-sm-12"><div class="help-block"></div></div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group field-anamnesa-riwayat_imunisasi has-success">
+                    <?php
+                        $list = ['Hepatitis A' => 'Hepatitis A', 'MMR' => 'MMR', 'Tifoid' => 'Tifoid', 'Varisela' => 'Varisela', 'Influenze' => 'Influenza', 'Tetanus' => 'Tetanus'];
+                        $model->riwayat_imunisasi = $riwayat_imunisasi;
+                        echo $form->field($model, 'riwayat_imunisasi')->checkboxList($list);
+                    ?>
 
-                    <div class="col-sm-12"><input type="hidden" value="" name="Anamnesa[riwayat_imunisasi]">
-                    <div id="anamnesa-riwayat_imunisasi"><div class="checkbox"><label><input type="checkbox" id="chkbox6" value="Hepatitis A" <?= ($model->riwayat_imunisasi == 'Hepatitis A') ? 'checked=true':'' ?> name="Anamnesa[riwayat_imunisasi][]"> Hepatitis A</label></div>
-                    <div class="checkbox"><label><input type="checkbox" id="chkbox7" value="MMR" <?= ($model->riwayat_imunisasi == 'MMR') ? 'checked=true':'' ?> name="Anamnesa[riwayat_imunisasi][]"> MMR</label></div>
-                    <div class="checkbox"><label><input type="checkbox" id="chkbox8" value="Tifoid" <?= ($model->riwayat_imunisasi == 'Tifoid') ? 'checked=true':'' ?> name="Anamnesa[riwayat_imunisasi][]"> Tifoid</label></div>
-                    <div class="checkbox"><label><input type="checkbox" id="chkbox9" value="Varisela" <?= ($model->riwayat_imunisasi == 'Varisela') ? 'checked=true':'' ?> name="Anamnesa[riwayat_imunisasi][]"> Varisela</label></div>
-                    <div class="checkbox"><label><input type="checkbox" id="chkbox10" value="Influenza" <?= ($model->riwayat_imunisasi == 'Influenza') ? 'checked=true':'' ?> name="Anamnesa[riwayat_imunisasi][]"> Influenza</label></div>
-                    <div class="checkbox"><label><input type="checkbox" id="chkbox11" value="Tetanus" <?= ($model->riwayat_imunisasi == 'Tetanus') ? 'checked=true':'' ?> name="Anamnesa[riwayat_imunisasi][]"> Tetanus</label></div></div></div>
-
-                    <div class="col-sm-12"><div class="help-block"></div></div>
                 </div>
             </div>
         </div>
@@ -82,33 +69,35 @@ use yii\bootstrap\Modal;
 <!--<script src="/admin/js/riwayatImunisasi.js"></script>-->
 <script>
     $(document).ready(function(){
-        $('#chkbox0').change(function(){
-            if($('#chkbox0').prop( "checked" )){
-                $('#chkbox1').prop("disabled", true);
-                $('#chkbox2').prop("disabled", true);
-                $('#chkbox3').prop("disabled", true);
-                $('#chkbox4').prop("disabled", true);
-                $('#chkbox5').prop("disabled", true);
-                $('#chkbox6').prop("disabled", true);
-                $('#chkbox7').prop("disabled", true);
-                $('#chkbox8').prop("disabled", true);
-                $('#chkbox9').prop("disabled", true);
-                $('#chkbox10').prop("disabled", true);
-                $('#chkbox11').prop("disabled", true);
+        $('input[name="Anamnesa[riwayat_imunisasi][]"]').change(function(){
+            //alert($('input[name="Anamnesa[riwayat_imunisasi][]"]').val());
+            if($('input[value="Lengkap"]').prop("checked")){
+                $('input[value="Hepatitis B"]').attr("checked", false).prop("disabled", true);
+                $('input[value="BCG"]').attr("checked", false).prop("disabled", true);
+                $('input[value="Polio"]').attr("checked", false).prop("disabled", true);
+                $('input[value="DPT"]').attr("checked", false).prop("disabled", true);
+                $('input[value="Campak"]').attr("checked", false).prop("disabled", true);
+                $('input[value="Hepatitis A"]').attr("checked", false).prop("disabled", true);
+                $('input[value="MMR"]').attr("checked", false).prop("disabled", true);
+                $('input[value="Tifoid"]').attr("checked", false).prop("disabled", true);
+                $('input[value="Varisela"]').attr("checked", false).prop("disabled", true);
+                $('input[value="Influenza"]').attr("checked", false).prop("disabled", true);
+                $('input[value="Tetanus"]').attr("checked", false).prop("disabled", true);
             }else{
-                $('#chkbox1').prop("disabled", false);
-                $('#chkbox2').prop("disabled", false);
-                $('#chkbox3').prop("disabled", false);
-                $('#chkbox4').prop("disabled", false);
-                $('#chkbox5').prop("disabled", false);
-                $('#chkbox6').prop("disabled", false);
-                $('#chkbox7').prop("disabled", false);
-                $('#chkbox8').prop("disabled", false);
-                $('#chkbox9').prop("disabled", false);
-                $('#chkbox10').prop("disabled", false);
-                $('#chkbox11').prop("disabled", false);
+                $('input[value="Hepatitis B"]').prop("disabled", false);
+                $('input[value="BCG"]').prop("disabled", false);
+                $('input[value="Polio"]').prop("disabled", false);
+                $('input[value="DPT"]').prop("disabled", false);
+                $('input[value="Campak"]').prop("disabled", false);
+                $('input[value="Hepatitis A"]').prop("disabled", false);
+                $('input[value="MMR"]').prop("disabled", false);
+                $('input[value="Tifoid"]').prop("disabled", false);
+                $('input[value="Varisela"]').prop("disabled", false);
+                $('input[value="Influenza"]').prop("disabled", false);
+                $('input[value="Tetanus"]').prop("disabled", false);
             }
         });
+
 
         $('#btnImunisasiOk').click(function(){
             var value = $("input:checkbox[name='Anamnesa[riwayat_imunisasi][]']:checked").map(function()
@@ -123,10 +112,10 @@ use yii\bootstrap\Modal;
 
             $.ajax({
                 type: "POST",
-                url: baseurl + '/Anamnesa/AnamnesaRiwayatLainnya/riwayat-imunisasi/update-imunisasi?id=' + id,
+                url: baseurl + '/Anamnesa/riwayat-imunisasi/update-imunisasi?id=' + id,
                 data: 'nama_jenis=' + value + '&imunisasi_pil=' + imunisasi,
                 success: function (data) {
-                    //alert('Success Update Data');
+                    alert('Success Update Data');
                     $("#m_riwayatimunisasi").modal('hide');
                 }
             });
