@@ -100,7 +100,6 @@ class SiteController extends Controller {
                     ];
             }
             \Yii::$app->db->createCommand()->batchInsert('pasien', [
-                'no_rm', 
                 'nama', 
                 'tempat_lahir', 
                 'tgl_lahir', 
