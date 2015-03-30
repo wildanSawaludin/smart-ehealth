@@ -18,6 +18,9 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 
     <?= $this->render('_form', [
         'model' => $model,
+        'faktor_resiko_riwayat' => $faktor_resiko_riwayat,
+        'faktor_resiko_kebiasaan' => $faktor_resiko_kebiasaan,
+        'psikososial_tingber' => $psikososial_tingber
     ]) ?>
 
 </div>
