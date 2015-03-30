@@ -181,6 +181,12 @@ use Yii;
  */
 class Anamnesa extends \yii\db\ActiveRecord
 {
+    public $faktor_resiko_riwayat_1;
+    public $faktor_resiko_riwayat_2;
+    public $faktor_resiko_kebiasaan_1;
+    public $faktor_resiko_kebiasaan_2;
+    public $psikososial_tingber_1;
+    public $psikososial_tingber_2;
     /**
      * @inheritdoc
      */
