@@ -358,7 +358,7 @@ use yii\bootstrap\Modal;
         $('#btnTambah').click(function(){
             $('#nama_jenis').append(
                 "<tr id='tr_jenis"+i+"'>" +
-                "<td><input type='text' name='Anamnesa[alergi_obat_jenis]' class='form-control' id='anamnesa-alergi_obat_jenis'></td>" +
+                "<td><input type='text' name='Anamnesa[alergi_obat_jenis][]' class='form-control' id='anamnesa-alergi_obat_jenis'></td>" +
                 "<td><input type='button' class='btn btn-danger' id='btnDel"+i+"' value='X' onClick='deleteJenisAppend("+i+")'> </td>" +
                 "</tr>"
             );
@@ -374,7 +374,7 @@ use yii\bootstrap\Modal;
 
             $.ajax({
                 type: "POST",
-                url: baseurl + '/Anamnesa/riwayat-alergi/update-alergi?id=' + id,
+                url: baseurl + '/Anamnesa/AnamnesaRiwayatLainnya/riwayat-alergi/update-alergi?id=' + id,
                 data: 'nama_jenis=' + value,
                 success: function (data) {
                     //alert('Success Update Data');
@@ -404,7 +404,7 @@ use yii\bootstrap\Modal;
 
             $.ajax({
                 type: "POST",
-                url: baseurl + '/Anamnesa/riwayat-alergi/update-alergi-makanan?id='+id,
+                url: baseurl + '/Anamnesa/AnamnesaRiwayatLainnya/riwayat-alergi/update-alergi-makanan?id='+id,
                 data: 'nama_jenis='+value,
                 success:function(data){
                     //alert('Success Update Data');
@@ -434,7 +434,7 @@ use yii\bootstrap\Modal;
 
             $.ajax({
                 type: "POST",
-                url: baseurl + '/Anamnesa/riwayat-alergi/update-alergi-sabun?id='+id,
+                url: baseurl + '/Anamnesa/AnamnesaRiwayatLainnya/riwayat-alergi/update-alergi-sabun?id='+id,
                 data: 'nama_jenis='+value,
                 success:function(data){
                     //alert('Success Update Data');
@@ -464,7 +464,7 @@ use yii\bootstrap\Modal;
 
             $.ajax({
                 type: "POST",
-                url: baseurl + '/Anamnesa/riwayat-alergi/update-alergi-udara?id='+id,
+                url: baseurl + '/Anamnesa/AnamnesaRiwayatLainnya/riwayat-alergi/update-alergi-udara?id='+id,
                 data: 'nama_jenis='+value,
                 success:function(data){
                     //alert('Success Update Data');
@@ -494,7 +494,7 @@ use yii\bootstrap\Modal;
 
             $.ajax({
                 type: "POST",
-                url: baseurl + '/Anamnesa/riwayat-alergi/update-alergi-debu?id='+id,
+                url: baseurl + '/Anamnesa/AnamnesaRiwayatLainnya/riwayat-alergi/update-alergi-debu?id='+id,
                 data: 'nama_jenis='+value,
                 success:function(data){
                     //alert('Success Update Data');
@@ -524,7 +524,7 @@ use yii\bootstrap\Modal;
 
             $.ajax({
                 type: "POST",
-                url: baseurl + '/Anamnesa/riwayat-alergi/update-alergi-lainnya?id='+id,
+                url: baseurl + '/Anamnesa/AnamnesaRiwayatLainnya/riwayat-alergi/update-alergi-lainnya?id='+id,
                 data: 'nama_jenis='+value,
                 success:function(data){
                     //alert('Success Update Data');

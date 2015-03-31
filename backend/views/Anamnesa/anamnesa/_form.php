@@ -108,76 +108,97 @@ use kartik\tabs\TabsX;
                 </div>
             
                 <div class="tab-pane fade" id="faktor">
-                    <?php
-                        $list3 = ['Riwayat Penyakit' => 'Riwayat Penyakit', 'Riwayat Perawatan' => 'Riwayat Perawatan', 'Riwayat Pengobatan' => 'Riwayat Pengobatan', 'Riwayat Penyakit Keluarga' => 'Riwayat Penyakit Keluarga',
-                            ];
-                        $list4 = ['Riwayat Alergi' => 'Riwayat Alergi','Riwayat Transfusi' => 'Riwayat Transfusi','Riwayat Imunisasi' => 'Riwayat Imunisasi'
-                            ];
-                        $list5 = ['Obat-obatan' => 'Obat-obatan', 'Rokok' => 'Rokok', 'Alkohol' => 'Alkohol', 'Perawatan Diri' => 'Perawatan Diri',
-                            ];
-                        $list6 = ['Nutrisi' => 'Nutrisi', 'Olahraga' => 'Olahraga', 'Kegiatan waktu senggang' => 'Kegiatan waktu senggang',
-                            ];
-                    ?>
-                    <div class="col-sm-12">
-                        <div class="col-sm-3">
-                            <?= $form->field($model, 'faktor_resiko_riwayat')->checkboxList($list3); ?>
+                    <form id="form-faktor-resiko">
+                        <?php
+                            $list3 = ['Riwayat Penyakit' => 'Riwayat Penyakit', 'Riwayat Perawatan' => 'Riwayat Perawatan', 'Riwayat Pengobatan' => 'Riwayat Pengobatan', 'Riwayat Penyakit Keluarga' => 'Riwayat Penyakit Keluarga',
+                                ];
+                            $list4 = ['Riwayat Alergi' => 'Riwayat Alergi','Riwayat Transfusi' => 'Riwayat Transfusi','Riwayat Imunisasi' => 'Riwayat Imunisasi'
+                                ];
+                            $list5 = ['Obat-obatan' => 'Obat-obatan', 'Rokok' => 'Rokok', 'Alkohol' => 'Alkohol', 'Perawatan Diri' => 'Perawatan Diri',
+                                ];
+                            $list6 = ['Nutrisi' => 'Nutrisi', 'Olahraga' => 'Olahraga', 'Kegiatan waktu senggang' => 'Kegiatan waktu senggang',
+                                ];
+                            $model->faktor_resiko_riwayat_1 = $faktor_resiko_riwayat;
+                            $model->faktor_resiko_riwayat_2 = $faktor_resiko_riwayat;
+                            $model->faktor_resiko_kebiasaan_1 = $faktor_resiko_kebiasaan;
+                            $model->faktor_resiko_kebiasaan_2 = $faktor_resiko_kebiasaan;
+                        ?>
+                        <div class="col-sm-12">
+                            <div class="col-sm-3">
+                                <?= $form->field($model, 'faktor_resiko_riwayat_1')->checkboxList($list3); ?>
+                            </div>
+                            <div class="col-sm-3">
+                                <?= $form->field($model, 'faktor_resiko_riwayat_2')->checkboxList($list4); ?>
+                            </div>
                         </div>
-                        <div class="col-sm-3">
-                            <?= $form->field($model, 'faktor_resiko_riwayat')->checkboxList($list4); ?>
+                        <div class="col-sm-12">
+                            <div class="col-sm-3">
+                                <?= $form->field($model, 'faktor_resiko_kebiasaan_1')->checkboxList($list5); ?>
+                            </div>
+                            <div class="col-sm-3">
+                                <?= $form->field($model, 'faktor_resiko_kebiasaan_2')->checkboxList($list6); ?>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="col-sm-3">
-                            <?= $form->field($model, 'faktor_resiko_kebiasaan')->checkboxList($list5); ?>
+                        <div class="form-group">
+                            <div class="col-sm-offset-3 col-sm-9">
+                                <input id="btnFaktorResikoOk" type="button" class="btn btn-primary" value="OK">
+                            </div>
                         </div>
-                        <div class="col-sm-3">
-                            <?= $form->field($model, 'faktor_resiko_kebiasaan')->checkboxList($list6); ?>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             
                 <div class="tab-pane fade" id="psiko">
-                    <div class="row">
-                        <div class="col-sm-5">
-                        <?= $form->field($model, 'psikososial_hubkel_pil')->checkbox(); ?>
-                        </div>
-                        <div class="col-sm-3">
-                        <?= $form->field($model, 'psikososial_hubkel')->dropDownList([ 'Baik/harmonis' => 'Baik/harmonis', 'Cukup baik' => 'Cukup baik', 'Kurang baik' => 'Kurang baik', 'Renggang' => 'Renggang', 'Berjauhan' => 'Berjauhan', 'Tidak memiliki keluarga' => 'Tidak memiliki keluarga', ], ['prompt' => '']) ?>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-5">
-                        <?= $form->field($model, 'psikososial_temting_pil')->checkbox(); ?>
-                        </div>
-                        <div class="col-sm-3">
-                        <?= $form->field($model, 'psikososial_temting')->dropDownList([ 'Rumah sendiri' => 'Rumah sendiri', 'Rumah orang tua/keluarga' => 'Rumah orang tua/keluarga', 'Rumah kontrak' => 'Rumah kontrak', 'Kos-kosan' => 'Kos-kosan', ], ['prompt' => '']) ?>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <?php
-                            $list7 = ['Sendri' => 'Sendri', 'Orang Tua' => 'Orang Tua', 'Saudara' => 'Saudara', 'Anak' => 'Anak',
-                                      'Keluarga' => 'Keluarga',
-                            ];
-                            $list8 = ['Suami/Istri' => 'Suami/Istri', 'Mertua' => 'Mertua', 'Menantu' => 'Menantu', 'Teman/Orang Lain' => 'Teman/Orang Lain',
-                            ];
-                        ?>
-                        <div class="col-sm-5">
-                        <?= $form->field($model, 'psikososial_tingber_pil')->checkbox(); ?>
-                        </div>
-                        <div class="col-sm-7">
+                    <form id="form-psikososial">
+                        <div class="row">
+                            <div class="col-sm-5">
+                            <?= $form->field($model, 'psikososial_hubkel_pil')->checkbox(); ?>
+                            </div>
                             <div class="col-sm-3">
-                                <?= $form->field($model, 'psikososial_tingber')->checkboxList($list7); ?>
-                            </div>
-                            <div class="col-sm-4">
-                                <?= $form->field($model, 'psikososial_tingber')->checkboxList($list8); ?>
-                            </div>
-                            <div class="col-sm-4">
-                                <?php $ambil = Lookup::items('Sakit','keluhan_rincian');
-                                        ?>
-                                <?= $form->field($model, 'keluhan_rincian')->checkbox(); ?>
+                            <?= $form->field($model, 'psikososial_hubkel')->dropDownList([ 'Baik/harmonis' => 'Baik/harmonis', 'Cukup baik' => 'Cukup baik', 'Kurang baik' => 'Kurang baik', 'Renggang' => 'Renggang', 'Berjauhan' => 'Berjauhan', 'Tidak memiliki keluarga' => 'Tidak memiliki keluarga', ], ['prompt' => '']) ?>
                             </div>
                         </div>
-                    </div>
+                        <div class="row">
+                            <div class="col-sm-5">
+                            <?= $form->field($model, 'psikososial_temting_pil')->checkbox(); ?>
+                            </div>
+                            <div class="col-sm-3">
+                            <?= $form->field($model, 'psikososial_temting')->dropDownList([ 'Rumah sendiri' => 'Rumah sendiri', 'Rumah orang tua/keluarga' => 'Rumah orang tua/keluarga', 'Rumah kontrak' => 'Rumah kontrak', 'Kos-kosan' => 'Kos-kosan', ], ['prompt' => '']) ?>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <?php
+                                $list7 = ['Sendri' => 'Sendri', 'Orang Tua' => 'Orang Tua', 'Saudara' => 'Saudara', 'Anak' => 'Anak',
+                                          'Keluarga' => 'Keluarga',
+                                ];
+                                $list8 = ['Suami/Istri' => 'Suami/Istri', 'Mertua' => 'Mertua', 'Menantu' => 'Menantu', 'Teman/Orang Lain' => 'Teman/Orang Lain',
+                                ];
+
+                                $model->psikososial_tingber_1 = $psikososial_tingber;
+                                $model->psikososial_tingber_2 = $psikososial_tingber;
+                            ?>
+                            <div class="col-sm-5">
+                            <?= $form->field($model, 'psikososial_tingber_pil')->checkbox(); ?>
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="col-sm-3">
+                                    <?= $form->field($model, 'psikososial_tingber_1')->checkboxList($list7); ?>
+                                </div>
+                                <div class="col-sm-4">
+                                    <?= $form->field($model, 'psikososial_tingber_2')->checkboxList($list8); ?>
+                                </div>
+                                <div class="col-sm-4">
+                                    <?php //$ambil = Lookup::items('Sakit','keluhan_rincian');
+                                            ?>
+                                    <?php //$form->field($model, 'keluhan_rincian')->checkbox(); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-3 col-sm-9">
+                                <input id="btnPsikososialOk" type="button" class="btn btn-primary" value="OK">
+                            </div>
+                        </div>
+                    </form>
                 </div>
         </div>
     <?php ActiveForm::end(); ?>
