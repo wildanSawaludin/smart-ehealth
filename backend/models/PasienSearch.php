@@ -18,7 +18,7 @@ class PasienSearch extends Pasien {
     public function rules() {
         return [
             [['id'], 'integer'],
-            [['no_rm', 'nama', 'tempat_lahir', 'tgl_lahir', 'jenkel', 'goldar', 'agama', 'pekerjaan', 'warga_negara', 'alamat', 'notelp', 'nama_ayah', 'pekerjaan_ayah', 'nama_ibu', 'pekerjaan_ibu', 'marital_status', 'nama_pasangan', 'pekerjaan_pasangan'], 'safe'],
+            [['nama', 'tempat_lahir', 'tgl_lahir', 'jenkel', 'goldar', 'agama', 'pekerjaan', 'warga_negara', 'alamat', 'notelp', 'nama_ayah', 'pekerjaan_ayah', 'nama_ibu', 'pekerjaan_ibu', 'marital_status', 'nama_pasangan', 'pekerjaan_pasangan'], 'safe'],
         ];
     }
 
@@ -54,8 +54,7 @@ class PasienSearch extends Pasien {
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'tgl_lahir' => $this->tgl_lahir,
-            'no_rm' => $this->no_rm
+            'tgl_lahir' => $this->tgl_lahir
         ]);
 
         $query->andFilterWhere(['like', 'nama', $this->nama])

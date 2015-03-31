@@ -201,9 +201,9 @@ class RegistrasiController extends Controller {
         $out = ['more' => false];
         if (!is_null($search)) {
             $query = new Query;
-            $query->select(['id', 'concat(nama,"||",no_rm) as text'])
+            $query->select(['id', 'concat(nama,"||",id) as text'])
                     ->from('pasien')
-                    ->where('concat(nama,"||",no_rm) LIKE "%' . $search . '%"')
+                    ->where('concat(nama,"||",id) LIKE "%' . $search . '%"')
                     ->limit(20);
             $command = $query->createCommand();
             $data = $command->queryAll();

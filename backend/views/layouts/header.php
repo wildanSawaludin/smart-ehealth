@@ -15,7 +15,7 @@ AppAsset::register($this);
 
 <header class="main-header">
 
-<?= Html::a(Yii::$app->name, Yii::$app->homeUrl, ['class' => 'logo']) ?>
+<?= Html::a('Dottoro\'ta', Yii::$app->homeUrl, ['class' => 'logo']) ?>
 
     <nav class="navbar navbar-static-top" role="navigation">
 

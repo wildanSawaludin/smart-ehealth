@@ -132,7 +132,33 @@ use yii\bootstrap\Nav;
                         ]
                     );
                     ?>
-            </li>                    
+            </li>      
+
+            <li class="treeview">
+                <a href="#" class="navbar-link">
+                    <i class="fa fa-suitcase"></i>
+                    <span class="text-info">Preference</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <?php                    
+                    echo Nav::widget(
+                        [
+                            'encodeLabels' => false,
+                            'options' => ['class' => 'treeview-menu'],
+                            'items' => [
+                                [
+                                    'label' => '<i class="fa fa-circle-o"></i> Propinsi',
+                                    'url' =>Yii::$app->urlManager->createAbsoluteUrl('propinsi'),
+                                ],
+                                [
+                                    'label' => '<i class="fa fa-circle-o"></i> Kabupaten/Kota',
+                                    'url' =>Yii::$app->urlManager->createAbsoluteUrl('kabkota'),
+                                ]
+                            ],
+                        ]
+                    );
+                    ?>
+            </li>              
         </ul>
     </section>
 </aside>

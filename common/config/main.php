@@ -2,7 +2,7 @@
 
 return [
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
-    'name' => 'Dottoro\'ta',
+    'name' => 'Dottoro\'ta Home Care Kota Makassar',
     'modules' => [
         'user' => [
 //            'identityClass' => 'dektrium\user\models\User',
