@@ -45,12 +45,12 @@ class Pasien extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['no_rm', 'nama', 'tempat_lahir', 'tgl_lahir', 'jenkel', 'goldar', 'agama', 'pekerjaan', 'warga_negara', 'alamat', 'notelp'], 'required'],
+            [['nama', 'tempat_lahir', 'tgl_lahir', 'jenkel', 'goldar', 'agama', 'pekerjaan', 'warga_negara', 'alamat', 'notelp'], 'required'],
             [['tgl_lahir'], 'safe'],
             [['jenkel', 'goldar', 'agama', 'pekerjaan', 'warga_negara', 'alamat', 'pekerjaan_ayah', 'pekerjaan_ibu', 'marital_status', 'pekerjaan_pasangan'], 'string'],
             [['nama', 'nama_ayah', 'nama_ibu', 'nama_pasangan'], 'string', 'max' => 25],
             [['tempat_lahir'], 'string', 'max' => 30],
-            [['no_rm', 'notelp'], 'string', 'max' => 15]
+            [['notelp'], 'string', 'max' => 15]
         ];
     }
 
@@ -61,7 +61,6 @@ class Pasien extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'no_rm' => 'No Rekam Medis',
             'nama' => 'Nama',
             'tempat_lahir' => 'Tempat Lahir',
             'tgl_lahir' => 'Tanggal Lahir',
