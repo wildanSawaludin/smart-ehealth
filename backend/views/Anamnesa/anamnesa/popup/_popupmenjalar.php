@@ -12,6 +12,12 @@ use yii\bootstrap\Modal;
  * and open the template in the editor.
  */
 
+?>
+
+<div class="form-group">
+    <div class="col-lg-3">
+
+<?php
 
 $rinci_menjalar = ['Kepala' => 'Kepala', 'Wajah' => 'Wajah', 'Mata' => 'Mata', 'Hidung'=>'Hidung','Mulut'=>'Mulut','Telinga'=>'Telinga', 'Leher'=>'Leher','Tenggorokan'=>'Tenggorokan','Bahu'=>'Bahu', 'Tangan'=>'Tangan','Dada'=>'Dada','Perut'=>'Perut','Pinggang'=>'Pinggang', 'Punggung'=>'Punggung','Kelamin'=>'Kelamin','Kaki'=>'Kaki', 'Seluruh Badan'=>'Seluruh Badan'];
    
@@ -21,7 +27,7 @@ $rinci_menjalar = ['Kepala' => 'Kepala', 'Wajah' => 'Wajah', 'Mata' => 'Mata', '
                    
                       
    ?>     
-
+    </div></div>
 <?php
 
     Modal::begin([
@@ -29,7 +35,7 @@ $rinci_menjalar = ['Kepala' => 'Kepala', 'Wajah' => 'Wajah', 'Mata' => 'Mata', '
              'size' => 'modal-lg',
         ]);
  
-    echo "<div id='modalMenjalardatarinci'></div>";
+    echo "<div class='modal-body' id='modalMenjalardatarinci'></div>";
  
     Modal::end();
 

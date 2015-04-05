@@ -156,8 +156,8 @@ SCRIPT;
                             'actions' => [
                                 'type' => Form::INPUT_RAW,
                                 'value' => '<div style="">' .
-                                Html::button('<span class="glyphicon glyphicon-envelope"></span> Surat Pengantar', ['type' => 'button', 'id' => 'sp_opname', 'class' => 'btn btn-primary']) .
-                                '</div>'
+                                Html::button('<span class="glyphicon glyphicon-envelope"></span> Surat Pengantar', ['type' => 'button', 'id' => 'sp_opname', 'class' => 'btn btn-primary', 'style' => 'display:none']) .
+                                '</div>',
                             ],
                         ]
                     ]
@@ -271,5 +271,20 @@ Modal::end();
                 "margin": "0px 0 0 -10%"
             });
         });
+
+        $('#registrasi-status_pelayanan').change(function() {
+            console.log($(this).val());
+
+            var sp_opname = $('#sp_opname');
+
+            if($(this).val() == "Rawat Inap") {
+                sp_opname.show();
+            }
+            else {
+                sp_opname.hide();
+            }
+
+        });
+
     });
 </script>

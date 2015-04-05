@@ -19,8 +19,6 @@ use yii\widgets\ActiveForm;
     );
     ?>
 
-    <?= $form->field($model, 'no_rm')->textInput(['maxlength' => 15]) ?>
-
     <?= $form->field($model, 'nama')->textInput(['maxlength' => 25]) ?>
 
     <?= $form->field($model, 'tempat_lahir')->textInput(['maxlength' => 30]) ?>

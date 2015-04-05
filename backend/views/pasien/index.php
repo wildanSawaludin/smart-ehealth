@@ -28,7 +28,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'header' => '',
                 'headerOptions' => ['class' => 'kartik-sheet-style']
             ],
-            'no_rm',
             'nama',
             'tempat_lahir',
             'tgl_lahir',

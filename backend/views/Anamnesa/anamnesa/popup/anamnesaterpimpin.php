@@ -146,7 +146,7 @@ use yii\bootstrap\Modal;
              'size' => 'modal-lg',
         ]);
  
-    echo "<div id='modalMenjalarrinci'></div>";
+    echo "<div class='modal-body' id='modalMenjalarrinci'></div>";
  
     Modal::end();
 
@@ -161,7 +161,7 @@ use yii\bootstrap\Modal;
              'size' => 'modal-lg',
         ]);
  
-    echo "<div id='modalKemunculanrinci'></div>";
+    echo "<div class='modal-body' id='modalKemunculanrinci'></div>";
  
     Modal::end();
 

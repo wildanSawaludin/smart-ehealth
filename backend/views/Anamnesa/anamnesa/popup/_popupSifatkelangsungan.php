@@ -10,37 +10,33 @@ use yii\helpers\Url;
 
 
 ?>
-<div class="modal-content" style="width: 750px;margin-left: 400px;margin-top: 100px">
-<div class="modal-header">
-	<a class="close" data-dismiss="modal">&times;</a>
-<!--	<h4><?php // echo $model->getAttributeLabel($_GET['title']); ?></h4>-->
-</div>
-<input type="hidden" value="" id="namakeluhan" name="namakeluhan">
-<div class="modal-body">
+<div class="form-group" >
 
-    <?php
+    
+     <?php
     
     $items = [
     [
         'label'=>'<i class="glyphicon glyphicon-home"></i> Karakter/Jenis',
-        'content'=>yii\base\View::render('_keluhanRincian',['model'=>$model]),
+        'content'=>yii\base\View::render('_kelangsunganKarakter',['model'=>$model]),
         'active'=>true
     ],
-    [
-        'label'=>'<i class="glyphicon glyphicon-user"></i> Peringan/Pereda',
-     //   'content'=>yii\base\View::render('_keluhanLokasi',['model'=>$model]),
-        'id'=>'tabs-keluhanlokasi',
-        'content'=>'<div id="tablokasi"></div>',
-        'linkOptions'=>['data-enable-cache'=>false,'data-url'=>\yii\helpers\Url::to(['/Anamnesa/anamnesa/popup-lokasi',['id'=>$_GET['id'],'datakeluhan'=>str_replace("_"," ",$_GET['param'])]])],
+        
+        [
+        'label'=>'<i class="glyphicon glyphicon-home"></i> Peringan/Pereda',
+        'content'=>yii\base\View::render('_kelangsunganPereda',['model'=>$model]),
+       
     ],
-    [
-        'label'=>'<i class="glyphicon glyphicon-user"></i> Pemberat',
-     //   'content'=>yii\base\View::render('_keluhanLokasi',['model'=>$model]),
-        'id'=>'tabs-keluhanterpimpin',
-        'content'=>'<div id="tabanamnesa_terpimpin"></div>',
-        'linkOptions'=>['data-enable-cache'=>false,'data-url'=>\yii\helpers\Url::to(['/Anamnesa/anamnesa/anamnesa-terpimpin','id'=>$_GET['id']])],
+        
+          
+        [
+        'label'=>'<i class="glyphicon glyphicon-home"></i> Pemberat',
+        'content'=>yii\base\View::render('_kelangsunganPemberat',['model'=>$model]),
+       
     ],
-  
+   
+ 
+
 ];
     
     echo TabsX::widget([
@@ -48,7 +44,7 @@ use yii\helpers\Url;
     'position'=>TabsX::POS_ABOVE,
     'bordered'=>true,
     'encodeLabels'=>false,
-    'id'=>'tabs-keluhan',
+    'id'=>'tabs-kelangsungan',
     'pluginOptions' =>  ['enableCache'=>false],
   //  'enableCache'=>false,
    //  'pluginEvents' => ["tabsX.beforeSend" => "$('#tabs-keluhanlokasi').on('tabsX.beforeSend', function (event) {
@@ -56,19 +52,5 @@ use yii\helpers\Url;
 //});"], 
 ]);
     ?>
-    
-  
-    
-</div>
 
-<div class="modal-footer">
-
-
-</div>
-
-
-    
-     
-    </div>   
-
-
+</div> 
