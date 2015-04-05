@@ -72,8 +72,17 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'asuransi_notelp',
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{delete}',
-                'buttons' => ['delete']
+                'template' => '{delete}{resume}',
+                'buttons' =>
+                [
+                    'resume' => function ($url, $model) {
+                        return Html::a('<span class="glyphicon glyphicon-zoom-in"></span>', $url, [
+                                    'title' => Yii::t('yii', 'Resume'),
+//                                    'data-confirm' => Yii::t('yii', 'Apa Anda yakin?'),
+                                    'data-method' => 'post',
+                        ]);
+                    }
+                        ],
             ]
         ],
     ]);

@@ -7,6 +7,8 @@ use yii\filters\AccessControl;
 use backend\models\Registrasi;
 use backend\models\Icdx;
 use backend\models\RegistrasiSearch;
+use backend\models\Anamnesa;
+use backend\models\AnamnesaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -159,6 +161,27 @@ class RegistrasiController extends Controller {
         return $this->renderAjax('popup/_addPasien', [
                     'model' => $model,
         ]);
+    }
+    
+    public function actionResume($id)
+    {
+       
+        $modelResume = new Anamnesa;
+        $modelResume->registrasi_id = $id;
+        $modelResume->save();
+        
+        $model = $this->findModel($id);
+        $model->status_registrasi = 'Resume';
+        $model->save();
+        
+        
+        if($modelResume->save()){
+            return $this->redirect(['Anamnesa/anamnesa/update', 'id' => $modelResume->id]);
+        }
+//        var_dump($modelResume);
+//                exit();
+        
+            
     }
 
     /**
