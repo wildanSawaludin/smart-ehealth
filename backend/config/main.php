@@ -9,7 +9,11 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => [/*
+        'user' => [
+            'as backend' => 'dektrium\user\filters\BackendFilter',
+        ],*/
+    ],
     'defaultRoute' => 'registrasi/index',
     'components' => [
 //        'user' => [
