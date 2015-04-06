@@ -165,13 +165,15 @@ class RegistrasiController extends Controller {
     
     public function actionResume($id)
     {
-        $model = $this->findModel($id);
-        $model->status_registrasi = 'Anamnesa';
-        $model->save();
-        
+       
         $modelResume = new Anamnesa;
         $modelResume->registrasi_id = $id;
         $modelResume->save();
+        
+        $model = $this->findModel($id);
+        $model->status_registrasi = 'Resume';
+        $model->save();
+        
         
         if($modelResume->save()){
             return $this->redirect(['Anamnesa/anamnesa/update', 'id' => $modelResume->id]);
