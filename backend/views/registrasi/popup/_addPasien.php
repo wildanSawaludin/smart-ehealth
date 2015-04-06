@@ -27,7 +27,6 @@ use kartik\widgets\DatePicker;
     <!-- Tab panes -->
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="dataumum-pass" style="padding:20px">
-            <?= $form->field($model, 'no_rm')->textInput(['maxlength' => 15]) ?>
             <?= $form->field($model, 'nama')->textInput(['maxlength' => 25]) ?>
             <?= $form->field($model, 'tempat_lahir')->textInput(['maxlength' => 30]) ?>
             <?php

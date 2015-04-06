@@ -50,64 +50,18 @@ use yii\bootstrap\Nav;
         </form>
         -->
         <ul class="sidebar-menu">
-            <li class="treeview">
-                <a href="#" class="navbar-link">
+            <li>
+                <a href="<?= Yii::$app->urlManager->baseUrl?>/registrasi/index">
                     <i class="fa fa-user-plus"></i>
                     <span class="text-info">Registrasi</span>
-                    <i class="fa fa-angle-left pull-right"></i>
                 </a>
-                <?php
-                    $callback = function($menu) {
-                                    $data = eval($menu['data']);
-                        
-                                    return [
-                                        'label' => '<i class="fa fa-circle-o"></i> '.$menu['name'],
-                                        'url' => $menu['route'],
-                        //                'options' => $data
-                        //                'items' => $menu['children']
-                                    ];
-                                };
-
-                    $items = MenuHelper::getAssignedMenu(Yii::$app->user->id, 2, $callback);
-                    
-                    echo Nav::widget(
-                        [
-                            'encodeLabels' => false,
-                            'options' => ['class' => 'treeview-menu'],
-                            'items' => $items,
-                        ]
-                    );
-                    ?>
             </li>
             
-            <li class="treeview">
-                <a href="#" class="navbar-link">
+            <li>
+                <a href="<?= Yii::$app->urlManager->baseUrl?>/pasien/index">
                     <i class="fa fa-child"></i>
                     <span class="text-info">Pasien</span>
-                    <i class="fa fa-angle-left pull-right"></i>
                 </a>
-                <?php
-                    $callback = function($menu) {
-                                    $data = eval($menu['data']);
-                        
-                                    return [
-                                        'label' => '<i class="fa fa-circle-o"></i> '.$menu['name'],
-                                        'url' => $menu['route'],
-                        //                'options' => $data
-                        //                'items' => $menu['children']
-                                    ];
-                                };
-
-                    $items = MenuHelper::getAssignedMenu(Yii::$app->user->id, 1, $callback);
-                    
-                    echo Nav::widget(
-                        [
-                            'encodeLabels' => false,
-                            'options' => ['class' => 'treeview-menu'],
-                            'items' => $items,
-                        ]
-                    );
-                    ?>
             </li>
 
             <li class="treeview">
@@ -128,22 +82,23 @@ use yii\bootstrap\Nav;
                                     ];
                                 };
 
-                    $items = MenuHelper::getAssignedMenu(Yii::$app->user->id, 1, $callback);
+                    $items = MenuHelper::getAssignedMenu(Yii::$app->user->id, 8, $callback);
                     
                     echo Nav::widget(
                         [
                             'encodeLabels' => false,
                             'options' => ['class' => 'treeview-menu'],
-                            'items' => [
-                                [
-                                    'label' => '<i class="fa fa-circle-o"></i>  Tambah User',
-                                    'url' => Yii::$app->urlManager->createAbsoluteUrl('user/admin/create'),
-                                ],
-                                [
-                                    'label' => '<i class="fa fa-circle-o"></i>  Setting User',
-                                    'url' => Yii::$app->urlManager->createAbsoluteUrl('user/admin/index')
-                                ]
-                            ],
+                            'items' => $items,
+//                            'items' => [
+//                                [
+//                                    'label' => '<i class="fa fa-circle-o"></i>  Tambah User',
+//                                    'url' => Yii::$app->urlManager->createAbsoluteUrl('user/admin/create'),
+//                                ],
+//                                [
+//                                    'label' => '<i class="fa fa-circle-o"></i>  Setting User',
+//                                    'url' => Yii::$app->urlManager->createAbsoluteUrl('user/admin/index')
+//                                ]
+//                            ],
                         ]
                     );
                     ?>
@@ -177,7 +132,33 @@ use yii\bootstrap\Nav;
                         ]
                     );
                     ?>
-            </li>                    
+            </li>      
+
+            <li class="treeview">
+                <a href="#" class="navbar-link">
+                    <i class="fa fa-suitcase"></i>
+                    <span class="text-info">Preference</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <?php                    
+                    echo Nav::widget(
+                        [
+                            'encodeLabels' => false,
+                            'options' => ['class' => 'treeview-menu'],
+                            'items' => [
+                                [
+                                    'label' => '<i class="fa fa-circle-o"></i> Propinsi',
+                                    'url' =>Yii::$app->urlManager->createAbsoluteUrl('propinsi'),
+                                ],
+                                [
+                                    'label' => '<i class="fa fa-circle-o"></i> Kabupaten/Kota',
+                                    'url' =>Yii::$app->urlManager->createAbsoluteUrl('kabkota'),
+                                ]
+                            ],
+                        ]
+                    );
+                    ?>
+            </li>              
         </ul>
     </section>
 </aside>

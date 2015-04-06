@@ -7,6 +7,8 @@ use yii\filters\AccessControl;
 use backend\models\Registrasi;
 use backend\models\Icdx;
 use backend\models\RegistrasiSearch;
+use backend\models\Anamnesa;
+use backend\models\AnamnesaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -160,6 +162,25 @@ class RegistrasiController extends Controller {
                     'model' => $model,
         ]);
     }
+    
+    public function actionResume($id)
+    {
+        $model = $this->findModel($id);
+        $model->status_registrasi = 'Anamnesa';
+        $model->save();
+        
+        $modelResume = new Anamnesa;
+        $modelResume->registrasi_id = $id;
+        $modelResume->save();
+        
+        if($modelResume->save()){
+            return $this->redirect(['Anamnesa/anamnesa/update', 'id' => $modelResume->id]);
+        }
+//        var_dump($modelResume);
+//                exit();
+        
+            
+    }
 
     /**
      * Finds the Registrasi model based on its primary key value.
@@ -180,9 +201,9 @@ class RegistrasiController extends Controller {
         $out = ['more' => false];
         if (!is_null($search)) {
             $query = new Query;
-            $query->select(['id', 'concat(nama,"||",no_rm) as text'])
+            $query->select(['id', 'concat(nama,"||",id) as text'])
                     ->from('pasien')
-                    ->where('concat(nama,"||",no_rm) LIKE "%' . $search . '%"')
+                    ->where('concat(nama,"||",id) LIKE "%' . $search . '%"')
                     ->limit(20);
             $command = $query->createCommand();
             $data = $command->queryAll();

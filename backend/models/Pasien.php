@@ -8,7 +8,6 @@ use Yii;
  * This is the model class for table "pasien".
  *
  * @property integer $id
- * @property string $no_rm
  * @property string $nama
  * @property string $tempat_lahir
  * @property string $tgl_lahir

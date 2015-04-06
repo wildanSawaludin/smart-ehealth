@@ -11,6 +11,7 @@ use Yii;
  * @property string $no_reg
  * @property integer $pasienId
  * @property string $tanggal_registrasi
+ * @property string $status_registrasi 
  * @property string $status_pelayanan
  * @property string $status_rawat
  * @property string $dr_penanggung_jawab
@@ -49,8 +50,8 @@ class Registrasi extends \yii\db\ActiveRecord
         return [
             [['pasienId', 'status_pelayanan'], 'required'],
             [['pasienId','asuransi_provider_id', 'icdx_id', 'no_antrian'], 'integer'],
-            [['tanggal_registrasi', 'asuransi_tgl_lahir', 'tanggal_kunjungan'], 'safe'],
-            [['status_pelayanan', 'status_rawat', 'status_asuransi', 'catatan'], 'string'],
+            [['tanggal_registrasi', 'asuransi_tgl_lahir'], 'safe'],
+            [['status_registrasi', 'status_pelayanan', 'status_rawat', 'status_asuransi', 'catatan'], 'string'],
             [['no_reg', 'asuransi_noreg','asuransi_noreg_other', 'asuransi_notelp'], 'string', 'max' => 15],
             [['dr_penanggung_jawab', 'asuransi_nama'], 'string', 'max' => 25],
             [['asuransi_status_jaminan', 'asuransi_penanggung_jawab', 'asuransi_alamat'], 'string', 'max' => 30]
@@ -67,10 +68,11 @@ class Registrasi extends \yii\db\ActiveRecord
             'no_reg' => 'No Registrasi',
             'pasienId' => 'Pasien',
             'tanggal_registrasi' => 'Tanggal Registrasi',
+            'status_registrasi' => 'Status Registrasi',
             'status_pelayanan' => 'Status Pelayanan',
             'status_rawat' => 'Status Rawat',
             'dr_penanggung_jawab' => 'Dokter Penanggung Jawab',
-            'icdx_id' => 'Kode ICD X',
+            'icdx_id' => 'Diagnosa',
             'status_asuransi' => 'Status Asuransi',
             'catatan' => 'Catatan',
             'asuransi_noreg' => 'No Reg Asuransi',
