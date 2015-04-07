@@ -1,7 +1,12 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use kartik\grid\GridView;
+use yii\widgets\Pjax;
+use yii\helpers\ArrayHelper;
+use kartik\datetime\DateTimePicker;
+use backend\models\Registrasi;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\RegistrasiSearch */
@@ -10,82 +15,127 @@ use kartik\grid\GridView;
 $this->title = Yii::t('app', 'Registrasi Pendaftaran');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="registrasi-index">
 
-    <h1><?php //Html::encode($this->title)  ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+<div class="registrasi-index row">
 
-    <?=
-    $this->render('_form', [
-        'model' => $model,
-        'pId' => $pId,
-    ])
-    ?>
+    <div class="col-sm-12">
 
-    <p>
-        <?php
-//            Html::a(Yii::t('app', 'Create {modelClass}', [
-//                'modelClass' => 'Registrasi',
-//            ]), ['create'], ['class' => 'btn btn-success']) 
-        ?>
-    </p>
+        <div class="box">
+            <h1><?php $GLOBALS['page_title'] = '<h1>
+            Data Tables
+            <small>advanced tables</small>
+          </h1>';// Html::encode($this->title)  ?></h1>
+            <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <?=
-    GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'pjax' => true,
-        'columns' => [
-            [
-                'class' => 'kartik\grid\SerialColumn',
-                'contentOptions' => ['class' => 'kartik-sheet-style'],
-                'width' => '40px',
-                'header' => '',
-                'headerOptions' => ['class' => 'kartik-sheet-style']
-            ],
-            'no_reg',
-            [
-                'attribute' => 'pasienNama',
-                'value' => $model->pasienNama
-            ],
-            [
-                'attribute' => 'tanggal_registrasi',
-                'filterType' => GridView::FILTER_DATE,
-                'format' => 'raw',
-                'width' => '100px',
-                'filterWidgetOptions' => [
-                    'pluginOptions' => ['format' => 'dd-mm-yyyy']
-                ],
-            ],
-            'status_pelayanan',
-            // 'status_rawat',
-            // 'dr_penanggung_jawab',
-            // 'icdx_id',
-            'status_asuransi',
-            // 'catatan:ntext',
-            // 'asuransi_noreg',
-            // 'asuransi_nama',
-            // 'asuransi_tgl_lahir',
-            // 'asuransi_status_jaminan',
-            // 'asuransi_penanggung_jawab',
-            // 'asuransi_alamat',
-            // 'asuransi_notelp',
-            [
-                'class' => 'yii\grid\ActionColumn',
-                'template' => '{delete}{resume}',
-                'buttons' =>
-                [
-                    'resume' => function ($url, $model) {
-                        return Html::a('<span class="glyphicon glyphicon-zoom-in"></span>', $url, [
-                                    'title' => Yii::t('yii', 'Resume'),
-//                                    'data-confirm' => Yii::t('yii', 'Apa Anda yakin?'),
-                                    'data-method' => 'post',
-                        ]);
-                    }
+            <?=
+            $this->render('_form', [
+                'model' => $model,
+                'pId' => $pId,
+            ])
+            ?>
+
+            <p>
+                <?php
+        //            Html::a(Yii::t('app', 'Create {modelClass}', [
+        //                'modelClass' => 'Registrasi',
+        //            ]), ['create'], ['class' => 'btn btn-success']) 
+                ?>
+            </p>
+        </div>
+
+        <div class="box" style="margin-top:20px;">
+            <?php
+                //echo '<label>Start Date/Time</label>';
+                echo DateTimePicker::widget([
+                    'name' => 'dp_2',
+                    'type' => DateTimePicker::TYPE_COMPONENT_PREPEND,
+                    'pluginOptions' => [
+                        'autoclose'=>true,
+                        'format' => 'yyyy-mm-dd hh:ii',
+                        'todayHighlight' => true
+                    ],
+                    'options' => [
+                        'onchange' => 
+                            'console.log("filtering");
+
+                            $.pjax.reload({
+                                url: "'.Url::to(['index']).'?EmployeeSearch[group_id]="+$(this).val(),
+                                container: "#pjax-gridview",
+                                timeout: 1000,
+                            });'
+                    ]
+                ]);
+
+            ?>
+
+            <?php Pjax::begin(['id' => 'pjax-gridview']) ?>
+            
+                <?=
+                    GridView::widget([
+                        'dataProvider' => $dataProvider,
+                        'filterModel' => $searchModel,
+                        'pjax' => true,
+                        'columns' => [
+                            [
+                                'class' => 'kartik\grid\SerialColumn',
+                                'contentOptions' => ['class' => 'kartik-sheet-style'],
+                                'width' => '40px',
+                                'header' => '',
+                                'headerOptions' => ['class' => 'kartik-sheet-style']
+                            ],
+                            'no_reg',
+                            [
+                                'attribute' => 'pasienNama',
+                                'value' => $model->pasienNama
+                            ],
+                            [
+                                'attribute' => 'tanggal_registrasi',
+                                'filterType' => GridView::FILTER_DATE,
+                                'format' => 'raw',
+                                'width' => '100px',
+                                'filterWidgetOptions' => [
+                                    'pluginOptions' => ['format' => 'dd-mm-yyyy']
+                                ],
+                            ],
+                            'status_pelayanan',
+                            // 'status_rawat',
+                            // 'dr_penanggung_jawab',
+                            // 'icdx_id',
+                            'status_asuransi',
+                            // 'catatan:ntext',
+                            // 'asuransi_noreg',
+                            // 'asuransi_nama',
+                            // 'asuransi_tgl_lahir',
+                            // 'asuransi_status_jaminan',
+                            // 'asuransi_penanggung_jawab',
+                            // 'asuransi_alamat',
+                            // 'asuransi_notelp',
+                            [
+                                'class' => 'yii\grid\ActionColumn',
+                                'template' => '{delete}{resume}',
+                                'buttons' =>
+                                [
+                                    'resume' => function ($url, $model) {
+                                        return Html::a('<span class="glyphicon glyphicon-zoom-in"></span>', $url, [
+                                                    'title' => Yii::t('yii', 'Resume'),
+                                                //  'data-confirm' => Yii::t('yii', 'Apa Anda yakin?'),
+                                                    'data-method' => 'post',
+                                        ]);
+                                    }
+                                ],
+                            ]
                         ],
-            ]
-        ],
-    ]);
-    ?>
+                        'headerRowOptions' => [
+                            'class' => 'box-header'
+                        ],
+                        'tableOptions' => [
+                            'class' => 'box-body'
+                        ]
+                    ]);
+                ?>
+                
+            <?php Pjax::end() ?>
+        </div>
+    </div>
 
 </div>
