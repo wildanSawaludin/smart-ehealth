@@ -91,6 +91,8 @@ class Registrasi extends \yii\db\ActiveRecord {
             'asuransi_notelp' => 'No Telepon/HP',
             'asuransi_provider_id' => 'Asuransi',
             'faskes_id' => 'Faskes ID',
+            'usia' => 'Usia',
+            'kategoriUsia' => 'Kategori Usia'
         ];
     }
 
@@ -124,6 +126,44 @@ class Registrasi extends \yii\db\ActiveRecord {
 
     public function getPasien() {
         return $this->hasOne(Pasien::className(), ['id' => 'pasienId']);
+    }
+
+    public function getUsia() {
+        try {
+            $birthDay = new \DateTime($this->pasien->tgl_lahir);
+            $now = new \DateTime();
+            $diff = $now->diff($birthDay);
+            return $diff->format('%y'); 
+        }
+        catch(\Exception $e) {
+            return 0;
+        }
+    }
+
+    public function getKategoriUsia() {
+        // Bayi 0 - 11 bulan => 0
+        // Anak 1 - 12 tahun => 1
+        // Dewasa > 12 tahun => 2
+
+        try {
+            $birthDay = new \DateTime($this->pasien->tgl_lahir);
+            $now = new \DateTime();
+            $diff = $now->diff($birthDay);
+            $totalmonth = $diff->format('%y') * 12 + $diff->format('%m');
+
+            if($totalmonth > 12 * 12) {
+                return 2;
+            }
+            else if($totalmonth >= 12 && $totalmonth <= 12 * 12) {
+                return 1;
+            }
+            else 
+                return 0;
+
+        }
+        catch(\Exception $e) {
+            return 0;
+        }
     }
 
 }

@@ -25,8 +25,9 @@ class ServiceController extends \yii\web\Controller
 		$pendaftaran = array();
 		$model = new Registrasi();
 		if ($_POST) {
+			$tanggal_kunjungan = date_create($_POST['tanggal_kunjungan'].' 00:00:00');
 			$noantrian = Registrasi::find()->select('count(id)')
-			->where('date_format(tanggal_registrasi,"%Y-%m-%d") = date_format(now(),"%Y-%m-%d")')->scalar();
+			->where('date_format(tanggal_kunjungan,"%Y-%m-%d") = "'.$tanggal_kunjungan->format('Y-m-d').'" ')->scalar();
             $model->pasienId = $_POST['pasienId'];
             $model->no_antrian = $noantrian+1;
             $model->tanggal_kunjungan = $_POST['tanggal_kunjungan'];
@@ -36,13 +37,13 @@ class ServiceController extends \yii\web\Controller
 			if($model->save()){
 				$model->no_reg= (string)sprintf('%08d', $model->id);
 				if($model->save()){
-					$modelpasien = Pasien::find($model->pasienId)->one();
+					$modelpasien = Pasien::find()->where('id = :norm', [':norm' => $model->pasienId])->one();
 					$interval = date_diff(date_create(), date_create($modelpasien->tgl_lahir.' 00:00:00'));
 					$dateKun=date_create($model->tanggal_kunjungan);
 					$pendaftaran["pasienId"] = $modelpasien->id;
 					$pendaftaran["saving"] = 'saving ok';
 					$pendaftaran["no_antrian"] = $model->no_antrian;
-					$pendaftaran["no_rm"] = $modelpasien->no_rm;
+					$pendaftaran["no_rm"] = $modelpasien->id;
 					$pendaftaran["no_registrasi"] = $model->no_reg;
 					$pendaftaran["nama"] = $modelpasien->nama;
 					$pendaftaran["tgl_lahir"] = $modelpasien->tgl_lahir;
@@ -61,7 +62,6 @@ class ServiceController extends \yii\web\Controller
 				$pendaftaran["message"] = "Data Gagal Terkirim";	
 			}
         }else{
-			$pendaftaran = array();
 			$pendaftaran["message"] = "Tidak Ada Data yang Dikirim";	
 			$response["success"] = 0;
 		}		
@@ -69,16 +69,21 @@ class ServiceController extends \yii\web\Controller
 		echo json_encode($response);
 	}
 	
+	public function actionCoba(){
+		$date = date_create('2015-3-30 00:00:00');
+		echo $date->format('Y-m-d');
+	}
+	
 	public function actionGetPasien(){
 		$response["pasien"] = array();
 		$data = array();
 		if($_POST){
 			$norm = $_POST['norm'];
-			$model = Pasien::find()->where('no_rm = :norm', [':norm' => "$norm"])->one();
+			$model = Pasien::find()->where('id = :norm', [':norm' => $norm])->one();
 			if(count($model)>0){
 				$interval = date_diff(date_create(), date_create($model->tgl_lahir.' 00:00:00'));
 				$data["pasienId"] = $model->id;
-				$data["no_rm"] = $model->no_rm;
+				$data["no_rm"] = $model->id;
 				$data["nama"] = $model->nama;
 				$data["tgl_lahir"] = $model->tgl_lahir;
 				$data["jenkel"] = $model->jenkel;

@@ -17,7 +17,7 @@ AppAsset::register($this);
 
 <?= Html::a('Dottoro\'ta', Yii::$app->homeUrl, ['class' => 'logo']) ?>
 
-    <nav class="navbar navbar-static-top" role="navigation">
+    <nav class="navbar navbar-static-top" role="navigation" style="max-height:50px !important">
 
         <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle navigation</span>
@@ -264,7 +264,7 @@ AppAsset::register($this);
                           <span class="hidden-xs"><?= @Yii::$app->user->identity->username ?></span>
                         </a>
 
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu" style="max-height: 50ox !import">
                             <!-- User image -->
                             <li class="user-header bg-light-blue">
                                 <?php

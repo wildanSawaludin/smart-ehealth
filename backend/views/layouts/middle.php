@@ -23,7 +23,7 @@ if (Yii::$app->controller->action->id === 'login') {
         <title><?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
     </head>
-    <body class="skin-blue">
+    <body class="skin-blue sidebar-collapse">
         <div class="wrapper">
 
             <?php $this->beginBody() ?>
@@ -73,12 +73,15 @@ if (Yii::$app->controller->action->id === 'login') {
             </div>
 
             <footer class="main-footer">
-                <div class="container">
-                    <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-                    <p class="pull-right"><?= Yii::powered() ?></p>
-                </div>
-            </footer>
+                <p class="pull-left">&copy; <?= date('Y') ?></p>
+                <p class="pull-right"><?= Yii::powered() ?></p>
 
+                <div class="pull-right hidden-xs">
+                    <b>Version</b> 0.1 Alpha &nbsp
+                </div>
+                <strong>&nbspCopyright © Dottoro'ta</strong> All rights reserved.
+            </footer>
+            
             <?php $this->endBody() ?>
         </div>
     </body>

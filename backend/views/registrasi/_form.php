@@ -215,7 +215,7 @@ SCRIPT;
         <?= Html::submitButton('<span class="glyphicon glyphicon-plus"></span> Daftar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 </div>
-<hr/>
+
 <?php
 Modal::begin([
     'id' => 'md_add_pasien',
