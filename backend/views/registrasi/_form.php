@@ -14,8 +14,11 @@ use yii\web\JsExpression;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Registrasi */
 /* @var $form yii\widgets\ActiveForm */
-if ($model->asuransi_tgl_lahir)
+
+if ($model->asuransi_tgl_lahir) {
     $model->asuransi_tgl_lahir = Yii::$app->get('helper')->dateFormatingAppStrip($model->asuransi_tgl_lahir);
+}
+
 $style1 = "";
 $style2 = "";
 switch ($model->status_asuransi) {
@@ -41,19 +44,14 @@ switch ($model->status_asuransi) {
         break;
 }
 ?>
-<style>
-    .form-horizontal .control-label {
-        margin-bottom: 0;
-        padding-top: 7px;
-        text-align: left;
-    }
-</style>
-<div role="tabpanel">
+
+<div class="nav-tabs-custom">
     <!-- Nav tabs -->
-    <ul class="nav nav-tabs" role="tablist">
+    <ul class="nav nav-tabs">
         <li role="presentation" class="active"><a href="#dataumum" aria-controls="dataumum" role="tab" data-toggle="tab">Data Umum</a></li>
         <li role="presentation"><a href="#statasur" aria-controls="profile" role="tab" data-toggle="tab">Status Asuransi</a></li>
     </ul>
+
     <?php
     $form = ActiveForm::begin([
                 'id' => 'registrasi-form',
@@ -61,40 +59,40 @@ switch ($model->status_asuransi) {
                 'formConfig' => [
                     'deviceSize' => ActiveForm::SIZE_SMALL
                 ]
-    ]);
+            ]);
+
     $model->pasienId = $pId;
 
     // The controller action that will render the list
     $url = \yii\helpers\Url::to(['pasien-list']);
     $urlIcdx = \yii\helpers\Url::to(['icdx-list']);
 
-// Script to initialize the selection based on the value of the select2 element
+    // Script to initialize the selection based on the value of the select2 element
     $initScript = <<< SCRIPT
-function (element, callback) {
-    var id=\$(element).val();
-    if (id !== "") {
-        \$.ajax("{$url}?id=" + id, {
-            dataType: "json"
-        }).done(function(data) { callback(data.results);});
-    }
-}
+        function (element, callback) {
+            var id=\$(element).val();
+            if (id !== "") {
+                \$.ajax("{$url}?id=" + id, {
+                    dataType: "json"
+                }).done(function(data) { callback(data.results);});
+            }
+        }
 SCRIPT;
-$initScriptIcdx = <<< SCRIPT
-function (element, callback) {
-    var id=\$(element).val();
-    if (id !== "") {
-        \$.ajax("{$urlIcdx}?id=" + id, {
-            dataType: "json"
-        }).done(function(data) { callback(data.results);});
+    
+    $initScriptIcdx = <<< SCRIPT
+        function (element, callback) {
+            var id=\$(element).val();
+        if (id !== "") {
+            \$.ajax("{$urlIcdx}?id=" + id, {
+                dataType: "json"
+            }).done(function(data) { callback(data.results);});
+        }
     }
-}
 SCRIPT;
     ?>
     <!-- Tab panes -->
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="dataumum" style="padding:20px">
-            <?php echo $form->errorSummary($model); ?>
-            <?php // $form->field($model, 'no_reg')->textInput(['maxlength' => 15, 'style' => 'width:70%;']) ?>
             <?php
             echo Form::widget([
                 'model' => $model,
@@ -110,8 +108,7 @@ SCRIPT;
                                 'type' => Form::INPUT_WIDGET,
                                 'widgetClass' => '\kartik\widgets\Select2',
                                 'options' => [
-//                                    'data' => ArrayHelper::map(Pasien::find()->asArray()->all(), 'id', 'nama'),
-                                    'options' => ['placeholder' => 'Cari dan pilih pasien ...'],
+                                'options' => ['placeholder' => 'Cari dan pilih pasien ...'],
                                     'pluginOptions' => [
                                         'allowClear' => true,
                                         'minimumInputLength' => 3,
@@ -163,6 +160,7 @@ SCRIPT;
                     ]
                 ]
             ]);
+
             Modal::begin([
                 'id' => 'md_spo',
                 'header' => '<h4>Surat Pengantar Opname</h4>',
@@ -211,8 +209,12 @@ SCRIPT;
             </div>
         </div>
     </div>
-    <div class="form-group" style="padding-left: 35px">
-        <?= Html::submitButton('<span class="glyphicon glyphicon-plus"></span> Daftar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+    <?php  echo $form->errorSummary($model); ?>
+    <div class="row form-group col-sm-offset-4" style=";padding-bottom:20px;">
+        <div class="col-sm-4 col-sm-offset-4">
+            <?= Html::resetButton('<span class="fa fa-refresh"></span> Reset', ['class' => 'btn btn-reset']) ?>
+            <?= Html::submitButton('<span class="glyphicon glyphicon-plus"></span> Daftar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        </div>
     </div>
 </div>
 
@@ -224,6 +226,14 @@ Modal::begin([
 Modal::end();
 ?>
 <?php ActiveForm::end(); ?>
+
+<style>
+    .form-horizontal .control-label {
+        margin-bottom: 0;
+        padding-top: 7px;
+        text-align: left;
+    }
+</style>
 
 <script>
     $(document).ready(function () {

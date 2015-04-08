@@ -40,7 +40,7 @@
         "dektrium/yii2-user": "*",
         "swiftmailer/swiftmailer": "@stable",
         "dmstr/yii2-adminlte-asset": "2.*@dev",
-	    "cebe/yii2-gravatar": "*",
+	"cebe/yii2-gravatar": "*",
         "kartik-v/yii2-widget-datetimepicker": "*"
     },
     "require-dev": {
