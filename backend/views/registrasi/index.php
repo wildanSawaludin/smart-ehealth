@@ -14,6 +14,7 @@ use backend\models\Registrasi;
 
 $this->title = Yii::t('app', 'Registrasi Pendaftaran');
 $this->params['breadcrumbs'][] = $this->title;
+$GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
 ?>
 
 <div class="registrasi-index row">
@@ -21,26 +22,23 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="col-sm-12">
 
         <div class="box">
-            <h1><?php $GLOBALS['page_title'] = '<h1>
-            Data Tables
-            <small>advanced tables</small>
-          </h1>';// Html::encode($this->title)  ?></h1>
-            <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="col-sm-4">
 
-            <?=
-            $this->render('_form', [
-                'model' => $model,
-                'pId' => $pId,
-            ])
-            ?>
-
-            <p>
-                <?php
-        //            Html::a(Yii::t('app', 'Create {modelClass}', [
-        //                'modelClass' => 'Registrasi',
-        //            ]), ['create'], ['class' => 'btn btn-success']) 
-                ?>
-            </p>
+                        </div>
+                        <div class="col-sm-8">
+                            <?=
+                            $this->render('_form', [
+                                'model' => $model,
+                                'pId' => $pId,
+                            ])
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="box" style="margin-top:20px;">
@@ -73,7 +71,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?=
                     GridView::widget([
                         'dataProvider' => $dataProvider,
-                        'filterModel' => $searchModel,
+                        //'filterModel' => $searchModel,
                         'pjax' => true,
                         'columns' => [
                             [
@@ -125,9 +123,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                 ],
                             ]
                         ],
-                        'headerRowOptions' => [
+                        /*'headerRowOptions' => [
                             'class' => 'box-header'
-                        ],
+                        ],*/
                         'tableOptions' => [
                             'class' => 'box-body'
                         ]
