@@ -10,7 +10,7 @@ use yii\helpers\Url;
 
 
 ?>
-<div class="form-group" >
+<div class="anamnesa-form">
 
     
      <?php
@@ -44,7 +44,7 @@ use yii\helpers\Url;
     'position'=>TabsX::POS_ABOVE,
     'bordered'=>true,
     'encodeLabels'=>false,
-    'id'=>'tabs-kelangsungan',
+    'id'=>'tabs-sifatkelangsungan',
     'pluginOptions' =>  ['enableCache'=>false],
   //  'enableCache'=>false,
    //  'pluginEvents' => ["tabsX.beforeSend" => "$('#tabs-keluhanlokasi').on('tabsX.beforeSend', function (event) {

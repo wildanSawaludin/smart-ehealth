@@ -24,15 +24,15 @@ use yii\helpers\Url;
         'label'=>'<i class="glyphicon glyphicon-user"></i> Tanda tanda vital',
      //   'content'=>yii\base\View::render('_keluhanLokasi',['model'=>$model]),
         'id'=>'tabs-tandavital',
-        'content'=>'<div id="tablokasi"></div>',
-        'linkOptions'=>['data-enable-cache'=>false,'data-url'=>\yii\helpers\Url::to(['/Anamnesa/anamnesa/popup-lokasi',['id'=>$_GET['id'],'datakeluhan'=>str_replace("_"," ",$_GET['param'])]])],
+        'content'=>'<div id="tabtandavital"></div>',
+        'linkOptions'=>['data-enable-cache'=>false,'data-url'=>\yii\helpers\Url::to(['/Anamnesa/pemeriksaan-fisik/tanda-vital','id'=>$model->id])],//,'datakeluhan'=>str_replace("_"," ",$_GET['param'])]])],
     ],
     [
         'label'=>'<i class="glyphicon glyphicon-user"></i> Evaluasi',
      //   'content'=>yii\base\View::render('_keluhanLokasi',['model'=>$model]),
         'id'=>'tabs-evaluasi',
-        'content'=>'<div id="tabanamnesa_terpimpin"></div>',
-        'linkOptions'=>['data-enable-cache'=>false,'data-url'=>\yii\helpers\Url::to(['/Anamnesa/anamnesa/anamnesa-terpimpin','id'=>$_GET['id']])],
+        'content'=>'<div id="tabevaluasi"></div>',
+        'linkOptions'=>['data-enable-cache'=>false,'data-url'=>\yii\helpers\Url::to(['/Anamnesa/pemeriksaan-fisik/evaluasi','id'=>$model->id])],//,'datakeluhan'=>str_replace("_"," ",$_GET['param'])]])],
     ],
    /* [
         'label'=>'<i class="glyphicon glyphicon-list-alt"></i> Dropdown',
@@ -56,7 +56,7 @@ use yii\helpers\Url;
     'position'=>TabsX::POS_ABOVE,
     'bordered'=>true,
     'encodeLabels'=>false,
-    'id'=>'tabs-keluhan',
+    'id'=>'tabs-pemeriksaanfisik',
     'pluginOptions' =>  ['enableCache'=>false],
   //  'enableCache'=>false,
    //  'pluginEvents' => ["tabsX.beforeSend" => "$('#tabs-keluhanlokasi').on('tabsX.beforeSend', function (event) {

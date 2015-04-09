@@ -428,6 +428,7 @@ use Yii;
  */
 class PemeriksaanFisik extends \yii\db\ActiveRecord
 {
+    public $imt;
     /**
      * @inheritdoc
      */
@@ -903,4 +904,353 @@ class PemeriksaanFisik extends \yii\db\ActiveRecord
       'Sakit berat',
    );
 }
+
+    public function getOptionsKesadaran()
+{ 
+   return array(
+    'Composmentis','Apatis','Delirium','Somnolen','Stupor','Koma',
+   );
+}
+       
+  public function getOptionsStatusgizi()
+{ 
+   return array(
+   'Gizi lebih','Gizi baik','Gizi kurang','Gizi buruk',
+   );
+} 
+
+  public function getOptionsHabitus()
+{ 
+   return array(
+  'Asthenicus','Athleticus','Pyknicus',
+   );
+}
+
+  public function getOptionsGcse()
+{ 
+   return array(
+  '1','2','3','4',
+   );
+}
+
+  public function getOptionsGcsv()
+{ 
+   return array(
+  '1','2','3','4','5',
+   );
+}
+
+  public function getOptionsGcsm()
+{ 
+   return array(
+ '1','2','3','4','5','6',
+   );
+}
+
+  public function getOptionsNadiIrama()
+{ 
+   return array(
+'Reguler','Irreguler',
+   );
+}
+
+      public function getOptionsNadiKuang()
+{ 
+   return array(
+'Ya','Tidak',
+   );
+}
+
+  public function getOptionsNadiKika()
+{ 
+   return array(
+'Ya','Tidak',
+   );
+}
+
+      public function getOptionsNadiAmplitudo()
+{ 
+   return array(
+'Pulsus Magnus','Pulsus Parvus','Pulsus Paradoksus, Dinamicus','Pulsus Paradoksus, Mechanicus','Pulsus Alternans','Pulsus Deficiens','Pulsus Bigeminus','Pulsus Shot Sound','Pulsus Celer','Pulsus Dikrotik','Pulsus Parvus et Tardus','Pulsus Bisferiens',
+   );
+}
+
+  public function getOptionsPernapasan()
+{ 
+   return array(
+'NORMAL','Thorakal','Abdominal','Thorakoabdominal','Takipnea','Bradipnea','Hiperpnea','Cheyne-Stokes','Biot’s / Ataksik','Mendesau','Apnea',
+   );
+}
+
+       public function getOptionsKulit()
+{ 
+   return array(
+'NORMAL','Tidak ada kelainan','Abnormal','Tidak dievaluasi',
+   );
+}   
+
+   public function getOptionsKulitWarna()
+{ 
+   return array(
+'Sawo matang','Hitam','Sianosis perifer','Sianosis sentral','Kuning (ikterus)','Karotenemia','Pucat',
+   );
+}   
+
+   public function getOptionsKulitKelembaban()
+{ 
+   return array(
+'Lembab','Kering','Berminyak',
+   );
+} 
+   public function getOptionsKulitPalpasiTemp()
+{ 
+   return array(
+'NORMAL','Lebih hangat','Lebih dingin',
+   );
+} 
+
+   public function getOptionsKulitPalpasiTeks()
+{ 
+   return array(
+'Licin','Kasar',
+   );
+}
+   public function getOptionsKulitPalpasiTur()
+{ 
+   return array(
+'NORMAL','Menurun',
+   );
+}
+
+   public function getOptionsKepala()
+{ 
+   return array(
+'NORMAL','Tidak ada kelainan','Abnormal','Tidak dievaluasi',
+   );
+}
+
+   public function getOptionsKepalaBentuk()
+{ 
+   return array(
+'NORMAL','Mesocephalus','Hydrocephalus','Depresi tulang tengkorak',
+   );
+}
+
+   public function getOptionsKepalaWarnaRambut()
+{ 
+   return array(
+'Hitam','Putih/beruban','Pirang',
+   );
+}
+
+   public function getOptionsKepalaKuantitasRambut()
+{ 
+   return array(
+'lebat','jarang',
+   );
+}
+
+   public function getOptionsKepalaBentukWajah()
+{ 
+   return array(
+'NORMAL','Dismorfisme','Cushingoid','Malar flush','Akromegali','Miopatik',
+   );
+}
+
+   public function getOptionsKepalaPalpasiRambut()
+{ 
+   return array(
+'Sukar dicabut','Mudah dicabut',
+   );
+}
+
+
+   public function getOptionsMata()
+{ 
+   return array(
+'NORMAL','Tidak ada kelainan','Abnormal','Tidak dievaluasi',
+   );
+}
+
+   public function getOptionsMataPosisiKanan()
+{ 
+   return array(
+'NORMAL','Eksoftalmus','Enoftalmus','Strabismus','Gerakan Nigtamus','Arcus Serilis','Hipertelorisme',
+   );
+}
+
+   public function getOptionsMataPosisiKiri()
+{ 
+   return array(
+'NORMAL','Eksoftalmus','Enoftalmus','Strabismus','Gerakan Nigtamus','Arcus Serilis','Hipertelorisme'
+   );
+}
+
+   public function getOptionsMataKelopakKanan()
+{ 
+   return array(
+'NORMAL','Bengkak','Kalazion','Ektropion','Entropion','Ptosis','Xantelasma',
+   );
+}
+
+   public function getOptionsMataKelopakKiri()
+{ 
+   return array(
+'NORMAL','Bengkak','Kalazion','Ektropion','Entropion','Ptosis','Xantelasma',
+   );
+}
+
+   public function getOptionsMataPalpebraKanan()
+{ 
+   return array(
+'NORMAL','Bengkak',
+   );
+}
+
+   public function getOptionsMataPalpebraKiri()
+{ 
+   return array(
+'NORMAL','Bengkak',
+   );
+}
+   public function getOptionsMataKonjungtivaKanan()
+{ 
+   return array(
+'NORMAL','Merah','Anemis','Sianosis','Pinquekula','Selaput pteriqium',
+   );
+}
+
+   public function getOptionsMataKonjungtivaKiri()
+{ 
+   return array(
+'NORMAL','Merah','Anemis','Sianosis','Pinquekula','Selaput pteriqium',
+   );
+}
+
+   public function getOptionsMataSkleraKanan()
+{ 
+   return array(
+'NORMAL','Merah','Anemis','Sianosis','Pinquekula','Selaput pteriqium',
+   );
+}
+
+   public function getOptionsMataSkleraKiri()
+{ 
+   return array(
+'NORMAL','Merah','Anemis','Sianosis','Pinquekula','Selaput pteriqium',
+   );
+}
+
+   public function getOptionsMataKorneaKanan()
+{ 
+   return array(
+'Opasitas','Jernih','Keruh',
+   );
+}
+
+   public function getOptionsMataKorneaKiri()
+{ 
+   return array(
+'Opasitas','Jernih','Keruh',
+   );
+}
+
+   public function getOptionsMataIrisKanan()
+{ 
+   return array(
+'Jernih','Keruh','Sublukasi lensa','Dislokasi lensa','Tidak ada',
+   );
+}
+
+   public function getOptionsMataIrisKiri()
+{ 
+   return array(
+'Jernih','Keruh','Sublukasi lensa','Dislokasi lensa','Tidak ada',
+   );
+}
+
+   public function getOptionsMataPupilKanan()
+{ 
+   return array(
+'Isokor','Anisokor',
+   );
+}
+
+   public function getOptionsMataPupilKiri()
+{ 
+   return array(
+'Isokor','Anisokor',
+   );
+}
+
+   public function getOptionsMataRetinaKanan()
+{ 
+   return array(
+'NORMAL','Hemoragik','Eksudat','Cotton-wool patches','Mikroaneurisma','Pigmentasi',
+   );
+}
+
+   public function getOptionsMataRetinaKiri()
+{ 
+   return array(
+'NORMAL','Hemoragik','Eksudat','Cotton-wool patches','Mikroaneurisma','Pigmentasi',
+   );
+}
+
+   public function getOptionsMataOeoKanan()
+{ 
+   return array(
+'Ada reaksi cahaya','Tidak ada reaksi cahaya',
+   );
+}
+
+   public function getOptionsMataOeoKiri()
+{ 
+   return array(
+'Ada reaksi cahaya','Tidak ada reaksi cahaya',
+   );
+}
+
+   public function getOptionsMataMekmusKanan()
+{ 
+   return array(
+'NORMAL ke segala arah','Tidak normal',
+   );
+}
+
+   public function getOptionsMataMekmusKiri()
+{ 
+   return array(
+'Ada reaksi cahaya','Tidak ada reaksi cahaya',
+   );
+}
+
+   public function getOptionsMataReffunKanan()
+{ 
+   return array(
+'Ada','Tidak ada',
+   );
+}
+
+   public function getOptionsMataReffunKiri()
+{ 
+   return array(
+'Ada','Tidak ada',
+   );
+}
+
+   public function getOptionsMataDisopKanan()
+{ 
+   return array(
+'NORMAL','Papiledema','Glucomatous cupping','Atrofi optik',
+   );
+}
+
+   public function getOptionsMataDisopKiri()
+{ 
+   return array(
+'NORMAL','Papiledema','Glucomatous cupping','Atrofi optik'
+       );
+ }
+
 }

@@ -42,23 +42,24 @@ use kartik\tabs\TabsX;
     [
         'label'=>'<i class="glyphicon glyphicon-user"></i> Keluhan Tambahan',
      //   'content'=>yii\base\View::render('_keluhanLokasi',['model'=>$model]),
-        'id'=>'tabs-keluhanlokasi',
-        'content'=>'<div id="tablokasi"></div>',
-        'linkOptions'=>['data-enable-cache'=>false,'data-url'=>\yii\helpers\Url::to(['../tambahan/',['id'=>$_GET['id']]])],
+        'id'=>'tabs-keluhantambahan',
+        'content'=>'<div id="tabkeluhantambahan"></div>',
+        'linkOptions'=>['data-enable-cache'=>false,'data-url'=>\yii\helpers\Url::to(['Anamnesa/anamnesa/keluhan-tambahan','id'=>$_GET['id']])],
     ],
     
-     [
+    /* [
         'label'=>'<i class="glyphicon glyphicon-home"></i> Rincian',
         'content'=>yii\base\View::render('tambahan/_formkeluhantambahan',['model'=>$model,'id'=>$_GET['id']]),
         
-    ],
+    ],*/
    
 ];
                      echo TabsX::widget([
     'items'=>$items,
     'position'=>TabsX::POS_LEFT,
     'sideways'=>true,
-    'encodeLabels'=>false
+    'encodeLabels'=>false,
+    'pluginOptions' =>  ['enableCache'=>false],
 ]);
                      
                    ?>

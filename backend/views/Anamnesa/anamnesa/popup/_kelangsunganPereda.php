@@ -24,7 +24,7 @@ use backend\models\Anamnesa;
                     ]); 
         ?>
 <div class="form-group">
-                 <div  class="col-lg-3">    
+                 <div  class="col-lg-4">    
                             <?php 
                          //   $keluh = Anamnesa::findOne(['id'=>  $model->id ])->keluhan_rincian;   
                           
@@ -35,7 +35,8 @@ use backend\models\Anamnesa;
                             ?>
                                  
                             <?= 
-                            \yii\helpers\BaseHtml::radioList('kelangsungan_pereda',[],$rinci_pereda);
+                        $form->field($model, 'keluhan_durasi_pereda')->radioList($rinci_pereda);
+                       //    \yii\helpers\BaseHtml::radioList('kelangsungan_pereda',[],$rinci_pereda);
                          /*   $form->field($model, 'keluhan_rincian')->radioList($rinci,[
                                 'item' => function($index, $label, $name, $checked, $value) {
 
@@ -49,5 +50,29 @@ use backend\models\Anamnesa;
                             ]);*/ ?>
                  </div>       
             </div>
+<div class="form-group">
+         <?= Html::Button('Submit', ['class' => 'btn btn-primary','id'=>'submitkeluhanpereda']) ?>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+</div>
  <?php ActiveForm::end(); ?>
 
+<?php
+$this->registerJs("$(document).ready(function () {
+   
+   
+   $('#submitkeluhanpereda').click(function(){
+   $.ajax({
+        type     :'POST',
+        cache    : false,
+        dataType : 'json',
+        data    : $('#sifatKelangsunganpereda-form').serialize(),
+        url  : 'save-keluhankarakter?id='+". $model->id.",
+            success  : function(response) {
+               alert('data berhasil disimpan');
+    }
+    });
+    });
+
+
+    });");
+?>

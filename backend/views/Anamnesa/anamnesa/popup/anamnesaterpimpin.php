@@ -15,7 +15,7 @@ use yii\bootstrap\Modal;
 <div class="anamnesa-form">
 
     <?php $form = ActiveForm::begin([
-                'id' => 'anamnesaterpimpin-form', 
+                'id' => 'anamnesaTerpimpin-form', 
                 'type' => ActiveForm::TYPE_HORIZONTAL,
                 'formConfig' => ['labelSpan' => 1, 'spanSize' => ActiveForm::SIZE_SMALL,
                                 'showLabels'=>false]
@@ -29,7 +29,7 @@ use yii\bootstrap\Modal;
                         <?= $form->field($model, 'keluhan_berlangsung_nil')->textInput(['maxlength'=>'2']); ?>
                        </div>
                         <div class="col-sm-2">
-                             <?= $form->field($model, 'keluhan_berlangsung_lama')->dropDownList([ 'menit' => 'menit', 'jam' => 'jam', 'hari' => 'hari', 'minggu' => 'minggu','bulan'=>'bulan','tahun'=>'tahun' ]) ?>
+                             <?= $form->field($model, 'keluhan_berlangsung_lama')->dropDownList($model->optionsKeluhanLanglama) ?>
                         </div>
                     </div>
                      <div class="form-group">  
@@ -42,13 +42,13 @@ use yii\bootstrap\Modal;
                     </div>
                   
              <div class="form-group">    
-                     <label class="col-lg-3 control-label" for="sifat_perlangsungan">Sifat Perlangsungan:</label>
-                     <label class="col-lg-3 control-label" for="durasi">Durasi :</label>
+                     <label class="col-lg-4 control-label" for="sifat_perlangsungan">Sifat Perlangsungan:</label>
+                     <label class="col-lg-2 control-label" for="durasi">Durasi :</label>
                     <div class="col-sm-3">
                           <?= $form->field($model, 'keluhan_durasi_nil')->textInput(['maxlength'=>'2']); ?>
                        </div>
                         <div class="col-sm-2">
-                             <?= $form->field($model, 'keluhan_durasi_lama')->dropDownList([ 'menit' => 'menit', 'jam' => 'jam', 'hari' => 'hari', 'minggu' => 'minggu','bulan'=>'bulan','tahun'=>'tahun' ]) ?>
+                             <?= $form->field($model, 'keluhan_durasi_lama')->dropDownList($model->optionsKeluhanDurasilama) ?>
                         </div>
                      
                
@@ -78,13 +78,13 @@ use yii\bootstrap\Modal;
             
             
               <div class="form-group">    
-                     <label class="col-lg-3 control-label" for="sifat_perlangsungan">Puncak keluhan:</label>
+                     <label class="col-lg-4 control-label" for="sifat_perlangsungan">Puncak keluhan:</label>
                     
                     <div class="col-sm-3">
-                          <?= $form->field($model, 'keluhan_durasi_nil')->textInput(['maxlength'=>'2']); ?>
+                          <?= $form->field($model, 'kel_punkel_nil')->textInput(['maxlength'=>'2']); ?>
                        </div>
                         <div class="col-sm-2">
-                             <?= $form->field($model, 'keluhan_durasi_lama')->dropDownList([ 'menit' => 'menit', 'jam' => 'jam', 'hari' => 'hari', 'minggu' => 'minggu','bulan'=>'bulan','tahun'=>'tahun' ]) ?>
+                             <?= $form->field($model, 'kel_punkel_lama')->dropDownList($model->optionsKeluhanPunkel) ?>
                         </div>
                      
                
@@ -99,7 +99,7 @@ use yii\bootstrap\Modal;
    
                         ?>
                         
-                        <?= $form->field($model, 'kel_kemunculan')->dropDownList($kemunculan)?>
+                        <?= $form->field($model, 'kel_kemunculan')->dropDownList($model->optionsKeluhanKemunculan)?>
                           <?= $form->field($model, 'kel_kemunculan_saat')->hiddenInput()?>
                               
                     </div>
@@ -107,8 +107,8 @@ use yii\bootstrap\Modal;
             
             
              <div class="form-group">    
-                     <label class="col-lg-3 control-label" for="sifat_perlangsungan">Penjelasan:</label>
-                     <label class="col-lg-3 control-label" for="durasi">Awalnya :</label>
+                     <label class="col-lg-4 control-label" for="sifat_perlangsungan">Penjelasan:</label>
+                     <label class="col-lg-2 control-label" for="durasi">Awalnya :</label>
                     <div class="col-sm-3">
                           <?= $form->field($model, 'kel_penjelasan_awal')->textInput(['maxlength'=>'2000']); ?>
                        </div>
@@ -117,7 +117,7 @@ use yii\bootstrap\Modal;
              </div>
 
             <div class="form-group">    
-                     <label class="col-lg-3 control-label" for="durasi">Kemudian :</label>
+                     <label class="col-lg-4 control-label" for="durasi">Kemudian :</label>
                     <div class="col-sm-3">
                           <?= $form->field($model, 'kel_penjelasan_kemudian')->textInput(['maxlength'=>'2000']); ?>
                        </div>
@@ -126,7 +126,7 @@ use yii\bootstrap\Modal;
              </div>
 
             <div class="form-group">    
-                     <label class="col-lg-3 control-label" for="durasi">Saat ini :</label>
+                     <label class="col-lg-4 control-label" for="durasi">Saat ini :</label>
                     <div class="col-sm-3">
                           <?= $form->field($model, 'kel_penjelasan_saat')->textInput(['maxlength'=>'2000']); ?>
                        </div>
@@ -136,6 +136,10 @@ use yii\bootstrap\Modal;
 
             
         </div>
+      <div class="form-group">
+         <?= Html::Button('Submit', ['class' => 'btn btn-primary','id'=>'submitpopupanamnesaterp']) ?>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+</div> 
     <?php ActiveForm::end(); ?>
 
 </div>
@@ -144,9 +148,10 @@ use yii\bootstrap\Modal;
     Modal::begin([
             'id' => 'm_popupmenjalar',
              'size' => 'modal-lg',
+        'header'=>'Lokasi Penyebaran',
         ]);
  
-    echo "<div class='modal-body' id='modalMenjalarrinci'></div>";
+    echo "<div id='modalMenjalarrinci'></div>";
  
     Modal::end();
 
@@ -176,7 +181,7 @@ use yii\bootstrap\Modal;
              'size' => 'modal-lg',
         ]);
  
-    echo "<div class='modal-body' id='modalPerlangsunganrinci'></div>";
+    echo "<div id='modalPerlangsungan'></div>";
  
     Modal::end();
 
@@ -216,8 +221,22 @@ $this->registerJs("$(document).ready(function () {
    }); 
    
 $('#anamnesa-keluhan_durasi_lama').change(function(){
- $('#m_popupperlangsungan').modal('show').find('#modalPerlangsunganrinci').load(baseurl + '/Anamnesa/anamnesa/sifat-kelangsungan?id=".$_GET['id']."');
+ $('#m_popupperlangsungan').modal('show').find('#modalPerlangsungan').load(baseurl + '/Anamnesa/anamnesa/sifat-kelangsungan?id=".$_GET['id']."');
 });
+
+
+$('#submitpopupanamnesaterp').click(function(){
+   $.ajax({
+        type     :'POST',
+        cache    : false,
+        dataType : 'json',
+        data    : $('#anamnesaTerpimpin-form').serialize(),
+        url  : 'save-keluhankarakter?id='+". $_GET['id'].",
+            success  : function(response) {
+               alert('data berhasil disimpan');
+    }
+    });
+    });
    
    });");
 

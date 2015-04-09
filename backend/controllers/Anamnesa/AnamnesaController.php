@@ -88,6 +88,7 @@ class AnamnesaController extends Controller
      */
     public function actionUpdate($id)
     {
+        
         $model = $this->findModel($id);
 
         
@@ -98,16 +99,15 @@ class AnamnesaController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
-        } else {
+       } else {
             return $this->render('update', [
                 'model' => $model,      
-
                 'faktor_resiko_riwayat' => $faktor_resiko_riwayat,
                 'faktor_resiko_kebiasaan' => $faktor_resiko_kebiasaan,
                 'psikososial_tingber' => $psikososial_tingber
 
             ]);
-        }
+       }
     }
 
     /**
@@ -326,6 +326,77 @@ $model->save();
         ]);
     }
     
+       public function actionSaveKeluhankarakter($id) {
+        $model = $this->findModel($id);
+       //   $model = new Anamnesa;
+        $return =0;
+     //   $model->keluhan_lokasi_umum ="";
+    //    $model->keluhan_sub_lokasi = "";
+         //  $model->keluhan = Lookup::findOne(['name'=>  $_POST['Anamnesa']['keluhan_rincian'] ])->type;
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+$model->save();
+
+            $return=1; 
+        }
+    //$datakeluhan =  $app->getRequest()->getQueryParam('keluhan');
+        
+         
+        return Json::encode($return);
+    }
+    
+      public function actionKeluhanTambahan($id)
+   //  public function actionFormtambahankeluhan($id)
+    {
+        
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $model = $this->findModel($id);
+    
+       // $modelTambahan = $this->findModelTambahan($id);
+
+       // if(count($modelTambahan)<1){
+      //      $modelTambahan = new Anamnesa;
+      //  }
+          return $this->renderAjax('tambahan/_formkeluhantambahan', [
+                'model' => $model, 
+                'modelTambahan' => $modelTambahan, 
+
+            ]);
+      
+    }
+
+    
+      public function actionSaveKeluhantambahan($id) {
+        $model = new Anamnesa;
+       //   $model = new Anamnesa;
+        $model->parent_id = $id;
+        $model->keluhan = $_POST['data'];
+     //   $model->keluhan_lokasi_umum ="";
+    //    $model->keluhan_sub_lokasi = "";
+         //  $model->keluhan = Lookup::findOne(['name'=>  $_POST['Anamnesa']['keluhan_rincian'] ])->type;
+        if ($model->validate()) {
+            $model->save();
+
+            
+        }
+        
+        $return = $model->id;
+    //$datakeluhan =  $app->getRequest()->getQueryParam('keluhan');
+        
+         
+        return Json::encode($return);
+    }
+    
+     public function actionDeleteKeluhantambahan($id) {
+       $this->findModel($id)->delete();
+       $model = Anamnesa::findOne(['parent_id'=>$id,'keluhan'=>$_POST['data']]);
+       $model->delete();  
+       $return = "1";
+    //$datakeluhan =  $app->getRequest()->getQueryParam('keluhan');
+        
+         
+        return Json::encode($return);
+    }
+    
     /**
      * Finds the Anamnesa model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
@@ -344,7 +415,7 @@ $model->save();
     
      protected function findModelTambahan($id)
     {
-        if (($model = Anamnesa::findOne(['parent_id'=>$id])) !== null) {
+        if (($model = Anamnesa::findAll(['parent_id'=>$id])) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

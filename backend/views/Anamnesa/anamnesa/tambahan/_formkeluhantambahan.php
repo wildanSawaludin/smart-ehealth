@@ -8,7 +8,7 @@ use yii\bootstrap\Modal;
 ?>
 
 <?php $form = ActiveForm::begin([
-                'id' => 'kelum-form', 
+                'id' => 'keluhantambahan-form', 
                 'type' => ActiveForm::TYPE_HORIZONTAL,
                 'formConfig' => ['labelSpan' => 1, 'spanSize' => ActiveForm::SIZE_SMALL,'showLabels'=>false]
                 ]); 
@@ -26,10 +26,65 @@ use yii\bootstrap\Modal;
                             ]; 
                     ?>
                     <div class="col-sm-3">
-                        <?= $form->field($model, 'keluhan')->checkboxList($list); ?>
+                        <?= $form->field($model, 'keluhan')->checkboxList($list,['itemOptions'=>['class' => 'test']]); ?>
                     </div>
                     <div class="col-sm-3">
                         <?= $form->field($model, 'keluhan')->checkboxList($list2); ?>
                     </div>
 
 <?php ActiveForm::end(); ?>
+
+
+
+  <?php
+//$this->registerJsFile('/admin/js/popupLokasi.js');
+$this->registerJs("$(document).ready(function () {
+   
+     
+    
+$(\"input[type='checkbox']\").click(
+
+    function() {
+    if($(this).is(':checked')){
+
+ var dataSakit = $(this).val();
+     $.ajax({
+        type     :'POST',
+        cache    : false,
+        dataType : 'json',
+        data    : 'data='+$(this).val(),
+        url  : 'save-keluhantambahan?id='+".$model->id.",
+            success  : function(response) {
+        $('#m_keluhanDetail').html('');
+        $('#m_keluhanDetail').load(baseurl + '/Anamnesa/anamnesa/popup-keluhan?id='+response+'&param='+dataSakit);
+        $('#m_keluhanDetail').modal('show');
+
+              
+    }
+    }); 
+    
+}else{
+ 
+   $.ajax({
+        type     :'POST',
+        cache    : false,
+        dataType : 'json',
+        data    : 'data='+$(this).val(),
+        url  : 'delete-keluhantambahan?id='+".$model->id.",
+            success  : function(response) {
+             
+    }
+    });
+}
+}
+);
+
+    
+ 
+ 
+
+   
+   
+
+    });");
+?>
