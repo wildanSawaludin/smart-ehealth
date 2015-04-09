@@ -63,7 +63,7 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
                 </div>
                 <div class="form-group no-margin-botom">
                     <div class="col-sm-offset-4 col-sm-4">
-                        <?= Html::submitButton('<span class="glyphicon glyphicon-pencil"></span> Daftar', ['class' => 'btn btn-primary']) ?>
+                        <?= Html::submitButton('<span class="glyphicon glyphicon-pencil"></span> Update', ['class' => 'btn btn-primary']) ?>
                     </div>
                 </div>
             </form>
@@ -89,27 +89,29 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
                         <h4 style="text-align:right;">Ubah Tanggal</h4>
                     </div>
                     <div class="col-sm-3 pull-right">
-                        <?=                
-                        DateTimePicker::widget([
-                            'name' => 'dp_2',
-                            'type' => DateTimePicker::TYPE_COMPONENT_PREPEND,
-                            'pluginOptions' => [
-                                'autoclose'=>true,
-                                'format' => 'yyyy-mm-dd hh:ii',
-                                'todayHighlight' => true
-                            ],
-                            'options' => [
-                                'id' => 'time_treshold',
-                                'onchange' => 
-                                    'console.log("filtering");
-                                    $.pjax.reload({
-                                        url: "'.Url::to(['index']).'?EmployeeSearch[group_id]="+$(this).val(),
-                                        container: "#pjax-gridview",
-                                        timeout: 1000,
-                                    });'
-                            ]
-                        ]);
-                        ?>
+                        <form id="dateTimeFilter" action="" method="POST">
+                            <?=                
+                            DateTimePicker::widget([
+                                'name' => 'tanggal_registrasi',
+                                'type' => DateTimePicker::TYPE_COMPONENT_PREPEND,
+                                'pluginOptions' => [
+                                    'autoclose'=>true,
+                                    'format' => 'yyyy-mm-dd hh:ii',
+                                    'todayHighlight' => true
+                                ],
+                                'value' => $input,
+                                'options' => [
+                                    'id' => 'time_treshold',
+                                    'onchange' => 
+                                        '$.pjax.reload({
+                                            url: "'.Url::to(['index']).'?RegistrasiSearch[tanggal_registrasi]="+$(this).val(),
+                                            container: "#pjax-gridview",
+                                            timeout: 1000,
+                                        })',
+                                ]
+                            ]);
+                            ?>
+                        </form>
                     </div>
                 </div>
                 <div class="row">
@@ -151,7 +153,8 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
                             'status_asuransi',
                             [
                                 'class' => 'yii\grid\ActionColumn',
-                                'template' => '{delete}{resume}',
+                                'visible' => $model->haveActivated() ? false : true,
+                                'template' => '{delete} {resume} {account}',
                                 'buttons' =>
                                 [
                                     'resume' => function ($url, $model) {
@@ -160,8 +163,20 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
                                                 //  'data-confirm' => Yii::t('yii', 'Apa Anda yakin?'),
                                                     'data-method' => 'post',
                                         ]);
+                                    },
+                                    'account' => function ($url, $model) {
+                                        return Html::a('<span class="fa fa-unlock"></span>', $url, [
+                                                    'title' => Yii::t('yii', 'Resume'),
+                                                //  'data-confirm' => Yii::t('yii', 'Apa Anda yakin?'),
+                                                    'data-method' => 'post',
+                                        ]);
                                     }
                                 ],
+                                'options' => [ 
+                                    'style' => [
+                                        'text-align:center;'
+                                    ]
+                                ]
                             ]
                         ],
                     ]);

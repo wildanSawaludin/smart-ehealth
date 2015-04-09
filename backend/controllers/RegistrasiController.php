@@ -59,7 +59,7 @@ class RegistrasiController extends Controller {
         if (Yii::$app->request->post()) {
 
             $model->load(Yii::$app->request->post());
-            $model->tanggal_registrasi = date('Y-m-d');
+            $model->tanggal_registrasi = date('Y-m-d H:i:s');
             if ($model->asuransi_tgl_lahir)
                 $model->asuransi_tgl_lahir = Yii::$app->get('helper')->dateFormatingStrip($model->asuransi_tgl_lahir);
             $model->save();
@@ -67,11 +67,17 @@ class RegistrasiController extends Controller {
             $model->save();
             //if($model->save())return $this->redirect(['view', 'id' => $model->id]);
         }
+
+
+        $queryParams = Yii::$app->request->queryParams;
+        $input = isset($queryParams['RegistrasiSearch']) && isset($queryParams['RegistrasiSearch']['tanggal_registrasi']) ? $queryParams['RegistrasiSearch']['tanggal_registrasi'] : null; 
+        
         return $this->render('index', [
                     'searchModel' => $searchModel,
                     'dataProvider' => $dataProvider,
                     'pId' => $pId,
                     'model' => $model,
+                    'input' => $input
         ]);
     }
 
@@ -97,8 +103,6 @@ class RegistrasiController extends Controller {
 
         if (Yii::$app->request->post()) {
             $model->load(Yii::$app->request->post());
-            var_dump($model->pasienId);
-            exit;
             $model->tanggal_registrasi = date('Y-m-d H:i:s');
             if ($model->asuransi_tgl_lahir)
                 $model->asuransi_tgl_lahir = Yii::$app->get('helper')->dateFormatingStrip($model->asuransi_tgl_lahir);
@@ -237,4 +241,10 @@ class RegistrasiController extends Controller {
         echo Json::encode($out);
     }
 
+    public function actionPasien($id){
+        $registrasi = Registrasi::findOne($id);
+
+        var_dump($registrasi->getAttribute($registrasi->safeAttributeNames));
+        exit();
+    }
 }

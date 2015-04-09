@@ -166,4 +166,8 @@ class Registrasi extends \yii\db\ActiveRecord {
         }
     }
 
+    public function haveActivated() {
+        return $this->pasien->goldar == 'A';
+    }
+ 
 }
