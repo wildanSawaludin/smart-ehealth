@@ -12,9 +12,10 @@ use yii\helpers\Html;
     <div class="modal-body">
         <?php
         echo GridView::widget([
+            'id'=>'popup-diagnosa',
             'dataProvider'=> $dataProvider,
             'filterModel' => $searchModel,
-            'pjax' => true,
+            'layout' => "{items}\n{pager}",
             'columns' => [
                 'kode',
                 'inggris',
@@ -28,12 +29,16 @@ use yii\helpers\Html;
                     ]
                 ],
             ],
-            'responsive'=>true,
-            'hover'=>true,
+            'pjax' => true,
             'pjaxSettings'=>[
+                'options'=>[
+                    'enablePushState'=>false,
+                ],
                 'neverTimeout'=>true,
                 'afterGrid'=>'<a id="pilih-diagnosa" class="btn btn-success">Pilih</a>',
-            ]
+            ],
+            'responsive'=>true,
+            'hover'=>true,
         ]);
         ?>
     </div>
@@ -45,7 +50,7 @@ use yii\helpers\Html;
              var value = $(this).val();
              var data = value.split('#');
 
-             $('#tbody-diagnosa-awal').append(
+             $('#tbody-diagnosa-<?= $diagnosa ?>').append(
                  '<tr id="trdiagnosa'+data[0]+'">' +
                     '<td><input type="text" name="diagnosa_kode[]" readonly="true" value="'+data[1]+'"></td>' +
                     '<td><input type="text" name="diagnosa_nama[]" readonly="true" value="'+data[2]+'"></td>' +

@@ -32,4 +32,11 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
  ]);
 
 Modal::end();
+
+Modal::begin([
+    'id' => 'pop-info',
+    'header' => 'Pilih Diagnosa'
+]);
+
+Modal::end();
 ?>
