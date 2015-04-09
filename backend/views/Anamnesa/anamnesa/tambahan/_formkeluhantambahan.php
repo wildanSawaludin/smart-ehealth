@@ -25,13 +25,17 @@ use yii\bootstrap\Modal;
                                  'Masalah_Reproduksi_Pria'=>'Masalah Reproduksi Pria','Lainnya'=>'Lainnya'
                             ]; 
                     ?>
-                    <div class="col-sm-3">
-                        <?= $form->field($model, 'keluhan')->checkboxList($list,['itemOptions'=>['class' => 'test']]); ?>
+                    <div class="col-sm-4">
+                       <?= \yii\helpers\BaseHtml::checkboxList('keluhan_tambahan1', $modelTambahan, $list,['class'=>'checkbox']) ; ?> 
                     </div>
-                    <div class="col-sm-3">
-                        <?= $form->field($model, 'keluhan')->checkboxList($list2); ?>
+                    <div class="col-sm-4">
+                      
+                        <?= \yii\helpers\BaseHtml::checkboxList('keluhan_tambahan2', $modelTambahan, $list2,['class'=>'checkbox']) ; ?> 
                     </div>
 
+
+
+<?php //rint_r($modelTambahan->keluhan); ?>
 <?php ActiveForm::end(); ?>
 
 

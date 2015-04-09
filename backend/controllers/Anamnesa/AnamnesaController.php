@@ -108,6 +108,7 @@ class AnamnesaController extends Controller
 
             ]);
        }
+          
     }
 
     /**
@@ -351,14 +352,26 @@ $model->save();
         Yii::$app->response->format = Response::FORMAT_JSON;
         $model = $this->findModel($id);
     
-       // $modelTambahan = $this->findModelTambahan($id);
-
-       // if(count($modelTambahan)<1){
+        $modelTambahan = $this->findModelTambahan($id);
+      //  if(count($modelTambahan)<1){
       //      $modelTambahan = new Anamnesa;
+     //   }else{
+        $keluhan =[];
+            if(!empty($modelTambahan))
+        {
+                foreach($modelTambahan as $row)
+                {
+                    $keluhan[] = $row->keluhan;
+                   
+
+                  }
+          }
       //  }
+         
+       
           return $this->renderAjax('tambahan/_formkeluhantambahan', [
                 'model' => $model, 
-                'modelTambahan' => $modelTambahan, 
+                'modelTambahan' => $keluhan, 
 
             ]);
       
@@ -387,7 +400,7 @@ $model->save();
     }
     
      public function actionDeleteKeluhantambahan($id) {
-       $this->findModel($id)->delete();
+      
        $model = Anamnesa::findOne(['parent_id'=>$id,'keluhan'=>$_POST['data']]);
        $model->delete();  
        $return = "1";

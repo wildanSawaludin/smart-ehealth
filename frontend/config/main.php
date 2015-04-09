@@ -44,5 +44,10 @@ return [
             ],
         ],
     ],
+    'modules' => [/*
+        'user' => [
+            'as frontend' => 'dektrium\user\filters\FrontendFilter',
+        ],*/
+    ],
     'params' => $params,
 ];
