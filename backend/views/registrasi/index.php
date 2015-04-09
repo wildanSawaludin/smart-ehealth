@@ -5,7 +5,7 @@ use yii\helpers\Url;
 use kartik\grid\GridView;
 use yii\widgets\Pjax;
 use yii\helpers\ArrayHelper;
-use kartik\datetime\DateTimePicker;
+use kartik\date\DatePicker;
 use backend\models\Registrasi;
 
 /* @var $this yii\web\View */
@@ -25,45 +25,11 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
             </div><!-- /.box-header -->
             <!-- form start -->
             <form class="form-horizontal" style="padding-bottom:20px;">
-                <div class="form-group no-margin-botom">
-                    <label class="col-sm-3 col-md-offset-1 control-label">No RM</label>
-                    <div class="col-sm-7">
-                        <p class="form-control-static">00009</p>
-                    </div>
-                </div>
-                <div class="form-group no-margin-botom">
-                    <label class="col-sm-3 col-md-offset-1 control-label">Nama</label>
-                    <div class="col-sm-7">
-                        <p class="form-control-static">Maya Pratama</p>
-                    </div>
-                </div>
-                <div class="form-group no-margin-botom">
-                    <label class="col-sm-3 col-md-offset-1 control-label">Gender</label>
-                    <div class="col-sm-7">
-                        <p class="form-control-static">P</p>
-                    </div>
-                </div>
-                <div class="form-group no-margin-botom">
-                    <label class="col-sm-3 col-md-offset-1 control-label">TTL</label>
-                    <div class="col-sm-7">
-                        <p class="form-control-static">Makassar, 31-10-1990</p>
-                    </div>
-                </div>
-                <div class="form-group no-margin-botom">
-                    <label class="col-sm-3 col-md-offset-1 control-label">Usia</label>
-                    <div class="col-sm-7">
-                        <p class="form-control-static">25 Tahun</p>
-                    </div>
-                </div>
-                <div class="form-group no-margin-botom">
-                    <label class="col-sm-3 col-md-offset-1 control-label">Alamat</label>
-                    <div class="col-sm-7">
-                        <p class="form-control-static">Jl. Merapi No.23</p>
-                    </div>
-                </div>
-                <div class="form-group no-margin-botom">
-                    <div class="col-sm-offset-4 col-sm-4">
-                        <?= Html::submitButton('<span class="glyphicon glyphicon-pencil"></span> Update', ['class' => 'btn btn-primary']) ?>
+                <div id="infoBody">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-5">
+                            <span class="fa fa-user fa-5x" style="margin-top: 50px;margin-bottom: 50px;"></span>
+                        </div>
                     </div>
                 </div>
             </form>
@@ -72,13 +38,56 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
 
         <section class="col-sm-8">
             <?=
-                            $this->render('_form', [
-                                'model' => $model,
-                                'pId' => $pId,
-                            ])
-                            ?>
+                $this->render('_form', [
+                    'model' => $model,
+                    'pId' => $pId,
+                ])
+            ?>
         </section>
 </div>
+
+<!--
+<div class="form-group no-margin-botom">
+                        <label class="col-sm-3 col-md-offset-1 control-label">No RM</label>
+                        <div class="col-sm-7">
+                            <p class="form-control-static">00009</p>
+                        </div>
+                    </div>
+                    <div class="form-group no-margin-botom">
+                        <label class="col-sm-3 col-md-offset-1 control-label">Nama</label>
+                        <div class="col-sm-7">
+                            <p class="form-control-static">Maya Pratama</p>
+                        </div>
+                    </div>
+                    <div class="form-group no-margin-botom">
+                        <label class="col-sm-3 col-md-offset-1 control-label">Gender</label>
+                        <div class="col-sm-7">
+                            <p class="form-control-static">P</p>
+                        </div>
+                    </div>
+                    <div class="form-group no-margin-botom">
+                        <label class="col-sm-3 col-md-offset-1 control-label">TTL</label>
+                        <div class="col-sm-7">
+                            <p class="form-control-static">Makassar, 31-10-1990</p>
+                        </div>
+                    </div>
+                    <div class="form-group no-margin-botom">
+                        <label class="col-sm-3 col-md-offset-1 control-label">Usia</label>
+                        <div class="col-sm-7">
+                            <p class="form-control-static">25 Tahun</p>
+                        </div>
+                    </div>
+                    <div class="form-group no-margin-botom">
+                        <label class="col-sm-3 col-md-offset-1 control-label">Alamat</label>
+                        <div class="col-sm-7">
+                            <p class="form-control-static">Jl. Merapi No.23</p>
+                        </div>
+                    </div>
+                    <div class="form-group no-margin-botom">
+                        <div class="col-sm-offset-4 col-sm-4">
+                            <button type="button" id="btnUpdate" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span> Update</button>                        </div>
+                    </div>
+    -->
 
 <div class="row">
     <section class="col-sm-12">
@@ -91,12 +100,12 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
                     <div class="col-sm-3 pull-right">
                         <form id="dateTimeFilter" action="" method="POST">
                             <?=                
-                            DateTimePicker::widget([
+                            DatePicker::widget([
                                 'name' => 'tanggal_registrasi',
-                                'type' => DateTimePicker::TYPE_COMPONENT_PREPEND,
+                                'type' => DatePicker::TYPE_COMPONENT_PREPEND,
                                 'pluginOptions' => [
                                     'autoclose'=>true,
-                                    'format' => 'yyyy-mm-dd hh:ii',
+                                    'format' => 'yyyy-mm-dd',
                                     'todayHighlight' => true
                                 ],
                                 'value' => $input,
@@ -132,6 +141,8 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
                         'dataProvider' => $dataProvider,
                         //'filterModel' => $searchModel,
                         'pjax' => true,
+                        'bootstrap' => true,
+                        'bordered' => true,
                         'hover' => true,
                         'layout' => "{items}\n{summary}\n{pager}",
                         'columns' => [
@@ -153,7 +164,7 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
                             'status_asuransi',
                             [
                                 'class' => 'yii\grid\ActionColumn',
-                                'template' => '{delete} {resume} {account}',
+                                'template' => '{delete} {resume}',
                                 'buttons' =>
                                 [
                                     'resume' => function ($url, $model) {
@@ -162,19 +173,11 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
                                                 //  'data-confirm' => Yii::t('yii', 'Apa Anda yakin?'),
                                                     'data-method' => 'post',
                                         ]);
-                                    },
-                                    'account' => function ($url, $model) {
-                                        return Html::a('<span class="fa fa-unlock"></span>', $url, [
-                                                    'title' => Yii::t('yii', 'Resume'),
-                                                //  'data-confirm' => Yii::t('yii', 'Apa Anda yakin?'),
-                                                    'data-method' => 'post',
-                                        ]);
                                     }
                                 ],
                                 'options' => [ 
-                                    'style' => [
-                                        'text-align:center;'
-                                    ]
+                                    'style' => 'text-align:center;'
+
                                 ]
                             ]
                         ],
@@ -185,3 +188,45 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
         </div>
     </section>
 </div>
+
+<script type="text/javascript">
+
+    var pasienInfo = {
+        'url': "<?= Yii::$app->urlManager->createAbsoluteUrl('registrasi/pasien') ?>",
+        'pasienId' : null,
+        'clearData': function() {
+            $("#infoBody").html('');
+        },
+        'showData' : function($data) {
+            $("#infoBody").html($data);
+        },
+        'update' : function($pasienId) {
+            window.location.href = "<?= Yii::$app->urlManager->createAbsoluteUrl('pasien/update?id=') ?>"+$pasienId
+        },
+        'getInfo': function($id) {
+            $.get(this.url+'?id='+$id, function(data) {
+                pasienInfo.showData(data);
+            });
+        }
+    }
+
+    $(document).ready(function() {
+
+        var firstPasien = $('.kv-grid-table tbody tr:first').data('key');
+        if(firstPasien != undefined) {
+            pasienInfo.getInfo(firstPasien);
+        }
+
+        $('#infoBody').delegate('#btnUpdate', 'click', function() {
+            pasienInfo.update($(this).data('pasien'));
+        })
+
+        $('#pjax-gridview').delegate('tbody tr', 'click', function(event) {
+            $(this).addClass('selected-row').siblings().removeClass('selected-row');
+
+            pasienInfo.getInfo($(this).data('key'));
+        })
+
+    })
+
+</script>
