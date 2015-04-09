@@ -153,7 +153,6 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
                             'status_asuransi',
                             [
                                 'class' => 'yii\grid\ActionColumn',
-                                'visible' => $model->haveActivated() ? false : true,
                                 'template' => '{delete} {resume} {account}',
                                 'buttons' =>
                                 [
