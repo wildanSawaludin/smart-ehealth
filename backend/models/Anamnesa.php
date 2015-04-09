@@ -458,4 +458,33 @@ class Anamnesa extends \yii\db\ActiveRecord
     {
         return $this->hasMany(RiwayatPengobatan::className(), ['anamnesa_id' => 'id']);
     }
+    
+  public function getOptionsKeluhanLanglama()
+{ 
+   return array(
+'detik','menit','jam','hari','minggu','bulan','tahun',
+   );
+}
+
+  public function getOptionsKeluhanDurasilama()
+{ 
+   return array(
+'menit','jam','hari','minggu','bulan','tahun',
+   );
+}
+
+  public function getOptionsKeluhanPunkel()
+{ 
+   return array(
+'menit','jam','hari','minggu','bulan','tahun',
+   );
+}
+
+  public function getOptionsKeluhanKemunculan()
+{ 
+   return array(
+'Perlahan','Berulang','Spontan/tiba-tiba',
+   );
+}
+    
 }

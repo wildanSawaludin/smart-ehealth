@@ -47,10 +47,11 @@ use backend\models\Lookup;
                             ]); ?>
                  </div>       
             </div>
+     <?= Html::Button('Submit', ['class' => 'btn btn-primary','id'=>'submitkeluhan']) ?>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
         <?php ActiveForm::end(); ?>
     
-         <?= Html::Button('Submit', ['class' => 'btn btn-primary','id'=>'submitkeluhan']) ?>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+        
     </div>
 <?php
 //Yii::app()->clientScript->registerScriptFile(

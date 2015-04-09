@@ -24,7 +24,7 @@ use backend\models\Anamnesa;
                     ]); 
         ?>
 <div class="form-group">
-                 <div  class="col-lg-3">    
+                 <div  class="col-lg-4">    
                             <?php 
                          //   $keluh = Anamnesa::findOne(['id'=>  $model->id ])->keluhan_rincian;   
                           
@@ -35,19 +35,36 @@ use backend\models\Anamnesa;
                             ?>
                                  
                             <?= 
-                            \yii\helpers\BaseHtml::radioList('kelangsungan_pemberat',[],$rinci_pemberat);
-                         /*   $form->field($model, 'keluhan_rincian')->radioList($rinci,[
-                                'item' => function($index, $label, $name, $checked, $value) {
-
-                                    $return = '<div class="radio"><label>';
-                                    $return .= '<input type="radio" name="' . $name . '" value="' . ucwords($label) . '" data-value="'.ucwords($label).'" >';
-                                    $return .= '' . ucwords($label) . '';
-                                    $return .= '</label></div>';
-
-                                    return $return;
-                                }
-                            ]);*/ ?>
+                            $form->field($model, 'keluhan_durasi_pemberat')->radioList($rinci_pemberat);
+                        ?>
                  </div>       
             </div>
+<div class="form-group">
+         <?= Html::Button('Submit', ['class' => 'btn btn-primary','id'=>'submitkeluhanpemberat']) ?>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+</div>
  <?php ActiveForm::end(); ?>
 
+
+
+
+<?php
+$this->registerJs("$(document).ready(function () {
+   
+   
+   $('#submitkeluhanpemberat').click(function(){
+   $.ajax({
+        type     :'POST',
+        cache    : false,
+        dataType : 'json',
+        data    : $('#sifatKelangsunganpemberat-form').serialize(),
+        url  : 'save-keluhankarakter?id='+". $model->id.",
+            success  : function(response) {
+               alert('data berhasil disimpan');
+    }
+    });
+    });
+
+
+    });");
+?>
