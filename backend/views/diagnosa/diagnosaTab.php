@@ -1,6 +1,7 @@
 <?php
 use kartik\tabs\TabsX;
 use yii\base\View;
+use yii\helpers\Url;
 
 ?>
 
@@ -17,6 +18,7 @@ use yii\base\View;
                 'modelDiagnosa' => $modelDiagnosa,
                 'id' => $_GET['id']
             ]),
+            'linkOptions'=>['data-url'=>Url::to(['/diagnosa/tab-diagnosa?id='.$_GET['id'].'&diagnosa=Awal&diagnosaTab=_diagnosaAwal'])],
             'active' => true
         ],
         [
@@ -25,8 +27,10 @@ use yii\base\View;
                 'model' => $model,
                 'dataProvider' => $dataProvider,
                 'searchModel' => $searchModel,
+                'modelDiagnosa' => $modelDiagnosa,
                 'id' => $_GET['id']
             ]),
+            'linkOptions'=>['data-url'=>Url::to(['/diagnosa/tab-diagnosa?id='.$_GET['id'].'&diagnosa=Banding&diagnosaTab=_diagnosaBanding'])],
         ],
         [
             'label'=>'Diagnosa Kerja',
@@ -34,8 +38,10 @@ use yii\base\View;
                 'model' => $model,
                 'dataProvider' => $dataProvider,
                 'searchModel' => $searchModel,
+                'modelDiagnosa' => $modelDiagnosa,
                 'id' => $_GET['id']
             ]),
+            'linkOptions'=>['data-url'=>Url::to(['/diagnosa/tab-diagnosa?id='.$_GET['id'].'&diagnosa=Kerja&diagnosaTab=_diagnosaKerja'])],
         ],
         [
             'label'=>'Diagnosa Akhir',
@@ -43,8 +49,10 @@ use yii\base\View;
                 'model' => $model,
                 'dataProvider' => $dataProvider,
                 'searchModel' => $searchModel,
+                'modelDiagnosa' => $modelDiagnosa,
                 'id' => $_GET['id']
             ]),
+            'linkOptions'=>['data-url'=>Url::to(['/diagnosa/tab-diagnosa?id='.$_GET['id'].'&diagnosa=Akhir&diagnosaTab=_diagnosaAkhir'])],
         ],
     ];
 

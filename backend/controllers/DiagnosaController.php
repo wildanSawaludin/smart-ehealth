@@ -9,6 +9,7 @@ use backend\models\Icdx;
 use backend\models\IcdxSearch;
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
@@ -21,10 +22,10 @@ class DiagnosaController extends Controller
         return $this->render('index');
     }
 
-    public function actionUpdate($id)
+    public function actionUpdate($id, $diagnosa = 'Awal')
     {
         $model = $this->findModel($id);
-        $modelDiagnosa = Diagnosa::findAll(['jenis_diagnosa' => 'Awal']);
+        $modelDiagnosa = Diagnosa::findAll(['jenis_diagnosa' => $diagnosa]);
         $dataProvider = new ActiveDataProvider([
             'query' => Icdx::find(),
         ]);
@@ -37,7 +38,19 @@ class DiagnosaController extends Controller
         ]);
     }
 
-    public function actionPopDiagnosa()
+    public function actionTabDiagnosa($id,$diagnosa, $diagnosaTab)
+    {
+        $this->layout = false;
+        $model = $this->findModel($id);
+        $modelDiagnosa = Diagnosa::findAll(['jenis_diagnosa' => $diagnosa]);
+        $html = $this->render($diagnosaTab, [
+            'model' => $model,
+            'modelDiagnosa' => $modelDiagnosa
+        ]);
+        return Json::encode($html);
+    }
+
+    public function actionPopDiagnosa($diagnosa)
     {
         $dataProvider = new ActiveDataProvider([
             'query' => Icdx::find(),
@@ -47,7 +60,17 @@ class DiagnosaController extends Controller
 
         return $this->renderAjax('_popDiagnosa',[
             'dataProvider' => $dataProvider,
-            'searchModel' => $searchModel
+            'searchModel' => $searchModel,
+            'diagnosa'=>$diagnosa
+        ]);
+    }
+
+    public function actionPopInfo($id)
+    {
+        $model = Icdx::findOne($id);
+
+        return $this->renderAjax('_popInfo',[
+            'model' => $model
         ]);
     }
 

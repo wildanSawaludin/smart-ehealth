@@ -25,9 +25,10 @@ use backend\models\Lookup;
         ?>
          <?=   \yii\helpers\BaseHtml::activeHiddenInput($model, 'keluhan',['id'=>'id_datakeluhan','value'=>$_GET[0]['datakeluhan']]); ?>
            <div id="content-lokasi"class="tab-content">
+           <div class="form-group">
          <input type="hidden" name="<?= Yii::$app->request->csrfParam; ?>" value="<?= Yii::$app->request->csrfToken; ?>" />         
             </div>
-      
+           </div>
     <div class="form-group">
         <?= Html::Button('Submit', ['class' => 'btn btn-primary','id'=>'submitlokasi']) ?>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  

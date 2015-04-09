@@ -9,9 +9,9 @@ use yii\helpers\BaseHtml;
 
 
 ?>
-  <div class="form-group">  
+
   <?php $form = ActiveForm::begin([
-                    'id' => 'keluhanRincilokasi-form',
+                    'id' => 'menjalarRinciLokasi-form',
                     'enableAjaxValidation' => false,
                     'enableClientValidation' => true,
                     'type' => ActiveForm::TYPE_HORIZONTAL,
@@ -24,41 +24,59 @@ use yii\helpers\BaseHtml;
                    
                     ]); 
         ?>
-   <div class="content">
-                 <div  id="rinci">  
-   
-<?=   \yii\helpers\BaseHtml::activeHiddenInput($model, 'keluhan_lokasi_umum',['id'=>'idrincilokasi','value'=>$dataLokasi]); ?>
+ 
+     <div class="form-group">  
+         <div class="col-lg-3">
+
                          
                             <?php 
                            
                             $rinci = Lookup::items2($dataLokasi,'lokum_sublokasi');
-//                            var_dump($rinci[1],$rinci[2],$rinci[3]);
-//                            exit();
+//                          
                             ?>
-                                 
+                             
+             <?php 
+            
+             $variab = "keljalar_".strtolower($dataLokasi); ?>
                             <?= 
-                            $form->field($model, 'keluhan_sub_lokasi')->radioList($rinci);
-                        /*    $form->field($model, 'keluhan_sub_lokasi')->radioList($rinci,[
-                                'item' => function($index, $label, $name, $checked, $value) {
-
-                                    $return = '<div class="radio"><label>';
-                                    $return .= '<input type="radio" name="' . $name . '" value="' . ucwords($label) .'" >';
-                                    $return .= '' . ucwords($label) . '';
-                                    $return .= '</label></div>';
-
-                                    return $return;
-                                }
-                            ]);*/ ?>
+                            $form->field($model, $variab)->radioList($rinci);
+                       ?>
+            
                  </div>
    </div>
                 <div class="form-group">
-        <?= Html::Button('Submit', ['class' => 'btn btn-primary','id'=>'submitrincilokasi']) ?>
+        <?= Html::Button('Submit', ['class' => 'btn btn-primary','id'=>'submitmenjalarrincilokasi']) ?>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
     </div>  
            
         <?php ActiveForm::end(); ?>
-                 </div>
+               
 
+<?php
+//$this->registerJsFile('/admin/js/popupLokasi.js');
+$this->registerJs("$(document).ready(function () {
+   
+       
+   
+ $('#submitmenjalarrincilokasi').click(function(){
+   $.ajax({
+        type     :'POST',
+        cache    : false,
+        dataType : 'json',
+        data    : $('#menjalarRinciLokasi-form').serialize(),
+        url  : 'save-keluhankarakter?id='+". $model->id.",
+            success  : function(response) {
+               alert('data berhasil disimpan');
+    }
+    });
+    });
+ 
+
+   
+   
+
+    });");
+?>
 
 
 

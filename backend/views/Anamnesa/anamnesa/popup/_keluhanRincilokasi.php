@@ -33,7 +33,7 @@ use yii\helpers\BaseHtml;
 //                            var_dump($rinci[1],$rinci[2],$rinci[3]);
 //                            exit();
                             ?>
-                                 
+<div class="form-group">    <div class="col-sm-3"> 
                             <?= 
                           //  $form->field($model, 'faktor_resiko_kebiasaan')->radioList($rinci);
                             $form->field($model, 'keluhan_sub_lokasi')->radioList($rinci,[
@@ -47,6 +47,7 @@ use yii\helpers\BaseHtml;
                                     return $return;
                                 }
                             ]); ?>
+    </div></div>
                 <div class="form-group">
         <?= Html::Button('Submit', ['class' => 'btn btn-primary','id'=>'submitrincilokasi']) ?>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
