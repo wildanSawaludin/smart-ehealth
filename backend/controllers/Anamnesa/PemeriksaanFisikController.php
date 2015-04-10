@@ -104,8 +104,9 @@ class PemeriksaanFisikController extends Controller{
      
  }
  
-    public function actionPopupNadi(){
-     $model = new PemeriksaanFisik();
+    public function actionPopupNadi($id){
+         $model = $this->findModel($id);
+    
        
      //   if ($model->load(Yii::$app->request->post()) && $model->save()) {
        //     return $this->redirect(['view', 'id' => $model->id]);
@@ -119,8 +120,8 @@ class PemeriksaanFisikController extends Controller{
      
  }
  
-  public function actionPopupPernapasan(){
-     $model = new PemeriksaanFisik();
+  public function actionPopupPernapasan($id){
+      $model = $this->findModel($id);
        
      //   if ($model->load(Yii::$app->request->post()) && $model->save()) {
        //     return $this->redirect(['view', 'id' => $model->id]);
@@ -135,8 +136,8 @@ class PemeriksaanFisikController extends Controller{
  }
  
   
-  public function actionPopupSuhu(){
-     $model = new PemeriksaanFisik();
+  public function actionPopupSuhu($id){
+     $model = $this->findModel($id);
        
      //   if ($model->load(Yii::$app->request->post()) && $model->save()) {
        //     return $this->redirect(['view', 'id' => $model->id]);
@@ -165,8 +166,8 @@ class PemeriksaanFisikController extends Controller{
      
  }
  
-  public function actionPopupKulit(){
-     $model = new PemeriksaanFisik();
+  public function actionPopupKulit($id){
+       $model = $this->findModel($id);
        
             return $this->renderAjax('_popupKulit', [
                 'model' => $model,
@@ -176,8 +177,8 @@ class PemeriksaanFisikController extends Controller{
         
  }
  
-   public function actionPopupKepala(){
-     $model = new PemeriksaanFisik();
+   public function actionPopupKepala($id){
+      $model = $this->findModel($id);
        
             return $this->renderAjax('_popupKepala', [
                 'model' => $model,

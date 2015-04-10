@@ -111,11 +111,11 @@ use kartik\checkbox\CheckboxX;
 $this->registerJs("$(document).ready(function () {
    
 $('#pemeriksaanfisik-evaluasi_kulit').change(function(){
-     $('#m_Kulit').modal('show').find('#modalKulit').load(baseurl + '/Anamnesa/pemeriksaan-fisik/popup-kulit');
+     $('#m_Kulit').modal('show').find('#modalKulit').load(baseurl + '/Anamnesa/pemeriksaan-fisik/popup-kulit?id=".$model->id."');
 });
 
 $('#pemeriksaanfisik-evaluasi_kepala').change(function(){
-     $('#m_Kepala').modal('show').find('#modalKepala').load(baseurl + '/Anamnesa/pemeriksaan-fisik/popup-kepala');
+     $('#m_Kepala').modal('show').find('#modalKepala').load(baseurl + '/Anamnesa/pemeriksaan-fisik/popup-kepala?id=".$model->id."');
 });
 
 
