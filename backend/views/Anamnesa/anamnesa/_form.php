@@ -17,10 +17,10 @@ use kartik\tabs\TabsX;
 <div class="anamnesa-form">
 
     <?php $form = ActiveForm::begin([
-                'id' => 'kelum-form', 
+                'id' => 'kelum-form',
                 'type' => ActiveForm::TYPE_HORIZONTAL,
                 'formConfig' => ['labelSpan' => 1, 'spanSize' => ActiveForm::SIZE_SMALL,'showLabels'=>false]
-                ]); 
+                ]);
     ?>
         <ul class="nav nav-tabs" id="tabs-cnt" style="padding-top:0px;margin-bottom: 10px">
             <li class="active"><a href="#eluh" data-toggle="tab">Keluhan </a></li>
@@ -31,7 +31,7 @@ use kartik\tabs\TabsX;
 
         </ul>
         <div class="tab-content">
-		<div class="tab-pane fade in active" id="eluh">    
+		<div class="tab-pane fade in active" id="eluh">
                    <?php
                      $items = [
     [
@@ -39,13 +39,13 @@ use kartik\tabs\TabsX;
         'content'=>yii\base\View::render('popup/_formkeluhanutama',['model'=>$model,'id'=>$_GET['id']]),
         'active'=>true
     ],
-    
+
      [
         'label'=>'<i class="glyphicon glyphicon-home"></i> Rincian',
         'content'=>yii\base\View::render('tambahan/_formkeluhantambahan',['model'=>$model,'id'=>$_GET['id']]),
-        
+
     ],
-   
+
 ];
                      echo TabsX::widget([
     'items'=>$items,
@@ -53,7 +53,7 @@ use kartik\tabs\TabsX;
     'sideways'=>true,
     'encodeLabels'=>false
 ]);
-                     
+
                    ?>
                 </div>
                 <div class="tab-pane fade" id="wayat">
@@ -62,7 +62,7 @@ use kartik\tabs\TabsX;
                         <?= $form->field($model, 'riwayat_perawatan_pil',['template'=>'{label}{input}'])->checkbox(); ?>
                         <?= $form->field($model, 'riwayat_pengobatan_pil',['template'=>'{label}{input}'])->checkbox(); ?>
                         <?= $form->field($model, 'riwayat_keluarga_pil',['template'=>'{label}{input}'])->checkbox(); ?>
-                        <?= $form->field($model, 'riwayat_lainnya_pil',['template'=>'{label}{input}'])->checkbox(); ?>                        
+                        <?= $form->field($model, 'riwayat_lainnya_pil',['template'=>'{label}{input}'])->checkbox(); ?>
                         <div id="riwayat_lain_hide" style="display: none; margin-left: 20px;">
                             <div class="form-group field-anamnesa-riwayat_alergi_pil has-success">
                                 <div class="col-md-12">
@@ -99,7 +99,7 @@ use kartik\tabs\TabsX;
                         <?= $form->field($model, 'kebiasaan_kegiatan_pil',['template'=>'{label}{input}'])->checkbox(['label' => 'Kegiatan waktu senggang']); ?>
                     </div>
                 </div>
-            
+
                 <div class="tab-pane fade" id="faktor">
                     <form id="form-faktor-resiko">
                         <?php
@@ -139,7 +139,7 @@ use kartik\tabs\TabsX;
                         </div>
                     </form>
                 </div>
-            
+
                 <div class="tab-pane fade" id="psiko">
                     <form id="form-psikososial">
                         <div class="row">
@@ -290,6 +290,6 @@ Modal::begin([
 ]);
 Modal::end();
 ?>
-<script>var id = '<?php echo $_GET['id']; ?>' </script>  
+<script>var id = '<?php echo $_GET['id']; ?>' </script>
 <?php $this->registerJsFile('/admin/js/popupKeluhan.js'); ?>
 <?php $this->registerJsFile('/admin/js/popupFunction.js'); ?>
