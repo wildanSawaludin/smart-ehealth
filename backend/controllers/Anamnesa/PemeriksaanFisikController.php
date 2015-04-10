@@ -3,12 +3,15 @@
 namespace backend\controllers\Anamnesa;
 
 use Yii;
-use yii\web\Response;
 use backend\models\PemeriksaanFisik;
-use yii\db\Query;
+use yii\web\Controller;
+use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
 use yii\helpers\Json;
+use yii\db\Query;
+use yii\web\Response;
 
-class PemeriksaanFisikController extends AnamnesaController{
+class PemeriksaanFisikController extends Controller{
 
  public function actionCreate($id){
      $model = $this->findModel($id);
