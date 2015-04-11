@@ -24,6 +24,7 @@
         "kartik-v/yii2-widget-activeform": "*",
         "kartik-v/yii2-widgets": "*",
         "kartik-v/yii2-datecontrol": "dev-master",
+	"kartik-v/yii2-widget-datepicker": "*",
         "kartik-v/yii2-detail-view": "*",
         "kartik-v/yii2-export": "*",
         "kartik-v/yii2-mpdf": "*",
@@ -41,7 +42,9 @@
         "swiftmailer/swiftmailer": "@stable",
         "dmstr/yii2-adminlte-asset": "2.*@dev",
 	"cebe/yii2-gravatar": "*",
-        "kartik-v/yii2-widget-datetimepicker": "*"
+        "kartik-v/yii2-widget-datetimepicker": "*",
+        "kartik-v/yii2-checkbox-x": "*",
+        "2amigos/yii2-ckeditor-widget": "~1.0"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

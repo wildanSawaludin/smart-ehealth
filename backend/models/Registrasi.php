@@ -31,6 +31,8 @@ use Yii;
  * @property integer $no_antrian 
  * @property integer $asuransi_provider_id 
  * @property integer $faskes_id 
+ * @property integer $no_resep_racikan
+ * @property integer $no_resep_nonracikan
  *
  * @property Anamnesa[] $anamnesas
  * @property AsuransiProvider $asuransiProvider 
@@ -165,9 +167,4 @@ class Registrasi extends \yii\db\ActiveRecord {
             return 0;
         }
     }
-
-    public function haveActivated() {
-        return $this->pasien->goldar == 'A';
-    }
- 
 }

@@ -21,7 +21,10 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
         'model' => $model,
         'dataProvider' => $dataProvider,
         'searchModel' => $searchModel,
-        'modelDiagnosa' => $modelDiagnosa
+        'modelDiagnosa' => $modelDiagnosa,
+        'modelResepNonRacikan' => $modelResepNonRacikan,
+        'modelResepNonracikanDetail' => $modelResepNonracikanDetail,
+        'modelResepNonracikanDetailIsi' => $modelResepNonracikanDetailIsi
     ]) ?>
 
 </div>
@@ -30,6 +33,13 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
      'id' => 'pop-diagnosa',
      'header' => 'Pilih Diagnosa'
  ]);
+
+Modal::end();
+
+Modal::begin([
+    'id' => 'pop-info',
+    'header' => 'Pilih Diagnosa'
+]);
 
 Modal::end();
 ?>

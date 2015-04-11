@@ -17,11 +17,12 @@ use yii\helpers\BaseHtml;
  
    <?=   \yii\helpers\BaseHtml::activeHiddenInput($model, 'keluhan_rincian',['id'=>'idkeluhan','value'=>$datakeluhan]); ?>
  <!--   <input type="text" name="idkeluhan" id="idkeluhan" value="<?php //echo $datakeluhan; ?>">!-->
-    <?php 
+   <div class="form-group">   
+       <div class="col-lg-5">  <?php 
 
 
 if(!empty($datakeluhan)) { ?>
- <div class="tab-pane fade in active" id="rinci">    
+
                             <?php 
                            
                        //    echo "testttt".$datakeluhan;
@@ -57,7 +58,7 @@ if(!empty($datakeluhan)) { ?>
              
              
              ?>
-    <div class="tab-pane fade in active" id="rinci">    
+   
 
             
            
@@ -81,7 +82,7 @@ if(!empty($datakeluhan)) { ?>
 }       ?>     
                 
                           
-                 </div> 
+     </div> </div>
      
 <?php
 

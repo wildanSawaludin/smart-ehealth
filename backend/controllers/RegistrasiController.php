@@ -243,8 +243,51 @@ class RegistrasiController extends Controller {
 
     public function actionPasien($id){
         $registrasi = Registrasi::findOne($id);
+        $pasien = $registrasi->pasien;
+        
+        $tempat = is_null($pasien->tempat_lahir) ? '-' : $pasien->tempat_lahir;
+        $tanggal = is_null($pasien->tgl_lahir) ? '-' : $pasien->tgl_lahir;
 
-        var_dump($registrasi->getAttribute($registrasi->safeAttributeNames));
-        exit();
+        echo '<div class="form-group no-margin-botom">
+            <label class="col-sm-3 col-md-offset-1 control-label">No RM</label>
+            <div class="col-sm-7">
+                <p class="form-control-static">'.$registrasi->no_reg.'</p>
+            </div>
+        </div>
+        <div class="form-group no-margin-botom">
+            <label class="col-sm-3 col-md-offset-1 control-label">Nama</label>
+            <div class="col-sm-7">
+                <p class="form-control-static">'.$pasien->nama.'</p>
+            </div>
+        </div>
+        <div class="form-group no-margin-botom">
+            <label class="col-sm-3 col-md-offset-1 control-label">Gender</label>
+            <div class="col-sm-7">
+                <p class="form-control-static">'.$pasien->jenkel.'</p>
+            </div>
+        </div>
+        <div class="form-group no-margin-botom">
+            <label class="col-sm-3 col-md-offset-1 control-label">TTL</label>
+            <div class="col-sm-7">
+                <p class="form-control-static">'.$tempat.', '.$tangal.'</p>
+            </div>
+        </div>
+        <div class="form-group no-margin-botom">
+            <label class="col-sm-3 col-md-offset-1 control-label">Usia</label>
+            <div class="col-sm-7">
+                <p class="form-control-static">'.$registrasi->getUsia().' Tahun</p>
+            </div>
+        </div>
+        <div class="form-group no-margin-botom">
+            <label class="col-sm-3 col-md-offset-1 control-label">Alamat</label>
+            <div class="col-sm-7">
+                <p class="form-control-static">'.$pasien->alamat.'</p>
+            </div>
+        </div>
+        <div class="form-group no-margin-botom">
+            <div class="col-sm-offset-4 col-sm-4">
+                <button type="button" id="btnUpdate" data-pasien="'.$pasien->id.'" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span> Update</button>                        </div>
+            </div>
+        </div>';
     }
 }

@@ -18,8 +18,8 @@ class IcdxSearch extends Icdx
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['kode', 'inggris', 'indonesia'], 'safe'],
+            [['id', 'penyakit_primer'], 'integer'],
+            [['kode', 'inggris', 'indonesia', 'nama_lazim', 'anamnesa', 'pemeriksaan_fisik', 'pemeriksaan_penunjang', 'terapi_tindakan', 'gizi_nutrisi'], 'safe'],
         ];
     }
 
@@ -57,11 +57,18 @@ class IcdxSearch extends Icdx
 
         $query->andFilterWhere([
             'id' => $this->id,
+            'penyakit_primer' => $this->penyakit_primer,
         ]);
 
         $query->andFilterWhere(['like', 'kode', $this->kode])
             ->andFilterWhere(['like', 'inggris', $this->inggris])
-            ->andFilterWhere(['like', 'indonesia', $this->indonesia]);
+            ->andFilterWhere(['like', 'indonesia', $this->indonesia])
+            ->andFilterWhere(['like', 'nama_lazim', $this->nama_lazim])
+            ->andFilterWhere(['like', 'anamnesa', $this->anamnesa])
+            ->andFilterWhere(['like', 'pemeriksaan_fisik', $this->pemeriksaan_fisik])
+            ->andFilterWhere(['like', 'pemeriksaan_penunjang', $this->pemeriksaan_penunjang])
+            ->andFilterWhere(['like', 'terapi_tindakan', $this->terapi_tindakan])
+            ->andFilterWhere(['like', 'gizi_nutrisi', $this->gizi_nutrisi]);
 
         return $dataProvider;
     }

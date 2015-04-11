@@ -8,7 +8,7 @@ use yii\bootstrap\Modal;
 ?>
 
 <?php $form = ActiveForm::begin([
-                'id' => 'kelum-form', 
+                'id' => 'keluhantambahan-form', 
                 'type' => ActiveForm::TYPE_HORIZONTAL,
                 'formConfig' => ['labelSpan' => 1, 'spanSize' => ActiveForm::SIZE_SMALL,'showLabels'=>false]
                 ]); 
@@ -25,11 +25,70 @@ use yii\bootstrap\Modal;
                                  'Masalah_Reproduksi_Pria'=>'Masalah Reproduksi Pria','Lainnya'=>'Lainnya'
                             ]; 
                     ?>
-                    <div class="col-sm-3">
-                        <?= $form->field($model, 'keluhan')->checkboxList($list); ?>
+                    <div class="col-sm-4">
+                       <?= \yii\helpers\BaseHtml::checkboxList('keluhan_tambahan1', $modelTambahan, $list,['class'=>'checkbox']) ; ?> 
                     </div>
-                    <div class="col-sm-3">
-                        <?= $form->field($model, 'keluhan')->checkboxList($list2); ?>
+                    <div class="col-sm-4">
+                      
+                        <?= \yii\helpers\BaseHtml::checkboxList('keluhan_tambahan2', $modelTambahan, $list2,['class'=>'checkbox']) ; ?> 
                     </div>
 
+
+
+<?php //rint_r($modelTambahan->keluhan); ?>
 <?php ActiveForm::end(); ?>
+
+
+
+  <?php
+//$this->registerJsFile('/admin/js/popupLokasi.js');
+$this->registerJs("$(document).ready(function () {
+   
+     
+    
+$(\"input[type='checkbox']\").click(
+
+    function() {
+    if($(this).is(':checked')){
+
+ var dataSakit = $(this).val();
+     $.ajax({
+        type     :'POST',
+        cache    : false,
+        dataType : 'json',
+        data    : 'data='+$(this).val(),
+        url  : 'save-keluhantambahan?id='+".$model->id.",
+            success  : function(response) {
+        $('#m_keluhanDetail').html('');
+        $('#m_keluhanDetail').load(baseurl + '/Anamnesa/anamnesa/popup-keluhan?id='+response+'&param='+dataSakit);
+        $('#m_keluhanDetail').modal('show');
+
+              
+    }
+    }); 
+    
+}else{
+ 
+   $.ajax({
+        type     :'POST',
+        cache    : false,
+        dataType : 'json',
+        data    : 'data='+$(this).val(),
+        url  : 'delete-keluhantambahan?id='+".$model->id.",
+            success  : function(response) {
+             
+    }
+    });
+}
+}
+);
+
+    
+ 
+ 
+
+   
+   
+
+    });");
+?>

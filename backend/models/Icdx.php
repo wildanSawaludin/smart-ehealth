@@ -11,8 +11,17 @@ use Yii;
  * @property string $kode
  * @property string $inggris
  * @property string $indonesia
+ * @property integer $penyakit_primer
+ * @property string $nama_lazim
+ * @property string $anamnesa
+ * @property string $pemeriksaan_fisik
+ * @property string $pemeriksaan_penunjang
+ * @property string $terapi_tindakan
+ * @property string $gizi_nutrisi
  *
  * @property Anamnesa[] $anamnesas
+ * @property Anamnesa[] $anamnesas0
+ * @property Diagnosa[] $diagnosas
  * @property Registrasi[] $registrasis
  */
 class Icdx extends \yii\db\ActiveRecord
@@ -32,9 +41,10 @@ class Icdx extends \yii\db\ActiveRecord
     {
         return [
             [['kode'], 'required'],
+            [['penyakit_primer'], 'integer'],
+            [['anamnesa', 'pemeriksaan_fisik', 'pemeriksaan_penunjang', 'terapi_tindakan', 'gizi_nutrisi'], 'string'],
             [['kode'], 'string', 'max' => 10],
-            [['inggris', 'indonesia'], 'string', 'max' => 200],
-            [['kode'], 'unique']
+            [['inggris', 'indonesia', 'nama_lazim'], 'string', 'max' => 200]
         ];
     }
 
@@ -44,10 +54,17 @@ class Icdx extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'kode' => Yii::t('app', 'Kode'),
-            'inggris' => Yii::t('app', 'Inggris'),
-            'indonesia' => Yii::t('app', 'Indonesia'),
+            'id' => 'ID',
+            'kode' => 'Kode',
+            'inggris' => 'Inggris',
+            'indonesia' => 'Indonesia',
+            'penyakit_primer' => 'Penyakit Primer',
+            'nama_lazim' => 'Nama Lazim',
+            'anamnesa' => 'Anamnesa',
+            'pemeriksaan_fisik' => 'Pemeriksaan Fisik',
+            'pemeriksaan_penunjang' => 'Pemeriksaan Penunjang',
+            'terapi_tindakan' => 'Terapi Tindakan',
+            'gizi_nutrisi' => 'Gizi Nutrisi',
         ];
     }
 
@@ -56,7 +73,23 @@ class Icdx extends \yii\db\ActiveRecord
      */
     public function getAnamnesas()
     {
+        return $this->hasMany(Anamnesa::className(), ['riwayatsakit_icdx_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAnamnesas0()
+    {
         return $this->hasMany(Anamnesa::className(), ['riwayatkel_icdx_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDiagnosas()
+    {
+        return $this->hasMany(Diagnosa::className(), ['icdx_id' => 'id']);
     }
 
     /**

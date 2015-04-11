@@ -10,35 +10,29 @@ use yii\helpers\Url;
 
 
 ?>
-<div class="modal-content" style="width: 750px;margin-left: 400px;margin-top: 100px">
-<div class="modal-header">
-	<a class="close" data-dismiss="modal">&times;</a>
-<!--	<h4><?php // echo $model->getAttributeLabel($_GET['title']); ?></h4>-->
-</div>
-<input type="hidden" value="" id="namakeluhan" name="namakeluhan">
-<div class="modal-body">
+<div class="anamnesa-form">
 
     <?php
     
     $items = [
     [
-        'label'=>'<i class="glyphicon glyphicon-home"></i> Rincian',
-        'content'=>yii\base\View::render('_keluhanRincian',['model'=>$model]),
+        'label'=>'<i class="glyphicon glyphicon-home"></i> Status Terkini',
+        'content'=>yii\base\View::render('_statusTerkini',['model'=>$model]),
         'active'=>true
     ],
     [
-        'label'=>'<i class="glyphicon glyphicon-user"></i> Lokasi',
+        'label'=>'<i class="glyphicon glyphicon-user"></i> Tanda tanda vital',
      //   'content'=>yii\base\View::render('_keluhanLokasi',['model'=>$model]),
-        'id'=>'tabs-keluhanlokasi',
-        'content'=>'<div id="tablokasi"></div>',
-        'linkOptions'=>['data-enable-cache'=>false,'data-url'=>\yii\helpers\Url::to(['/Anamnesa/anamnesa/popup-lokasi',['id'=>$_GET['id'],'datakeluhan'=>str_replace("_"," ",$_GET['param'])]])],
+        'id'=>'tabs-tandavital',
+        'content'=>'<div id="tabtandavital"></div>',
+        'linkOptions'=>['data-enable-cache'=>false,'data-url'=>\yii\helpers\Url::to(['/Anamnesa/pemeriksaan-fisik/tanda-vital','id'=>$model->id])],//,'datakeluhan'=>str_replace("_"," ",$_GET['param'])]])],
     ],
     [
-        'label'=>'<i class="glyphicon glyphicon-user"></i> Anamnesa Terpimpin',
+        'label'=>'<i class="glyphicon glyphicon-user"></i> Evaluasi',
      //   'content'=>yii\base\View::render('_keluhanLokasi',['model'=>$model]),
-        'id'=>'tabs-keluhanterpimpin',
-        'content'=>'<div id="tabanamnesa_terpimpin"></div>',
-        'linkOptions'=>['data-enable-cache'=>false,'data-url'=>\yii\helpers\Url::to(['/Anamnesa/anamnesa/anamnesa-terpimpin','id'=>$_GET['id']])],
+        'id'=>'tabs-evaluasi',
+        'content'=>'<div id="tabevaluasi"></div>',
+        'linkOptions'=>['data-enable-cache'=>false,'data-url'=>\yii\helpers\Url::to(['/Anamnesa/pemeriksaan-fisik/evaluasi','id'=>$model->id])],//,'datakeluhan'=>str_replace("_"," ",$_GET['param'])]])],
     ],
    /* [
         'label'=>'<i class="glyphicon glyphicon-list-alt"></i> Dropdown',
@@ -62,7 +56,7 @@ use yii\helpers\Url;
     'position'=>TabsX::POS_ABOVE,
     'bordered'=>true,
     'encodeLabels'=>false,
-    'id'=>'tabs-keluhan',
+    'id'=>'tabs-pemeriksaanfisik',
     'pluginOptions' =>  ['enableCache'=>false],
   //  'enableCache'=>false,
    //  'pluginEvents' => ["tabsX.beforeSend" => "$('#tabs-keluhanlokasi').on('tabsX.beforeSend', function (event) {
@@ -75,14 +69,7 @@ use yii\helpers\Url;
     
 </div>
 
-<div class="modal-footer">
 
 
-</div>
-
-
-    
-     
-    </div>   
 
 

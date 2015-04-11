@@ -10,7 +10,7 @@ use backend\models\Anamnesa;
 ?>
 
 <?php $form = ActiveForm::begin([
-                    'id' => 'keluhanSifatkelangsungan-form',
+                    'id' => 'keluhanKelangsunganKarakter-form',
                     'enableAjaxValidation' => false,
                     'enableClientValidation' => true,
                     'type' => ActiveForm::TYPE_HORIZONTAL,
@@ -29,25 +29,37 @@ use backend\models\Anamnesa;
                             $keluh = Anamnesa::findOne(['id'=>  $model->id ])->keluhan_rincian;   
                           
                             $rinci_karakter = Lookup::items2($keluh,'rincian_karakter');
-                        
-//                            var_dump($rinci[1],$rinci[2],$rinci[3]);
-//                            exit();
+                       
                             ?>
                                  
                             <?= 
-                            \yii\helpers\BaseHtml::radioList('kelangsungan_karakter',[],$rinci_karakter);
-                         /*   $form->field($model, 'keluhan_rincian')->radioList($rinci,[
-                                'item' => function($index, $label, $name, $checked, $value) {
-
-                                    $return = '<div class="radio"><label>';
-                                    $return .= '<input type="radio" name="' . $name . '" value="' . ucwords($label) . '" data-value="'.ucwords($label).'" >';
-                                    $return .= '' . ucwords($label) . '';
-                                    $return .= '</label></div>';
-
-                                    return $return;
-                                }
-                            ]);*/ ?>
+                           $form->field($model, 'keluhan_durasi_jenis')->radioList($rinci_karakter);
+                      ?>
                  </div>       
             </div>
+<div class="form-group">
+         <?= Html::Button('Submit', ['class' => 'btn btn-primary','id'=>'submitkeluhankarakter']) ?>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+</div>
  <?php ActiveForm::end(); ?>
 
+<?php
+$this->registerJs("$(document).ready(function () {
+   
+   
+   $('#submitkeluhankarakter').click(function(){
+   $.ajax({
+        type     :'POST',
+        cache    : false,
+        dataType : 'json',
+        data    : $('#keluhanKelangsunganKarakter-form').serialize(),
+        url  : 'save-keluhankarakter?id='+". $model->id.",
+            success  : function(response) {
+               alert('data berhasil disimpan');
+    }
+    });
+    });
+
+
+    });");
+?>
