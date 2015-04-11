@@ -61,5 +61,34 @@ use kartik\checkbox\CheckboxX;
             </div>
            
         </div>
+      <div class="form-group">
+        <?= Html::Button('Submit', ['class' => 'btn btn-primary','id'=>'submit_popupnadi']) ?>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+    </div>  
      <?php ActiveForm::end(); ?>
 </div>
+
+
+<?php
+
+$this->registerJs("$(document).ready(function () {
+   
+       
+
+
+
+     $('#submit_popupnadi').click(function(){
+   $.ajax({
+        type     :'POST',
+        cache    : false,
+        dataType : 'json',
+        data    : $('#popupNadi-form').serialize(),
+        url  : 'save-statusterkini?id='+".$model->id.",
+            success  : function(response) {
+               alert('data berhasil disimpan');
+    }
+    });
+});
+   
+
+    });");
