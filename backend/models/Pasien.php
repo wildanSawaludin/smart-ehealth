@@ -87,4 +87,16 @@ class Pasien extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Registrasi::className(), ['pasienId' => 'id']);
     }
+
+    public function getUsia() {
+        try {
+            $birthDay = new \DateTime($this->tgl_lahir);
+            $now = new \DateTime();
+            $diff = $now->diff($birthDay);
+            return $diff->format('%y'); 
+        }
+        catch(\Exception $e) {
+            return 0;
+        }
+    }
 }

@@ -66,6 +66,7 @@ switch ($model->status_asuransi) {
     // The controller action that will render the list
     $url = \yii\helpers\Url::to(['pasien-list']);
     $urlIcdx = \yii\helpers\Url::to(['icdx-list']);
+    $urlId = \yii\helpers\Url::to(['id-list']);
 
     // Script to initialize the selection based on the value of the select2 element
     $initScript = <<< SCRIPT
@@ -89,103 +90,172 @@ SCRIPT;
         }
     }
 SCRIPT;
+
+    $initScriptId = <<< SCRIPT
+        function (element, callback) {
+            var id=\$(element).val();
+        if (id !== "") {
+            \$.ajax("{$urlId}?id=" + id, {
+                dataType: "json"
+            }).done(function(data) { callback(data.results);});
+        }
+    }
+SCRIPT;
     ?>
     <!-- Tab panes -->
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="dataumum" style="padding:20px">
-            <?php
-            echo Form::widget([
-                'model' => $model,
-                'form' => $form,
-                'columns' => 1,
-                'attributes' => [
-                    'address_detail' => [
-                        'label' => 'Pasien',
-                        'labelSpan' => 2,
-                        'columns' => 3,
-                        'attributes' => [
-                            'pasienId' => [
-                                'type' => Form::INPUT_WIDGET,
-                                'widgetClass' => '\kartik\widgets\Select2',
-                                'options' => [
-                                'options' => ['placeholder' => 'Cari dan pilih pasien ...'],
-                                    'pluginOptions' => [
-                                        'allowClear' => true,
-                                        'minimumInputLength' => 3,
-                                        'ajax' => [
-                                            'url' => $url,
-                                            'dataType' => 'json',
-                                            'data' => new JsExpression('function(term,page) { return {search:term}; }'),
-                                            'results' => new JsExpression('function(data,page) { return {results:data.results}; }'),
-                                        ],
-                                        'initSelection' => new JsExpression($initScript)
-                                    ],
-                                ],
-                                'columnOptions' => ['colspan' => 2, 'class' => 'col-sm-7'],
-                            ],
-                            'actions' => [
-                                'type' => Form::INPUT_RAW,
-                                'value' => '<div style="">' .
-                                Html::button('<span class="glyphicon glyphicon-user"></span> Pasien', ['type' => 'button', 'id' => 'add_pasien', 'class' => 'btn btn-primary']) .
-                                '</div>'
-                            ],
-                        ]
-                    ]
-                ]
-            ]);
-            
-            echo Form::widget([
-                'model' => $model,
-                'form' => $form,
-                'columns' => 2,
-                'attributes' => [
-                    'stat_pel' => [
-                        'label' => 'Status Pelayanan',
-                        'labelSpan' => 2,
-                        'columns' => 3,
-                        'attributes' => [
-                            'status_pelayanan' => [
-                                'type' => Form::INPUT_DROPDOWN_LIST,
-                                'items'=>[ 'Rawat Jalan' => 'Rawat Jalan', 'Rawat Inap' => 'Rawat Inap',],
-                                'options' => ['prompt' => '',],
-                                'columnOptions' => ['colspan' => 2, 'class' => 'col-sm-7'],
-                            ],
-                            'actions' => [
-                                'type' => Form::INPUT_RAW,
-                                'value' => '<div style="">' .
-                                Html::button('<span class="glyphicon glyphicon-envelope"></span> Surat Pengantar', ['type' => 'button', 'id' => 'sp_opname', 'class' => 'btn btn-primary', 'style' => 'display:none']) .
-                                '</div>',
-                            ],
-                        ]
-                    ]
-                ]
-            ]);
 
-            Modal::begin([
-                'id' => 'md_spo',
-                'header' => '<h4>Surat Pengantar Opname</h4>',
-            ]);
-            echo $form->field($model, 'status_rawat')->dropDownList([ 'Biasa' => 'Biasa', 'Persalinan' => 'Persalinan',], ['prompt' => '']);
-            echo $form->field($model, 'dr_penanggung_jawab')->textInput(['maxlength' => 25]);
-            echo $form->field($model, 'icdx_id')->widget(Select2::classname(), [
-                'options' => ['placeholder' => 'Select ICDX ...'],
-                'pluginOptions' => [
-                    'allowClear' => true,
-                    'minimumInputLength' => 3,
-                    'ajax' => [
-                        'url' => $urlIcdx,
-                        'dataType' => 'json',
-                        'data' => new JsExpression('function(term,page) { return {search:term}; }'),
-                        'results' => new JsExpression('function(data,page) { return {results:data.results}; }'),
-                    ],
-                    'initSelection' => new JsExpression($initScriptIcdx)
-                ],
-            ]);
-            echo $form->field($model, 'catatan')->textarea(['rows' => 6]);
-            Modal::end();
-            ?>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-4">
+                        <?php
+                        echo Form::widget([
+                            'model' => $model,
+                            'form' => $form,
+                            'columns' => 1,
+                            'attributes' => [
+                                'address_detail' => [
+                                    'label' => 'Id pasien',
+                                    'labelSpan' => 6,
+                                    //'columns' => 4,
+                                    'attributes' => [
+                                        'catatan' => [
+                                            'type' => Form::INPUT_WIDGET,
+                                            'widgetClass' => '\kartik\widgets\Select2',
+                                            'options' => [
+                                                //'options' => ['placeholder' => 'Cari dan pilih pasien berdasarkan id'],
+                                                    'pluginOptions' => [
+                                                        'allowClear' => true,
+                                                        'minimumInputLength' => 1,
+                                                        'ajax' => [
+                                                            'url' => $urlId,
+                                                            'dataType' => 'json',
+                                                            'data' => new JsExpression('function(term,page) { return {search:term}; }'),
+                                                            'results' => new JsExpression('function(data,page) { return {results:data.results}; }'),
+                                                        ],
+                                                        'initSelection' => new JsExpression($initScriptId)
+                                                    ],
+                                                    'pluginEvents' => [
+                                                         "change" => "function() { pasienInfo.getInfoByPasien($('#registrasi-catatan').select2(\"val\")); $('#registrasi-pasienid').select2(\"val\", \"\") }",
+                                                    ]
+                                                ],
+                                            //'columnOptions' => ['class' => 'col-sm-7'],
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]);
+                        ?>
+                    </div>
+
+                    <div class="col-sm-8">
+                        <?php
+                        echo Form::widget([
+                            'model' => $model,
+                            'form' => $form,
+                            'columns' => 1,
+                            'attributes' => [
+                                            'address_detail' => [
+                                                'label' => 'Nama pasien',
+                                                'labelSpan' => 3,
+                                                'columns' => 3,
+                                                'attributes' => [
+                                                    'pasienId' => [
+                                                        'type' => Form::INPUT_WIDGET,
+                                                        'widgetClass' => '\kartik\widgets\Select2',
+                                                        'options' => [
+                                                            'options' => ['placeholder' => 'Cari berdasarkan nama'],
+                                                                'pluginOptions' => [
+                                                                    'allowClear' => true,
+                                                                    'minimumInputLength' => 3,
+                                                                    'ajax' => [
+                                                                        'url' => $url,
+                                                                        'dataType' => 'json',
+                                                                        'data' => new JsExpression('function(term,page) { return {search:term}; }'),
+                                                                        'results' => new JsExpression('function(data,page) { return {results:data.results}; }'),
+                                                                    ],
+                                                                    'initSelection' => new JsExpression($initScript)
+                                                                ],
+                                                                'pluginEvents' => [
+                                                                     "change" => "function(e) { pasienInfo.getInfoByPasien( $('#registrasi-pasienid').select2(\"val\")); $('#registrasi-catatan').select2(\"val\", \"\") }",
+                                                                ]
+                                                            ],
+                                                        'columnOptions' => ['colspan' => 2, 'class' => 'col-sm-7'],
+                                                    ],
+                                                    'actions' => [
+                                                        'type' => Form::INPUT_RAW,
+                                                        'value' => '<div style="">' .
+                                                        Html::button('<span class="glyphicon glyphicon-user"></span> Pasien', ['type' => 'button', 'id' => 'add_pasien', 'class' => 'btn btn-primary']) .
+                                                        '</div>'
+                                                    ],
+                                                ]
+                                            ]
+                                         ]
+                        ]);
+                        ?>
+                    </div> 
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-sm-12">
+                    <?php
+                    echo Form::widget([
+                        'model' => $model,
+                        'form' => $form,
+                        'columns' => 3,
+                        'attributes' => [
+                            'stat_pel' => [
+                                'label' => 'Status Pelayanan',
+                                'labelSpan' => 3,
+                                'columns' => 3,
+                                'attributes' => [
+                                    'status_pelayanan' => [
+                                        'type' => Form::INPUT_DROPDOWN_LIST,
+                                        'items'=>[ 'Rawat Jalan' => 'Rawat Jalan', 'Rawat Inap' => 'Rawat Inap',],
+                                        'options' => ['prompt' => '',],
+                                        'columnOptions' => ['colspan' => 2, 'class' => 'col-sm-7'],
+                                    ],
+                                    'actions' => [
+                                        'type' => Form::INPUT_RAW,
+                                        'value' => '<div style="">' .
+                                        Html::button('<span class="glyphicon glyphicon-envelope"></span> Surat Pengantar', ['type' => 'button', 'id' => 'sp_opname', 'class' => 'btn btn-primary', 'style' => 'display:none']) .
+                                        '</div>',
+                                    ],
+                                ]
+                            ]
+                        ]
+                    ]);
+
+                    Modal::begin([
+                        'id' => 'md_spo',
+                        'header' => '<h4>Surat Pengantar Opname</h4>',
+                    ]);
+                    echo $form->field($model, 'status_rawat')->dropDownList([ 'Biasa' => 'Biasa', 'Persalinan' => 'Persalinan',], ['prompt' => '']);
+                    echo $form->field($model, 'dr_penanggung_jawab')->textInput(['maxlength' => 25]);
+                    echo $form->field($model, 'icdx_id')->widget(Select2::classname(), [
+                        'options' => ['placeholder' => 'Select ICDX ...'],
+                        'pluginOptions' => [
+                            'allowClear' => true,
+                            'minimumInputLength' => 3,
+                            'ajax' => [
+                                'url' => $urlIcdx,
+                                'dataType' => 'json',
+                                'data' => new JsExpression('function(term,page) { return {search:term}; }'),
+                                'results' => new JsExpression('function(data,page) { return {results:data.results}; }'),
+                            ],
+                            'initSelection' => new JsExpression($initScriptIcdx)
+                        ],
+                    ]);
+                    echo $form->field($model, 'catatan')->textarea(['rows' => 6]);
+                    Modal::end();
+                    ?>
+                </div>
+            </div>
+            
         </div>
-        <div role="tabpanel" class="tab-pane" id="statasur" style="padding:20px">
+        <div role="tabpanel" class="tab-pane" id="statasur" style="padding:20px;min-height:158px;">
             <?= $form->field($model, 'status_asuransi')->radioList([ 'Umum' => 'Umum', 'BPJS Kesehatan' => 'BPJS Kesehatan', 'BPJS Ketenagakerjaan' => 'BPJS Ketenagakerjaan', 'Asuransi Lainnya' => 'Asuransi Lainnya',], ['inline' => true]) ?>
             <div id="el-1" style="<?= $style1 ?>">
                 <?= $form->field($model, 'asuransi_noreg')->textInput(['maxlength' => 15]) ?>
