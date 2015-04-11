@@ -269,7 +269,7 @@ class RegistrasiController extends Controller {
         return '<div class="form-group no-margin-botom">
                     <label class="col-sm-3 col-md-offset-1 control-label">No RM</label>
                     <div class="col-sm-7">
-                        <p class="form-control-static">'.$pasien->id.'</p>
+                        <p class="form-control-static">'.str_pad($pasien->id, 6, '0', STR_PAD_LEFT).'</p>
                     </div>
                 </div>
                 <div class="form-group no-margin-botom">
