@@ -54,13 +54,17 @@ class Registrasi extends \yii\db\ActiveRecord {
      */
     public $pasienNama;
     public $tanggal_registrasi_format;
+    public $nomorRegistrasi;
+    public $no_rm;
+    public $jenis_kelamin;
+    public $faskes;
 
     public function rules() {
         return [
             [['pasienId', 'status_pelayanan'], 'required'],
-            [['pasienId', 'asuransi_provider_id', 'icdx_id', 'no_antrian', 'faskes_id'], 'integer'],
-            [['tanggal_registrasi', 'asuransi_tgl_lahir'], 'safe'],
-            [['status_registrasi', 'asal_registrasi', 'status_pelayanan', 'status_rawat', 'status_asuransi', 'catatan'], 'string'],
+            [['pasienId', 'asuransi_provider_id', 'icdx_id', 'no_antrian', 'faskes_id', 'nomorRegistrasi', 'usia'], 'integer'],
+            [['tanggal_registrasi', 'asuransi_tgl_lahir', 'no_rm', 'jenis_kelamin'], 'safe'],
+            [['status_registrasi', 'asal_registrasi', 'status_pelayanan', 'status_rawat', 'status_asuransi', 'catatan', 'faskes'], 'string'],
             [['no_reg', 'asuransi_noreg', 'asuransi_noreg_other', 'asuransi_notelp'], 'string', 'max' => 15],
             [['dr_penanggung_jawab', 'asuransi_nama'], 'string', 'max' => 25],
             [['asuransi_status_jaminan', 'asuransi_penanggung_jawab', 'asuransi_alamat'], 'string', 'max' => 30]
@@ -94,7 +98,11 @@ class Registrasi extends \yii\db\ActiveRecord {
             'asuransi_provider_id' => 'Asuransi',
             'faskes_id' => 'Faskes ID',
             'usia' => 'Usia',
-            'kategoriUsia' => 'Kategori Usia'
+            'kategoriUsia' => 'Kategori Usia',
+            'nomorRegistrasi' => 'No Registrasi',
+            'no_rm' => 'No RM',
+            'jenis_kelamin' => 'Jenis Kelamin',
+            'faskes' => 'Fasilitas Kesehatan'
         ];
     }
 
@@ -165,6 +173,36 @@ class Registrasi extends \yii\db\ActiveRecord {
         }
         catch(\Exception $e) {
             return 0;
+        }
+    }
+
+    public function afterFind() {
+        $birthDay = new \DateTime($this->pasien->tgl_lahir);
+        $now = new \DateTime();
+        $diff = $now->diff($birthDay); 
+
+        $this->faskes = $this->faskes_id->nama;
+        $this->jenis_kelamin = $this->pasien->jenkel;
+        $this->no_rm = str_pad($this->pasien->id, 6, '0', STR_PAD_LEFT);
+        $this->nomorRegistrasi = $this->asal_registrasi.'-'.str_pad($this->id, 6, '0', STR_PAD_LEFT);
+    }
+
+    public function beforeSave($insert) {
+        if (parent::beforeSave($insert)) {
+
+            if($this->isNewRecord) {
+                $query = new Query;
+                $counter = $query->select(['IFNULL(max(no_antrian), 0) + 1 as counter'])
+                    ->from('registrasi')
+                    ->where('tanggal_registrasi > "' . date('Y-m-d') . '"');
+                $command = $query->scalar();
+
+                $this->no_antrian = $counter;
+            }
+
+            return true;
+        } else {
+            return false;
         }
     }
 }

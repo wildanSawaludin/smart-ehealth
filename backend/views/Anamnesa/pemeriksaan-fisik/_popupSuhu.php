@@ -52,6 +52,33 @@ use kartik\checkbox\CheckboxX;
             </div>
              <label for="kesadaran" class="col-md-1">C</label>
         </div>
-   
+     <div class="form-group">
+        <?= Html::Button('Submit', ['class' => 'btn btn-primary','id'=>'submit_popupsuhu']) ?>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+    </div>  
      <?php ActiveForm::end(); ?>
 </div>
+
+<?php
+
+$this->registerJs("$(document).ready(function () {
+   
+       
+
+
+
+     $('#submit_popupsuhu').click(function(){
+   $.ajax({
+        type     :'POST',
+        cache    : false,
+        dataType : 'json',
+        data    : $('#popupSuhu-form').serialize(),
+        url  : 'save-statusterkini?id='+".$model->id.",
+            success  : function(response) {
+               alert('data berhasil disimpan');
+    }
+    });
+});
+   
+
+    });");

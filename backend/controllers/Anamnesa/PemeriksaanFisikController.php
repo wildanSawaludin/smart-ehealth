@@ -3,12 +3,15 @@
 namespace backend\controllers\Anamnesa;
 
 use Yii;
-use yii\web\Response;
 use backend\models\PemeriksaanFisik;
-use yii\db\Query;
+use yii\web\Controller;
+use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
 use yii\helpers\Json;
+use yii\db\Query;
+use yii\web\Response;
 
-class PemeriksaanFisikController extends AnamnesaController{
+class PemeriksaanFisikController extends Controller{
 
  public function actionCreate($id){
      $model = $this->findModel($id);
@@ -101,8 +104,9 @@ class PemeriksaanFisikController extends AnamnesaController{
      
  }
  
-    public function actionPopupNadi(){
-     $model = new PemeriksaanFisik();
+    public function actionPopupNadi($id){
+         $model = $this->findModel($id);
+    
        
      //   if ($model->load(Yii::$app->request->post()) && $model->save()) {
        //     return $this->redirect(['view', 'id' => $model->id]);
@@ -116,8 +120,8 @@ class PemeriksaanFisikController extends AnamnesaController{
      
  }
  
-  public function actionPopupPernapasan(){
-     $model = new PemeriksaanFisik();
+  public function actionPopupPernapasan($id){
+      $model = $this->findModel($id);
        
      //   if ($model->load(Yii::$app->request->post()) && $model->save()) {
        //     return $this->redirect(['view', 'id' => $model->id]);
@@ -132,8 +136,8 @@ class PemeriksaanFisikController extends AnamnesaController{
  }
  
   
-  public function actionPopupSuhu(){
-     $model = new PemeriksaanFisik();
+  public function actionPopupSuhu($id){
+     $model = $this->findModel($id);
        
      //   if ($model->load(Yii::$app->request->post()) && $model->save()) {
        //     return $this->redirect(['view', 'id' => $model->id]);
@@ -162,8 +166,8 @@ class PemeriksaanFisikController extends AnamnesaController{
      
  }
  
-  public function actionPopupKulit(){
-     $model = new PemeriksaanFisik();
+  public function actionPopupKulit($id){
+       $model = $this->findModel($id);
        
             return $this->renderAjax('_popupKulit', [
                 'model' => $model,
@@ -173,8 +177,8 @@ class PemeriksaanFisikController extends AnamnesaController{
         
  }
  
-   public function actionPopupKepala(){
-     $model = new PemeriksaanFisik();
+   public function actionPopupKepala($id){
+      $model = $this->findModel($id);
        
             return $this->renderAjax('_popupKepala', [
                 'model' => $model,

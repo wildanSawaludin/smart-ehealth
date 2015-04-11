@@ -15,6 +15,7 @@ use backend\models\Registrasi;
 $this->title = Yii::t('app', 'Registrasi Pendaftaran');
 $this->params['breadcrumbs'][] = $this->title;
 $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
+
 ?>
 
 <div class="registrasi-index row">
@@ -46,49 +47,6 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
         </section>
 </div>
 
-<!--
-<div class="form-group no-margin-botom">
-                        <label class="col-sm-3 col-md-offset-1 control-label">No RM</label>
-                        <div class="col-sm-7">
-                            <p class="form-control-static">00009</p>
-                        </div>
-                    </div>
-                    <div class="form-group no-margin-botom">
-                        <label class="col-sm-3 col-md-offset-1 control-label">Nama</label>
-                        <div class="col-sm-7">
-                            <p class="form-control-static">Maya Pratama</p>
-                        </div>
-                    </div>
-                    <div class="form-group no-margin-botom">
-                        <label class="col-sm-3 col-md-offset-1 control-label">Gender</label>
-                        <div class="col-sm-7">
-                            <p class="form-control-static">P</p>
-                        </div>
-                    </div>
-                    <div class="form-group no-margin-botom">
-                        <label class="col-sm-3 col-md-offset-1 control-label">TTL</label>
-                        <div class="col-sm-7">
-                            <p class="form-control-static">Makassar, 31-10-1990</p>
-                        </div>
-                    </div>
-                    <div class="form-group no-margin-botom">
-                        <label class="col-sm-3 col-md-offset-1 control-label">Usia</label>
-                        <div class="col-sm-7">
-                            <p class="form-control-static">25 Tahun</p>
-                        </div>
-                    </div>
-                    <div class="form-group no-margin-botom">
-                        <label class="col-sm-3 col-md-offset-1 control-label">Alamat</label>
-                        <div class="col-sm-7">
-                            <p class="form-control-static">Jl. Merapi No.23</p>
-                        </div>
-                    </div>
-                    <div class="form-group no-margin-botom">
-                        <div class="col-sm-offset-4 col-sm-4">
-                            <button type="button" id="btnUpdate" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span> Update</button>                        </div>
-                    </div>
-    -->
-
 <div class="row">
     <section class="col-sm-12">
         <div class="box box-primary" style="margin-top:20px;">
@@ -116,7 +74,16 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
                                             url: "'.Url::to(['index']).'?RegistrasiSearch[tanggal_registrasi]="+$(this).val(),
                                             container: "#pjax-gridview",
                                             timeout: 1000,
-                                        })',
+                                        })
+
+                                        if($(this).val() != "") {
+                                            $("#gridTitle").html("Daftar Pasien "+$(this).val());
+                                        }
+                                        else {
+                                            $("#gridTitle").html("Daftar Pasien Hari Ini");   
+                                        }
+
+                                        ',
                                 ]
                             ]);
                             ?>
@@ -125,7 +92,7 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
                 </div>
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3">
-                        <h1 class="text-center">Daftar Pasien Hari Ini</h1>
+                        <h1 class="text-center" id="gridTitle">Daftar Pasien <?php $tanggal = Yii::$app->request->queryParams['RegistrasiSearch']['tanggal_registrasi']; echo !is_null($tanggal) && $tanggal != '' ? $tanggal : 'Hari Ini'; ?></h1>
                     </div>
                 </div>
             </div>
@@ -134,8 +101,6 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
                 <?php Pjax::begin(['id' => 'pjax-gridview']) ?>
             
                 <?php
-
-                    $dataProvider->pagination->pageSize=5;
 
                     echo GridView::widget([
                         'dataProvider' => $dataProvider,
@@ -146,22 +111,17 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
                         'hover' => true,
                         'layout' => "{items}\n{summary}\n{pager}",
                         'columns' => [
-                            'no_reg',
+                            'no_antrian',
+                            'nomorRegistrasi',
+                            'no_rm',
                             [
                                 'attribute' => 'pasienNama',
                                 'value' => $model->pasienNama
                             ],
-                            [
-                                'attribute' => 'tanggal_registrasi',
-                                'filterType' => GridView::FILTER_DATE,
-                                'format' => 'raw',
-                                'width' => '100px',
-                                'filterWidgetOptions' => [
-                                    'pluginOptions' => ['format' => 'dd-mm-yyyy']
-                                ],
-                            ],
-                            'status_pelayanan',
-                            'status_asuransi',
+                            'usia',
+                            'jenis_kelamin',
+                            'faskes',
+                            'status_registrasi',
                             [
                                 'class' => 'yii\grid\ActionColumn',
                                 'template' => '{delete} {resume}',
@@ -182,6 +142,7 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
                             ]
                         ],
                     ]);
+
                 ?>
             </div>
             <?php Pjax::end() ?>
@@ -192,7 +153,7 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
 <script type="text/javascript">
 
     var pasienInfo = {
-        'url': "<?= Yii::$app->urlManager->createAbsoluteUrl('registrasi/pasien') ?>",
+        'url': "<?= Yii::$app->urlManager->createAbsoluteUrl('registrasi/registrasi') ?>",
         'pasienId' : null,
         'clearData': function() {
             $("#infoBody").html('');
@@ -207,6 +168,23 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
             $.get(this.url+'?id='+$id, function(data) {
                 pasienInfo.showData(data);
             });
+        },
+        'getInfoByPasien': function($id, flag) {
+            if($id == '')
+                return false;
+
+            $.get("<?= Yii::$app->urlManager->createAbsoluteUrl('registrasi/pasien') ?>"+'?id='+$id, function(data) {
+                pasienInfo.showData(data);
+
+
+                if(flag != undefined && flag == true) {
+                    pasienInfo.setSelected();
+                } 
+            });
+
+        },
+        'setSelected': function() {
+             $('#registrasi-pasienid').select2("data", { id: $('#registrasi-catatan').select2("val"), text: $('#patienName').html() });
         }
     }
 
