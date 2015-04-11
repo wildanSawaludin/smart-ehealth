@@ -137,7 +137,7 @@ SCRIPT;
                                                         'initSelection' => new JsExpression($initScriptId)
                                                     ],
                                                     'pluginEvents' => [
-                                                         "change" => "function() { pasienInfo.getInfoByPasien($('#registrasi-catatan').select2(\"val\")); $('#registrasi-pasienid').select2(\"val\", \"\") }",
+                                                         "change" => "function() { pasienInfo.getInfoByPasien($('#registrasi-catatan').select2(\"val\"), true); }",
                                                     ]
                                                 ],
                                             //'columnOptions' => ['class' => 'col-sm-7'],
@@ -178,7 +178,7 @@ SCRIPT;
                                                                     'initSelection' => new JsExpression($initScript)
                                                                 ],
                                                                 'pluginEvents' => [
-                                                                     "change" => "function(e) { pasienInfo.getInfoByPasien( $('#registrasi-pasienid').select2(\"val\")); $('#registrasi-catatan').select2(\"val\", \"\") }",
+                                                                     "change" => "function(e) { pasienInfo.getInfoByPasien( $('#registrasi-pasienid').select2(\"val\")); $('#registrasi-catatan').select2(\"data\", { id: $('#registrasi-pasienid').select2(\"val\"), text: $('#registrasi-pasienid').select2(\"val\") }) }",
                                                                 ]
                                                             ],
                                                         'columnOptions' => ['colspan' => 2, 'class' => 'col-sm-7'],

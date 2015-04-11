@@ -275,7 +275,7 @@ class RegistrasiController extends Controller {
                 <div class="form-group no-margin-botom">
                     <label class="col-sm-3 col-md-offset-1 control-label">Nama</label>
                     <div class="col-sm-7">
-                        <p class="form-control-static">'.$pasien->nama.'</p>
+                        <p id="patienName" class="form-control-static">'.$pasien->nama.'</p>
                     </div>
                 </div>
                 <div class="form-group no-margin-botom">
