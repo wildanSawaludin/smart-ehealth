@@ -199,7 +199,7 @@ class PemeriksaanFisikController extends Controller{
         
  }
  
- 
+
  
  
      protected function findModel($id)

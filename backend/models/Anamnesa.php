@@ -24,6 +24,7 @@ use Yii;
  * @property string $keluhan_durasi_jenis
  * @property string $keluhan_durasi_pereda
  * @property string $keluhan_durasi_pemberat
+ * @property string $keluhan_frekuensi
  * @property integer $keluhan_menjalar_pil
  * @property integer $keljalar_kepala_pil
  * @property string $keljalar_kepala
@@ -187,6 +188,9 @@ class Anamnesa extends \yii\db\ActiveRecord
     public $faktor_resiko_kebiasaan_2;
     public $psikososial_tingber_1;
     public $psikososial_tingber_2;
+    
+    public $keluhan_tambahan1;
+    public $keluhan_tambahan2;
     /**
      * @inheritdoc
      */
@@ -202,7 +206,7 @@ class Anamnesa extends \yii\db\ActiveRecord
     {
         return [
             [['parent_id', 'registrasi_id', 'user_id', 'keluhan_berlangsung_nil', 'keluhan_durasi_nil', 'keluhan_menjalar_pil', 'keljalar_kepala_pil', 'keljalar_wajah_pil', 'keljalar_mata_pil', 'keljalar_hidung_pil', 'keljalar_mulut_pil', 'keljalar_telinga_pil', 'keljalar_leher_pil', 'keljalar_tenggorokan_pil', 'keljalar_bahu_pil', 'keljalar_tangan_pil', 'keljalar_dada_pil', 'keljalar_perut_pil', 'keljalar_pinggang_pil', 'keljalar_punggung_pil', 'keljalar_kelamin_pil', 'keljalar_kaki_pil', 'keljalar_seltub_pil', 'kel_tembus_pil', 'kel_punkel_nil', 'riwayat_penyakit_pil', 'riwayatsakit_icdx_id', 'riwayat_penyakit_nil', 'riwayat_perawatan_pil', 'riwayat_perawatan_nil', 'riwayat_pengobatan_pil', 'riwayat_keluarga_pil', 'riwayatkel_icdx_id', 'riwayat_lainnya_pil', 'riwayat_alergi_pil', 'alergi_obat_pil', 'alergi_makanan_pil', 'alergi_sabun_pil', 'alergi_udara_pil', 'alergi_debu_pil', 'alergi_lainnya_pil', 'riwayat_transfusi_pil', 'transfusi_wb_pil', 'transfusi_wb_jumlah', 'transfusi_trombosit_pil', 'transfusi_trombosit_jumlah', 'transfusi_eritrosit_pil', 'transfusi_eritrosit_jumlah', 'riwayat_imunisasi_pil', 'kebiasaan_obat_pil', 'kebiasaan_rokok_pil', 'kebiasaan_rokok_jmlh', 'kebiasaan_rokok_nil', 'kebiasaan_alkohol_pil', 'kebiasaan_alkohol_nil', 'perawatan_mandi_pil', 'perawatan_mandi_jmlh', 'perawatan_rambut_pil', 'perawatan_rambut_jmlh', 'perawatan_kuku_pil', 'perawatan_kuku_jmlh', 'perawatan_tidur_pil', 'perawatan_tidur_jmlh', 'kebiasaan_nutrisi_pil', 'nutrisi_selera_pil', 'makan_frekuensi_pil', 'makan_pembatasan_pil', 'makan_menu_pil', 'makan_pokok_lainnya_pil', 'makan_lauk_lainnya_pil', 'makan_sayuran_lainnya_pil', 'makan_buah_lainnya_pil', 'minum_jenis_pil', 'minum_frekuensi_pil', 'minum_cara_pil', 'kebiasaan_olahraga_pil', 'olahraga_frekuensi_kali', 'kebiasaan_kegiatan_pil', 'kegiatan_frekuensi_kali', 'psikososial_hubkel_pil', 'psikososial_temting_pil', 'psikososial_tingber_pil', 'olahraga_jenis_lainnya_pil'], 'integer'],
-            [['keluhan_berlangsung_lama', 'keluhan_durasi_lama', 'kel_punkel_lama', 'kel_kemunculan', 'riwayat_penyakit_lama', 'riwayat_perawatan_tempat', 'riwayat_perawatan_lama', 'transfusi_wb_ukuran', 'transfusi_trombosit_ukuran', 'transfusi_eritrosit_ukuran', 'kebiasaan_rokok_satuan', 'kebiasaan_rokok_lama', 'kebiasaan_rokok_awal', 'kebiasaan_rokok_berhenti', 'kebiasaan_alkohol_lama', 'kebiasaan_alkohol_awal', 'kebiasaan_alkohol_berhenti', 'perawatan_mandi_lama', 'perawatan_mandi_oleh', 'perawatan_rambut_lama', 'perawatan_rambut_oleh', 'perawatan_kuku_lama', 'perawatan_kuku_oleh', 'perawatan_tidur_lama', 'perawatan_tidur_oleh', 'nutrisi_selera_makan', 'makan_frekuensi', 'minum_jenis', 'minum_frekuensi', 'olahraga_frekuensi_lama', 'kegiatan_frekuensi_lama', 'psikososial_hubkel', 'psikososial_temting'], 'string'],
+            [['keluhan_berlangsung_lama', 'keluhan_durasi_lama', 'keluhan_frekuensi','kel_punkel_lama', 'kel_kemunculan', 'riwayat_penyakit_lama', 'riwayat_perawatan_tempat', 'riwayat_perawatan_lama', 'transfusi_wb_ukuran', 'transfusi_trombosit_ukuran', 'transfusi_eritrosit_ukuran', 'kebiasaan_rokok_satuan', 'kebiasaan_rokok_lama', 'kebiasaan_rokok_awal', 'kebiasaan_rokok_berhenti', 'kebiasaan_alkohol_lama', 'kebiasaan_alkohol_awal', 'kebiasaan_alkohol_berhenti', 'perawatan_mandi_lama', 'perawatan_mandi_oleh', 'perawatan_rambut_lama', 'perawatan_rambut_oleh', 'perawatan_kuku_lama', 'perawatan_kuku_oleh', 'perawatan_tidur_lama', 'perawatan_tidur_oleh', 'nutrisi_selera_makan', 'makan_frekuensi', 'minum_jenis', 'minum_frekuensi', 'olahraga_frekuensi_lama', 'kegiatan_frekuensi_lama', 'psikososial_hubkel', 'psikososial_temting'], 'string'],
             [['riwayat_perawatan_waktu', 'transfusi_wb_waktu', 'transfusi_trombosit_waktu', 'transfusi_eritrosit_waktu'], 'safe'],
 //            [['transfusi_wb_waktu'], 'required'],
             [['keluhan', 'keluhan_rincian', 'keluhan_lokasi', 'keluhan_lokasi_umum', 'keluhan_sub_lokasi', 'keluhan_durasi_jenis', 'keluhan_durasi_pereda', 'keluhan_durasi_pemberat', 'makan_menu_pokok', 'makan_menu_lauk', 'makan_menu_sayur', 'makan_menu_buah', 'minum_cara_pemenuhan', 'psikososial_tingber', 'makan_pokok_lainnya', 'makan_lauk_lainnya', 'makan_sayuran_lainnya', 'makan_buah_lainnya'], 'string', 'max' => 50],
@@ -235,6 +239,7 @@ class Anamnesa extends \yii\db\ActiveRecord
             'keluhan_durasi_jenis' => Yii::t('app', 'Keluhan Durasi Jenis'),
             'keluhan_durasi_pereda' => Yii::t('app', 'Keluhan Durasi Pereda'),
             'keluhan_durasi_pemberat' => Yii::t('app', 'Keluhan Durasi Pemberat'),
+            'keluhan_frekuensi' => Yii::t('app', 'Keluhan Frekuensi'),
             'keluhan_menjalar_pil' => Yii::t('app', 'Keluhan Menjalar Pil'),
             'keljalar_kepala_pil' => Yii::t('app', 'Keljalar Kepala Pil'),
             'keljalar_kepala' => Yii::t('app', 'Keljalar Kepala'),
@@ -462,29 +467,36 @@ class Anamnesa extends \yii\db\ActiveRecord
   public function getOptionsKeluhanLanglama()
 { 
    return array(
-'detik','menit','jam','hari','minggu','bulan','tahun',
+'detik'=>'detik','menit'=>'menit','jam'=>'jam','hari'=>'hari','minggu'=>'minggu','bulan'=>'bulan','tahun'=>'tahun',
    );
 }
 
   public function getOptionsKeluhanDurasilama()
 { 
    return array(
-'menit','jam','hari','minggu','bulan','tahun',
+'menit'=>'menit','jam'=>'jam','hari'=>'hari','minggu'=>'minggu','bulan'=>'bulan','tahun'=>'tahun',
    );
 }
 
   public function getOptionsKeluhanPunkel()
 { 
    return array(
-'menit','jam','hari','minggu','bulan','tahun',
+'menit'=>'menit','jam'=>'jam','hari'=>'hari','minggu'=>'minggu','bulan'=>'bulan','tahun'=>'tahun',
    );
 }
 
   public function getOptionsKeluhanKemunculan()
 { 
    return array(
-'Perlahan','Berulang','Spontan/tiba-tiba',
+'Perlahan'=>'Perlahan','Berulang'=>'Berulang','Spontan/tiba-tiba'=>'Spontan/tiba-tiba',
    );
 }
-    
+
+  public function getOptionsKeluhanFrekuensi()
+{ 
+   return array(
+   'Sepanjang hari'=>'Sepanjang hari','Tidak menentu'=>'Tidak menentu','1 kali sehari'=>'1 kali sehari','2 kali sehari'=>'2 kali sehari','3 kali sehari'=>'3 kali sehari','> 3 kali sehari'=>'> 3 kali sehari','1 kali seminggu'=>'1 kali seminggu','2 kali seminggu'=>'2 kali seminggu','3 kali seminggu'=>'3 kali seminggu','> 3 kali seminggu'=>'> 3 kali seminggu',
+   );
+}
+ 
 }

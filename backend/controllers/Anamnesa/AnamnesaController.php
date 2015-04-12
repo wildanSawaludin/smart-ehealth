@@ -353,11 +353,11 @@ $model->save();
         $model = $this->findModel($id);
     
         $modelTambahan = $this->findModelTambahan($id);
-      //  if(count($modelTambahan)<1){
-      //      $modelTambahan = new Anamnesa;
-     //   }else{
+        $countTambahan = Anamnesa::find()->where('parent_id = :id and parent_id != id', ['id'=>$id])->count();
+     
         $keluhan =[];
-            if(!empty($modelTambahan))
+     
+            if($countTambahan > 0)
         {
                 foreach($modelTambahan as $row)
                 {
@@ -428,10 +428,11 @@ $model->save();
     
      protected function findModelTambahan($id)
     {
-        if (($model = Anamnesa::findAll(['parent_id'=>$id])) !== null) {
+        if ($model = Anamnesa::find()->where('parent_id = :id and parent_id != id', ['id'=>$id])->all()) {
             return $model;
         } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+            $model = new Anamnesa;
+            return $model;
         }
     }
     
