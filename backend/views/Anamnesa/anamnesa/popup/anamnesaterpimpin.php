@@ -21,7 +21,8 @@ use yii\bootstrap\Modal;
                                 'showLabels'=>false]
                 ]); 
     ?>
-      
+    
+       
         <div class="content">
 		    <div class="form-group">  
                         <label class="col-lg-4 control-label" for="lama_perlangsungan">Lama Perlangsungan :</label>
@@ -55,15 +56,11 @@ use yii\bootstrap\Modal;
              </div>
             
                <div class="form-group">  
-                         <label class="col-lg-4 control-label" for="frekuensi">Frekuensi :</label>
+                         <label class="col-lg-4 control-label" for="frekuensi">Frekuens2i :</label>
                           <div class="col-sm-4">
-                        <?php 
+                       
                         
-             $rinci_lama = ['1' => 'Sepanjang Hari', '2' => 'Tidak Menentu', '3' => '1 kali sehari', '4'=>'2 kali sehari','5'=>'3 kali sehari','6'=>'>3 kali sehari', '7'=>'1 kali seminggu','8'=>'2 kali seminggu','9'=>'3 kali seminggu', '10'=>'> 3 kali seminggu'];
-   
-                        ?>
-                        
-                        <?= $form->field($model, 'keluhan_durasi_lama')->dropDownList($rinci_lama)?>
+                        <?= $form->field($model, 'keluhan_frekuensi')->dropDownList($model->optionsKeluhanFrekuensi)?>
                     </div>
                     </div>
             
@@ -75,8 +72,8 @@ use yii\bootstrap\Modal;
                         <?= $form->field($model, 'keluhan_durasi_jenis')->radioList(['1'=>'Menjalar','2'=>'Tembus ke belakang']); ?>
                     </div>
                     </div>
-            
-            
+           
+          
               <div class="form-group">    
                      <label class="col-lg-4 control-label" for="sifat_perlangsungan">Puncak keluhan:</label>
                     
@@ -135,11 +132,14 @@ use yii\bootstrap\Modal;
              </div>
 
             
-        </div>
+       
       <div class="form-group">
          <?= Html::Button('Submit', ['class' => 'btn btn-primary','id'=>'submitpopupanamnesaterp']) ?>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
 </div> 
+       
+    </div>
+    
     <?php ActiveForm::end(); ?>
 
 </div>
@@ -238,6 +238,9 @@ $('#submitpopupanamnesaterp').click(function(){
     });
     });
    
+
+
+
    });");
 
 ?>

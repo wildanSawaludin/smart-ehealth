@@ -3,9 +3,15 @@ return [
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
+<<<<<<< HEAD
+            'dsn' => 'mysql:host=localhost;dbname=smart_ehealth_db',
+            'username' => 'root',
+            'password' => '',
+=======
             'dsn' => 'mysql:host=103.27.206.187;dbname=smart_ehealth_db',
             'username' => 'developer',
             'password' => 'dev123',
+>>>>>>> 76c6691db15b233e9f6aea02a4f558ca61158f37
             'charset' => 'utf8',
         ],
         'mailer' => [

@@ -34,6 +34,7 @@ use yii\helpers\Url;
         'content'=>'<div id="tabevaluasi"></div>',
         'linkOptions'=>['data-enable-cache'=>false,'data-url'=>\yii\helpers\Url::to(['/Anamnesa/pemeriksaan-fisik/evaluasi','id'=>$model->id])],//,'datakeluhan'=>str_replace("_"," ",$_GET['param'])]])],
     ],
+  
    /* [
         'label'=>'<i class="glyphicon glyphicon-list-alt"></i> Dropdown',
         'items'=>[

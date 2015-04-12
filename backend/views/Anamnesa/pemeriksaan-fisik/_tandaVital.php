@@ -60,7 +60,7 @@ use yii\bootstrap\Modal;
                 
                           <?=    $form->field($model, 'ttv_suhu')->textInput(['maxlength'=>'3']); ?>
             </div>
-            <label for="kesadaran_umum" class="col-md-2">C</label>
+            <label for="kesadaran_umum" class="col-md-2">&deg;C</label>
         </div>
  <div class="form-group">
         <?= Html::Button('Submit', ['class' => 'btn btn-primary','id'=>'submit_tandavital']) ?>

@@ -26,11 +26,16 @@ use yii\bootstrap\Modal;
                             ]; 
                     ?>
                     <div class="col-sm-4">
-                       <?= \yii\helpers\BaseHtml::checkboxList('keluhan_tambahan1', $modelTambahan, $list,['class'=>'checkbox']) ; ?> 
+                       <?php $model->keluhan_tambahan1 = $modelTambahan; 
+                            $model->keluhan_tambahan2 = $modelTambahan;?>
+<?= $form->field($model, 'keluhan_tambahan1')->checkboxList($list); ?>
+
+ 
                     </div>
                     <div class="col-sm-4">
                       
-                        <?= \yii\helpers\BaseHtml::checkboxList('keluhan_tambahan2', $modelTambahan, $list2,['class'=>'checkbox']) ; ?> 
+<?= $form->field($model, 'keluhan_tambahan2')->checkboxList($list2); ?>
+                       
                     </div>
 
 
