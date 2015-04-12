@@ -32,6 +32,8 @@ use yii\db\Query;
  * @property integer $no_antrian 
  * @property integer $asuransi_provider_id 
  * @property integer $faskes_id 
+ * @property integer $no_resep_racikan
+ * @property integer $no_resep_nonracikan
  *
  * @property Anamnesa[] $anamnesas
  * @property AsuransiProvider $asuransiProvider 

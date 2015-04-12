@@ -22,7 +22,13 @@ use kartik\tabs\TabsX;
             ],
             [
                 'label'=>'Saran/Anjuran',
-                'content' => 'sdsdsds',
+                'content' => View::render('saranAnjuran',[
+                    'model' => $model,
+                    'modelResepNonRacikan' => $modelResepNonRacikan,
+                    'modelResepNonracikanDetail' => $modelResepNonracikanDetail,
+                    'modelResepNonracikanDetailIsi' => $modelResepNonracikanDetailIsi,
+                    'id' => $_GET['id']
+                ]),
             ]
         ];
 

@@ -29,36 +29,31 @@ use dosamigos\ckeditor\CKEditor;
             <div class="tab-pane fade in active" id="klinis">
                 <p>
                     Anamnesa : <br>
-                    <?= $form->field($model, 'anamnesa')->widget(CKEditor::className(), [
-                        'options' => ['rows' => 6],
-                        'preset' => 'basic'
-                    ]) ?>
+                    <pre>
+                        <?= $model['anamnesa']; ?>
+                    </pre>
                 </p>
                 <p>
                     Pemeriksaan Fisik : <br>
-                    <?= $form->field($model, 'pemeriksaan_fisik')->widget(CKEditor::className(), [
-                        'options' => ['rows' => 6],
-                        'preset' => 'basic'
-                    ]) ?>
+                    <pre>
+                        <?= $model['pemeriksaan_fisik']; ?>
+                    </pre>
                 </p>
             </div>
             <div class="tab-pane fade" id="penunjang">
-                <?= $form->field($model, 'pemeriksaan_penunjang')->widget(CKEditor::className(), [
-                    'options' => ['rows' => 6],
-                    'preset' => 'basic'
-                ]) ?>
+                <pre>
+                    <?= $model['pemeriksaan_penunjang']; ?>
+                </pre>
             </div>
             <div class="tab-pane fade" id="tindakan">
-                <?= $form->field($model, 'terapi_tindakan')->widget(CKEditor::className(), [
-                    'options' => ['rows' => 6],
-                    'preset' => 'basic'
-                ]) ?>
+                <pre>
+                    <?= $model['terapi_tindakan']; ?>
+                </pre>
             </div>
             <div class="tab-pane fade" id="gizi">
-                <?= $form->field($model, 'gizi_nutrisi')->widget(CKEditor::className(), [
-                    'options' => ['rows' => 6],
-                    'preset' => 'basic'
-                ]) ?>
+                <pre>
+                    <?= $model['gizi_nutrisi']; ?>
+                </pre>
             </div>
         </div>
         <?php ActiveForm::end(); ?>

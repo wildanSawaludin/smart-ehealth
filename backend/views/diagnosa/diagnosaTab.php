@@ -58,8 +58,7 @@ use yii\helpers\Url;
 
     echo TabsX::widget([
         'items'=>$items,
-        'position'=>TabsX::POS_ABOVE,
-        'sideways'=>true,
+        'position'=>TabsX::POS_LEFT,
         'encodeLabels'=>false
     ]);
 
