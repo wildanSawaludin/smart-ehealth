@@ -36,7 +36,7 @@ class ResepNonracikan extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'registrasi_id', 'label_etiket'], 'integer'],
+            [['id', 'user_id', 'registrasi_id', 'label_etiket'], 'integer'],
             [['status', 'iter'], 'string']
         ];
     }

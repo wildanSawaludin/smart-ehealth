@@ -197,12 +197,14 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
         var pasienId = getUrlVars()['pasienId'];
 
         if(pasienId != undefined && pasienId != '') {
+            
             pasienInfo.getInfoByPasien(pasienId);
 
             setTimeout(function() {
-                pasienInfo.setSelected();
                 $('#registrasi-catatan').select2("data", {id: pasienId, text: pasienId});
-            }, 100)
+                $('#registrasi-pasienid').select2("data", { id: pasienId, text: $('#patienName').html()});
+            }, 2000)
+
         }
         else {
             var firstPasien = $('.kv-grid-table tbody tr:first').data('key');

@@ -56,20 +56,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
     $content = '
 
             <div class="col-sm-4">
-                <form class="form-horizontal">
-                      <div class="form-group">
-                        <label class="col-sm-5 control-label">Keluhan Utama</label>
-                        <div class="col-sm-1">
-                          <p class="form-control-static"></p>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="col-sm-5 control-label">Anamnesas Terpimpin</label>
-                        <div class="col-sm-1">
-                          <p class="form-control-static"></p>
-                        </div>
-                      </div>
-                    </form>
+                <img src="https://www.google.com/images/srpr/logo11w.png">
             </div>
             <div class="col-sm-8">
                     '.
@@ -87,14 +74,14 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
     $items = [
                 [
                     'label' => 'Anamnesa',
-                    'content' => $content,
+                    'content' => '',
                     'headerOptions' => ['style'=>'font-weight:bold'],
-                    'active' => true
                 ],
                 [
                     'label' => 'Pemeriksaan Fisik',
-                    'content' => '',
+                    'content' => $content,
                     'headerOptions' => ['style'=>'font-weight:bold'],
+                    'active' => true
                 ]
             ];
 
@@ -129,13 +116,13 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
         var id = getUrlVars()['id'];
 
         if(id != undefined && id != '') {
-            window.location.href = "<?= Yii::$app->urlManager->createAbsoluteUrl('/Anamnesa/anamnesa/edit') ?>?id="+id;
+            window.location.href = "<?= Yii::$app->urlManager->createAbsoluteUrl('/Anamnesa/anamnesa/main') ?>?id="+id;
         }
 
     }
 
     $(document).ready(function() {
-        $("#w1 li a:last").click(function() { relocate(); });
+        $("#w1 li a:first").click(function() { relocate(); });
     })
 
 </script>

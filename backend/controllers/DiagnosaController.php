@@ -30,9 +30,9 @@ class DiagnosaController extends Controller
         //$model = $this->findModel($id);
         $model = Registrasi::findOne($id);
         $modelDiagnosa = Diagnosa::findAll(['jenis_diagnosa' => $diagnosa]);
-        $modelResepNonRacikan = ResepNonracikan::findOne(['registrasi_id' => $id]);
+        /*$modelResepNonRacikan = ResepNonracikan::findOne(['registrasi_id' => $id]);
         $modelResepNonracikanDetail = new ResepNonracikanDetail();
-        $modelResepNonracikanDetailIsi = ResepNonracikanDetail::findAll(['resep_nonracikan_id' => $modelResepNonRacikan->id]);
+        $modelResepNonracikanDetailIsi = ResepNonracikanDetail::findAll(['resep_nonracikan_id' => $modelResepNonRacikan->id]);*/
         $dataProvider = new ActiveDataProvider([
             'query' => Icdx::find(),
         ]);
@@ -42,9 +42,9 @@ class DiagnosaController extends Controller
             'dataProvider' => $dataProvider,
             'searchModel' => $searchModel,
             'modelDiagnosa' => $modelDiagnosa,
-            'modelResepNonRacikan' => $modelResepNonRacikan,
+            /*'modelResepNonRacikan' => $modelResepNonRacikan,
             'modelResepNonracikanDetail' => $modelResepNonracikanDetail,
-            'modelResepNonracikanDetailIsi' => $modelResepNonracikanDetailIsi
+            'modelResepNonracikanDetailIsi' => $modelResepNonracikanDetailIsi*/
         ]);
     }
 

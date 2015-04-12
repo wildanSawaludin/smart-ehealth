@@ -1,5 +1,6 @@
 <?php
 use kartik\tabs\TabsX;
+use yii\helpers\Url;
 use yii\web\View;
 
 ?>
@@ -19,17 +20,18 @@ use yii\web\View;
                     $items = [
                         [
                             'label'=>'Obat-obatan',
-                            'content' => View::render('obatTab',[
-                                /*'modelResepNonRacikan' => $modelResepNonRacikan,
-                                'modelResepNonracikanDetail' => $modelResepNonracikanDetail,
-                                'modelResepNonracikanDetailIsi' => $modelResepNonracikanDetailIsi,*/
+                            'content' => View::render('obatTabUpdate',[
+                                'resepNonracikanIsi' => $resepNonracikanIsi,
+                                'resepNonracikanDetailIsi' => $resepNonracikanDetailIsi,
                                 'id' => $_GET['id']
                             ]),
-                            'active' => true
+                            'active' => true,
+                            'linkOptions'=>['data-url'=>Url::to(['/saran-anjuran/index?id='.$_GET['id']])],
                         ],
                         [
                             'label'=>'Rawat inap',
-                            'content' => ''
+                            'content' => '',
+                            'linkOptions'=>['data-url'=>Url::to(['/saran-anjuran/index?id='.$_GET['id']])],
                         ],
                         [
                             'label'=>'Bedah/operasi',

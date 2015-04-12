@@ -2,6 +2,8 @@
 
 use yii\base\View;
 use kartik\tabs\TabsX;
+use yii\helpers\Url;
+
 ?>
 
 <div class="diagnosa-form">
@@ -22,13 +24,8 @@ use kartik\tabs\TabsX;
             ],
             [
                 'label'=>'Saran/Anjuran',
-                'content' => View::render('saranAnjuran',[
-                    'model' => $model,
-                    'modelResepNonRacikan' => $modelResepNonRacikan,
-                    'modelResepNonracikanDetail' => $modelResepNonracikanDetail,
-                    'modelResepNonracikanDetailIsi' => $modelResepNonracikanDetailIsi,
-                    'id' => $_GET['id']
-                ]),
+                'content' => '',
+                'linkOptions'=>['data-url'=>Url::to(['/saran-anjuran/index?id='.$_GET['id']])],
             ]
         ];
 
