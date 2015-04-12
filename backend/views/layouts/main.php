@@ -42,7 +42,17 @@ if (Yii::$app->controller->action->id === 'login') {
         <title><?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
     </head>
-    <body class="skin-blue">
+     <?php
+
+        $collapse = '';
+
+        if(isset($GLOBALS['collapse']) && $GLOBALS['collapse'] = true) {
+            $collapse = 'sidebar-collapse';
+        }
+
+    ?>
+
+    <body class="skin-blue <?= $collapse ?>">
         <div class="wrapper">
 
             <?php $this->beginBody() ?>
