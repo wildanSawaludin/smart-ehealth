@@ -353,7 +353,6 @@ Modal::end();
         });
 
         $('#registrasi-status_pelayanan').change(function() {
-            console.log($(this).val());
 
             var sp_opname = $('#sp_opname');
 

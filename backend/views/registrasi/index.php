@@ -194,9 +194,21 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
 
     $(document).ready(function() {
 
-        var firstPasien = $('.kv-grid-table tbody tr:first').data('key');
-        if(firstPasien != undefined) {
-            pasienInfo.getInfo(firstPasien);
+        var pasienId = getUrlVars()['pasienId'];
+
+        if(pasienId != undefined && pasienId != '') {
+            pasienInfo.getInfoByPasien(pasienId);
+
+            setTimeout(function() {
+                pasienInfo.setSelected();
+                $('#registrasi-catatan').select2("data", {id: pasienId, text: pasienId});
+            }, 100)
+        }
+        else {
+            var firstPasien = $('.kv-grid-table tbody tr:first').data('key');
+            if(firstPasien != undefined) {
+                pasienInfo.getInfo(firstPasien);
+            }
         }
 
         $('#infoBody').delegate('#btnUpdate', 'click', function() {
@@ -207,8 +219,20 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
             $(this).addClass('selected-row').siblings().removeClass('selected-row');
 
             pasienInfo.getInfo($(this).data('key'));
-        })
-
+        })        
+ 
     })
+
+    function getUrlVars() {
+        var vars = [], hash;
+        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        for(var i = 0; i < hashes.length; i++)
+        {
+            hash = hashes[i].split('=');
+            vars.push(hash[0]);
+            vars[hash[0]] = hash[1];
+        }
+        return vars;
+    }
 
 </script>

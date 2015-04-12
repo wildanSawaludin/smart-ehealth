@@ -100,13 +100,27 @@ class AnamnesaController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
        } else {
-            return $this->render('update', [
-                'model' => $model,      
-                'faktor_resiko_riwayat' => $faktor_resiko_riwayat,
-                'faktor_resiko_kebiasaan' => $faktor_resiko_kebiasaan,
-                'psikososial_tingber' => $psikososial_tingber
 
-            ]);
+            if(Yii::$app->request->isAjax) {
+                $html = $this->renderPartial('update', [
+                    'model' => $model,      
+                    'faktor_resiko_riwayat' => $faktor_resiko_riwayat,
+                    'faktor_resiko_kebiasaan' => $faktor_resiko_kebiasaan,
+                    'psikososial_tingber' => $psikososial_tingber
+
+                ]);
+
+                return Json::encode($html);
+            }
+            else {
+                return $this->render('update', [
+                    'model' => $model,      
+                    'faktor_resiko_riwayat' => $faktor_resiko_riwayat,
+                    'faktor_resiko_kebiasaan' => $faktor_resiko_kebiasaan,
+                    'psikososial_tingber' => $psikososial_tingber
+
+                ]);    
+            }
        }
           
     }
@@ -435,4 +449,35 @@ $model->save();
         }
     }
     
+    /**
+     * The main view to load all anamnesa view using ajax.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionMain($id)
+    {
+
+        return $this->render('main', [
+            'id' => $id
+        ]);
+        /*
+        $model = $this->findModel($id);
+
+        $faktor_resiko_riwayat = explode(',', $model->faktor_resiko_riwayat);
+        $faktor_resiko_kebiasaan = explode(',', $model->faktor_resiko_kebiasaan);
+        $psikososial_tingber = explode(',', $model->psikososial_tingber);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+       } else {
+            return $this->render('update', [
+                'model' => $model,      
+                'faktor_resiko_riwayat' => $faktor_resiko_riwayat,
+                'faktor_resiko_kebiasaan' => $faktor_resiko_kebiasaan,
+                'psikososial_tingber' => $psikososial_tingber
+
+            ]);
+       }
+        */
+    }    
 }
