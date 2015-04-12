@@ -13,9 +13,23 @@ use yii\web\Response;
 
 class PemeriksaanFisikController extends Controller{
 
+     public $layout = 'anamnesa';
+
+    public function behaviors()
+    {
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['post'],
+                ],
+            ],
+        ];
+    }
+    
  public function actionCreate($id){
      $model = $this->findModel($id);
-       
+       Yii::$app->response->format = Response::FORMAT_JSON; 
      //   if ($model->load(Yii::$app->request->post()) && $model->save()) {
        //     return $this->redirect(['view', 'id' => $model->id]);
        // } else {

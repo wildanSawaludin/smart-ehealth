@@ -58,6 +58,7 @@ use kartik\tabs\TabsX;
     'items'=>$items,
     'position'=>TabsX::POS_LEFT,
     'sideways'=>true,
+    'id'=>'tabs-anamnesautama',
     'encodeLabels'=>false,
     'pluginOptions' =>  ['enableCache'=>false],
 ]);
@@ -301,3 +302,5 @@ Modal::end();
 <script>var id = '<?php echo $_GET['id']; ?>' </script>  
 <?php $this->registerJsFile('/admin/js/popupKeluhan.js'); ?>
 <?php $this->registerJsFile('/admin/js/popupFunction.js'); ?>
+
+

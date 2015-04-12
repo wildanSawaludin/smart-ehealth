@@ -20,7 +20,7 @@ use yii\web\Response;
  */
 class AnamnesaController extends Controller
 {
-    public $layout = 'middle';
+    public $layout = 'anamnesa';
 
     public function behaviors()
     {
@@ -88,7 +88,7 @@ class AnamnesaController extends Controller
      */
     public function actionUpdate($id)
     {
-        
+        //$id = $_POST['id'];
         $model = $this->findModel($id);
 
         
