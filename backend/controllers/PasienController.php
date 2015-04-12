@@ -77,8 +77,8 @@ class PasienController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
-    {
+    public function actionUpdate($id) {
+
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -88,6 +88,7 @@ class PasienController extends Controller
                 'model' => $model,
             ]);
         }
+        
     }
 
     /**

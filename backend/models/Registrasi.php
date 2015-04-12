@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use yii\db\Query;
 
 /**
  * This is the model class for table "registrasi".
@@ -57,14 +58,14 @@ class Registrasi extends \yii\db\ActiveRecord {
     public $nomorRegistrasi;
     public $no_rm;
     public $jenis_kelamin;
-    public $faskes;
+    public $fasilitas_kesehatan;
 
     public function rules() {
         return [
             [['pasienId', 'status_pelayanan'], 'required'],
             [['pasienId', 'asuransi_provider_id', 'icdx_id', 'no_antrian', 'faskes_id', 'nomorRegistrasi', 'usia'], 'integer'],
-            [['tanggal_registrasi', 'asuransi_tgl_lahir', 'no_rm', 'jenis_kelamin'], 'safe'],
-            [['status_registrasi', 'asal_registrasi', 'status_pelayanan', 'status_rawat', 'status_asuransi', 'catatan', 'faskes'], 'string'],
+            [['tanggal_registrasi', 'asuransi_tgl_lahir', 'no_rm', 'jenis_kelamin', 'fasilitas_kesehatan', 'faskes'], 'safe'],
+            [['status_registrasi', 'asal_registrasi', 'status_pelayanan', 'status_rawat', 'status_asuransi', 'catatan'], 'string'],
             [['no_reg', 'asuransi_noreg', 'asuransi_noreg_other', 'asuransi_notelp'], 'string', 'max' => 15],
             [['dr_penanggung_jawab', 'asuransi_nama'], 'string', 'max' => 25],
             [['asuransi_status_jaminan', 'asuransi_penanggung_jawab', 'asuransi_alamat'], 'string', 'max' => 30]
@@ -102,7 +103,7 @@ class Registrasi extends \yii\db\ActiveRecord {
             'nomorRegistrasi' => 'No Registrasi',
             'no_rm' => 'No RM',
             'jenis_kelamin' => 'Jenis Kelamin',
-            'faskes' => 'Fasilitas Kesehatan'
+            'fasilitas_kesehatan' => 'Fasilitas Kesehatan'
         ];
     }
 
@@ -181,10 +182,10 @@ class Registrasi extends \yii\db\ActiveRecord {
         $now = new \DateTime();
         $diff = $now->diff($birthDay); 
 
-        $this->faskes = $this->faskes_id->nama;
+        $this->fasilitas_kesehatan = $this->faskes->nama;
         $this->jenis_kelamin = $this->pasien->jenkel;
         $this->no_rm = str_pad($this->pasien->id, 6, '0', STR_PAD_LEFT);
-        $this->nomorRegistrasi = $this->asal_registrasi.'-'.str_pad($this->id, 6, '0', STR_PAD_LEFT);
+        $this->nomorRegistrasi = $this->asal_registrasi[0].'-'.str_pad($this->id, 6, '0', STR_PAD_LEFT);
     }
 
     public function beforeSave($insert) {
@@ -197,7 +198,10 @@ class Registrasi extends \yii\db\ActiveRecord {
                     ->where('tanggal_registrasi > "' . date('Y-m-d') . '"');
                 $command = $query->scalar();
 
-                $this->no_antrian = $counter;
+                $this->status_registrasi = 'Antrian';
+                $this->asal_registrasi = 'Web';
+                $this->faskes_id = 1;
+                $this->no_antrian = $command;
             }
 
             return true;

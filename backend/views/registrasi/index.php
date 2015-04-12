@@ -120,7 +120,11 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
                             ],
                             'usia',
                             'jenis_kelamin',
-                            'faskes',
+                            [
+                                'attribute' => 'fasilitas_kesehatan',
+                                'value' => $model->fasilitas_kesehatan
+
+                            ],
                             'status_registrasi',
                             [
                                 'class' => 'yii\grid\ActionColumn',
