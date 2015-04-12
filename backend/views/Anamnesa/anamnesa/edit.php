@@ -82,6 +82,11 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
                     'content' => $content,
                     'headerOptions' => ['style'=>'font-weight:bold'],
                     'active' => true
+                ],
+                [
+                    'label' => 'Diagnosa',
+                    'content' => '',
+                    'headerOptions' => ['style'=>'font-weight:bold']
                 ]
             ];
 
@@ -110,19 +115,21 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
         }
         return vars;
     }
-    
-    function relocate() {
+
+    $(document).ready(function() {
 
         var id = getUrlVars()['id'];
 
-        if(id != undefined && id != '') {
-            window.location.href = "<?= Yii::$app->urlManager->createAbsoluteUrl('/Anamnesa/anamnesa/main') ?>?id="+id;
+        if(id != undefined && id != "") {
+            $($("#w1 li a")[0]).bind('click', id, function(){ 
+                window.location.href = "<?= Yii::$app->urlManager->createAbsoluteUrl('/Anamnesa/anamnesa/main') ?>?id="+id;
+            })
+
+            $($("#w1 li a")[2]).bind('click', id, function(){ 
+                window.location.href = "<?= Yii::$app->urlManager->createAbsoluteUrl('/diagnosa/update') ?>?id="+id;
+            })
         }
 
-    }
-
-    $(document).ready(function() {
-        $("#w1 li a:first").click(function() { relocate(); });
     })
 
 </script>

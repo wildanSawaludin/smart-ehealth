@@ -485,7 +485,7 @@ $model->save();
      * @param integer $id
      * @return mixed
      */
-    public function actionEdit($id)
+    public function actionPemeriksaanFisik($id)
     {
         $this->layout = 'main';
 

@@ -37,6 +37,10 @@ class DiagnosaController extends Controller
             'query' => Icdx::find(),
         ]);
         $searchModel = new IcdxSearch();
+        
+        $this->layout = 'main';
+        $GLOBALS['collapse'] = true;
+        
         return $this->render('update', [
            'model' => $model,
             'dataProvider' => $dataProvider,
@@ -165,6 +169,10 @@ class DiagnosaController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function actionPemeriksaanFisik($id) {
+
     }
 
 }

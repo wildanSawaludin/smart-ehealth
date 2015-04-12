@@ -9,6 +9,8 @@ use backend\models\Icdx;
 use backend\models\RegistrasiSearch;
 use backend\models\Anamnesa;
 use backend\models\AnamnesaSearch;
+use backend\models\Diagnosa;
+use backend\models\PemeriksaanFisik;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -170,17 +172,27 @@ class RegistrasiController extends Controller {
     public function actionResume($id)
     {
        
+        //insert anamnesa
         $modelResume = new Anamnesa;
         $modelResume->registrasi_id = $id;
         $modelResume->save();
-        
+
+        //insert diagnosa
+        $modelDiagnosa = new Diagnosa();
+        $modelDiagnosa->registrasi_id = $id;
+        $modelDiagnosa->save();
+
+        //insert pemeriksaan fisik
+        $modelPemeriksaanFisik = new PemeriksaanFisik();
+        $modelPemeriksaanFisik->registrasi_id = $id;
+        $modelPemeriksaanFisik->save();
+
         $model = $this->findModel($id);
         $model->status_registrasi = 'Resume';
         $model->save();
-        
-        
+
         if($modelResume->save()){
-            return $this->redirect(['Anamnesa/anamnesa/update', 'id' => $modelResume->id]);
+            return $this->redirect(['Anamnesa/anamnesa/main', 'id' => $modelResume->id]);
         }
 //        var_dump($modelResume);
 //                exit();
