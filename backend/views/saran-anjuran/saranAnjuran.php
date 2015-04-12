@@ -1,5 +1,6 @@
 <?php
 use kartik\tabs\TabsX;
+use yii\helpers\Url;
 use yii\web\View;
 
 ?>
@@ -20,16 +21,16 @@ use yii\web\View;
                         [
                             'label'=>'Obat-obatan',
                             'content' => View::render('obatTab',[
-                                /*'modelResepNonRacikan' => $modelResepNonRacikan,
-                                'modelResepNonracikanDetail' => $modelResepNonracikanDetail,
-                                'modelResepNonracikanDetailIsi' => $modelResepNonracikanDetailIsi,*/
+                                'resepNonracikan' => $resepNonracikan,
                                 'id' => $_GET['id']
                             ]),
-                            'active' => true
+                            'active' => true,
+                            'linkOptions'=>['data-url'=>Url::to(['/saran-anjuran/index?id='.$_GET['id']])],
                         ],
                         [
                             'label'=>'Rawat inap',
-                            'content' => ''
+                            'content' => '',
+                            'linkOptions'=>['data-url'=>Url::to(['/saran-anjuran/index?id='.$_GET['id']])],
                         ],
                         [
                             'label'=>'Bedah/operasi',

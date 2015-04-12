@@ -22,9 +22,9 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
         'dataProvider' => $dataProvider,
         'searchModel' => $searchModel,
         'modelDiagnosa' => $modelDiagnosa,
-        'modelResepNonRacikan' => $modelResepNonRacikan,
+        /*'modelResepNonRacikan' => $modelResepNonRacikan,
         'modelResepNonracikanDetail' => $modelResepNonracikanDetail,
-        'modelResepNonracikanDetailIsi' => $modelResepNonracikanDetailIsi
+        'modelResepNonracikanDetailIsi' => $modelResepNonracikanDetailIsi*/
     ]) ?>
 
 </div>
