@@ -14,58 +14,12 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Diagnosa'), 'url' =>
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 
- $content = '
+$GLOBALS['page_title'] = '<h1>Anamnesa<small>Diagnosa</small></h1>';
 
-            <div class="col-sm-12">
-                    '.
-                   $this->render('_form', [
-                        'model' => $model,
-                        'dataProvider' => $dataProvider,
-                        'searchModel' => $searchModel,
-                        'modelDiagnosa' => $modelDiagnosa,
-                        /*'modelResepNonRacikan' => $modelResepNonRacikan,
-                        'modelResepNonracikanDetail' => $modelResepNonracikanDetail,
-                        'modelResepNonracikanDetailIsi' => $modelResepNonracikanDetailIsi*/
-                    ]).
-                '
-            </div>
-
-    ';
-
-    $items = [
-                [
-                    'label' => 'Anamnesa',
-                    'content' => '',
-                    'headerOptions' => ['style'=>'font-weight:bold'],
-                ],
-                [
-                    'label' => 'Pemeriksaan Fisik',
-                    'content' => '',
-                    'headerOptions' => ['style'=>'font-weight:bold'],
-                ],
-                [
-                    'label' => 'Diagnosa',
-                    'content' => $content,
-                    'headerOptions' => ['style'=>'font-weight:bold'],
-                    'active' => true
-                ]
-            ];
-
-          
-            echo '<div class="col-sm-12">  '. TabsX::widget([
-                'position' => TabsX::POS_ABOVE,
-                'align' => TabsX::ALIGN_LEFT,
-                'items'=>$items,
-                'encodeLabels'=>false,
-            ]).'</div>';
-            
-
-?>
-<?php
- Modal::begin([
+Modal::begin([
      'id' => 'pop-diagnosa',
      'header' => 'Pilih Diagnosa'
- ]);
+]);
 
 Modal::end();
 
@@ -76,6 +30,41 @@ Modal::begin([
 
 Modal::end();
 ?>
+
+<div class="row">
+    <div class="nav-tabs-custom">
+        <ul id="tab-main" class="nav nav-tabs">
+            <li class=""><a href="#tab_1" data-toggle="tab" aria-expanded="false">Anamnesa</a></li>
+            <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Pemeriksaan Fisik</a></li>
+            <li class="active"><a href="#tab_3" data-toggle="tab" aria-expanded="true">Diagnosa</a></li>
+            <li class="pull-right header">
+                <dl class="dl-horizontal">
+                    <dt>No RM</dt>
+                    <dd><?= str_pad($pasien->id, 6, '0', STR_PAD_LEFT) ?></dd>
+                    <dt>Nama</dt>
+                    <dd><?= $pasien->nama.' / '.$pasien->getUsia().' / '.$pasien->jenkel[0] ?></dd>
+                </dl>
+            </li>
+        </ul>
+        <div class="tab-content" style="min-height:800px;">
+            <div class="tab-pane active" id="tab_3">
+                <div class="col-sm-12">
+                    <?= 
+                        $this->render('_form', [
+                            'model' => $model,
+                            'dataProvider' => $dataProvider,
+                            'searchModel' => $searchModel,
+                            'modelDiagnosa' => $modelDiagnosa,
+                        ])
+                    ?>
+                </div>
+            </div><!-- /.tab-pane -->
+            <div class="tab-pane" id="tab_1">
+                
+            </div><!-- /.tab-pane -->
+        </div><!-- /.tab-content -->
+    </div>
+</div>
 
 <script type="text/javascript">
 
@@ -96,11 +85,11 @@ Modal::end();
         var id = getUrlVars()['id'];
 
         if(id != undefined && id != "") {
-            $($("#w2 li a")[0]).bind('click', id, function(){ 
+            $($("#tab-main li a")[0]).bind('click', id, function(){ 
                 window.location.href = "<?= Yii::$app->urlManager->createAbsoluteUrl('/Anamnesa/anamnesa/main') ?>?id="+id;
             })
 
-            $($("#w2 li a")[1]).bind('click', id, function(){ 
+            $($("#tab-main li a")[1]).bind('click', id, function(){ 
                 window.location.href = "<?= Yii::$app->urlManager->createAbsoluteUrl('/Anamnesa/anamnesa/pemeriksaan-fisik') ?>?id="+id;
             })
         }

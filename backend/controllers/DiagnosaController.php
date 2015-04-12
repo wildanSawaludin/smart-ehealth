@@ -40,12 +40,15 @@ class DiagnosaController extends Controller
         
         $this->layout = 'main';
         $GLOBALS['collapse'] = true;
-        
+        $modelAnamnesa = Anamnesa::findOne($id);
+        $registrasi = Registrasi::findOne($modelAnamnesa->registrasi_id);
+
         return $this->render('update', [
            'model' => $model,
             'dataProvider' => $dataProvider,
             'searchModel' => $searchModel,
             'modelDiagnosa' => $modelDiagnosa,
+            'pasien' => $registrasi->pasien,
             /*'modelResepNonRacikan' => $modelResepNonRacikan,
             'modelResepNonracikanDetail' => $modelResepNonracikanDetail,
             'modelResepNonracikanDetailIsi' => $modelResepNonracikanDetailIsi*/
@@ -169,10 +172,6 @@ class DiagnosaController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
-    }
-
-    public function actionPemeriksaanFisik($id) {
-
     }
 
 }
