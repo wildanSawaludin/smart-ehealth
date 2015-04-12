@@ -157,7 +157,7 @@ $this->registerJs("$(document).ready(function () {
                type: "POST",
                url: baseurl + '/diagnosa/save-obat-nonracikan?id=<?php echo $_GET['id']; ?>',
                success:function(data){
-
+               		location.reload();
                }
            });
        })
