@@ -87,14 +87,16 @@ $GLOBALS['page_title'] = '<h1>Anamnesa<small>Anamnesa</small></h1>';
         if(id != undefined && id != "") {
 
             $($("#tab-main li a")[1]).bind('click', id, function(){ 
+
                 window.location.href = "<?= Yii::$app->urlManager->createAbsoluteUrl('/Anamnesa/pemeriksaan-fisik/create') ?>?id="+id;
-            })
+
+            });
 
             $($("#tab-main li a")[2]).bind('click', id, function(){ 
                 window.location.href = "<?= Yii::$app->urlManager->createAbsoluteUrl('/diagnosa/update') ?>?id="+id;
-            })
+            });
         }
 
-    })
+    });
 
 </script>

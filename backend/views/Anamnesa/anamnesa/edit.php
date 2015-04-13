@@ -34,7 +34,9 @@ $GLOBALS['page_title'] = '<h1>Anamnesa<small>Pemeriksaan Fisik</small></h1>';
             <div class="tab-pane active" id="tab_2">
                 <div class="col-sm-12">
                     <div class="col-sm-4">
-                        <!--<img src="https://www.google.com/images/srpr/logo11w.png">-->
+                        <div style="margin:auto;">
+                            <img style="max-height:400px;" src="<?= Yii::$app->urlManager->baseUrl . '/static/front.jpg' ?>">
+                        </div>
                     </div>
                     <div class="col-sm-8">
                         <?= 

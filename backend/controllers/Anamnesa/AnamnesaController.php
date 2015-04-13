@@ -8,6 +8,7 @@ use backend\models\Anamnesa;
 use backend\models\AnamnesaSearch;
 use backend\models\Lookup;
 use backend\models\Registrasi;
+use backend\models\PemeriksaanFisik;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -432,6 +433,15 @@ $model->save();
      * @return Anamnesa the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
+    protected function findRegistrasi($id)
+    {
+        if (($model = Anamnesa::findOne(['registrasi_id'=>$id])) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+    
     protected function findModel($id)
     {
         if (($model = Anamnesa::findOne($id)) !== null) {
@@ -459,11 +469,11 @@ $model->save();
     public function actionMain($id)
     {
         $this->layout = 'main';
-
-        $model = $this->findModel($id);
+        $modelRegistrasi = $this->findRegistrasi($id);
+        $model = $this->findModel($modelRegistrasi->id);
 
         $registrasi = Registrasi::findOne($model->registrasi_id);
-        
+        $pemeriksaan_fisik = PemeriksaanFisik::findOne(['registrasi_id' => $registrasi->id]);
         $faktor_resiko_riwayat = explode(',', $model->faktor_resiko_riwayat);
         $faktor_resiko_kebiasaan = explode(',', $model->faktor_resiko_kebiasaan);
         $psikososial_tingber = explode(',', $model->psikososial_tingber);
@@ -478,7 +488,8 @@ $model->save();
                     'faktor_resiko_riwayat' => $faktor_resiko_riwayat,
                     'faktor_resiko_kebiasaan' => $faktor_resiko_kebiasaan,
                     'psikososial_tingber' => $psikososial_tingber,
-                    'pasien' => $registrasi->pasien
+                    'pasien' => $registrasi->pasien,
+                    'pemeriksaan_fisik' => $pemeriksaan_fisik->id
                 ]);    
        }
     }    

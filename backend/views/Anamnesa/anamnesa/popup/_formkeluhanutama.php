@@ -39,7 +39,7 @@ use yii\bootstrap\Modal;
 $this->registerJs("$(document).ready(function () {
        $('input[name=\"Anamnesa[keluhan]\"]').change(function () {
           
-            alert('test');
-
+           
+        });
     });");
 ?>

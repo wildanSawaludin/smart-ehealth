@@ -70,7 +70,7 @@ $(\"input[type='checkbox']\").click(
 
               
     }
-    }); 
+  });
     
 }else{
  
@@ -83,7 +83,7 @@ $(\"input[type='checkbox']\").click(
             success  : function(response) {
              
     }
-    });
+  });
 }
 }
 );

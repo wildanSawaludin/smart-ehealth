@@ -192,7 +192,7 @@ class RegistrasiController extends Controller {
         $model->save();
 
         if($modelResume->save()){
-            return $this->redirect(['Anamnesa/anamnesa/main', 'id' => $modelResume->id]);
+            return $this->redirect(['Anamnesa/anamnesa/main', 'id' => $model->id]);
         }
 //        var_dump($modelResume);
 //                exit();
