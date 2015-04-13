@@ -8,6 +8,7 @@ use backend\models\Anamnesa;
 use backend\models\AnamnesaSearch;
 use backend\models\Lookup;
 use backend\models\Registrasi;
+use backend\models\PemeriksaanFisik;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -463,7 +464,7 @@ $model->save();
         $model = $this->findModel($id);
 
         $registrasi = Registrasi::findOne($model->registrasi_id);
-        
+        $pemeriksaan_fisik = PemeriksaanFisik::findOne(['registrasi_id' => $registrasi->id]);
         $faktor_resiko_riwayat = explode(',', $model->faktor_resiko_riwayat);
         $faktor_resiko_kebiasaan = explode(',', $model->faktor_resiko_kebiasaan);
         $psikososial_tingber = explode(',', $model->psikososial_tingber);
@@ -478,7 +479,8 @@ $model->save();
                     'faktor_resiko_riwayat' => $faktor_resiko_riwayat,
                     'faktor_resiko_kebiasaan' => $faktor_resiko_kebiasaan,
                     'psikososial_tingber' => $psikososial_tingber,
-                    'pasien' => $registrasi->pasien
+                    'pasien' => $registrasi->pasien,
+                    'pemeriksaan_fisik' => $pemeriksaan_fisik->id
                 ]);    
        }
     }    

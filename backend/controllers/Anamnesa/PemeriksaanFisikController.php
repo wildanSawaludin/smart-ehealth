@@ -4,6 +4,7 @@ namespace backend\controllers\Anamnesa;
 
 use Yii;
 use backend\models\PemeriksaanFisik;
+use backend\models\Registrasi;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -14,15 +15,16 @@ use yii\web\Response;
 class PemeriksaanFisikController extends Controller{
 
  public function actionCreate($id){
-     $model = $this->findModel($id);
-       
+      $model = $this->findModel($id);
+
+      $registrasi = Registrasi::findOne($model->registrasi_id);
+        
      //   if ($model->load(Yii::$app->request->post()) && $model->save()) {
        //     return $this->redirect(['view', 'id' => $model->id]);
        // } else {
             return $this->render('create', [
                 'model' => $model,
-               
-                
+                'pasien' =>  $registrasi->pasien
             ]);
         //}
      
