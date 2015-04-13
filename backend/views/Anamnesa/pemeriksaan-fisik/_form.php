@@ -61,8 +61,16 @@ $items = [
             <div class="tab-pane active" id="tab_2">
                 <div class="col-sm-12">
                     <div class="col-sm-4">
-                        <div style="margin:auto;">
-                            <img style="max-height:400px;" src="<?= Yii::$app->urlManager->baseUrl . '/static/front.jpg' ?>">
+                        <div class="col-sm-12">
+                            <h3 style="text-align:center;">Depan</h3>
+                        </div>
+                        <div class="col-sm-6">
+                            <img style="max-height: 201px;" src="<?= Yii::$app->urlManager->baseUrl . '/static/head.jpg' ?>">
+                            <h3 style="text-align:center;">Belakang</h3>
+                            <img style="max-height: 351px;" src="<?= Yii::$app->urlManager->baseUrl . '/static/back.jpg' ?>">
+                        </div>
+                        <div class="col-sm-6">
+                            <img style="max-height: 500px;margin-top:28px;" src="<?= Yii::$app->urlManager->baseUrl . '/static/front.jpg' ?>">
                         </div>
                     </div>
                     <div class="col-sm-8">
