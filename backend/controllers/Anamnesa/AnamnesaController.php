@@ -7,6 +7,7 @@ use yii\filters\AccessControl;
 use backend\models\Anamnesa;
 use backend\models\AnamnesaSearch;
 use backend\models\Lookup;
+use backend\models\Registrasi;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -461,6 +462,8 @@ $model->save();
 
         $model = $this->findModel($id);
 
+        $registrasi = Registrasi::findOne($model->registrasi_id);
+        
         $faktor_resiko_riwayat = explode(',', $model->faktor_resiko_riwayat);
         $faktor_resiko_kebiasaan = explode(',', $model->faktor_resiko_kebiasaan);
         $psikososial_tingber = explode(',', $model->psikososial_tingber);
@@ -474,8 +477,8 @@ $model->save();
                     'model' => $model,      
                     'faktor_resiko_riwayat' => $faktor_resiko_riwayat,
                     'faktor_resiko_kebiasaan' => $faktor_resiko_kebiasaan,
-                    'psikososial_tingber' => $psikososial_tingber
-
+                    'psikososial_tingber' => $psikososial_tingber,
+                    'pasien' => $registrasi->pasien
                 ]);    
        }
     }    
@@ -485,11 +488,13 @@ $model->save();
      * @param integer $id
      * @return mixed
      */
-    public function actionEdit($id)
+    public function actionPemeriksaanFisik($id)
     {
         $this->layout = 'main';
 
         $model = $this->findModel($id);
+
+        $registrasi = Registrasi::findOne($model->registrasi_id);
 
         $faktor_resiko_riwayat = explode(',', $model->faktor_resiko_riwayat);
         $faktor_resiko_kebiasaan = explode(',', $model->faktor_resiko_kebiasaan);
@@ -504,7 +509,8 @@ $model->save();
                     'model' => $model,      
                     'faktor_resiko_riwayat' => $faktor_resiko_riwayat,
                     'faktor_resiko_kebiasaan' => $faktor_resiko_kebiasaan,
-                    'psikososial_tingber' => $psikososial_tingber
+                    'psikososial_tingber' => $psikososial_tingber,
+                    'pasien' => $registrasi->pasien
                 ]);    
        }
     }        

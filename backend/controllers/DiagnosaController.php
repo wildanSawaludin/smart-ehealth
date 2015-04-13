@@ -38,11 +38,18 @@ class DiagnosaController extends Controller
             'query' => Icdx::find(),
         ]);
         $searchModel = new IcdxSearch();
+        
+        $this->layout = 'main';
+        $GLOBALS['collapse'] = true;
+        $modelAnamnesa = Anamnesa::findOne($id);
+        $registrasi = Registrasi::findOne($modelAnamnesa->registrasi_id);
+
         return $this->render('update', [
            'model' => $model,
             'dataProvider' => $dataProvider,
             'searchModel' => $searchModel,
             'modelDiagnosa' => $modelDiagnosa,
+            'pasien' => $registrasi->pasien,
             /*'modelResepNonRacikan' => $modelResepNonRacikan,
             'modelResepNonracikanDetail' => $modelResepNonracikanDetail,
             'modelResepNonracikanDetailIsi' => $modelResepNonracikanDetailIsi*/

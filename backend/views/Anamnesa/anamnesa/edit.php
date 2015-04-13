@@ -3,48 +3,6 @@
 use kartik\tabs\TabsX;
 use yii\helpers\Url;
 use yii\helpers\Html;
- 
-/*
-$items = [
-    [
-        'label'=>'<i class="glyphicon glyphicon-home"></i> Home',
-        'content'=>$content1,
-        'active'=>true,
-        'linkOptions'=>['data-url'=>Url::to(['/Anamnesa/anamnesa/update?id=27#'])]
-    ],
-    [
-        'label'=>'<i class="glyphicon glyphicon-user"></i> Profile',
-        'content'=>$content2,
-        'linkOptions'=>['data-url'=>Url::to(['/site/fetch-tab?tab=2'])]
-    ],
-    [
-        'label'=>'<i class="glyphicon glyphicon-list-alt"></i> Dropdown',
-        'items'=>[
-             [
-                 'label'=>'<i class="glyphicon glyphicon-chevron-right"></i> Option 1',
-                 'encode'=>false,
-                 'content'=>$content3,
-                 'linkOptions'=>['data-url'=>Url::to(['/site/fetch-tab?tab=3'])]
-             ],
-             [
-                 'label'=>'<i class="glyphicon glyphicon-chevron-right"></i> Option 2',
-                 'encode'=>false,
-                 'content'=>$content4,
-                 'linkOptions'=>['data-url'=>Url::to(['/site/fetch-tab?tab=4'])]
-             ],
-        ],
-    ],
-];
-// Ajax Tabs Above
-echo TabsX::widget([
-    'items'=>$items,
-    'position'=>TabsX::POS_ABOVE,
-    'encodeLabels'=>false
-]);
-*/
-
-/* @var $this yii\web\View */
-/* @var $model backend\models\Anamnesa */
 
 $this->title = Yii::t('app', 'Update {modelClass}: ', [
     'modelClass' => 'Anamnesa',
@@ -53,48 +11,49 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Anamnesas'), 'url' =
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 
-    $content = '
-
-            <div class="col-sm-4">
-                <img src="https://www.google.com/images/srpr/logo11w.png">
-            </div>
-            <div class="col-sm-8">
-                    '.
-                    $this->render('_form', [
-                        'model' => $model,
-                        'faktor_resiko_riwayat' => $faktor_resiko_riwayat,
-                        'faktor_resiko_kebiasaan' => $faktor_resiko_kebiasaan,
-                        'psikososial_tingber' => $psikososial_tingber
-                    ]).
-                '
-            </div>
-
-    ';
-
-    $items = [
-                [
-                    'label' => 'Anamnesa',
-                    'content' => '',
-                    'headerOptions' => ['style'=>'font-weight:bold'],
-                ],
-                [
-                    'label' => 'Pemeriksaan Fisik',
-                    'content' => $content,
-                    'headerOptions' => ['style'=>'font-weight:bold'],
-                    'active' => true
-                ]
-            ];
-
-          
-            echo '<div class="col-sm-12">  '. TabsX::widget([
-                'position' => TabsX::POS_ABOVE,
-                'align' => TabsX::ALIGN_LEFT,
-                'items'=>$items,
-                'encodeLabels'=>false,
-            ]).'</div>';
-            
+$GLOBALS['page_title'] = '<h1>Anamnesa<small>Pemeriksaan Fisik</small></h1>';
 
 ?>
+
+<div class="row">
+    <div class="nav-tabs-custom">
+        <ul id="tab-main" class="nav nav-tabs">
+            <li class=""><a href="#tab_1" data-toggle="tab" aria-expanded="false">Anamnesa</a></li>
+            <li class="active"><a href="#tab_2" data-toggle="tab" aria-expanded="true">Pemeriksaan Fisik</a></li>
+            <li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="false">Diagnosa</a></li>
+            <li class="pull-right header">
+                <dl class="dl-horizontal">
+                    <dt>No RM</dt>
+                    <dd><?= str_pad($pasien->id, 6, '0', STR_PAD_LEFT) ?></dd>
+                    <dt>Nama</dt>
+                    <dd><?= $pasien->nama.' / '.$pasien->getUsia().' / '.$pasien->jenkel[0] ?></dd>
+                </dl>
+            </li>
+        </ul>
+        <div class="tab-content" style="min-height:500px;">
+            <div class="tab-pane active" id="tab_2">
+                <div class="col-sm-12">
+                    <div class="col-sm-4">
+                        <!--<img src="https://www.google.com/images/srpr/logo11w.png">-->
+                    </div>
+                    <div class="col-sm-8">
+                        <?= 
+                            $this->render('_form', [
+                                'model' => $model,
+                                'faktor_resiko_riwayat' => $faktor_resiko_riwayat,
+                                'faktor_resiko_kebiasaan' => $faktor_resiko_kebiasaan,
+                                'psikososial_tingber' => $psikososial_tingber
+                            ]) 
+                        ?>
+                    </div>
+                </div>
+            </div><!-- /.tab-pane -->
+            <div class="tab-pane" id="tab_1">
+                
+            </div><!-- /.tab-pane -->
+        </div><!-- /.tab-content -->
+    </div>
+</div>
 
 
 <script type="text/javascript">
@@ -110,19 +69,22 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
         }
         return vars;
     }
-    
-    function relocate() {
+
+    $(document).ready(function() {
 
         var id = getUrlVars()['id'];
 
-        if(id != undefined && id != '') {
-            window.location.href = "<?= Yii::$app->urlManager->createAbsoluteUrl('/Anamnesa/anamnesa/main') ?>?id="+id;
+        if(id != undefined && id != "") {
+
+            $($("#tab-main li a")[0]).bind('click', id, function(){ 
+                window.location.href = "<?= Yii::$app->urlManager->createAbsoluteUrl('/Anamnesa/anamnesa/main') ?>?id="+id;
+            })
+
+            $($("#tab-main li a")[2]).bind('click', id, function(){ 
+                window.location.href = "<?= Yii::$app->urlManager->createAbsoluteUrl('/diagnosa/update') ?>?id="+id;
+            })
         }
 
-    }
-
-    $(document).ready(function() {
-        $("#w1 li a:first").click(function() { relocate(); });
     })
 
 </script>

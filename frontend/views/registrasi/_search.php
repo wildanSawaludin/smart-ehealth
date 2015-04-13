@@ -21,9 +21,15 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'pasien_id') ?>
 
-    <?= $form->field($model, 'registrasi_date') ?>
+    <?= $form->field($model, 'tanggal_registrasi') ?>
 
-    <?= $form->field($model, 'status_pelayanan') ?>
+    <?= $form->field($model, 'status_registrasi') ?>
+
+    <?php // echo $form->field($model, 'asal_registrasi') ?>
+
+    <?php // echo $form->field($model, 'status_pelayanan') ?>
+
+    <?php // echo $form->field($model, 'tanggal_kunjungan') ?>
 
     <?php // echo $form->field($model, 'status_rawat') ?>
 
@@ -37,6 +43,8 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'asuransi_noreg') ?>
 
+    <?php // echo $form->field($model, 'asuransi_noreg_other') ?>
+
     <?php // echo $form->field($model, 'asuransi_nama') ?>
 
     <?php // echo $form->field($model, 'asuransi_tgl_lahir') ?>
@@ -48,6 +56,12 @@ use yii\widgets\ActiveForm;
     <?php // echo $form->field($model, 'asuransi_alamat') ?>
 
     <?php // echo $form->field($model, 'asuransi_notelp') ?>
+
+    <?php // echo $form->field($model, 'no_antrian') ?>
+
+    <?php // echo $form->field($model, 'asuransi_provider_id') ?>
+
+    <?php // echo $form->field($model, 'faskes_id') ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>

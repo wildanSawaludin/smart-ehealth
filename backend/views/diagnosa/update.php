@@ -1,5 +1,6 @@
 <?php
 
+use kartik\tabs\TabsX;
 use yii\bootstrap\Modal;
 use yii\helpers\Html;
 
@@ -12,27 +13,13 @@ $this->title = Yii::t('app', 'Update {modelClass}: ', [
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Diagnosa'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
-?>
-<div class="anamnesa-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+$GLOBALS['page_title'] = '<h1>Anamnesa<small>Diagnosa</small></h1>';
 
-    <?= $this->render('_form', [
-        'model' => $model,
-        'dataProvider' => $dataProvider,
-        'searchModel' => $searchModel,
-        'modelDiagnosa' => $modelDiagnosa,
-        /*'modelResepNonRacikan' => $modelResepNonRacikan,
-        'modelResepNonracikanDetail' => $modelResepNonracikanDetail,
-        'modelResepNonracikanDetailIsi' => $modelResepNonracikanDetailIsi*/
-    ]) ?>
-
-</div>
-<?php
- Modal::begin([
+Modal::begin([
      'id' => 'pop-diagnosa',
      'header' => 'Pilih Diagnosa'
- ]);
+]);
 
 Modal::end();
 
@@ -43,3 +30,70 @@ Modal::begin([
 
 Modal::end();
 ?>
+
+<div class="row">
+    <div class="nav-tabs-custom">
+        <ul id="tab-main" class="nav nav-tabs">
+            <li class=""><a href="#tab_1" data-toggle="tab" aria-expanded="false">Anamnesa</a></li>
+            <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Pemeriksaan Fisik</a></li>
+            <li class="active"><a href="#tab_3" data-toggle="tab" aria-expanded="true">Diagnosa</a></li>
+            <li class="pull-right header">
+                <dl class="dl-horizontal">
+                    <dt>No RM</dt>
+                    <dd><?= str_pad($pasien->id, 6, '0', STR_PAD_LEFT) ?></dd>
+                    <dt>Nama</dt>
+                    <dd><?= $pasien->nama.' / '.$pasien->getUsia().' / '.$pasien->jenkel[0] ?></dd>
+                </dl>
+            </li>
+        </ul>
+        <div class="tab-content" style="min-height:800px;">
+            <div class="tab-pane active" id="tab_3">
+                <div class="col-sm-12">
+                    <?= 
+                        $this->render('_form', [
+                            'model' => $model,
+                            'dataProvider' => $dataProvider,
+                            'searchModel' => $searchModel,
+                            'modelDiagnosa' => $modelDiagnosa,
+                        ])
+                    ?>
+                </div>
+            </div><!-- /.tab-pane -->
+            <div class="tab-pane" id="tab_1">
+                
+            </div><!-- /.tab-pane -->
+        </div><!-- /.tab-content -->
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function getUrlVars() {
+        var vars = [], hash;
+        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        for(var i = 0; i < hashes.length; i++)
+        {
+            hash = hashes[i].split('=');
+            vars.push(hash[0]);
+            vars[hash[0]] = hash[1];
+        }
+        return vars;
+    }
+
+    $(document).ready(function() {
+
+        var id = getUrlVars()['id'];
+
+        if(id != undefined && id != "") {
+            $($("#tab-main li a")[0]).bind('click', id, function(){ 
+                window.location.href = "<?= Yii::$app->urlManager->createAbsoluteUrl('/Anamnesa/anamnesa/main') ?>?id="+id;
+            })
+
+            $($("#tab-main li a")[1]).bind('click', id, function(){ 
+                window.location.href = "<?= Yii::$app->urlManager->createAbsoluteUrl('/Anamnesa/anamnesa/pemeriksaan-fisik') ?>?id="+id;
+            })
+        }
+
+    })
+
+</script>
