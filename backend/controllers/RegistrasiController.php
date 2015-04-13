@@ -160,7 +160,7 @@ class RegistrasiController extends Controller {
         if ($_POST) {
             $model->load(Yii::$app->request->post());
             if ($model->save()) {
-                return $this->redirect(['index', 'pasienId' => $model->id]);
+                return $this->redirect(['index', 'pasien_id' => $model->id]);
             }
             //return $this->redirect(['view', 'id' => $model->id]);
         }
