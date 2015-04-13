@@ -2,18 +2,17 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use backend\models\Pasien;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Registrasi */
 
 $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Registrasis'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = $model->no_reg;
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="registrasi-view">
 
-    <h1><?= Html::encode($model->no_reg) ?></h1>
+    <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -25,11 +24,7 @@ $this->params['breadcrumbs'][] = $model->no_reg;
             ],
         ]) ?>
     </p>
-    <?php
-        $model->pasien_id = Pasien::findOne($model->pasien_id)->nama;
-        $date=date_create($model->tanggal_registrasi);
-        $model->tanggal_registrasi = date_format($date,"d-m-Y H:i:s");
-    ?>
+
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -37,19 +32,26 @@ $this->params['breadcrumbs'][] = $model->no_reg;
             'no_reg',
             'pasien_id',
             'tanggal_registrasi',
+            'status_registrasi',
+            'asal_registrasi',
             'status_pelayanan',
+            'tanggal_kunjungan',
             'status_rawat',
             'dr_penanggung_jawab',
             'icdx_id',
             'status_asuransi',
             'catatan:ntext',
             'asuransi_noreg',
+            'asuransi_noreg_other',
             'asuransi_nama',
             'asuransi_tgl_lahir',
             'asuransi_status_jaminan',
             'asuransi_penanggung_jawab',
             'asuransi_alamat',
             'asuransi_notelp',
+            'no_antrian',
+            'asuransi_provider_id',
+            'faskes_id',
         ],
     ]) ?>
 

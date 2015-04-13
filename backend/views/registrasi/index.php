@@ -158,15 +158,15 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
 
     var pasienInfo = {
         'url': "<?= Yii::$app->urlManager->createAbsoluteUrl('registrasi/registrasi') ?>",
-        'pasienId' : null,
+        'pasien_id' : null,
         'clearData': function() {
             $("#infoBody").html('');
         },
         'showData' : function($data) {
             $("#infoBody").html($data);
         },
-        'update' : function($pasienId) {
-            window.location.href = "<?= Yii::$app->urlManager->createAbsoluteUrl('pasien/update?id=') ?>"+$pasienId
+        'update' : function($pasien_id) {
+            window.location.href = "<?= Yii::$app->urlManager->createAbsoluteUrl('pasien/update?id=') ?>"+$pasien_id
         },
         'getInfo': function($id) {
             $.get(this.url+'?id='+$id, function(data) {
@@ -194,15 +194,15 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
 
     $(document).ready(function() {
 
-        var pasienId = getUrlVars()['pasienId'];
+        var pasien_id = getUrlVars()['pasien_id'];
 
-        if(pasienId != undefined && pasienId != '') {
+        if(pasien_id != undefined && pasien_id != '') {
             
-            pasienInfo.getInfoByPasien(pasienId);
+            pasienInfo.getInfoByPasien(pasien_id);
 
             setTimeout(function() {
-                $('#registrasi-catatan').select2("data", {id: pasienId, text: pasienId});
-                $('#registrasi-pasienid').select2("data", { id: pasienId, text: $('#patienName').html()});
+                $('#registrasi-catatan').select2("data", {id: pasien_id, text: pasien_id});
+                $('#registrasi-pasienid').select2("data", { id: pasien_id, text: $('#patienName').html()});
             }, 2000)
 
         }

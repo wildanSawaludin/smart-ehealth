@@ -61,7 +61,7 @@ switch ($model->status_asuransi) {
                 ]
             ]);
 
-    $model->pasienId = $pId;
+    $model->pasien_id = $pId;
 
     // The controller action that will render the list
     $url = \yii\helpers\Url::to(['pasien-list']);
@@ -161,7 +161,7 @@ SCRIPT;
                                                 'labelSpan' => 3,
                                                 'columns' => 3,
                                                 'attributes' => [
-                                                    'pasienId' => [
+                                                    'pasien_id' => [
                                                         'type' => Form::INPUT_WIDGET,
                                                         'widgetClass' => '\kartik\widgets\Select2',
                                                         'options' => [
