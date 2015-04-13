@@ -27,6 +27,7 @@ class DiagnosaController extends Controller
 
     public function actionUpdate($id, $diagnosa = 'Awal')
     {
+       
         //$model = $this->findModel($id);
         $model = Registrasi::findOne($id);
         $modelDiagnosa = Diagnosa::findAll(['jenis_diagnosa' => $diagnosa]);

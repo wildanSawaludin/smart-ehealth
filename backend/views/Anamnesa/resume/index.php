@@ -38,6 +38,12 @@ $this->params['breadcrumbs'][] = $this->title;
       //  'active'=>true,
        
     ],
+    [
+        'label'=>'<i class="glyphicon glyphicon-home"></i> Diagnosa',
+         'content'=>yii\base\View::render('_diagnosa',['modelDiagnosa'=>$modelDiagnosa]),
+      //  'active'=>true,
+       
+    ],
    /* [
         'label'=>'<i class="glyphicon glyphicon-user"></i> Diagnosa',
      //   'content'=>yii\base\View::render('_keluhanLokasi',['model'=>$model]),

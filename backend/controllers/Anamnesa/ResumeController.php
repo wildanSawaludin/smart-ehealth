@@ -13,6 +13,7 @@ use yii\web\Response;
 use backend\models\Anamnesa;
 use backend\models\PemeriksaanFisik;
 use backend\models\Registrasi;
+use backend\models\Diagnosa;
 
 class ResumeController extends Controller{
 
@@ -34,10 +35,12 @@ class ResumeController extends Controller{
      $var = '14';
       $modelAnamnesa = $this->findModelAnamanesa ($var);//Yii::$app->getRequest()->getQueryParam('id_anamnesa'));
       $modelPemeriksaanFisik = $this->findModelPemerFisik ('1');//Yii::$app->getRequest()->getQueryParam('id_pemerfisik'));
+     // $modelDiagnosa = $this->findModelDiagnosa ('1');
         return $this->renderAjax('index', [
              //   'modelRegistrasi' => $modelRegistrasi,
                 'modelAnamnesa' => $modelAnamnesa,
                 'modelPemeriksaanFisik' => $modelPemeriksaanFisik,
+                'modelDiagnosa' => $modelDiagnosa,
                 
             ]);
  }
@@ -63,6 +66,14 @@ class ResumeController extends Controller{
         protected function findModelPemerFisik($id)
     {
         if (($model = PemeriksaanFisik::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+     protected function findModelDiagnosa($id)
+    {
+        if (($model = Diagnosa::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

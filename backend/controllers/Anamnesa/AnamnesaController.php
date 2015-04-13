@@ -20,7 +20,7 @@ use yii\web\Response;
  */
 class AnamnesaController extends Controller
 {
-    public $layout = 'anamnesa';
+    public $layout = 'middle';
 
     public function behaviors()
     {
