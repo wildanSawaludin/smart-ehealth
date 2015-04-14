@@ -3,16 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\Pasien;
-use backend\models\PasienSearch;
+use backend\models\FasilitasKesehatan;
+use backend\models\FasilitasKesehatanSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * PasienController implements the CRUD actions for Pasien model.
+ * FasilitasKesehatanController implements the CRUD actions for FasilitasKesehatan model.
  */
-class PasienController extends Controller
+class FasilitasKesehatanController extends Controller
 {
     public function behaviors()
     {
@@ -27,12 +27,12 @@ class PasienController extends Controller
     }
 
     /**
-     * Lists all Pasien models.
+     * Lists all FasilitasKesehatan models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new PasienSearch();
+        $searchModel = new FasilitasKesehatanSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -42,7 +42,7 @@ class PasienController extends Controller
     }
 
     /**
-     * Displays a single Pasien model.
+     * Displays a single FasilitasKesehatan model.
      * @param integer $id
      * @return mixed
      */
@@ -54,13 +54,13 @@ class PasienController extends Controller
     }
 
     /**
-     * Creates a new Pasien model.
+     * Creates a new FasilitasKesehatan model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Pasien();
+        $model = new FasilitasKesehatan();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -72,7 +72,7 @@ class PasienController extends Controller
     }
 
     /**
-     * Updates an existing Pasien model.
+     * Updates an existing FasilitasKesehatan model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -91,7 +91,7 @@ class PasienController extends Controller
     }
 
     /**
-     * Deletes an existing Pasien model.
+     * Deletes an existing FasilitasKesehatan model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -104,15 +104,15 @@ class PasienController extends Controller
     }
 
     /**
-     * Finds the Pasien model based on its primary key value.
+     * Finds the FasilitasKesehatan model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Pasien the loaded model
+     * @return FasilitasKesehatan the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Pasien::findOne($id)) !== null) {
+        if (($model = FasilitasKesehatan::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

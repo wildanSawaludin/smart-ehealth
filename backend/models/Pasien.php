@@ -8,6 +8,8 @@ use Yii;
  * This is the model class for table "pasien".
  *
  * @property integer $id
+ * @property integer $user_id
+ * @property string $no_rm
  * @property string $nama
  * @property string $tempat_lahir
  * @property string $tgl_lahir
@@ -26,6 +28,7 @@ use Yii;
  * @property string $nama_pasangan
  * @property string $pekerjaan_pasangan
  *
+ * @property User $user
  * @property Registrasi[] $registrasis
  */
 class Pasien extends \yii\db\ActiveRecord
@@ -44,12 +47,13 @@ class Pasien extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['user_id'], 'integer'],
             [['nama', 'tempat_lahir', 'tgl_lahir', 'jenkel', 'goldar', 'agama', 'pekerjaan', 'warga_negara', 'alamat', 'notelp'], 'required'],
             [['tgl_lahir'], 'safe'],
             [['jenkel', 'goldar', 'agama', 'pekerjaan', 'warga_negara', 'alamat', 'pekerjaan_ayah', 'pekerjaan_ibu', 'marital_status', 'pekerjaan_pasangan'], 'string'],
+            [['no_rm', 'notelp'], 'string', 'max' => 15],
             [['nama', 'nama_ayah', 'nama_ibu', 'nama_pasangan'], 'string', 'max' => 25],
-            [['tempat_lahir'], 'string', 'max' => 30],
-            [['notelp'], 'string', 'max' => 15]
+            [['tempat_lahir'], 'string', 'max' => 30]
         ];
     }
 
@@ -59,25 +63,35 @@ class Pasien extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'nama' => 'Nama',
-            'tempat_lahir' => 'Tempat Lahir',
-            'tgl_lahir' => 'Tanggal Lahir',
-            'jenkel' => 'Jenis Kelamin',
-            'goldar' => 'Golongan Darah',
-            'agama' => 'Agama',
-            'pekerjaan' => 'Pekerjaan',
-            'warga_negara' => 'Warga Negara',
-            'alamat' => 'Alamat',
-            'notelp' => 'No Telepon',
-            'nama_ayah' => 'Nama Ayah',
-            'pekerjaan_ayah' => 'Pekerjaan Ayah',
-            'nama_ibu' => 'Nama Ibu',
-            'pekerjaan_ibu' => 'Pekerjaan Ibu',
-            'marital_status' => 'Status Pernikahan',
-            'nama_pasangan' => 'Nama Pasangan',
-            'pekerjaan_pasangan' => 'Pekerjaan Pasangan',
+            'id' => Yii::t('app', 'ID'),
+            'user_id' => Yii::t('app', 'User ID'),
+            'no_rm' => Yii::t('app', 'No Rm'),
+            'nama' => Yii::t('app', 'Nama'),
+            'tempat_lahir' => Yii::t('app', 'Tempat Lahir'),
+            'tgl_lahir' => Yii::t('app', 'Tgl Lahir'),
+            'jenkel' => Yii::t('app', 'Jenkel'),
+            'goldar' => Yii::t('app', 'Goldar'),
+            'agama' => Yii::t('app', 'Agama'),
+            'pekerjaan' => Yii::t('app', 'Pekerjaan'),
+            'warga_negara' => Yii::t('app', 'Warga Negara'),
+            'alamat' => Yii::t('app', 'Alamat'),
+            'notelp' => Yii::t('app', 'Notelp'),
+            'nama_ayah' => Yii::t('app', 'Nama Ayah'),
+            'pekerjaan_ayah' => Yii::t('app', 'Pekerjaan Ayah'),
+            'nama_ibu' => Yii::t('app', 'Nama Ibu'),
+            'pekerjaan_ibu' => Yii::t('app', 'Pekerjaan Ibu'),
+            'marital_status' => Yii::t('app', 'Marital Status'),
+            'nama_pasangan' => Yii::t('app', 'Nama Pasangan'),
+            'pekerjaan_pasangan' => Yii::t('app', 'Pekerjaan Pasangan'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 
     /**
@@ -86,17 +100,5 @@ class Pasien extends \yii\db\ActiveRecord
     public function getRegistrasis()
     {
         return $this->hasMany(Registrasi::className(), ['pasienId' => 'id']);
-    }
-
-    public function getUsia() {
-        try {
-            $birthDay = new \DateTime($this->tgl_lahir);
-            $now = new \DateTime();
-            $diff = $now->diff($birthDay);
-            return $diff->format('%y'); 
-        }
-        catch(\Exception $e) {
-            return 0;
-        }
     }
 }

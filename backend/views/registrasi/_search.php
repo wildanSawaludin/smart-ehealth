@@ -19,7 +19,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'no_reg') ?>
 
-    <?= $form->field($model, 'pasien_id') ?>
+    <?= $form->field($model, 'pasienId') ?>
 
     <?= $form->field($model, 'registrasi_date') ?>
 

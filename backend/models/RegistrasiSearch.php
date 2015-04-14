@@ -17,7 +17,7 @@ class RegistrasiSearch extends Registrasi {
      */
     public function rules() {
         return [
-            [['id', 'pasien_id', 'icdx_id', 'asuransi_provider_id', 'faskes_id'], 'integer'],
+            [['id', 'pasienId', 'icdx_id', 'asuransi_provider_id', 'faskes_id'], 'integer'],
             [['no_reg', 'tanggal_registrasi', 'status_registrasi', 'asal_registrasi', 'status_pelayanan', 'status_rawat', 'dr_penanggung_jawab', 'status_asuransi', 'catatan', 'asuransi_noreg', 'asuransi_nama', 'asuransi_tgl_lahir', 'asuransi_status_jaminan', 'asuransi_penanggung_jawab', 'asuransi_alamat', 'asuransi_notelp', 'pasienNama', 'tanggal_registrasi_format'], 'safe'],
         ];
     }
@@ -68,7 +68,7 @@ class RegistrasiSearch extends Registrasi {
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'pasien_id' => $this->pasien_id,
+            'pasienId' => $this->pasienId,
             'icdx_id' => $this->icdx_id,
             'asuransi_tgl_lahir' => $this->asuransi_tgl_lahir,
             'asuransi_provider_id' => $this->asuransi_provider_id,
