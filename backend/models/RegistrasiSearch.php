@@ -60,15 +60,10 @@ class RegistrasiSearch extends Registrasi {
             return $dataProvider;
         }
 
-        if(is_null($this->tanggal_registrasi) || $this->tanggal_registrasi == '') {
-            $currDate = new \DateTime();
-
-            $this->tanggal_registrasi = $currDate->format('Y-m-d 00:00');
-        }
-
         $query->andFilterWhere([
             'id' => $this->id,
             'pasienId' => $this->pasienId,
+            'tanggal_registrasi' => $this->tanggal_registrasi,
             'icdx_id' => $this->icdx_id,
             'asuransi_tgl_lahir' => $this->asuransi_tgl_lahir,
             'asuransi_provider_id' => $this->asuransi_provider_id,
@@ -91,10 +86,6 @@ class RegistrasiSearch extends Registrasi {
                 ->andFilterWhere(['like', 'asuransi_alamat', $this->asuransi_alamat])
                 ->andFilterWhere(['like', 'asuransi_notelp', $this->asuransi_notelp])
                 ->andFilterWhere(['like', 'pasien.nama', $this->pasienNama]);
-
-        $query->andFilterWhere(
-            ['>=', 'tanggal_registrasi',  $this->tanggal_registrasi]
-        );
 
         return $dataProvider;
     }
