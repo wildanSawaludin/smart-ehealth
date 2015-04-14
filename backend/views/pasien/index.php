@@ -21,12 +21,19 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
+//            [
+//                'class' => 'kartik\grid\SerialColumn',
+//                'contentOptions' => ['class' => 'kartik-sheet-style'],
+//                'width' => '40px',
+//                'header' => '',
+//                'headerOptions' => ['class' => 'kartik-sheet-style']
+//            ],
             [
-                'class' => 'kartik\grid\SerialColumn',
-                'contentOptions' => ['class' => 'kartik-sheet-style'],
-                'width' => '40px',
-                'header' => '',
-                'headerOptions' => ['class' => 'kartik-sheet-style']
+                'attribute' => 'id',
+                'format' => 'raw',
+                'value' => function($data) {
+                    return str_pad($data->id, 6, "0", STR_PAD_LEFT);
+                }
             ],
             'nama',
             'tempat_lahir',
@@ -47,12 +54,20 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'pekerjaan_pasangan',
             [
                 'class' => 'kartik\grid\ActionColumn',
+                'template' => '{view} {update} {delete} {activation}',
                 'buttons' => [
-                    'update' => function ($url, $model) {
-                        return Html::a('<span class="glyphicon glyphicon-pencil"></span>', '', [
-                                    'title' => Yii::t('yii', 'Update'), 'onclick' => 'showDlg(' . $model->id . ')'
+                    'activation' => function ($url, $model) {
+                        return Html::a('<span class="glyphicon glyphicon-lock"></span>', $url, [
+                                    'title' => Yii::t('yii', 'Activation'),
+                                    'data-confirm' => Yii::t('yii', 'Apakah anda yakin untuk membuat data user untuk pasien ini?'),
+                                    'data-method' => 'post',
                         ]);
-                    }
+                    },
+//                    'update' => function ($url, $model) {
+//                        return Html::a('<span class="glyphicon glyphicon-pencil"></span>', '', [
+//                                    'title' => Yii::t('yii', 'Update'), 'onclick' => 'showDlg(' . $model->id . ')'
+//                        ]);
+//                    }
                         ],
 //                        'dropdown' => $this->dropdown,
 //                        'urlCreator' => function($action, $model, $key, $index) {

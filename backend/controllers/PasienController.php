@@ -5,6 +5,7 @@ namespace backend\controllers;
 use Yii;
 use backend\models\Pasien;
 use backend\models\PasienSearch;
+use dektrium\user\models\User;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -102,6 +103,30 @@ class PasienController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+    
+    public function actionActivation($id)
+    {
+        $user = Yii::createObject([
+            'class'    => User::className(),
+            'scenario' => 'create',
+        ]);
+        
+        $user->username = str_pad($id, 6, "0", STR_PAD_LEFT);
+        $user->email = 'username'.$id.'@example.com';
+        $user->password = 'segeradiubah';
+        $user->create();
+        
+        $model = $this->findModel($id);
+        $model->user_id = $user->id;
+        $model->save();
+        
+        $access = Yii::$app->authManager;
+        $item = $access->getRole('Pasien');
+        $access->assign($item,$user->id);
+        
+        return $this->redirect(['index']);
+
     }
 
     /**
