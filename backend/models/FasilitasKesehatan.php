@@ -10,7 +10,6 @@ use Yii;
  * @property integer $id
  * @property string $nama
  * @property string $alamat
- * @property string $no_telepon
  * @property integer $kecamatan_id
  *
  * @property Kecamatan $kecamatan
@@ -21,6 +20,7 @@ class FasilitasKesehatan extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+	public $kecnama;
     public static function tableName()
     {
         return 'fasilitas_kesehatan';
@@ -32,11 +32,10 @@ class FasilitasKesehatan extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nama'], 'required'],
+            [['nama', 'alamat'], 'required'],
             [['kecamatan_id'], 'integer'],
             [['nama'], 'string', 'max' => 100],
-            [['alamat'], 'string', 'max' => 300],
-            [['no_telepon'], 'string', 'max' => 20]
+            [['alamat'], 'string', 'max' => 300]
         ];
     }
 
@@ -46,11 +45,10 @@ class FasilitasKesehatan extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'nama' => 'Nama',
-            'alamat' => 'Alamat',
-            'no_telepon' => 'No Telepon',
-            'kecamatan_id' => 'Kecamatan ID',
+            'id' => Yii::t('app', 'ID'),
+            'nama' => Yii::t('app', 'Nama'),
+            'alamat' => Yii::t('app', 'Alamat'),
+            'kecamatan_id' => Yii::t('app', 'Kecamatan ID'),
         ];
     }
 

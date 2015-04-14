@@ -489,6 +489,7 @@ $model->save();
                     'faktor_resiko_kebiasaan' => $faktor_resiko_kebiasaan,
                     'psikososial_tingber' => $psikososial_tingber,
                     'pasien' => $registrasi->pasien,
+                  //  'resgistrasi' =
                     'pemeriksaan_fisik' => $pemeriksaan_fisik->id
                 ]);    
        }

@@ -33,13 +33,3 @@ use yii\bootstrap\Modal;
                     </div>
 
 <?php ActiveForm::end(); ?>
-
-<?php
-
-$this->registerJs("$(document).ready(function () {
-       $('input[name=\"Anamnesa[keluhan]\"]').change(function () {
-          
-           
-        });
-    });");
-?>

@@ -6,9 +6,6 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Anamnesa */
 
-$this->title = Yii::t('app', 'Create {modelClass}', [
-    'modelClass' => 'PemeriksaanFisik',
-]);
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="anamnesa-create">

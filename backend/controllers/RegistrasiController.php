@@ -171,32 +171,34 @@ class RegistrasiController extends Controller {
     
     public function actionResume($id)
     {
-       
-        //insert anamnesa
-        $modelResume = new Anamnesa;
-        $modelResume->registrasi_id = $id;
-        $modelResume->save();
 
-        //insert diagnosa
-        $modelDiagnosa = new Diagnosa();
-        $modelDiagnosa->registrasi_id = $id;
-        $modelDiagnosa->save();
-
-        //insert pemeriksaan fisik
-        $modelPemeriksaanFisik = new PemeriksaanFisik();
-        $modelPemeriksaanFisik->registrasi_id = $id;
-        $modelPemeriksaanFisik->save();
 
         $model = $this->findModel($id);
-        $model->status_registrasi = 'Resume';
-        $model->save();
 
-        if($modelResume->save()){
-            return $this->redirect(['Anamnesa/anamnesa/main', 'id' => $model->id]);
+        if($model->status_registrasi != 'Resume') {
+            
+           
+            //insert anamnesa
+            $modelResume = new Anamnesa;
+            $modelResume->registrasi_id = $id;
+            $modelResume->save();
+
+            //insert diagnosa
+            $modelDiagnosa = new Diagnosa();
+            $modelDiagnosa->registrasi_id = $id;
+            $modelDiagnosa->save();
+
+            //insert pemeriksaan fisik
+            $modelPemeriksaanFisik = new PemeriksaanFisik();
+            $modelPemeriksaanFisik->registrasi_id = $id;
+            $modelPemeriksaanFisik->save();
+
+            $model->status_registrasi = 'Resume';
+            $model->save();
         }
-//        var_dump($modelResume);
-//                exit();
+
         
+        return $this->redirect(['Anamnesa/anamnesa/main', 'id' => $model->id]);
             
     }
 

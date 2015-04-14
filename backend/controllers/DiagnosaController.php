@@ -33,7 +33,6 @@ class DiagnosaController extends Controller
         $model = Registrasi::findOne($id);
         $modelDiagnosa = Diagnosa::findAll(['jenis_diagnosa' => $diagnosa]);
         
-        $pemeriksaan_fisik = PemeriksaanFisik::findOne(['registrasi_id' => $model->id]);
         /*$modelResepNonRacikan = ResepNonracikan::findOne(['registrasi_id' => $id]);
         $modelResepNonracikanDetail = new ResepNonracikanDetail();
         $modelResepNonracikanDetailIsi = ResepNonracikanDetail::findAll(['resep_nonracikan_id' => $modelResepNonRacikan->id]);*/
@@ -53,7 +52,6 @@ class DiagnosaController extends Controller
             'searchModel' => $searchModel,
             'modelDiagnosa' => $modelDiagnosa,
             'pasien' => $registrasi->pasien,
-            'pemeriksaan_fisik' => $pemeriksaan_fisik->id
             /*'modelResepNonRacikan' => $modelResepNonRacikan,
             'modelResepNonracikanDetail' => $modelResepNonracikanDetail,
             'modelResepNonracikanDetailIsi' => $modelResepNonracikanDetailIsi*/

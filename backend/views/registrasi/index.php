@@ -180,7 +180,6 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
             $.get("<?= Yii::$app->urlManager->createAbsoluteUrl('registrasi/pasien') ?>"+'?id='+$id, function(data) {
                 pasienInfo.showData(data);
 
-
                 if(flag != undefined && flag == true) {
                     pasienInfo.setSelected();
                 } 
@@ -188,7 +187,7 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
 
         },
         'setSelected': function() {
-             $('#registrasi-pasienid').select2("data", { id: $('#registrasi-catatan').select2("val"), text: $('#patienName').html() });
+             $('#s2id_registrasi-pasien_id').select2("data", { id: $('#registrasi-catatan').select2("val"), text: $('#patienName').html() });
         }
     }
 
@@ -202,7 +201,7 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
 
             setTimeout(function() {
                 $('#registrasi-catatan').select2("data", {id: pasien_id, text: pasien_id});
-                $('#registrasi-pasienid').select2("data", { id: pasien_id, text: $('#patienName').html()});
+                $('#s2id_registrasi-pasien_id').select2("data", { id: pasien_id, text: $('#patienName').html()});
             }, 2000)
 
         }
