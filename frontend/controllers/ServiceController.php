@@ -27,13 +27,13 @@ class ServiceController extends \yii\web\Controller
                 $user = User::find()->where('username = :username',[':username' => $_POST['no_rm']])->one();
                 $pasien = Pasien::find()->where('user_id = :userid',[':userid' => $user->id])->one();
                 $appsAuth = new AppsAuth;
-                $appsAuth->user_Id = $user->id;
+                $appsAuth->user_id = $user->id;
                 $appsAuth->pasien_id = $pasien->id;
                 $appsAuth->code = md5(uniqid(rand(),true));
                 $appsAuth->created_date = date('Y-m-d H:i:s');
                 $appsAuth->expired_date = date('Y-m-d',time()+86400);
                 if ($appsAuth->save()){
-                    $data["pasienId"] = $appsAuth->user_Id;
+                    $data["pasienId"] = $appsAuth->user_id;
                     $data["userId"] = $appsAuth->pasien_id;
                     $data["code"] = $appsAuth->code;
                     $data["message"] = "login success";
@@ -154,6 +154,7 @@ class ServiceController extends \yii\web\Controller
 
             $model->pasien_id = $_POST['pasienId'];
             $model->no_antrian = $noantrian+1;
+            $model->status_pelayanan = 'Rawat Jalan';
             $model->tanggal_kunjungan = str_replace(' ','',$date_f);
             $model->faskes_id = $_POST['fasilitas_kesehatan_id'];
             $model->tanggal_registrasi = date('Y-m-d');
