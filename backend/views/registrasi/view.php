@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $model->no_reg;
         ]) ?>
     </p>
     <?php
-        $model->pasienId = Pasien::findOne($model->pasienId)->nama;
+        $model->pasien_id = Pasien::findOne($model->pasien_id)->nama;
         $date=date_create($model->tanggal_registrasi);
         $model->tanggal_registrasi = date_format($date,"d-m-Y H:i:s");
     ?>
@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $model->no_reg;
         'attributes' => [
             'id',
             'no_reg',
-            'pasienId',
+            'pasien_id',
             'tanggal_registrasi',
             'status_pelayanan',
             'status_rawat',

@@ -9,6 +9,8 @@ use backend\models\Icdx;
 use backend\models\RegistrasiSearch;
 use backend\models\Anamnesa;
 use backend\models\AnamnesaSearch;
+use backend\models\Diagnosa;
+use backend\models\PemeriksaanFisik;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -158,7 +160,7 @@ class RegistrasiController extends Controller {
         if ($_POST) {
             $model->load(Yii::$app->request->post());
             if ($model->save()) {
-                return $this->redirect(['index', 'pasienId' => $model->id]);
+                return $this->redirect(['index', 'pasien_id' => $model->id]);
             }
             //return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -169,22 +171,34 @@ class RegistrasiController extends Controller {
     
     public function actionResume($id)
     {
-       
-        $modelResume = new Anamnesa;
-        $modelResume->registrasi_id = $id;
-        $modelResume->save();
-        
+
+
         $model = $this->findModel($id);
-        $model->status_registrasi = 'Resume';
-        $model->save();
-        
-        
-        if($modelResume->save()){
-            return $this->redirect(['Anamnesa/anamnesa/update', 'id' => $modelResume->id]);
+
+        if($model->status_registrasi != 'Resume') {
+            
+           
+            //insert anamnesa
+            $modelResume = new Anamnesa;
+            $modelResume->registrasi_id = $id;
+            $modelResume->save();
+
+            //insert diagnosa
+            $modelDiagnosa = new Diagnosa();
+            $modelDiagnosa->registrasi_id = $id;
+            $modelDiagnosa->save();
+
+            //insert pemeriksaan fisik
+            $modelPemeriksaanFisik = new PemeriksaanFisik();
+            $modelPemeriksaanFisik->registrasi_id = $id;
+            $modelPemeriksaanFisik->save();
+
+            $model->status_registrasi = 'Resume';
+            $model->save();
         }
-//        var_dump($modelResume);
-//                exit();
+
         
+        return $this->redirect(['Anamnesa/anamnesa/main', 'id' => $model->id]);
             
     }
 
@@ -207,9 +221,9 @@ class RegistrasiController extends Controller {
         $out = ['more' => false];
         if (!is_null($search)) {
             $query = new Query;
-            $query->select(['id', 'concat(nama,"||",id) as text'])
+            $query->select(['id', 'nama as text'])
                     ->from('pasien')
-                    ->where('concat(nama,"||",id) LIKE "%' . $search . '%"')
+                    ->where('nama LIKE "%' . $search . '%"')
                     ->limit(20);
             $command = $query->createCommand();
             $data = $command->queryAll();
@@ -219,6 +233,26 @@ class RegistrasiController extends Controller {
         } else {
             $out['results'] = ['id' => 0, 'text' => 'Pasien tidak ditemukan'];
         }
+        echo Json::encode($out);
+    }
+
+    public function actionIdList($search = null, $id = null) {
+        $out = ['more' => false];
+        if (!is_null($search)) {
+            $query = new Query;
+            $query->select(['id', 'id as text'])
+                    ->from('pasien')
+                    ->where('id LIKE "%' . $search . '%"')
+                    ->limit(20);
+            $command = $query->createCommand();
+            $data = $command->queryAll();
+            $out['results'] = array_values($data);
+        } elseif ($id > 0) {
+            $out['results'] = ['id' => $id, 'text' => Pasien::find($id)->nama];
+        } else {
+            $out['results'] = ['id' => 0, 'text' => 'Pasien tidak ditemukan'];
+        }
+
         echo Json::encode($out);
     }
     
@@ -241,10 +275,64 @@ class RegistrasiController extends Controller {
         echo Json::encode($out);
     }
 
-    public function actionPasien($id){
-        $registrasi = Registrasi::findOne($id);
+    private function showInfo($pasien) {
 
-        var_dump($registrasi->getAttribute($registrasi->safeAttributeNames));
-        exit();
+        $tempat = is_null($pasien->tempat_lahir) ? '-' : $pasien->tempat_lahir;
+        $tanggal = is_null($pasien->tgl_lahir) ? '-' : $pasien->tgl_lahir;
+
+        return '<div class="form-group no-margin-botom">
+                    <label class="col-sm-3 col-md-offset-1 control-label">No RM</label>
+                    <div class="col-sm-7">
+                        <p class="form-control-static">'.str_pad($pasien->id, 6, '0', STR_PAD_LEFT).'</p>
+                    </div>
+                </div>
+                <div class="form-group no-margin-botom">
+                    <label class="col-sm-3 col-md-offset-1 control-label">Nama</label>
+                    <div class="col-sm-7">
+                        <p id="patienName" class="form-control-static">'.$pasien->nama.'</p>
+                    </div>
+                </div>
+                <div class="form-group no-margin-botom">
+                    <label class="col-sm-3 col-md-offset-1 control-label">Gender</label>
+                    <div class="col-sm-7">
+                        <p class="form-control-static">'.$pasien->jenkel.'</p>
+                    </div>
+                </div>
+                <div class="form-group no-margin-botom">
+                    <label class="col-sm-3 col-md-offset-1 control-label">TTL</label>
+                    <div class="col-sm-7">
+                        <p class="form-control-static">'.$tempat.', '.$tangal.'</p>
+                    </div>
+                </div>
+                <div class="form-group no-margin-botom">
+                    <label class="col-sm-3 col-md-offset-1 control-label">Usia</label>
+                    <div class="col-sm-7">
+                        <p class="form-control-static">'.$pasien->getUsia().' Tahun</p>
+                    </div>
+                </div>
+                <div class="form-group no-margin-botom">
+                    <label class="col-sm-3 col-md-offset-1 control-label">Alamat</label>
+                    <div class="col-sm-7">
+                        <p class="form-control-static">'.$pasien->alamat.'</p>
+                    </div>
+                </div>
+                <div class="form-group no-margin-botom">
+                    <div class="col-sm-offset-4 col-sm-4">
+                        <button type="button" id="btnUpdate" data-pasien="'.$pasien->id.'" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span> Update</button>                        </div>
+                    </div>
+                </div>';
+    }
+
+    public function actionRegistrasi($id){
+        $registrasi = Registrasi::findOne($id);
+        $pasien = $registrasi->pasien;
+        
+        echo $this->showInfo($pasien);
+    }
+
+    public function actionPasien($id) {
+        $pasien = Pasien::findOne($id);
+
+        echo $this->showInfo($pasien);
     }
 }
