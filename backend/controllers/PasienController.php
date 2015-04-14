@@ -117,6 +117,10 @@ class PasienController extends Controller
         $user->password = 'segeradiubah';
         $user->create();
         
+        $model = $this->findModel($id);
+        $model->user_id = $user->id;
+        $model->save();
+        
         $access = Yii::$app->authManager;
         $item = $access->getRole('Pasien');
         $access->assign($item,$user->id);
