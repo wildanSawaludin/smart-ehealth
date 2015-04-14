@@ -47,13 +47,12 @@ class Pasien extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id'], 'integer'],
             [['nama', 'tempat_lahir', 'tgl_lahir', 'jenkel', 'goldar', 'agama', 'pekerjaan', 'warga_negara', 'alamat', 'notelp'], 'required'],
             [['tgl_lahir'], 'safe'],
             [['jenkel', 'goldar', 'agama', 'pekerjaan', 'warga_negara', 'alamat', 'pekerjaan_ayah', 'pekerjaan_ibu', 'marital_status', 'pekerjaan_pasangan'], 'string'],
             [['no_rm', 'notelp'], 'string', 'max' => 15],
             [['nama', 'nama_ayah', 'nama_ibu', 'nama_pasangan'], 'string', 'max' => 25],
-            [['tempat_lahir'], 'string', 'max' => 30]
+            [['tempat_lahir'], 'string', 'max' => 30],
         ];
     }
 
@@ -63,7 +62,7 @@ class Pasien extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'No RM'),
+            'id' => Yii::t('app', 'ID'),
             'user_id' => Yii::t('app', 'User ID'),
             'no_rm' => Yii::t('app', 'No Rm'),
             'nama' => Yii::t('app', 'Nama'),
@@ -93,12 +92,21 @@ class Pasien extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
+    
     public function getRegistrasis()
     {
         return $this->hasMany(Registrasi::className(), ['pasien_id' => 'id']);
+    }
+
+    public function getUsia() {
+        try {
+            $birthDay = new \DateTime($this->tgl_lahir);
+            $now = new \DateTime();
+            $diff = $now->diff($birthDay);
+            return $diff->format('%y'); 
+        }
+        catch(\Exception $e) {
+            return 0;
+        }
     }
 }
