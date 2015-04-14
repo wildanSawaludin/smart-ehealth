@@ -28,7 +28,7 @@ class PemeriksaanFisikController extends Controller{
         ];
     }
     
- public function actionCreate($id){
+ public function actionUpdate($id){
 
      $modelRegistrasi = $this->findRegistrasi($id);
      $model = $this->findModel($modelRegistrasi->id);
