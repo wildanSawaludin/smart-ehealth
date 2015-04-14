@@ -63,7 +63,7 @@ class Pasien extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
+            'id' => Yii::t('app', 'No RM'),
             'user_id' => Yii::t('app', 'User ID'),
             'no_rm' => Yii::t('app', 'No Rm'),
             'nama' => Yii::t('app', 'Nama'),
@@ -99,6 +99,6 @@ class Pasien extends \yii\db\ActiveRecord
      */
     public function getRegistrasis()
     {
-        return $this->hasMany(Registrasi::className(), ['pasienId' => 'id']);
+        return $this->hasMany(Registrasi::className(), ['pasien_id' => 'id']);
     }
 }
