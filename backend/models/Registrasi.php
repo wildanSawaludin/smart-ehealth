@@ -10,7 +10,7 @@ use yii\db\Query;
  *
  * @property integer $id
  * @property string $no_reg
- * @property integer $pasienId
+ * @property integer $pasien_id
  * @property string $tanggal_registrasi
  * @property string $status_registrasi
  * @property string $asal_registrasi 
@@ -62,8 +62,8 @@ class Registrasi extends \yii\db\ActiveRecord {
 
     public function rules() {
         return [
-            [['pasienId', 'status_pelayanan'], 'required'],
-            [['pasienId', 'asuransi_provider_id', 'icdx_id', 'no_antrian', 'faskes_id', 'nomorRegistrasi', 'usia'], 'integer'],
+            [['pasien_id', 'status_pelayanan'], 'required'],
+            [['pasien_id', 'asuransi_provider_id', 'icdx_id', 'no_antrian', 'faskes_id', 'nomorRegistrasi', 'usia'], 'integer'],
             [['tanggal_registrasi', 'asuransi_tgl_lahir', 'no_rm', 'jenis_kelamin', 'fasilitas_kesehatan', 'faskes'], 'safe'],
             [['status_registrasi', 'asal_registrasi', 'status_pelayanan', 'status_rawat', 'status_asuransi', 'catatan'], 'string'],
             [['no_reg', 'asuransi_noreg', 'asuransi_noreg_other', 'asuransi_notelp'], 'string', 'max' => 15],
@@ -79,7 +79,7 @@ class Registrasi extends \yii\db\ActiveRecord {
         return [
             'id' => 'ID',
             'no_reg' => 'No Registrasi',
-            'pasienId' => 'Pasien',
+            'pasien_id' => 'Pasien',
             'tanggal_registrasi' => 'Tanggal Registrasi',
             'status_registrasi' => 'Status Registrasi',
             'status_pelayanan' => 'Status Pelayanan',
@@ -136,7 +136,7 @@ class Registrasi extends \yii\db\ActiveRecord {
     }
 
     public function getPasien() {
-        return $this->hasOne(Pasien::className(), ['id' => 'pasienId']);
+        return $this->hasOne(Pasien::className(), ['id' => 'pasien_id']);
     }
 
     public function getUsia() {
