@@ -192,16 +192,16 @@ class Registrasi extends \yii\db\ActiveRecord {
         if (parent::beforeSave($insert)) {
 
             if($this->isNewRecord) {
-                $query = new Query;
-                $counter = $query->select(['IFNULL(max(no_antrian), 0) + 1 as counter'])
-                    ->from('registrasi')
-                    ->where('tanggal_registrasi > "' . date('Y-m-d') . '"');
-                $command = $query->scalar();
+                // $query = new Query;
+                // $counter = $query->select(['IFNULL(max(no_antrian), 0) + 1 as counter'])
+                    // ->from('registrasi')
+                    // ->where('tanggal_registrasi > "' . date('Y-m-d') . '"');
+                // $command = $query->scalar();
 
                 $this->status_registrasi = 'Antrian';
-                $this->asal_registrasi = 'Web';
-                $this->faskes_id = 1;
-                $this->no_antrian = $command;
+                // $this->asal_registrasi = 'Web';
+                // $this->faskes_id = 1;
+                // $this->no_antrian = $command;
             }
 
             return true;
