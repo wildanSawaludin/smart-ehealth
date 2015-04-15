@@ -44,7 +44,7 @@ use yii\bootstrap\Modal;
                        
                        if($pasien->jenkel == "Perempuan" && $registrasi->kategoriUsia == "2"){ ?>
 <div class="form-group">
-            <label for="kesadaran" class="col-md-4">Keadaan  Khusus :</label>
+            <label for="kesadaran" class="col-md-4">Keterangan  Khusus :</label>
             <div class="col-md-2">
                 
                      
