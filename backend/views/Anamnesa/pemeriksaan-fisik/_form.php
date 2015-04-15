@@ -20,7 +20,7 @@ $GLOBALS['page_title'] = '<h1>Anamnesa<small>Pemeriksaan Fisik</small></h1>';
 $items = [
     [
         'label'=>'<i class="glyphicon glyphicon-home"></i> Status Terkini',
-        'content'=>yii\base\View::render('_statusTerkini',['model'=>$model]),
+        'content'=>yii\base\View::render('_statusTerkini',['model'=>$model,'pasien'=>$pasien, 'registrasi' => $registrasi]),
         'active'=>true
     ],
     [

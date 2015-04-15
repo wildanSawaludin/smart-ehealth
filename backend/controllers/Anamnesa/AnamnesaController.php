@@ -142,10 +142,10 @@ class AnamnesaController extends Controller
     
     public function actionPopupKeluhan($id) {
        $model = $this->findModel($id);
-       if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            return ActiveForm::validate($model);
-        }
+      // if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+        //    Yii::$app->response->format = Response::FORMAT_JSON;
+         //   return ActiveForm::validate($model);
+    //    }
 //        if ($_POST) {
 //            $model->load(Yii::$app->request->post());
 //            if ($model->save()) {
@@ -489,6 +489,7 @@ $model->save();
                     'faktor_resiko_kebiasaan' => $faktor_resiko_kebiasaan,
                     'psikososial_tingber' => $psikososial_tingber,
                     'pasien' => $registrasi->pasien,
+                  //  'resgistrasi' =
                     'pemeriksaan_fisik' => $pemeriksaan_fisik->id
                 ]);    
        }

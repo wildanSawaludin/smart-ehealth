@@ -9,7 +9,8 @@ use yii\helpers\Html;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<?= $this->render('_form', [
-    'model' => $model,
-    'pasien' => $pasien
-]) ?>
+    <?= $this->render('_form', [
+        'model' => $model,
+        'pasien' => $pasien,
+        'registrasi' => $registrasi,
+    ]) ?>
