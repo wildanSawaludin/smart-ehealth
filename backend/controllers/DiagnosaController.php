@@ -42,7 +42,7 @@ class DiagnosaController extends Controller
         $searchModel = new IcdxSearch();
         
         $this->layout = 'main';
-        $GLOBALS['collapse'] = true;
+        //$GLOBALS['collapse'] = true;
         $modelAnamnesa = Anamnesa::findOne($id);
         $registrasi = Registrasi::findOne($modelAnamnesa->registrasi_id);
 

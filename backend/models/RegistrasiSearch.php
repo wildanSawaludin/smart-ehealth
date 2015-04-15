@@ -60,10 +60,10 @@ class RegistrasiSearch extends Registrasi {
             return $dataProvider;
         }
 
-        if(is_null($this->tanggal_registrasi) || $this->tanggal_registrasi == '') {
+        if(is_null($this->tanggal_kunjungan) || $this->tanggal_kunjungan == '') {
             $currDate = new \DateTime();
 
-            $this->tanggal_registrasi = $currDate->format('Y-m-d 00:00');
+            $this->tanggal_kunjungan = $currDate->format('Y-m-d');
         }
 
         $query->andFilterWhere([

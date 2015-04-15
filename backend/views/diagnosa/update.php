@@ -90,7 +90,7 @@ Modal::end();
             })
 
             $($("#tab-main li a")[1]).bind('click', id, function(){ 
-                window.location.href = "<?= Yii::$app->urlManager->createAbsoluteUrl('/Anamnesa/pemeriksaan-fisik/create') ?>?id="+id;
+                window.location.href = "<?= Yii::$app->urlManager->createAbsoluteUrl('/Anamnesa/pemeriksaan-fisik/update') ?>?id="+id;
             })
         }
 

@@ -21,7 +21,7 @@ use yii\bootstrap\Modal;
                             ];
                         $list2 = ['Masalah_pada_Mata' => 'Masalah pada Mata', 'gangguan_penglihatan' => 'gangguan penglihatan', 'Masalah_pada_Telinga' => 'Masalah pada Telinga', 'Masalah pada Mulut'=>'Masalah pada Mulut','Kelainan Suhu Tubuh'=>'Kelainan Suhu Tubuh',
                                  'Masalah_pada_Hidung/Pernapasan'=>'Masalah pada Hidung/Pernapasan',
-                                 'Masalah pada_Jantung'=>'Masalah pada Jantung','Masalah_pada_Perut'=>'Masalah pada Perut','Masalah_Kewanitaan'=>'Masalah Kewanitaan',
+                                 'Masalah pada Jantung'=>'Masalah pada Jantung','Masalah_pada_Perut'=>'Masalah pada Perut','Masalah_Kewanitaan'=>'Masalah Kewanitaan',
                                  'Masalah_Reproduksi_Pria'=>'Masalah Reproduksi Pria','Lainnya'=>'Lainnya'
                             ]; 
                     ?>
@@ -34,12 +34,17 @@ use yii\bootstrap\Modal;
 
 <?php ActiveForm::end(); ?>
 
-<?php
 
+   <?php
+//$this->registerJsFile('/admin/js/popupLokasi.js');
 $this->registerJs("$(document).ready(function () {
-       $('input[name=\"Anamnesa[keluhan]\"]').change(function () {
-          
-           
-        });
+    $('input[name=\"Anamnesa[keluhan]\"]').change(function () {
+       var keluhan = $(this).val();
+     
+        $('#m_keluhanDetail').html('');
+            $('#m_keluhanDetail').load(baseurl + '/Anamnesa/anamnesa/popup-keluhan?id='+id+'&param='+encodeURIComponent(keluhan));
+            $('#m_keluhanDetail').modal('show');
+
+    });
     });");
-?>
+    ?>

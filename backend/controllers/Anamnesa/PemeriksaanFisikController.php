@@ -28,7 +28,7 @@ class PemeriksaanFisikController extends Controller{
         ];
     }
     
- public function actionCreate($id){
+ public function actionUpdate($id){
 
      $modelRegistrasi = $this->findRegistrasi($id);
      $model = $this->findModel($modelRegistrasi->id);
@@ -44,7 +44,8 @@ class PemeriksaanFisikController extends Controller{
        // } else {
             return $this->render('create', [
                 'model' => $model,
-                'pasien' =>  $registrasi->pasien
+                'pasien' =>  $registrasi->pasien,
+                'registrasi' => $registrasi,
             ]);
         //}
      
@@ -52,6 +53,7 @@ class PemeriksaanFisikController extends Controller{
  
  public function actionSaveStatusterkini($id){
      $model = $this->findModel($id);
+    
        $return =0;
       if ($model->load(Yii::$app->request->post()) && $model->validate()) {
         $model->save();

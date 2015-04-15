@@ -1,10 +1,5 @@
 $(document).ready(function () {
-    $('input[name="Anamnesa[keluhan]"]').change(function () {
-        $('#m_keluhanDetail').html('');
-        $('#m_keluhanDetail').load(baseurl + '/anamnesa/popup-keluhan?id='+id+'&param='+$(this).val());
-        $('#m_keluhanDetail').modal('show');
-
-    });
+   
     $('#anamnesa-riwayat_penyakit_pil').change(function(){
         if($('#anamnesa-riwayat_penyakit_pil').prop( "checked" )){
             $('#m_riwayatpenyakit').html('');
