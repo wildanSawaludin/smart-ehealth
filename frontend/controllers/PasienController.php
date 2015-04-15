@@ -3,17 +3,16 @@
 namespace frontend\controllers;
 
 use Yii;
-use backend\models\Registrasi;
-use backend\models\RegistrasiSearch;
 use backend\models\Pasien;
+use backend\models\PasienSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * RegistrasiController implements the CRUD actions for Registrasi model.
+ * PasienController implements the CRUD actions for Pasien model.
  */
-class RegistrasiController extends Controller
+class PasienController extends Controller
 {
     public function behaviors()
     {
@@ -28,38 +27,22 @@ class RegistrasiController extends Controller
     }
 
     /**
-     * Lists all Registrasi models.
+     * Lists all Pasien models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new RegistrasiSearch();
+        $searchModel = new PasienSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $modelPasien = Pasien::find()->where(['user_id' => Yii::$app->user->id])->one();
-        $model = new Registrasi();
-        if (Yii::$app->request->post()) {
 
-            $model->load(Yii::$app->request->post());
-            $model->tanggal_registrasi = date('Y-m-d H:i:s');
-            if ($model->asuransi_tgl_lahir)
-                $model->asuransi_tgl_lahir = Yii::$app->get('helper')->dateFormatingStrip($model->asuransi_tgl_lahir);
-            $model->save();
-            $model->no_reg= (string)sprintf('%08d', $model->id);
-            $model->save();
-            //if($model->save())return $this->redirect(['view', 'id' => $model->id]);
-        }
-//        var_dump($model);
-//                exit();
         return $this->render('index', [
-            'model' => $model,
-            'modelPasien' => $modelPasien,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
-     * Displays a single Registrasi model.
+     * Displays a single Pasien model.
      * @param integer $id
      * @return mixed
      */
@@ -71,13 +54,13 @@ class RegistrasiController extends Controller
     }
 
     /**
-     * Creates a new Registrasi model.
+     * Creates a new Pasien model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Registrasi();
+        $model = new Pasien();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -89,7 +72,7 @@ class RegistrasiController extends Controller
     }
 
     /**
-     * Updates an existing Registrasi model.
+     * Updates an existing Pasien model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -108,7 +91,7 @@ class RegistrasiController extends Controller
     }
 
     /**
-     * Deletes an existing Registrasi model.
+     * Deletes an existing Pasien model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -119,17 +102,17 @@ class RegistrasiController extends Controller
 
         return $this->redirect(['index']);
     }
-    
+
     /**
-     * Finds the Registrasi model based on its primary key value.
+     * Finds the Pasien model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Registrasi the loaded model
+     * @return Pasien the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Registrasi::findOne($id)) !== null) {
+        if (($model = Pasien::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
