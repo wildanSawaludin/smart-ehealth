@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' 
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 
 $GLOBALS['page_title'] = '<h1>Anamnesa<small>Pemeriksaan Fisik</small></h1>';
-$GLOBALS['collapse'] = true;
+//$GLOBALS['collapse'] = true;
 
 $items = [
     [
@@ -60,6 +60,7 @@ $items = [
         <div class="tab-content" style="min-height:700px;">
             <div class="tab-pane active" id="tab_2">
                 <div class="col-sm-12">
+                    <!--
                     <div class="col-sm-4">
                         <div class="col-sm-12">
                             <h3 style="text-align:center;">Depan</h3>
@@ -73,7 +74,8 @@ $items = [
                             <img style="max-height: 500px;margin-top:28px;" src="<?= Yii::$app->urlManager->baseUrl . '/static/front.jpg' ?>">
                         </div>
                     </div>
-                    <div class="col-sm-8">
+                    -->
+                    <div class="col-sm-12">
                         <?= 
                             TabsX::widget([
                                 'items'=>$items,

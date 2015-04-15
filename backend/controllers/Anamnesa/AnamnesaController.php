@@ -482,7 +482,7 @@ $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
        } else {
 
-            $GLOBALS['collapse'] = true;
+            //$GLOBALS['collapse'] = true;
             return $this->render('main', [
                     'model' => $model,      
                     'faktor_resiko_riwayat' => $faktor_resiko_riwayat,
@@ -494,35 +494,4 @@ $model->save();
        }
     }    
 
-    /**
-     * The main view to load all anamnesa view using ajax.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionPemeriksaanFisik($id)
-    {
-        $this->layout = 'main';
-
-        $model = $this->findModel($id);
-
-        $registrasi = Registrasi::findOne($model->registrasi_id);
-
-        $faktor_resiko_riwayat = explode(',', $model->faktor_resiko_riwayat);
-        $faktor_resiko_kebiasaan = explode(',', $model->faktor_resiko_kebiasaan);
-        $psikososial_tingber = explode(',', $model->psikososial_tingber);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-       } else {
-
-            $GLOBALS['collapse'] = true;
-            return $this->render('edit', [
-                    'model' => $model,      
-                    'faktor_resiko_riwayat' => $faktor_resiko_riwayat,
-                    'faktor_resiko_kebiasaan' => $faktor_resiko_kebiasaan,
-                    'psikososial_tingber' => $psikososial_tingber,
-                    'pasien' => $registrasi->pasien
-                ]);    
-       }
-    }        
 }

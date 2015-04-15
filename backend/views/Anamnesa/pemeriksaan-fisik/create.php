@@ -8,13 +8,8 @@ use yii\helpers\Html;
 
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="anamnesa-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <?= $this->render('_form', [
-        'model' => $model,
-        'pasien' => $pasien
-    ]) ?>
-
-</div>
+<?= $this->render('_form', [
+    'model' => $model,
+    'pasien' => $pasien
+]) ?>

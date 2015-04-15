@@ -32,6 +32,7 @@ $GLOBALS['page_title'] = '<h1>Anamnesa<small>Anamnesa</small></h1>';
         <div class="tab-content" style="min-height:500px;">
             <div class="tab-pane active" id="tab_1">
                 <div class="col-sm-12">
+                    <!--
                     <div class="col-sm-4">
                         <form class="form-horizontal">
                             <div class="form-group">
@@ -48,7 +49,8 @@ $GLOBALS['page_title'] = '<h1>Anamnesa<small>Anamnesa</small></h1>';
                             </div>
                         </form>
                     </div>
-                    <div class="col-sm-8">
+                    -->
+                    <div class="col-sm-12">
                         <?= $this->render('_form', [
                                     'model' => $model,
                                     'faktor_resiko_riwayat' => $faktor_resiko_riwayat,
