@@ -61,7 +61,7 @@ class Pasien extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
+            'id' => Yii::t('app', 'No RM'),
             'user_id' => Yii::t('app', 'User ID'),
             'no_rm' => Yii::t('app', 'No Rm'),
             'nama' => Yii::t('app', 'Nama'),
