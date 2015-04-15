@@ -37,14 +37,14 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
         </div>
     </section>
 
-        <section class="col-sm-8">
-            <?=
-                $this->render('_form', [
-                    'model' => $model,
-                    'pId' => $pId,
-                ])
-            ?>
-        </section>
+	<section class="col-sm-8">
+		<?=
+			$this->render('_form', [
+				'model' => $model,
+				'pId' => $pId,
+			])
+		?>
+	</section>
 </div>
 
 <div class="row">
@@ -90,11 +90,9 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
                         </form>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6 col-md-offset-3">
-                        <h1 class="text-center" id="gridTitle">Daftar Pasien <?php $tanggal = Yii::$app->request->queryParams['RegistrasiSearch']['tanggal_registrasi']; echo !is_null($tanggal) && $tanggal != '' ? $tanggal : 'Hari Ini'; ?></h1>
-                    </div>
-                </div>
+                
+				<h1 class="text-center" id="gridTitle">Daftar Pasien <?php $tanggal = Yii::$app->request->queryParams['RegistrasiSearch']['tanggal_registrasi']; echo !is_null($tanggal) && $tanggal != '' ? $tanggal : 'Hari Ini'; ?></h1>
+                    
             </div>
 
             <div class="box-body">
@@ -180,6 +178,7 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
             $.get("<?= Yii::$app->urlManager->createAbsoluteUrl('registrasi/pasien') ?>"+'?id='+$id, function(data) {
                 pasienInfo.showData(data);
 
+
                 if(flag != undefined && flag == true) {
                     pasienInfo.setSelected();
                 } 
@@ -187,7 +186,7 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
 
         },
         'setSelected': function() {
-             $('#s2id_registrasi-pasien_id').select2("data", { id: $('#registrasi-catatan').select2("val"), text: $('#patienName').html() });
+             $('#registrasi-pasienid').select2("data", { id: $('#registrasi-catatan').select2("val"), text: $('#patienName').html() });
         }
     }
 
@@ -201,7 +200,7 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
 
             setTimeout(function() {
                 $('#registrasi-catatan').select2("data", {id: pasien_id, text: pasien_id});
-                $('#s2id_registrasi-pasien_id').select2("data", { id: pasien_id, text: $('#patienName').html()});
+                $('#registrasi-pasienid').select2("data", { id: pasien_id, text: $('#patienName').html()});
             }, 2000)
 
         }
