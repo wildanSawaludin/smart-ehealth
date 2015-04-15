@@ -17,6 +17,8 @@ class ServiceController extends \yii\web\Controller
 
     public function actionAuthLogin()
     {
+		// $_POST['no_rm'] = '36493';
+		// $_POST['password'] = 'admin123';
         $response["login"] = array();
         $data = array();
         if ($_POST){
@@ -33,8 +35,8 @@ class ServiceController extends \yii\web\Controller
                 $appsAuth->created_date = date('Y-m-d H:i:s');
                 $appsAuth->expired_date = date('Y-m-d',time()+86400);
                 if ($appsAuth->save()){
-                    $data["pasienId"] = $appsAuth->user_id;
-                    $data["userId"] = $appsAuth->pasien_id;
+                    $data["pasienId"] = $appsAuth->pasien_id;
+                    $data["userId"] = $appsAuth->user_id;
                     $data["code"] = $appsAuth->code;
                     $data["message"] = "login success";
                     $response["success"] = 1;
@@ -141,6 +143,9 @@ class ServiceController extends \yii\web\Controller
 
     public function actionRegistrasi()
     {
+		// $_POST['pasienId'] = '1';
+		// $_POST['fasilitas_kesehatan_id'] = '13';
+		// $_POST['tanggal_kunjungan'] = '21-4-2015';
         $response["pendaftaran"] = array();
         $pendaftaran = array();
         $model = new Registrasi();
@@ -154,10 +159,10 @@ class ServiceController extends \yii\web\Controller
 
             $model->pasien_id = $_POST['pasienId'];
             $model->no_antrian = $noantrian+1;
-            $model->status_pelayanan = 'Rawat Jalan';
+            $model->status_pelayanan = $_POST['status_pelayanan'];
             $model->tanggal_kunjungan = str_replace(' ','',$date_f);
             $model->faskes_id = $_POST['fasilitas_kesehatan_id'];
-            $model->tanggal_registrasi = date('Y-m-d');
+            $model->tanggal_registrasi = date('Y-m-d H:i:s');
             $model->status_registrasi = 'Antrian';
             $model->asal_registrasi = 'Apps';
             if ($model->save()){

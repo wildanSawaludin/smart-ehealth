@@ -48,8 +48,8 @@ switch ($model->status_asuransi) {
 <div class="nav-tabs-custom">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs">
-        <li role="presentation" class="active"><a href="#dataumum" aria-controls="dataumum" role="tab" data-toggle="tab">Data Umum</a></li>
-        <li role="presentation"><a href="#statasur" aria-controls="profile" role="tab" data-toggle="tab">Status Asuransi</a></li>
+        <li role="presentation" class="active"><a href="#dataumum" aria-controls="dataumum" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-paperclip"></span>&nbsp;&nbsp;Data Umum</a></li>
+        <li role="presentation"><a href="#statasur" aria-controls="profile" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;Status Asuransi</a></li>
     </ul>
 
     <?php
@@ -108,7 +108,7 @@ SCRIPT;
 
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="col-sm-4">
+                    <div class="col-sm-5">
                         <?php
                         echo Form::widget([
                             'model' => $model,
@@ -149,7 +149,7 @@ SCRIPT;
                         ?>
                     </div>
 
-                    <div class="col-sm-8">
+                    <div class="col-sm-7">
                         <?php
                         echo Form::widget([
                             'model' => $model,
@@ -178,7 +178,7 @@ SCRIPT;
                                                                     'initSelection' => new JsExpression($initScript)
                                                                 ],
                                                                 'pluginEvents' => [
-                                                                     "change" => "function(e) { pasienInfo.getInfoByPasien( $('#s2id_registrasi-pasien_id').select2(\"val\")); $('#registrasi-catatan').select2(\"data\", { id: $('#s2id_registrasi-pasien_id').select2(\"val\"), text: $('#s2id_registrasi-pasien_id').select2(\"val\") }) }",
+                                                                     "change" => "function(e) { pasienInfo.getInfoByPasien( $('#registrasi-pasienid').select2(\"val\")); $('#registrasi-catatan').select2(\"data\", { id: $('#registrasi-pasienid').select2(\"val\"), text: $('#registrasi-pasienid').select2(\"val\") }) }",
                                                                 ]
                                                             ],
                                                         'columnOptions' => ['colspan' => 2, 'class' => 'col-sm-7'],
@@ -200,6 +200,7 @@ SCRIPT;
             
             <div class="row">
                 <div class="col-sm-12">
+					 <div class="col-sm-10">
                     <?php
                     echo Form::widget([
                         'model' => $model,
@@ -251,6 +252,7 @@ SCRIPT;
                     echo $form->field($model, 'catatan')->textarea(['rows' => 6]);
                     Modal::end();
                     ?>
+                </div>
                 </div>
             </div>
             
