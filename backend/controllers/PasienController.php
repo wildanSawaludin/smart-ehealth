@@ -132,15 +132,14 @@ class PasienController extends Controller
     public function actionDeactivation($id)
     {
         $model = $this->findModel($id);
-        $modelUser = User::find($model->user_id);
-        var_dump($modelUser);
-                exit();
+        $modelUser = User::findOne($model->user_id);
+        $model->user_id = NULL;
+        $model->save();
+        $access = Yii::$app->authManager;
+        $item = $access->getRole('Pasien');
+        $access->revoke($item,$modelUser->id);
+        $modelUser->delete();
         
-//        $access = Yii::$app->authManager;
-//        $item = $access->getRole('Pasien');
-//        $access->revoke($item,$modelUser->id);
-//        $model->user_id = NULL;
-//        $model->save();
         
         
         return $this->redirect(['index']);
