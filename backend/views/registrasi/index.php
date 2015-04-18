@@ -37,14 +37,14 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
         </div>
     </section>
 
-        <section class="col-sm-8">
-            <?=
-                $this->render('_form', [
-                    'model' => $model,
-                    'pId' => $pId,
-                ])
-            ?>
-        </section>
+	<section class="col-sm-8">
+		<?=
+			$this->render('_form', [
+				'model' => $model,
+				'pId' => $pId,
+			])
+		?>
+	</section>
 </div>
 
 <div class="row">
@@ -59,7 +59,7 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
                         <form id="dateTimeFilter" action="" method="POST">
                             <?=                
                             DatePicker::widget([
-                                'name' => 'tanggal_registrasi',
+                                'name' => 'tanggal_kunjungan',
                                 'type' => DatePicker::TYPE_COMPONENT_PREPEND,
                                 'pluginOptions' => [
                                     'autoclose'=>true,
@@ -71,7 +71,7 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
                                     'id' => 'time_treshold',
                                     'onchange' => 
                                         '$.pjax.reload({
-                                            url: "'.Url::to(['index']).'?RegistrasiSearch[tanggal_registrasi]="+$(this).val(),
+                                            url: "'.Url::to(['index']).'?RegistrasiSearch[tanggal_kunjungan]="+$(this).val(),
                                             container: "#pjax-gridview",
                                             timeout: 1000,
                                         })
@@ -92,7 +92,7 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
                 </div>
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3">
-                        <h1 class="text-center" id="gridTitle">Daftar Pasien <?php $tanggal = Yii::$app->request->queryParams['RegistrasiSearch']['tanggal_registrasi']; echo !is_null($tanggal) && $tanggal != '' ? $tanggal : 'Hari Ini'; ?></h1>
+                        <h1 class="text-center" id="gridTitle">Daftar Pasien <?php $tanggal = Yii::$app->request->queryParams['RegistrasiSearch']['tanggal_kunjungan']; echo !is_null($tanggal) && $tanggal != '' ? $tanggal : 'Hari Ini'; ?></h1>
                     </div>
                 </div>
             </div>

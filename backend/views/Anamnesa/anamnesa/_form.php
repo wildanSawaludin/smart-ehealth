@@ -36,7 +36,7 @@ use kartik\tabs\TabsX;
                      $items = [
     [
         'label'=>'<i class="glyphicon glyphicon-home"></i> Keluhan Utama',
-        'content'=>yii\base\View::render('popup/_formkeluhanutama',['model'=>$model,'id'=>$_GET['id']]),
+        'content'=>yii\base\View::render('popup/_formkeluhanutama',['model'=>$model,'id'=>$model->id]),
         'active'=>true
     ],
     [
@@ -44,7 +44,7 @@ use kartik\tabs\TabsX;
      //   'content'=>yii\base\View::render('_keluhanLokasi',['model'=>$model]),
         'id'=>'tabs-keluhantambahan',
         'content'=>'<div id="tabkeluhantambahan"></div>',
-        'linkOptions'=>['data-enable-cache'=>false,'data-url'=>\yii\helpers\Url::to(['Anamnesa/anamnesa/keluhan-tambahan','id'=>$_GET['id']])],
+        'linkOptions'=>['data-enable-cache'=>false,'data-url'=>\yii\helpers\Url::to(['Anamnesa/anamnesa/keluhan-tambahan','id'=>$model->id])],
     ],
     
     /* [
@@ -58,6 +58,7 @@ use kartik\tabs\TabsX;
     'items'=>$items,
     'position'=>TabsX::POS_LEFT,
     'sideways'=>true,
+    'id'=>'tabs-anamnesautama',
     'encodeLabels'=>false,
     'pluginOptions' =>  ['enableCache'=>false],
 ]);
@@ -298,6 +299,8 @@ Modal::begin([
 ]);
 Modal::end();
 ?>
-<script>var id = '<?php echo $_GET['id']; ?>' </script>  
+<script>var id = '<?php echo $model->id; ?>' </script>  
 <?php $this->registerJsFile('/admin/js/popupKeluhan.js'); ?>
 <?php $this->registerJsFile('/admin/js/popupFunction.js'); ?>
+
+

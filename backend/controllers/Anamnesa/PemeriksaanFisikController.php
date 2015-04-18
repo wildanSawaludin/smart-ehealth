@@ -4,6 +4,7 @@ namespace backend\controllers\Anamnesa;
 
 use Yii;
 use backend\models\PemeriksaanFisik;
+use backend\models\Registrasi;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -13,16 +14,38 @@ use yii\web\Response;
 
 class PemeriksaanFisikController extends Controller{
 
- public function actionCreate($id){
-     $model = $this->findModel($id);
-       
+   //  public $layout = 'anamnesa';
+
+    public function behaviors()
+    {
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['post'],
+                ],
+            ],
+        ];
+    }
+    
+ public function actionUpdate($id){
+
+     $modelRegistrasi = $this->findRegistrasi($id);
+     $model = $this->findModel($modelRegistrasi->id);
+     //  Yii::$app->response->format = Response::FORMAT_JSON; 
+     $registrasi = $this->findPasien($id);
+     // $model = $this->findModel($id);
+      
+    //  $registrasi = Registrasi::findOne($model->registrasi_id);
+        
+
      //   if ($model->load(Yii::$app->request->post()) && $model->save()) {
        //     return $this->redirect(['view', 'id' => $model->id]);
        // } else {
             return $this->render('create', [
                 'model' => $model,
-               
-                
+                'pasien' =>  $registrasi->pasien,
+                'registrasi' => $registrasi,
             ]);
         //}
      
@@ -30,6 +53,7 @@ class PemeriksaanFisikController extends Controller{
  
  public function actionSaveStatusterkini($id){
      $model = $this->findModel($id);
+    
        $return =0;
       if ($model->load(Yii::$app->request->post()) && $model->validate()) {
         $model->save();
@@ -205,6 +229,25 @@ class PemeriksaanFisikController extends Controller{
      protected function findModel($id)
     {
         if (($model = PemeriksaanFisik::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+    
+    
+       protected function findRegistrasi($id)
+    {
+        if (($model = PemeriksaanFisik::findOne(['registrasi_id'=>$id])) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+    
+     protected function findPasien($id)
+    {
+        if (($model = Registrasi::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

@@ -10,6 +10,7 @@ use backend\models\IcdxSearch;
 use backend\models\Registrasi;
 use backend\models\ResepNonracikan;
 use backend\models\ResepNonracikanDetail;
+use backend\models\PemeriksaanFisik;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Json;
@@ -27,9 +28,11 @@ class DiagnosaController extends Controller
 
     public function actionUpdate($id, $diagnosa = 'Awal')
     {
+       
         //$model = $this->findModel($id);
         $model = Registrasi::findOne($id);
         $modelDiagnosa = Diagnosa::findAll(['jenis_diagnosa' => $diagnosa]);
+        
         /*$modelResepNonRacikan = ResepNonracikan::findOne(['registrasi_id' => $id]);
         $modelResepNonracikanDetail = new ResepNonracikanDetail();
         $modelResepNonracikanDetailIsi = ResepNonracikanDetail::findAll(['resep_nonracikan_id' => $modelResepNonRacikan->id]);*/
@@ -39,7 +42,7 @@ class DiagnosaController extends Controller
         $searchModel = new IcdxSearch();
         
         $this->layout = 'main';
-        $GLOBALS['collapse'] = true;
+        //$GLOBALS['collapse'] = true;
         $modelAnamnesa = Anamnesa::findOne($id);
         $registrasi = Registrasi::findOne($modelAnamnesa->registrasi_id);
 

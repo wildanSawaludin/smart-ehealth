@@ -40,21 +40,7 @@ use yii\helpers\Url;
         'content'=>'<div id="tabanamnesa_terpimpin"></div>',
         'linkOptions'=>['data-enable-cache'=>false,'data-url'=>\yii\helpers\Url::to(['/Anamnesa/anamnesa/anamnesa-terpimpin','id'=>$_GET['id']])],
     ],
-   /* [
-        'label'=>'<i class="glyphicon glyphicon-list-alt"></i> Dropdown',
-        'items'=>[
-             [
-                 'label'=>'<i class="glyphicon glyphicon-chevron-right"></i> Option 1',
-                 'encode'=>false,
-                 'content'=>'test4',
-             ],
-             [
-                 'label'=>'<i class="glyphicon glyphicon-chevron-right"></i> Option 2',
-                 'encode'=>false,
-                 'content'=>'content4',
-             ],
-        ],
-    ],*/
+   
 ];
     
     echo TabsX::widget([
@@ -62,7 +48,7 @@ use yii\helpers\Url;
     'position'=>TabsX::POS_ABOVE,
     'bordered'=>true,
     'encodeLabels'=>false,
-    'id'=>'tabs-keluhan',
+    'id'=>'tabs-keluhandetail',
     'pluginOptions' =>  ['enableCache'=>false],
   //  'enableCache'=>false,
    //  'pluginEvents' => ["tabsX.beforeSend" => "$('#tabs-keluhanlokasi').on('tabsX.beforeSend', function (event) {

@@ -39,6 +39,21 @@ use yii\bootstrap\Modal;
                          <?=    $form->field($model, 'st_kesadaran')->dropDownList($model->optionsKesadaran); ?>
             </div>
         </div>
+  <?php 
+                       
+                       
+                       if($pasien->jenkel == "Perempuan" && $registrasi->kategoriUsia == "2"){ ?>
+<div class="form-group">
+            <label for="kesadaran" class="col-md-4">Keterangan  Khusus :</label>
+            <div class="col-md-2">
+                
+                     
+                              <?=    $form->field($model, 'keterangan_khusus')->dropDownList($model->optionsKeteranganKhusus); ?>
+                      
+                
+            </div>
+        </div>
+ <?php } ?>
 <div class="form-group">
             <label for="kesadaran" class="col-md-4">Berat Badan :</label>
             <div class="col-md-2">

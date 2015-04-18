@@ -13,11 +13,11 @@ use kartik\grid\GridView;
 ?>
 <table class="table">
     <thead>
-    <tr>
+    <tr> 
         <th>Kode</th>
         <th>Diagnosa</th>
         <th>Action</th>
-        <th><a href="#" id="tambah-diagnosa-awal" class="btn btn-info">+</a></th>
+       <th><a href="#" id="tambah-diagnosa-awal" class="btn btn-info">+</a></th>
     </tr>
     </thead>
     <tbody id="tbody-diagnosa-awal">
@@ -26,6 +26,7 @@ use kartik\grid\GridView;
             <td><?= $value->icdx->kode ?></td>
             <td><?= $value->icdx->inggris ?></td>
             <td><a id="view-info" onclick="informasiDiagnosa(<?= $value['icdx_id'] ?>)" class="btn btn-info">View</a> </td>
+            
         </tr>
     <?php endforeach; ?>
     </tbody>

@@ -192,21 +192,23 @@ class Registrasi extends \yii\db\ActiveRecord {
         if (parent::beforeSave($insert)) {
 
             if($this->isNewRecord) {
-                $query = new Query;
-                $counter = $query->select(['IFNULL(max(no_antrian), 0) + 1 as counter'])
-                    ->from('registrasi')
-                    ->where('tanggal_registrasi > "' . date('Y-m-d') . '"');
-                $command = $query->scalar();
-
                 $this->status_registrasi = 'Antrian';
-                $this->asal_registrasi = 'Web';
-                $this->faskes_id = 1;
-                $this->no_antrian = $command;
             }
 
             return true;
+
         } else {
             return false;
         }
+    }
+
+    public function getNoAntrian($date_f, $faskes_id) {
+
+        $tanggal_kunjungan = date_create(str_replace(' ','',$date_f).' 00:00:00');
+        $noantrian = Registrasi::find()->select('count(id)')
+            ->where('date_format(tanggal_kunjungan,"%Y-%m-%d") = "'.$tanggal_kunjungan->format('Y-m-d').'" and faskes_id = '.$faskes_id.'')->scalar();
+
+        return $noantrian + 1;
+        
     }
 }

@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use Yii;
 use backend\models\Registrasi;
 use backend\models\RegistrasiSearch;
+use backend\models\Pasien;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -34,8 +35,24 @@ class RegistrasiController extends Controller
     {
         $searchModel = new RegistrasiSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $modelPasien = Pasien::find()->where(['user_id' => Yii::$app->user->id])->one();
+        $model = new Registrasi();
+        if (Yii::$app->request->post()) {
 
+            $model->load(Yii::$app->request->post());
+            $model->tanggal_registrasi = date('Y-m-d H:i:s');
+            if ($model->asuransi_tgl_lahir)
+                $model->asuransi_tgl_lahir = Yii::$app->get('helper')->dateFormatingStrip($model->asuransi_tgl_lahir);
+            $model->save();
+            $model->no_reg= (string)sprintf('%08d', $model->id);
+            $model->save();
+            //if($model->save())return $this->redirect(['view', 'id' => $model->id]);
+        }
+//        var_dump($model);
+//                exit();
         return $this->render('index', [
+            'model' => $model,
+            'modelPasien' => $modelPasien,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -102,7 +119,7 @@ class RegistrasiController extends Controller
 
         return $this->redirect(['index']);
     }
-
+    
     /**
      * Finds the Registrasi model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

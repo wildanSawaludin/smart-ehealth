@@ -62,17 +62,21 @@ class RegistrasiController extends Controller {
 
             $model->load(Yii::$app->request->post());
             $model->tanggal_registrasi = date('Y-m-d H:i:s');
+            $model->tanggal_kunjungan = date('Y-m-d');
             if ($model->asuransi_tgl_lahir)
                 $model->asuransi_tgl_lahir = Yii::$app->get('helper')->dateFormatingStrip($model->asuransi_tgl_lahir);
-            $model->save();
             $model->no_reg= (string)sprintf('%08d', $model->id);
+            $model->asal_registrasi = 'Web';
+            $model->faskes_id = 1;
+            $model->no_antrian = $model->getNoAntrian(date('Y-m-d'), 1);
+            
             $model->save();
             //if($model->save())return $this->redirect(['view', 'id' => $model->id]);
         }
 
 
         $queryParams = Yii::$app->request->queryParams;
-        $input = isset($queryParams['RegistrasiSearch']) && isset($queryParams['RegistrasiSearch']['tanggal_registrasi']) ? $queryParams['RegistrasiSearch']['tanggal_registrasi'] : null; 
+        $input = isset($queryParams['RegistrasiSearch']) && isset($queryParams['RegistrasiSearch']['tanggal_kunjungan']) ? $queryParams['RegistrasiSearch']['tanggal_kunjungan'] : null; 
         
         return $this->render('index', [
                     'searchModel' => $searchModel,
@@ -171,32 +175,32 @@ class RegistrasiController extends Controller {
     
     public function actionResume($id)
     {
-       
-        //insert anamnesa
-        $modelResume = new Anamnesa;
-        $modelResume->registrasi_id = $id;
-        $modelResume->save();
-
-        //insert diagnosa
-        $modelDiagnosa = new Diagnosa();
-        $modelDiagnosa->registrasi_id = $id;
-        $modelDiagnosa->save();
-
-        //insert pemeriksaan fisik
-        $modelPemeriksaanFisik = new PemeriksaanFisik();
-        $modelPemeriksaanFisik->registrasi_id = $id;
-        $modelPemeriksaanFisik->save();
 
         $model = $this->findModel($id);
-        $model->status_registrasi = 'Resume';
-        $model->save();
 
-        if($modelResume->save()){
-            return $this->redirect(['Anamnesa/anamnesa/main', 'id' => $modelResume->id]);
+        if($model->status_registrasi != 'Resume') {
+            
+            //insert anamnesa
+            $modelResume = new Anamnesa;
+            $modelResume->registrasi_id = $id;
+            $modelResume->save();
+
+            //insert diagnosa
+            $modelDiagnosa = new Diagnosa();
+            $modelDiagnosa->registrasi_id = $id;
+            $modelDiagnosa->save();
+
+            //insert pemeriksaan fisik
+            $modelPemeriksaanFisik = new PemeriksaanFisik();
+            $modelPemeriksaanFisik->registrasi_id = $id;
+            $modelPemeriksaanFisik->save();
+
+            $model->status_registrasi = 'Resume';
+            $model->save();
         }
-//        var_dump($modelResume);
-//                exit();
+
         
+        return $this->redirect(['Anamnesa/anamnesa/main', 'id' => $model->id]);
             
     }
 

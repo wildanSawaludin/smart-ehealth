@@ -12,13 +12,17 @@ $this->title = Yii::t('app', 'Create {modelClass}', [
 ]);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Pasiens'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+$GLOBALS['page_title'] = '<h1>Daftar Pasien</h1>';
 ?>
-<div class="pasien-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
-
+<div class="row box box-primary">
+   
+        
+            <!-- form start -->
+           
+		    <section style="margin-top:20px;" class="col-sm-8"><?= $this->render('_form', [
+				'model' => $model,
+			]) ?>
+			</section>
+        
 </div>
