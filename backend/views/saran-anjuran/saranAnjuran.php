@@ -1,7 +1,7 @@
 <?php
 use kartik\tabs\TabsX;
 use yii\helpers\Url;
-use yii\web\View;
+use yii\base\View;
 
 ?>
 
@@ -20,36 +20,44 @@ use yii\web\View;
                     $items = [
                         [
                             'label'=>'Obat-obatan',
+                            'id' => 'obat-obatan',
                             'content' => View::render('obatTab',[
                                 'resepNonracikan' => $resepNonracikan,
+                                'resepRacikan' => $resepRacikan,
                                 'id' => $_GET['id']
                             ]),
                             'active' => true,
-                            'linkOptions'=>['data-url'=>Url::to(['/saran-anjuran/index?id='.$_GET['id']])],
+                            'linkOptions'=>['data-enable-cache'=>false,'data-url'=>Url::to(['/saran-anjuran/index?id='.$_GET['id']])],
                         ],
                         [
                             'label'=>'Rawat inap',
-                            'content' => '',
+                            'id' => 'rawat-inap',
+                            'content' => 'rrrr',
                             'linkOptions'=>['data-url'=>Url::to(['/saran-anjuran/index?id='.$_GET['id']])],
                         ],
                         [
                             'label'=>'Bedah/operasi',
-                            'content' => ''
+                            'id' => 'bedah-operasi',
+                            'content' => 'sdsd'
                         ],
                         [
                             'label'=>'Kemoterapi',
-                            'content' => ''
+                            'id' => 'kemoterapi',
+                            'content' => 'dddd'
                         ],
                         [
                             'label'=>'Fisioterapi',
-                            'content' => ''
+                            'id' => 'fisioterapi',
+                            'content' => 'fisio'
                         ],
                     ];
 
                     echo TabsX::widget([
                         'items'=>$items,
                         'position'=>TabsX::POS_ABOVE,
-                        'encodeLabels'=>false
+                        'encodeLabels'=>false,
+                        'id'=>'tabs-saran-anjuran-form',
+                        'pluginOptions' =>  ['enableCache'=>false],
                     ]);
                 ?>
             </div>
