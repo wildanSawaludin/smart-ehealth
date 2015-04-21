@@ -1,7 +1,9 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use kartik\widgets\ActiveForm;
+use kartik\widgets\DatePicker;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Registrasi */
@@ -12,49 +14,24 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'no_reg')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'pasien_id')->textInput() ?>
-
-    <?= $form->field($model, 'tanggal_registrasi')->textInput() ?>
-
-    <?= $form->field($model, 'status_registrasi')->dropDownList([ 'Antrian' => 'Antrian', 'Pemeriksaan' => 'Pemeriksaan', 'Hasil' => 'Hasil', ], ['prompt' => '']) ?>
-
-    <?= $form->field($model, 'asal_registrasi')->dropDownList([ 'Apps' => 'Apps', 'Web' => 'Web', 'Faskes' => 'Faskes', ], ['prompt' => '']) ?>
-
-    <?= $form->field($model, 'status_pelayanan')->dropDownList([ 'Rawat Jalan' => 'Rawat Jalan', 'Inap' => 'Inap', ], ['prompt' => '']) ?>
-
-    <?= $form->field($model, 'status_rawat')->dropDownList([ 'Biasa' => 'Biasa', 'Persalinan' => 'Persalinan', ], ['prompt' => '']) ?>
-
-    <?= $form->field($model, 'dr_penanggung_jawab')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'icdx_id')->textInput() ?>
-
-    <?= $form->field($model, 'status_asuransi')->dropDownList([ 'Umum' => 'Umum', 'BPJS Kesehatan' => 'BPJS Kesehatan', 'BPJS Ketenagakerjaan' => 'BPJS Ketenagakerjaan', 'Asuransi Lainnya' => 'Asuransi Lainnya', ], ['prompt' => '']) ?>
-
-    <?= $form->field($model, 'catatan')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'asuransi_noreg')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'asuransi_noreg_other')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'asuransi_nama')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'asuransi_tgl_lahir')->textInput() ?>
-
-    <?= $form->field($model, 'asuransi_status_jaminan')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'asuransi_penanggung_jawab')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'asuransi_alamat')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'asuransi_notelp')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'no_antrian')->textInput() ?>
-
-    <?= $form->field($model, 'asuransi_provider_id')->textInput() ?>
-
-    <?= $form->field($model, 'faskes_id')->textInput() ?>
+    <?= $form->field($model, 'tanggal_kunjungan')->widget(DatePicker::classname(), [
+    'options' => ['placeholder' => '(yyyy-mm-dd)'],
+                'pluginOptions' => [
+                    'autoclose' => true, 'format' => 'yyyy-mm-dd'
+    ]]);?>
+    <?php $kec = [1 => 'Mariso', 2 => 'Tamalate', 3 => 'Bontoala', 4 => 'Rappoocini',
+                    5 => 'Makassar', 6 => 'Ujung Tanah', 7 => 'Tallo', 8 => 'Ujung Pandang',
+                    9 => 'Mamajang', 10 => 'Tamalanrea', 11 => 'Panakkukang', 12 => 'Manggala',
+                    13 => 'Wajo', 14 => 'Biringkanaya'
+                                ];?>
+    <?= $form->field($model, 'faskes_id')->dropDownList($kec, ['prompt' => '-- Pilih Kecamatan --',
+        'onchange'=>'$.post( "'.Yii::$app->urlManager->createUrl('/registrasi/lists?id=').'"+$(this).val(), 
+        function( data ) {$( "select#faskes_id" ).html( data );});'])->label('Kecamatan');; ?>
+    
+    <?php $dataPost=ArrayHelper::map(backend\models\FasilitasKesehatan::find()->asArray()->all(), 'id', 'nama'); ?>
+    <?= $form->field($model, 'faskes_id')->dropDownList($dataPost,['prompt' => '-- Pilih Fasilitas Kesehatan --','id'=>'faskes_id'])->label('Fasilitas Kesehatan');;?>
+    
+    <?= $form->field($model, 'status_pelayanan')->radioList([ 'Rawat Jalan' => 'Rawat Jalan','Rawat Inap' => 'Rawat Inap'], ['inline' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
