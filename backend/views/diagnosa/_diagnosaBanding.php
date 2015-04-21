@@ -25,6 +25,7 @@ use kartik\grid\GridView;
         <tr id="tr-diagnosa-awal<?= $model['icdx_id'] ?>">
             <td><?= $value->icdx->kode ?></td>
             <td><?= $value->icdx->inggris ?></td>
+            <td><a class="glyphicon glyphicon-info-sign" id="view-info" onclick="informasiDiagnosa(<?= $value['icdx_id'] ?>)" class="btn btn-info"></a> </td>
         </tr>
     <?php endforeach; ?>
     </tbody>
@@ -49,6 +50,13 @@ use kartik\grid\GridView;
              '<td><i id="info" class="glyphicon glyphicon-info-sign"></i></td>' +
              '</tr>'
              );*/
-        })
+        });
+
+        function informasiDiagnosa(id)
+        {
+            $('#pop-info').html();
+            $('#pop-info').load(baseurl + '/diagnosa/pop-info?id='+id);
+            $('#pop-info').modal('show');
+        }
     });
 </script>

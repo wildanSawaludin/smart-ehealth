@@ -20,9 +20,21 @@ use yii\helpers\Html;
                 'kode',
                 'inggris',
                 [
+                    'class'=>'kartik\grid\BooleanColumn',
+                    'attribute'=>'penyakit_primer',
+                    'vAlign'=>'middle',
+                    'filterType'=>GridView::FILTER_CHECKBOX,
+                    'value'=>function($model,$key,$index,$widget) {
+                        return ($model->penyakit_primer == null) ? false : true;
+                    },
+                ],
+                [
                     'class' => 'kartik\grid\ActionColumn',
-                    'template' => '{select}',
+                    'template' => '{info}{select}',
                     'buttons' => [
+                        'info' => function($url, $model){
+                            return "<a class='glyphicon glyphicon-info-sign' onclick='informasiDiagnosa(".$model['id'].")' id='view-info'></a>";
+                        },
                         'select' => function($url, $model){
                             return Html::checkbox('pilih', false, ['value' => $model['id'].'#'.$model['kode'].'#'.$model['inggris']]);
                         }

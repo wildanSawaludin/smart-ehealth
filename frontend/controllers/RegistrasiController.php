@@ -6,6 +6,7 @@ use Yii;
 use backend\models\Registrasi;
 use backend\models\RegistrasiSearch;
 use backend\models\Pasien;
+use backend\models\FasilitasKesehatan;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -40,13 +41,16 @@ class RegistrasiController extends Controller
         if (Yii::$app->request->post()) {
 
             $model->load(Yii::$app->request->post());
+            $model->pasien_id = $modelPasien->id;
             $model->tanggal_registrasi = date('Y-m-d H:i:s');
-            if ($model->asuransi_tgl_lahir)
-                $model->asuransi_tgl_lahir = Yii::$app->get('helper')->dateFormatingStrip($model->asuransi_tgl_lahir);
+            $model->status_registrasi = 'Antrian';
+            $model->asal_registrasi = 'Web';
+//            $model->tanggal_kunjungan = date('Y-m-d');
+            $model->no_antrian = $model->getNoAntrian(date('Y-m-d'), $model->faskes_id);
             $model->save();
-            $model->no_reg= (string)sprintf('%08d', $model->id);
+            $model->no_reg= str_pad($model->id, 8, '0', STR_PAD_LEFT);
             $model->save();
-            //if($model->save())return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 //        var_dump($model);
 //                exit();
@@ -65,8 +69,10 @@ class RegistrasiController extends Controller
      */
     public function actionView($id)
     {
+        $modelPasien = Pasien::find()->where(['user_id' => Yii::$app->user->id])->one();
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'modelPasien' => $modelPasien
         ]);
     }
 
@@ -135,4 +141,38 @@ class RegistrasiController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+    
+    public function actionUpdatePasien($id)
+    {
+        $model = Pasien::findOne($id);
+        
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['index']);
+        } 
+            return $this->render('_updatePasien', [
+                'model' => $model,
+            ]);
+        
+    }
+
+    public function actionLists($id)
+    {
+        $countFaskes = FasilitasKesehatan::find()
+                ->where(['kecamatan_id' => $id])
+                ->count();
+
+        $faskes = FasilitasKesehatan::find()
+                ->where(['kecamatan_id' => $id])
+                ->orderBy('id DESC')
+                ->all();
+
+        if ($countFaskes > 0) {
+            foreach ($faskes as $fasks) {
+                echo "<option value='" . $fasks->id . "'>" . $fasks->nama . "</option>";
+            }
+        } else {
+            echo "<option>-</option>";
+        }
+    }
+
 }

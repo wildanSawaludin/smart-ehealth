@@ -8,7 +8,7 @@ use Yii;
  * This is the model class for table "racikan_obat".
  *
  * @property integer $id
- * @property integer $resep_racikan_id
+ * @property integer $resep_racikan_detail_id
  * @property string $nama_obat
  * @property string $kek_isi
  *
@@ -30,8 +30,7 @@ class RacikanObat extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['resep_racikan_id'], 'required'],
-            [['resep_racikan_id'], 'integer'],
+            [['resep_racikan_detail_id'], 'integer'],
             [['nama_obat'], 'string', 'max' => 100],
             [['kek_isi'], 'string', 'max' => 10]
         ];
@@ -44,7 +43,7 @@ class RacikanObat extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'resep_racikan_id' => 'Resep Racikan ID',
+            'resep_racikan_detail_id' => 'Resep Racikan ID',
             'nama_obat' => 'Nama Obat',
             'kek_isi' => 'Kek Isi',
         ];

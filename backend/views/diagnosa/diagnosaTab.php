@@ -11,6 +11,7 @@ use yii\helpers\Url;
     $items = [
         [
             'label'=>'Diagnosa Awal/Sementara',
+            'id' => 'diagnosa-awal-sementara',
             'content' => View::render('_diagnosaAwal', [
                 'model' => $model,
                 'dataProvider' => $dataProvider,
@@ -23,6 +24,7 @@ use yii\helpers\Url;
         ],
         [
             'label'=>'Diagnosa Banding',
+            'id' => 'tab-diagnosa-banding',
             'content' => View::render('_diagnosaBanding', [
                 'model' => $model,
                 'dataProvider' => $dataProvider,
@@ -34,6 +36,7 @@ use yii\helpers\Url;
         ],
         [
             'label'=>'Diagnosa Kerja',
+            'id' => 'tab-diagnosa-kerja',
             'content' => View::render('_diagnosaKerja', [
                 'model' => $model,
                 'dataProvider' => $dataProvider,
@@ -45,6 +48,7 @@ use yii\helpers\Url;
         ],
         [
             'label'=>'Diagnosa Akhir',
+            'id' => 'tab-diagnosa-akhir',
             'content' => View::render('_diagnosaAkhir', [
                 'model' => $model,
                 'dataProvider' => $dataProvider,
@@ -59,7 +63,9 @@ use yii\helpers\Url;
     echo TabsX::widget([
         'items'=>$items,
         'position'=>TabsX::POS_LEFT,
-        'encodeLabels'=>false
+        'encodeLabels'=>false,
+        'id'=>'tabs-diagnosa',
+        'pluginOptions' =>  ['enableCache'=>false],
     ]);
 
     ?>

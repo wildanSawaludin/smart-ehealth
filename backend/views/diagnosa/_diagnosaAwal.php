@@ -25,7 +25,7 @@ use kartik\grid\GridView;
         <tr id="tr-diagnosa-awal<?= $model['icdx_id'] ?>">
             <td><?= $value->icdx->kode ?></td>
             <td><?= $value->icdx->inggris ?></td>
-            <td><a id="view-info" onclick="informasiDiagnosa(<?= $value['icdx_id'] ?>)" class="btn btn-info">View</a> </td>
+            <td><a class="glyphicon glyphicon-info-sign" id="view-info" onclick="informasiDiagnosa(<?= $value['icdx_id'] ?>)" class="btn btn-info"></a> </td>
             
         </tr>
     <?php endforeach; ?>

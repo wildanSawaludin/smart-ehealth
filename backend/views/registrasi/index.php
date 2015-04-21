@@ -188,7 +188,7 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
 
         },
         'setSelected': function() {
-             $('.filter-pasien .select2-container:last').select2("data", { id: $('#registrasi-catatan').select2("val"), text: $('#patienName').html() });
+             $('#registrasi-pasienid').select2("data", { id: $('#registrasi-catatan').select2("val"), text: $('#patienName').html() });
         }
     }
 
