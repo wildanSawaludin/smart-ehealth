@@ -128,6 +128,23 @@ class PasienController extends Controller
         return $this->redirect(['index']);
 
     }
+    
+    public function actionDeactivation($id)
+    {
+        $model = $this->findModel($id);
+        $modelUser = User::findOne($model->user_id);
+        $model->user_id = NULL;
+        $model->save();
+        $access = Yii::$app->authManager;
+        $item = $access->getRole('Pasien');
+        $access->revoke($item,$modelUser->id);
+        $modelUser->delete();
+        
+        
+        
+        return $this->redirect(['index']);
+
+    }
 
     /**
      * Finds the Pasien model based on its primary key value.

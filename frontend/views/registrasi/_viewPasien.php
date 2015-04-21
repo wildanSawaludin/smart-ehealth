@@ -6,7 +6,7 @@ use kartik\form\ActiveForm;
 use yii\base\View;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Package */
+/* @var $model app\models\Registrasi */
 
 ?>
 <?php 

@@ -41,13 +41,6 @@ class RegistrasiSearch extends Registrasi {
         $query = Registrasi::find()
                 ->joinWith(['pasien']);
 
-        $items = $query
-                ->select([
-                    'pasien.nama as pasienNama',
-                    'date_format(registrasi.tanggal_registrasi,"%d-%m-%Y %H:%i:%s") as tanggal_registrasi_format',
-                    'registrasi.*'])
-                ->all();
-
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -60,9 +53,15 @@ class RegistrasiSearch extends Registrasi {
             return $dataProvider;
         }
 
+        // if there is no preset tanggal_kunjungan
         if(is_null($this->tanggal_kunjungan) || $this->tanggal_kunjungan == '') {
             $currDate = new \DateTime();
+            $this->tanggal_kunjungan = $currDate->format('Y-m-d');
+        }
 
+
+        if(isset($params['RegistrasiSearch']) && isset($params['RegistrasiSearch']['tanggal_kunjungan'])) {
+            $currDate = new \DateTime($params['RegistrasiSearch']['tanggal_kunjungan']);
             $this->tanggal_kunjungan = $currDate->format('Y-m-d');
         }
 
@@ -93,7 +92,7 @@ class RegistrasiSearch extends Registrasi {
                 ->andFilterWhere(['like', 'pasien.nama', $this->pasienNama]);
 
         $query->andFilterWhere(
-            ['>=', 'tanggal_registrasi',  $this->tanggal_registrasi]
+            ['>=', 'tanggal_kunjungan',  $this->tanggal_kunjungan]
         );
 
         return $dataProvider;
