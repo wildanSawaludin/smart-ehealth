@@ -16,8 +16,9 @@ use yii\base\View;
     ]); 
 
 
-$tempat = is_null($model->tempat_lahir) ? '-' : $model->tempat_lahir;
-        $tanggal = is_null($model->tgl_lahir) ? '-' : $model->tgl_lahir; ?>
+        $tempat = is_null($model->tempat_lahir) ? '-' : $model->tempat_lahir;
+        $tanggal = date("d-m-Y",strtotime($model->tgl_lahir));
+        $tanggal =  $tanggal = 00-00-0000 ? '-' : $tanggal;?>
                 <div class="form-group no-margin-botom">
                     <label class="col-sm-3 col-md-offset-1 control-label">No RM</label>
                     <div class="col-sm-7">
@@ -39,7 +40,7 @@ $tempat = is_null($model->tempat_lahir) ? '-' : $model->tempat_lahir;
                 <div class="form-group no-margin-botom">
                     <label class="col-sm-3 col-md-offset-1 control-label">TTL</label>
                     <div class="col-sm-7">
-                        <p class="form-control-static"><?= $tempat ?> <?= $tangal ?></p>
+                        <p class="form-control-static"><?= $tempat ?>, <?= $tanggal ?></p>
                     </div>
                 </div>
                 <div class="form-group no-margin-botom">
@@ -57,7 +58,7 @@ $tempat = is_null($model->tempat_lahir) ? '-' : $model->tempat_lahir;
                 <div class="form-group no-margin-botom">
                     <div class="col-sm-offset-4 col-sm-4">
 <!--                        <button type="button" id="btnUpdate" data-pasien="<?= $model->id ?>" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span> Update</button>                        -->
-                        <?= Html::a(Yii::t('app', 'Update'), ['pasien/update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+                        <?= Html::a(Yii::t('app', 'Update'), ['registrasi/update-pasien', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
                     </div>
                 </div>
 

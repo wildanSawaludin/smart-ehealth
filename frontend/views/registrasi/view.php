@@ -2,57 +2,83 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use kartik\form\ActiveForm;
+use yii\base\View;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\Registrasi */
+/* @var $modelPasien app\models\Registrasi */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Registrasis'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="registrasi-view">
+<?php 
+    $form = ActiveForm::begin([
+        'id' => 'login-form-vertical', 
+        'type' => ActiveForm::TYPE_VERTICAL
+    ]); 
 
-    <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
+        $tempat = is_null($modelPasien->tempat_lahir) ? '-' : $modelPasien->tempat_lahir;
+        $kunjungan = date("d-m-Y",strtotime($model->tanggal_kunjungan));
+        $kunjungan =  $kunjungan = 00-00-0000 ? '-' : $kunjungan;
+?>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'no_reg',
-            'pasien_id',
-            'tanggal_registrasi',
-            'status_registrasi',
-            'asal_registrasi',
-            'status_pelayanan',
-            'tanggal_kunjungan',
-            'status_rawat',
-            'dr_penanggung_jawab',
-            'icdx_id',
-            'status_asuransi',
-            'catatan:ntext',
-            'asuransi_noreg',
-            'asuransi_noreg_other',
-            'asuransi_nama',
-            'asuransi_tgl_lahir',
-            'asuransi_status_jaminan',
-            'asuransi_penanggung_jawab',
-            'asuransi_alamat',
-            'asuransi_notelp',
-            'no_antrian',
-            'asuransi_provider_id',
-            'faskes_id',
-        ],
-    ]) ?>
+<h3><center>Terima Kasih</center></h3>
+<h3><center>Anda Telah Terdaftar</center></h3>
+<h3><center>No. Antrian</center></h3>
+<h3><center><?= $model->no_antrian ?></center></h3>
+                <div class="form-group no-margin-botom">
+                    <label class="col-sm-3 col-md-offset-1 control-label">Tanggal Kunjungan</label>
+                    <div class="col-sm-7">
+                        <p class="form-control-static"><?= $kunjungan ?></p>
+                    </div>
+                </div>
+                <div class="form-group no-margin-botom">
+                    <label class="col-sm-3 col-md-offset-1 control-label">No Registrasi</label>
+                    <div class="col-sm-7">
+                        <p class="form-control-static"><?= $model->no_reg ?></p>
+                    </div>
+                </div>
+                <div class="form-group no-margin-botom">
+                    <label class="col-sm-3 col-md-offset-1 control-label">No RM</label>
+                    <div class="col-sm-7">
+                        <p class="form-control-static"><?php echo str_pad($modelPasien->id, 6, '0', STR_PAD_LEFT)?></p>
+                    </div>
+                </div>
+                <div class="form-group no-margin-botom">
+                    <label class="col-sm-3 col-md-offset-1 control-label">Nama</label>
+                    <div class="col-sm-7">
+                        <p id="patienName" class="form-control-static"><?php echo $modelPasien->nama ?></p>
+                    </div>
+                </div>
+                <div class="form-group no-margin-botom">
+                    <label class="col-sm-3 col-md-offset-1 control-label">Gender</label>
+                    <div class="col-sm-7">
+                        <p class="form-control-static"><?php echo $modelPasien->jenkel ?></p>
+                    </div>
+                </div>
+                <div class="form-group no-margin-botom">
+                    <label class="col-sm-3 col-md-offset-1 control-label">Usia</label>
+                    <div class="col-sm-7">
+                        <p class="form-control-static"><?php echo $modelPasien->getUsia() ?> Tahun</p>
+                    </div>
+                </div>
+                <div class="form-group no-margin-botom">
+                    <label class="col-sm-3 col-md-offset-1 control-label">Alamat</label>
+                    <div class="col-sm-7">
+                        <p class="form-control-static"><?php echo $modelPasien->alamat ?></p>
+                    </div>
+                </div>
+                <div class="form-group no-margin-botom">
+                    <label class="col-sm-3 col-md-offset-1 control-label">Status Pelayanan</label>
+                    <div class="col-sm-7">
+                        <p class="form-control-static"><?php echo $model->status_pelayanan ?></p>
+                    </div>
+                </div>
+                <div class="form-group no-margin-botom">
+                    <div class="col-sm-offset-4 col-sm-4">
+<!--                        <button type="button" id="btnUpdate" data-pasien="<?= $modelPasien->id ?>" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span> Update</button>                        -->
+                        <?= Html::a(Yii::t('app', 'OK'), ['index'], ['class' => 'btn btn-primary']) ?>
+                    </div>
+                </div>
 
-</div>
+  <?php ActiveForm::end(); ?>              
+

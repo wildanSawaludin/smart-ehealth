@@ -112,20 +112,24 @@ class PasienController extends Controller
             'scenario' => 'create',
         ]);
         
-        $user->username = str_pad($id, 6, "0", STR_PAD_LEFT);
-        $user->email = 'username'.$id.'@example.com';
-        $user->password = 'segeradiubah';
-        $user->create();
+        if (Yii::$app->request->post()) {
+            $user->load(Yii::$app->request->post());
+            $user->username = str_pad($id, 6, "0", STR_PAD_LEFT);
+//          $user->email = 'username'.$id.'@example.com';
+            $user->password = 'segeradiubah';
+            if($user->create()){
+                $model = $this->findModel($id);
+                $model->user_id = $user->id;
+                $model->save();
         
-        $model = $this->findModel($id);
-        $model->user_id = $user->id;
-        $model->save();
-        
-        $access = Yii::$app->authManager;
-        $item = $access->getRole('Pasien');
-        $access->assign($item,$user->id);
-        
-        return $this->redirect(['index']);
+                $access = Yii::$app->authManager;
+                $item = $access->getRole('Pasien');
+                $access->assign($item,$user->id);
+                
+                return $this->redirect(['index']);}
+        }
+//        return $this->redirect(['index']);
+        return $this->render('_user',['user'=>$user]);
 
     }
     
