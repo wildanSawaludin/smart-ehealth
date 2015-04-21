@@ -64,7 +64,7 @@ class Registrasi extends \yii\db\ActiveRecord {
         return [
             [['pasien_id', 'status_pelayanan'], 'required'],
             [['pasien_id', 'asuransi_provider_id', 'icdx_id', 'no_antrian', 'faskes_id', 'nomorRegistrasi', 'usia'], 'integer'],
-            [['tanggal_registrasi', 'asuransi_tgl_lahir', 'no_rm', 'jenis_kelamin', 'fasilitas_kesehatan', 'faskes'], 'safe'],
+            [['tanggal_registrasi', 'tanggal_kunjungan', 'asuransi_tgl_lahir', 'no_rm', 'jenis_kelamin', 'fasilitas_kesehatan', 'faskes'], 'safe'],
             [['status_registrasi', 'asal_registrasi', 'status_pelayanan', 'status_rawat', 'status_asuransi', 'catatan'], 'string'],
             [['no_reg', 'asuransi_noreg', 'asuransi_noreg_other', 'asuransi_notelp'], 'string', 'max' => 15],
             [['dr_penanggung_jawab', 'asuransi_nama'], 'string', 'max' => 25],
@@ -81,6 +81,7 @@ class Registrasi extends \yii\db\ActiveRecord {
             'no_reg' => 'No Registrasi',
             'pasien_id' => 'Pasien',
             'tanggal_registrasi' => 'Tanggal Registrasi',
+            'tanggal_kunjungan' => 'Tanggal Kunjungan',
             'status_registrasi' => 'Status Registrasi',
             'status_pelayanan' => 'Status Pelayanan',
             'status_rawat' => 'Status Rawat',
@@ -184,6 +185,7 @@ class Registrasi extends \yii\db\ActiveRecord {
 
         $this->fasilitas_kesehatan = $this->faskes->nama;
         $this->jenis_kelamin = $this->pasien->jenkel;
+        $this->pasienNama = $this->pasien->nama;
         $this->no_rm = str_pad($this->pasien->id, 6, '0', STR_PAD_LEFT);
         $this->nomorRegistrasi = $this->asal_registrasi[0].'-'.str_pad($this->id, 6, '0', STR_PAD_LEFT);
     }
