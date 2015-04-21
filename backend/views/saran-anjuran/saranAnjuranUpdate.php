@@ -20,9 +20,13 @@ use yii\web\View;
                     $items = [
                         [
                             'label'=>'Obat-obatan',
+                            'id' => 'obat-update',
                             'content' => View::render('obatTabUpdate',[
                                 'resepNonracikanIsi' => $resepNonracikanIsi,
                                 'resepNonracikanDetailIsi' => $resepNonracikanDetailIsi,
+                                'resepRacikan' => $resepRacikan,
+                                'resepRacikanDetail' => $resepRacikanDetail,
+                                'racikanObat' => $racikanObat,
                                 'id' => $_GET['id']
                             ]),
                             'active' => true,
@@ -30,19 +34,23 @@ use yii\web\View;
                         ],
                         [
                             'label'=>'Rawat inap',
+                            'id' => 'rawat-inap-update',
                             'content' => '',
                             'linkOptions'=>['data-url'=>Url::to(['/saran-anjuran/index?id='.$_GET['id']])],
                         ],
                         [
                             'label'=>'Bedah/operasi',
+                            'id' => 'bedah-operasi-update',
                             'content' => ''
                         ],
                         [
                             'label'=>'Kemoterapi',
+                            'id' => 'kemoterapi-update',
                             'content' => ''
                         ],
                         [
                             'label'=>'Fisioterapi',
+                            'id' => 'fisio-update',
                             'content' => ''
                         ],
                     ];
@@ -50,7 +58,9 @@ use yii\web\View;
                     echo TabsX::widget([
                         'items'=>$items,
                         'position'=>TabsX::POS_ABOVE,
-                        'encodeLabels'=>false
+                        'encodeLabels'=>false,
+                        'id'=>'tabs-saran-anjuran-update-form',
+                        'pluginOptions' =>  ['enableCache'=>false],
                     ]);
                 ?>
             </div>

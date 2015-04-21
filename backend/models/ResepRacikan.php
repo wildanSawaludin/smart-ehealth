@@ -2,6 +2,7 @@
 
 namespace backend\models;
 
+use dektrium\user\models\User;
 use Yii;
 
 /**
@@ -21,6 +22,7 @@ use Yii;
  */
 class ResepRacikan extends \yii\db\ActiveRecord
 {
+    public $no_resep;
     /**
      * @inheritdoc
      */
@@ -35,7 +37,7 @@ class ResepRacikan extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'registrasi_id', 'no_resep'], 'required'],
+            [['user_id', 'registrasi_id'], 'required'],
             [['user_id', 'registrasi_id', 'no_resep', 'label_etiket'], 'integer'],
             [['status', 'iter'], 'string']
         ];
@@ -79,5 +81,10 @@ class ResepRacikan extends \yii\db\ActiveRecord
     public function getResepRacikanDetails()
     {
         return $this->hasMany(ResepRacikanDetail::className(), ['resep_racikan_id' => 'id']);
+    }
+
+    public function afterFind()
+    {
+        $this->no_resep = str_pad($this->id, 6, "R-000000", STR_PAD_LEFT);
     }
 }
