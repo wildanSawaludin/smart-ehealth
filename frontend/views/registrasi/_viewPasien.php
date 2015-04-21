@@ -22,37 +22,37 @@ use yii\base\View;
                 <div class="form-group no-margin-botom">
                     <label class="col-sm-3 col-md-offset-1 control-label">No RM</label>
                     <div class="col-sm-7">
-                        <p class="form-control-static"><?php echo str_pad($model->id, 6, '0', STR_PAD_LEFT)?></p>
+                        <p class="form-control-static"> : <?php echo str_pad($model->id, 6, '0', STR_PAD_LEFT)?></p>
                     </div>
                 </div>
                 <div class="form-group no-margin-botom">
                     <label class="col-sm-3 col-md-offset-1 control-label">Nama</label>
                     <div class="col-sm-7">
-                        <p id="patienName" class="form-control-static"><?php echo $model->nama ?></p>
+                        <p id="patienName" class="form-control-static"> : <?php echo $model->nama ?></p>
                     </div>
                 </div>
                 <div class="form-group no-margin-botom">
                     <label class="col-sm-3 col-md-offset-1 control-label">Gender</label>
                     <div class="col-sm-7">
-                        <p class="form-control-static"><?php echo $model->jenkel ?></p>
+                        <p class="form-control-static"> : <?php echo $model->jenkel ?></p>
                     </div>
                 </div>
                 <div class="form-group no-margin-botom">
-                    <label class="col-sm-3 col-md-offset-1 control-label">TTL</label>
+                    <label class="col-sm-3 col-md-offset-1 control-label">TTL :</label>
                     <div class="col-sm-7">
-                        <p class="form-control-static"><?= $tempat ?>, <?= $tanggal ?></p>
+                        <p class="form-control-static"> : <?= $tempat ?>, <?= $tanggal ?></p>
                     </div>
                 </div>
                 <div class="form-group no-margin-botom">
                     <label class="col-sm-3 col-md-offset-1 control-label">Usia</label>
                     <div class="col-sm-7">
-                        <p class="form-control-static"><?php echo $model->getUsia() ?> Tahun</p>
+                        <p class="form-control-static"> : <?php echo $model->getUsia() ?> Tahun</p>
                     </div>
                 </div>
                 <div class="form-group no-margin-botom">
                     <label class="col-sm-3 col-md-offset-1 control-label">Alamat</label>
                     <div class="col-sm-7">
-                        <p class="form-control-static"><?php echo $model->alamat ?></p>
+                        <p class="form-control-static"> : <?php echo $model->alamat ?></p>
                     </div>
                 </div>
                 <div class="form-group no-margin-botom">
