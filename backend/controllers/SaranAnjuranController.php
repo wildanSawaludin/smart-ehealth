@@ -29,10 +29,14 @@ class SaranAnjuranController extends Controller{
             $resepNonracikanIsi = $this->findModel($id);
             $resepNonracikanDetailIsi = ResepNonracikanDetail::findAll(['resep_nonracikan_id' => $resepNonracikanIsi->id]);
             $resepRacikan = $this->findModelRacikan($id);
+            $resepRacikanDetail = ResepRacikanDetail::findAll(['resep_racikan_id' => $resepRacikan->id]);
+            $racikanObat = RacikanObat::findAll(['resep_racikan_id' => $resepRacikan->id]);
             $html = $this->render('saranAnjuranUpdate',[
                 'resepNonracikanIsi' => $resepNonracikanIsi,
                 'resepNonracikanDetailIsi' => $resepNonracikanDetailIsi,
-                'resepRacikan' => $resepRacikan
+                'resepRacikan' => $resepRacikan,
+                'resepRacikanDetail' => $resepRacikanDetail,
+                'racikanObat' => $racikanObat
             ]);
         }else{
             $resepNonracikan = new ResepNonracikan();
@@ -110,8 +114,6 @@ class SaranAnjuranController extends Controller{
         $modelUpdate->label_etiket = $modelUpdate->label_etiket;
         $modelUpdate->save();
 
-        $nama_obat = Yii::$app->request->post('nama_obat_racikan');
-        $kek_isi = Yii::$app->request->post('kek_isi_racikan');
         $m_f = Yii::$app->request->post('mf_racikan');
         $jumlah = Yii::$app->request->post('dtd_no_racikan');
         $aturan_pakai_sehari = Yii::$app->request->post('aturan_pakai_sehari_racikan');
@@ -127,9 +129,11 @@ class SaranAnjuranController extends Controller{
             $modelResepRacikanDetail->save();
 
             //echo $modelResepRacikanDetail->id;
+            $nama_obat = Yii::$app->request->post('nama_obat_racikan_'.$i);
+            $kek_isi = Yii::$app->request->post('kek_isi_racikan_'.$i);
+            var_dump($nama_obat);
 
-
-            for($a=0;$a<count($nama_obat[$i]);$a++){
+            for($a=0;$a<count($nama_obat);$a++){
                 $racikanObat = new RacikanObat();
                 $racikanObat->resep_racikan_detail_id = $modelResepRacikanDetail->id;
                 $racikanObat->nama_obat = $nama_obat[$a];

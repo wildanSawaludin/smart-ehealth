@@ -25,6 +25,8 @@ use yii\web\View;
                                 'resepNonracikanIsi' => $resepNonracikanIsi,
                                 'resepNonracikanDetailIsi' => $resepNonracikanDetailIsi,
                                 'resepRacikan' => $resepRacikan,
+                                'resepRacikanDetail' => $resepRacikanDetail,
+                                'racikanObat' => $racikanObat,
                                 'id' => $_GET['id']
                             ]),
                             'active' => true,

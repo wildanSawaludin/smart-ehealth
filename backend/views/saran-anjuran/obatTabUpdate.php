@@ -18,7 +18,9 @@ $items = [
         'label'=>'Resep Racikan',
         'id' => 'obat-racikan-update',
         'content' => View::render('_obatRacikanUpdate',[
-            'resepRacikan' => $resepRacikan
+            'resepRacikan' => $resepRacikan,
+            'resepRacikanDetail' => $resepRacikanDetail,
+            'racikanObat' => $racikanObat
         ]),
         'linkOptions'=>['data-url'=>Url::to(['/saran-anjuran/resep-obat-racikan?id='.$_GET['id']])],
     ],

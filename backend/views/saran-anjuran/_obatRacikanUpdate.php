@@ -49,7 +49,45 @@ use kartik\widgets\ActiveForm;
     <div class="col-md-12">
         <a class="btn btn-info" id="tambah_obat_racikan">Tambah Obat</a>
         <div id="nama_obat_racikan">
+            <?php if($resepRacikanDetail != null): ?>
+                <?php
+                    //foreach ($resepRacikanDetail as $value):
+                    foreach ($racikanObat as $valueObat):
 
+                    ?>
+                    <div class="form-group">
+
+                        <label class="control-label col-md-1"><b>R/</b></label>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control" readonly value="<?= $valueObat['nama_obat'] ?>">
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control" readonly value="<?= $valueObat['kek_isi'] ?>">
+                        </div>
+
+                    </div>
+                    <div class=form-group>
+                        <label class="control-label col-md-2">∫</label>
+                        <div class="col-md-1">
+                            <!--<input type="text" class="form-control" readonly value="<?/*= $value['aturan_pakai_sehari'] */?>">-->
+                        </div>
+                        <div class="col-md-1">dd</div>
+                        <div class="col-md-2"><!--<input type="text" class="form-control" readonly value="<?/*= $value['aturan_pakai_jumlah'] */?>" >--></div>
+                    </div>
+                <?php endforeach; ?>
+                <?php
+                foreach ($resepRacikanDetail as $value):
+                    //foreach ($racikanObat as $valueObat):
+
+                    ?>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control" readonly value="<?= $value['m_f'] ?>">
+                    </div>
+                    <div class=col-md-2>
+                        <input type="text" class="form-control" readonly value="<?= $value['jumlah'] ?>">
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </div>
     </div>
     <input type="hidden" name="id_resep_racikan" value="<?= $resepRacikan['id']; ?>">
@@ -90,17 +128,17 @@ use kartik\widgets\ActiveForm;
                 }
             });
         });
-        var i = 1;
+        var i = 0;
         $('#tambah_obat_racikan').click(function(){
 
             $('#nama_obat_racikan').append(
                 '<div class=form-group>'+
                     '<label class="control-label col-md-1"><b>R/</b></label>'+
-                    '<div class="col-md-2 nama_obat">'+
-                        '<input type="text" class="form-control" name="nama_obat_racikan'+i+'[]" placeholder="nama obat"> '+
+                    '<div class="col-md-2 nama_obat'+i+'">'+
+                        '<input type="text" class="form-control" name="nama_obat_racikan_'+i+'[]" placeholder="nama obat"> '+
                     '</div>'+
-                    '<div class="col-md-2 kek_isi">'+
-                        '<input type="text" class="form-control" name="kek_isi_racikan'+i+'[]" placeholder="kek/isi">'+
+                    '<div class="col-md-2 kek_isi'+i+'">'+
+                        '<input type="text" class="form-control" name="kek_isi_racikan_'+i+'[]" placeholder="kek/isi">'+
                     '</div>'+
                     '<div class="col-md-2 tombol"><a class="btn btn-info" id="tambah_nama_obat_racikan" onclick="tambahNamaObatRacikan('+i+')">+</a></div>'+
                 '</div>'+
@@ -153,16 +191,16 @@ use kartik\widgets\ActiveForm;
             });
         });*/
     });
-    var a = 1;
+    var a = 2;
     function tambahNamaObatRacikan(i)
     {
 
-        $('.nama_obat').append(
-            '<input type="text" class="form-control" name="nama_obat_racikan_'+i+'_'+a+'[]" placeholder="nama obat">'
+        $('.nama_obat'+i).append(
+            '<input type="text" class="form-control" name="nama_obat_racikan_'+i+'[]" placeholder="nama obat">'
         );
 
-        $('.kek_isi').append(
-            '<input type="text" class="form-control" name="kek_isi_racikan_'+i+'_'+a+'[]" placeholder="kek/isi">'
+        $('.kek_isi'+i).append(
+            '<input type="text" class="form-control" name="kek_isi_racikan_'+i+'[]" placeholder="kek/isi">'
         );
         a++;
         /*$('.tombol').append(
