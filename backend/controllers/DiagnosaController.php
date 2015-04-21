@@ -72,11 +72,13 @@ class DiagnosaController extends Controller
 
     public function actionPopDiagnosa($diagnosa)
     {
-        $dataProvider = new ActiveDataProvider([
+        /*$dataProvider = new ActiveDataProvider([
             'query' => Icdx::find(),
         ]);
-        $dataProvider->pagination->pageSize=10;
+        $dataProvider->pagination->pageSize=10;*/
         $searchModel = new IcdxSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->pagination->pageSize=10;
 
         return $this->renderAjax('_popDiagnosa',[
             'dataProvider' => $dataProvider,
