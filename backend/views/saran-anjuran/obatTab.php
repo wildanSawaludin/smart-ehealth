@@ -6,6 +6,7 @@ use yii\web\View;
 $items = [
     [
         'label'=>'Resep Obat Non-Racikan',
+        'id' => 'obat-non-racikan',
         'content' => View::render('_obatNonRacikan',[
             'resepNonracikan' => $resepNonracikan
         ]),
@@ -14,7 +15,10 @@ $items = [
     ],
     [
         'label'=>'Resep Racikan',
-        'content' => 'sdsds'
+        'id' => 'obat-racikan',
+        'content' => View::render('_obatRacikan',[
+            'resepRacikan' => $resepRacikan
+        ])
     ],
 ];
 
@@ -22,6 +26,8 @@ echo TabsX::widget([
     'items'=>$items,
     'position'=>TabsX::POS_ABOVE,
     'bordered'=>true,
-    'encodeLabels'=>false
+    'encodeLabels'=>false,
+    'id'=>'tabs-resep-form',
+    'pluginOptions' =>  ['enableCache'=>false],
 ]);
 ?>

@@ -54,12 +54,19 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'pekerjaan_pasangan',
             [
                 'class' => 'kartik\grid\ActionColumn',
-                'template' => '{view} {update} {delete} {activation}',
+                'template' => '{view} {update} {delete} {activation} {deactivation}',
                 'buttons' => [
                     'activation' => function ($url, $model) {
                         return $model->user_id == NULL? Html::a('<span class="glyphicon glyphicon-lock"></span>', $url, [
                                     'title' => Yii::t('yii', 'Activation'),
-                                    'data-confirm' => Yii::t('yii', 'Apakah anda yakin untuk membuat data user untuk pasien ini?'),
+                                    'data-confirm' => Yii::t('yii', 'Apakah anda yakin untuk mengaktifasi pasien ini?'),
+                                    'data-method' => 'post',
+                        ]):'';
+                    },
+                    'deactivation' => function ($url, $model) {
+                        return $model->user_id != NULL? Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
+                                    'title' => Yii::t('yii', 'Deactivation'),
+                                    'data-confirm' => Yii::t('yii', 'Apakah anda yakin untuk menonaktifkan pasien ini?'),
                                     'data-method' => 'post',
                         ]):'';
                     },

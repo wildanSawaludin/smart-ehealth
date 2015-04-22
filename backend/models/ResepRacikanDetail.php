@@ -19,6 +19,8 @@ use Yii;
  */
 class ResepRacikanDetail extends \yii\db\ActiveRecord
 {
+    public $nama_obat;
+    public $kek_isi;
     /**
      * @inheritdoc
      */
@@ -61,7 +63,7 @@ class ResepRacikanDetail extends \yii\db\ActiveRecord
      */
     public function getRacikanObats()
     {
-        return $this->hasMany(RacikanObat::className(), ['resep_racikan_id' => 'id']);
+        return $this->hasMany(RacikanObat::className(), ['resep_racikan_detail_id' => 'id']);
     }
 
     /**
