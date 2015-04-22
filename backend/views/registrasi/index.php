@@ -144,17 +144,21 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
                                 'buttons' =>
                                 [
                                     'resume' => function ($url, $model) {
-                                        return Html::a('<span class="glyphicon glyphicon-zoom-in"></span>', $url, [
-                                                    'title' => Yii::t('yii', 'Resume'),
-                                                //  'data-confirm' => Yii::t('yii', 'Apa Anda yakin?'),
-                                                    'data-method' => 'post',
-                                        ]);
+                                        if(Yii::$app->user->can('Dokter')||Yii::$app->user->can('Perawat')||Yii::$app->user->can('Administrator')){
+                                            return Html::a('<span class="glyphicon glyphicon-zoom-in"></span>', $url, [
+                                                        'title' => Yii::t('yii', 'Resume'),
+                                                    //  'data-confirm' => Yii::t('yii', 'Apa Anda yakin?'),
+                                                        'data-method' => 'post',
+                                            ]);
+                                        }
                                     },
                                     'edit' => function ($url, $model) {
-                                    return Html::a('<span class="glyphicon glyphicon-edit"></span>', 'javascript:void(0);', [
-                                                'title' => Yii::t('yii', 'Edit'),
-                                                'onclick'=>'editReg(\''.$model->id.'\')'
-                                    ]);
+                                        if(Yii::$app->user->can('Verifikator')||Yii::$app->user->can('Administrator')){
+                                            return Html::a('<span class="glyphicon glyphicon-edit"></span>', 'javascript:void(0);', [
+                                                        'title' => Yii::t('yii', 'Edit'),
+                                                        'onclick'=>'editReg(\''.$model->id.'\')'
+                                            ]);
+                                        }
                                     }
                                 ],
                                 'options' => [ 
