@@ -43,3 +43,5 @@ use yii\helpers\Url;
     ?>
 
 </div>
+
+<a href="<?= Yii::$app->urlManager->baseUrl?>/diagnosa/show-resep-obat-form?id=<?= isset($_GET['id']) ? $_GET['id'] : '' ?>">Resep Obat</a>

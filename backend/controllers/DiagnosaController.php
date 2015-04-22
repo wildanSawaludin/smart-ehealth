@@ -9,6 +9,7 @@ use backend\models\Icdx;
 use backend\models\IcdxSearch;
 use backend\models\Registrasi;
 use backend\models\ResepNonracikan;
+use backend\models\ResepRacikan;
 use backend\models\ResepNonracikanDetail;
 use backend\models\PemeriksaanFisik;
 use Yii;
@@ -167,6 +168,36 @@ class DiagnosaController extends Controller
             $model->save();
         }
 
+
+    }
+
+    public function actionShowResepObatForm($id) {
+
+        $this->layout = 'main';
+        $modelAnamnesa = Anamnesa::findOne($id);
+        $registrasi = Registrasi::findOne($modelAnamnesa->registrasi_id);
+
+        $newResepRacikan = new ResepRacikan();
+        $newResepRacikan->user_id = Yii::$app->user->identity->id;
+        $newResepRacikan->registrasi_id = $registrasi->id;
+        $newResepRacikan->save();
+        $newResepRacikan->no_resep = $newResepRacikan->id;//'RR-'.str_pad($newResepRacikan->id, 6, '0', STR_PAD_LEFT);
+        $newResepRacikan->save();
+
+        $newResepNonRacikan = new ResepNonracikan();
+        $newResepNonRacikan->user_id = Yii::$app->user->identity->id;
+        $newResepNonRacikan->registrasi_id = $registrasi->id;
+        $newResepNonRacikan->save();
+        $newResepNonRacikan->no_resep = $newResepNonRacikan->id;// 'RN-'.str_pad($newResepNonRacikan->id, 6, '0', STR_PAD_LEFT);
+        $newResepNonRacikan->save();
+
+        return $this->render('resep', [
+            'registrasi' => $registrasi,
+            'user' => Yii::$app->user->identity,
+            'pasien' => $registrasi->pasien,
+            'resepRacikan' => $newResepRacikan,
+            'resepNonRacikan' => $newResepNonRacikan
+        ]);
 
     }
 
