@@ -56,9 +56,25 @@ class Registrasi extends \yii\db\ActiveRecord {
     public $pasienNama;
     public $tanggal_registrasi_format;
     public $nomorRegistrasi;
-    public $no_rm;
     public $jenis_kelamin;
+    public $faskesnama;
+    public $no_rm;
     public $fasilitas_kesehatan;
+    
+    //edit popup registri
+    public $status_rawat_reged;
+    public $dr_penanggung_jawab_reged;
+    public $icdx_id_reged;
+    public $catatan_reged;
+    public $status_asuransi_reged;
+    public $asuransi_provider_id_reged;
+    public $asuransi_penanggung_jawab_reged;
+    public $asuransi_alamat_reged;
+    public $asuransi_notelp_reged;
+    public $asuransi_noreg_reged;
+    public $asuransi_nama_reged;
+    public $asuransi_tgl_lahir_reged;
+    public $asuransi_status_jaminan_reged;
 
     public function rules() {
         return [
@@ -178,29 +194,31 @@ class Registrasi extends \yii\db\ActiveRecord {
     }
 
     public function afterFind() {
-        $birthDay = new \DateTime($this->pasien->tgl_lahir);
-        $now = new \DateTime();
-        $diff = $now->diff($birthDay); 
+        if($this->isNewRecord){
+            $birthDay = new \DateTime($this->pasien->tgl_lahir);
+            $now = new \DateTime();
+            $diff = $now->diff($birthDay); 
 
-        $this->fasilitas_kesehatan = $this->faskes->nama;
-        $this->jenis_kelamin = $this->pasien->jenkel;
-        $this->no_rm = str_pad($this->pasien->id, 6, '0', STR_PAD_LEFT);
-        $this->nomorRegistrasi = $this->asal_registrasi[0].'-'.str_pad($this->id, 6, '0', STR_PAD_LEFT);
-    }
-
-    public function beforeSave($insert) {
-        if (parent::beforeSave($insert)) {
-
-            if($this->isNewRecord) {
-                $this->status_registrasi = 'Antrian';
-            }
-
-            return true;
-
-        } else {
-            return false;
+            $this->fasilitas_kesehatan = $this->faskes->nama;
+            $this->jenis_kelamin = $this->pasien->jenkel;
+            $this->no_rm = str_pad($this->pasien->id, 6, '0', STR_PAD_LEFT);
+            $this->nomorRegistrasi = $this->asal_registrasi[0].'-'.str_pad($this->id, 6, '0', STR_PAD_LEFT);
         }
     }
+
+//    public function beforeSave($insert) {
+//        if (parent::beforeSave($insert)) {
+//
+//            if($this->isNewRecord) {
+//                $this->status_registrasi = 'Antrian';
+//            }
+//
+//            return true;
+//
+//        } else {
+//            return false;
+//        }
+//    }
 
     public function getNoAntrian($date_f, $faskes_id) {
 
