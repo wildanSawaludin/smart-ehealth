@@ -40,7 +40,7 @@ use kartik\checkbox\CheckboxX;
                 
                          <?=    $form->field($model, 'mata_posisi_kanan')->dropDownList($model->optionsMataPosisiKanan); ?>
             </div>
-            <label for="kesadaran" class="col-md-2">Posisi </label>
+            <label for="kesadaran" class="col-md-2">Kelopak Mata </label>
               <div class="col-md-3">
                 
                          <?=    $form->field($model, 'mata_posisi_kiri')->dropDownList($model->optionsMataPosisiKiri); ?>
