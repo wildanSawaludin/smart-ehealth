@@ -7,6 +7,7 @@ use yii\widgets\Pjax;
 use yii\helpers\ArrayHelper;
 use kartik\date\DatePicker;
 use backend\models\Registrasi;
+use yii\bootstrap\Modal;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\RegistrasiSearch */
@@ -112,23 +113,33 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
                         'layout' => "{items}\n{summary}\n{pager}",
                         'columns' => [
                             'no_antrian',
-                            'nomorRegistrasi',
-                            'no_rm',
+                            'no_reg',
                             [
-                                'attribute' => 'pasienNama',
-                                'value' => $model->pasienNama
+                                'label' => 'No Rm',
+                                'attribute' => 'norm',
+                                'value' => function ($model) {
+                                    return $model->pasien->id;
+                                },
+                            ],
+                            [
+                                'attribute' => 'pasienNama'
                             ],
                             'usia',
-                            'jenis_kelamin',
                             [
-                                'attribute' => 'fasilitas_kesehatan',
-                                'value' => $model->fasilitas_kesehatan
+                                'label' => 'Jenis Kelamin',
+                                'attribute' => 'jenkel',
+                                'value' => function ($model) {
+                                    return $model->pasien->jenkel;
+                                },
+                            ],
+                            [
+                                'attribute' => 'faskesnama'
 
                             ],
                             'status_registrasi',
                             [
                                 'class' => 'yii\grid\ActionColumn',
-                                'template' => '{delete} {resume}',
+                                'template' => '{delete} {resume} {edit}',
                                 'buttons' =>
                                 [
                                     'resume' => function ($url, $model) {
@@ -137,6 +148,12 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
                                                 //  'data-confirm' => Yii::t('yii', 'Apa Anda yakin?'),
                                                     'data-method' => 'post',
                                         ]);
+                                    },
+                                    'edit' => function ($url, $model) {
+                                    return Html::a('<span class="glyphicon glyphicon-edit"></span>', 'javascript:void(0);', [
+                                                'title' => Yii::t('yii', 'Edit'),
+                                                'onclick'=>'editReg(\''.$model->id.'\')'
+                                    ]);
                                     }
                                 ],
                                 'options' => [ 
@@ -153,6 +170,13 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
         </div>
     </section>
 </div>
+<?php
+Modal::begin([
+    'id' => 'md_edit_reg',
+    'header' => '<h7>Edit Reg</h7>'
+]);
+Modal::end();
+?>
 
 <script type="text/javascript">
 

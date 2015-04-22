@@ -39,12 +39,15 @@ class RegistrasiSearch extends Registrasi {
      */
     public function search($params) {
         $query = Registrasi::find()
-                ->joinWith(['pasien']);
+                ->joinWith(['pasien'])
+                ->joinWith(['faskes'])
+                ;
 
         $items = $query
                 ->select([
                     'pasien.nama as pasienNama',
                     'date_format(registrasi.tanggal_registrasi,"%d-%m-%Y %H:%i:%s") as tanggal_registrasi_format',
+                    'fasilitas_kesehatan.nama as faskesnama',
                     'registrasi.*'])
                 ->all();
 
