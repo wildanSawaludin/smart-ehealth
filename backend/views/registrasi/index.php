@@ -137,6 +137,7 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
 
                             ],
                             'status_registrasi',
+                            'status_pelayanan',
                             [
                                 'class' => 'yii\grid\ActionColumn',
                                 'template' => '{delete} {resume} {edit}',
