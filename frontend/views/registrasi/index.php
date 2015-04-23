@@ -11,7 +11,8 @@ $this->title = Yii::t('app', 'Registrasi');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <style>
-hr {border:2px solid rgba(255,255,255,0.7)}
+hr {border:1px solid #888;}
+.col-md-2 {padding:20px;margin-left:-30px;min-height:540px;background-image:url('../frontend/web/images/bg_sidebar.png');background-color:#9e1200;margin:-20px 0 -20px -20px;}
 </style>
 <!--<style>
 .container {width:30%;}
@@ -39,35 +40,40 @@ hr {border:2px solid rgba(255,255,255,0.7)}
 
 </style>-->
 
-<body style="background:url('../frontend/web/images/bg_login.jpg') no-repeat center center fixed;   -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;">
-<body style="background-image:url('../frontend/web/images/bg_login.jpg')">
-<div class="registrasi-index-row" style="margin-top:0%">
-    <?php if(Yii::$app->user->can('Pasien')){ ?>
-	<div class="col-sm-6">
-	<h3 class="box-title">Informasi Pasien</h3>
-	<?php echo $this->render('_viewPasien', ['model' => $modelPasien]); ?>
-	</div>
-	<?php }?>
-	<div class="login-box">
+<body style="background-color:#ebebeb;">
+<?php if(Yii::$app->user->can('Pasien')){ ?>
+
+<div class="row">
+	<div class="col-sm-5 col-md-2"></div>
 	
-		<div class="login-logo text-center">
-		<h2 style="color:#fff;">Registrasi Pasien&nbsp;&nbsp;
-		<span class="glyphicon glyphicon-user"></span>
+	<div class="col-sm-5 col-md-5">
+		<div class="thumbnail">
+
+		<div class="caption">
+		<h2 class="text-center">Informasi Pasien&nbsp;&nbsp;
+		<span class="glyphicon glyphicon-user"></span></h2>
+		<hr><br/>
+		<?php echo $this->render('_viewPasien', ['model' => $modelPasien]); ?>
+		<?php }?>
+		</div>
+		</div>
+	</div>
+	<div class="col-sm-5 col-md-5">
+		<div class="thumbnail">
+
+		<div class="caption">
+		<h2 class="text-center">Registrasi Pasien&nbsp;&nbsp;
 		<span class="glyphicon glyphicon-tags"></span>
 		</h2>
 		<hr><br/>
 		</div><!-- /.login-logo -->
-		<div class="login-box-body">
 
-		<div class="form-group has-feedback">
+		<div class="form-group">
 		<?php echo $this->render('_form', ['model' => $model]); ?>
 		</div>
 
-		</div><!-- /.login-box-body -->
-	</div><!-- /.login-box -->
-   
+		</div>
+	</div>
 </div>
+    
 </body>

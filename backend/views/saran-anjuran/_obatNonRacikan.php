@@ -16,26 +16,38 @@ use kartik\widgets\ActiveForm;
         'formConfig' => ['labelSpan' => 1, 'spanSize' => ActiveForm::SIZE_SMALL,'showLabels'=>false]
     ]);
     ?>
+	<div class="row form-group">
+	  <div class="col-md-1"><label class="control-label">No. Resep</label></div>
+	  <div class="col-md-2"><input type="text" id="no_resep" readonly="true" class="form-control"></div>
+	  <div class="col-md-2"><button type="button" id="isi_no_resep" class="btn btn-success">Isi No Resep</button></div>
+	  <div class="col-md-1"><label class="control-label">Dokter</label></div>
+	  <div class="col-md-2"><input class="form-control" type="text" readonly="true" value="<?= Yii::$app->user->identity->username ?>"></div>
+	</div>
+	<br/><hr>
+	<!--<div class="form-group">
+		 <div class="col-md-1"><label class="control-label">No. Resep</label></div>
+		 <div class="col-xs-3"><input type="text" id="no_resep" readonly="true" class=""><a id="isi_no_resep" class="btn btn-info">Isi No Resep</a></div>
+		 <div class="col-xs-1">
+		<label class="control-label">Dokter</label></div>
+		<input type="text" readonly="true" value="<?= Yii::$app->user->identity->username ?>">
+	</div>-->
+	<div class="row form-group">
+		
+		<div class="col-md-4">
+			<div style="margin-left:5px">
+			<?php $list = ['CITO!' => 'CITO!','Statim' => 'Statim','Urgent' => 'Urgent','P.I.M' => 'P.I.M'] ?>
+			<?= $form->field($resepNonracikan, 'status')->dropDownList($list) ?>
+			</div>
+		</div>
+		<div class="col-md-2">
+			<button type="button" id="tambah_obat" class="btn btn-success">Tambah Obat</button>
+       
+			<div id="nama_obat">
 
-        <div class="form-group">
-            <label class="control-label">No. Resep</label>
-            <input type="text" id="no_resep" readonly="true"><a id="isi_no_resep" class="btn btn-info">Isi No Resep</a>
-            <br>
-            <label class="control-label">Dokter</label>
-            <input type="text" readonly="true" value="<?= Yii::$app->user->identity->username ?>">
-        </div>
-
-    <div class="col-md-6">
-        <?php $list = ['CITO!' => 'CITO!','Statim' => 'Statim','Urgent' => 'Urgent','P.I.M' => 'P.I.M'] ?>
-        <?= $form->field($resepNonracikan, 'status')->dropDownList($list) ?>
-    </div>
-
-    <div class="col-md-12">
-        <a class="btn btn-info" id="tambah_obat">Tambah Obat</a>
-        <div id="nama_obat">
-
-        </div>
-    </div>
+			</div>
+		</div>
+	</div>
+	
     <input type="hidden" name="id_resep_nonracikan" value="<?= $resepNonracikan['id']; ?>">
     <div class="form-group">
         <label class="control-label col-md-2">iter :</label>
@@ -47,7 +59,9 @@ use kartik\widgets\ActiveForm;
         </div>
     </div>
     <div class="form-group">
-        <label class="control-label col-md-2">&nbsp;</label>
+        <div class="col-md-2">
+		<label class="control-label">&nbsp;</label>
+		</div>
         <div class="col-md-2">
             <?= $form->field($resepNonracikan, 'label_etiket')->checkbox(['label' => 'Label/Etiket']) ?>
         </div>
@@ -55,7 +69,7 @@ use kartik\widgets\ActiveForm;
     <div class="form-group">
         <label class="control-label col-md-2">&nbsp;</label>
         <div class="col-md-2">
-            <a class="btn btn-info" id="simpan-obat">Ok</a>
+            <button class="btn btn-primary" id="simpan-obat">Ok</button>
         </div>
     </div>
 

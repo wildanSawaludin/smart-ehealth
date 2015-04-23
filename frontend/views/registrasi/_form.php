@@ -10,7 +10,7 @@ use yii\helpers\ArrayHelper;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 <style>
-label {color:#ffffff;}
+label {;}
 </style>
 
 <div class="registrasi-form">

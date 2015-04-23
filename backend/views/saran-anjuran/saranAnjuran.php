@@ -1,7 +1,7 @@
 <?php
 use kartik\tabs\TabsX;
 use yii\helpers\Url;
-use yii\base\View;
+use yii\web\View;
 
 ?>
 
@@ -20,44 +20,36 @@ use yii\base\View;
                     $items = [
                         [
                             'label'=>'Obat-obatan',
-                            'id' => 'obat-obatan',
                             'content' => View::render('obatTab',[
                                 'resepNonracikan' => $resepNonracikan,
-                                'resepRacikan' => $resepRacikan,
                                 'id' => $_GET['id']
                             ]),
                             'active' => true,
-                            'linkOptions'=>['data-enable-cache'=>false,'data-url'=>Url::to(['/saran-anjuran/index?id='.$_GET['id']])],
+                            'linkOptions'=>['data-url'=>Url::to(['/saran-anjuran/index?id='.$_GET['id']])],
                         ],
                         [
                             'label'=>'Rawat inap',
-                            'id' => 'rawat-inap',
-                            'content' => 'rrrr',
+                            'content' => '',
                             'linkOptions'=>['data-url'=>Url::to(['/saran-anjuran/index?id='.$_GET['id']])],
                         ],
                         [
                             'label'=>'Bedah/operasi',
-                            'id' => 'bedah-operasi',
-                            'content' => 'sdsd'
+                            'content' => ''
                         ],
                         [
                             'label'=>'Kemoterapi',
-                            'id' => 'kemoterapi',
-                            'content' => 'dddd'
+                            'content' => ''
                         ],
                         [
                             'label'=>'Fisioterapi',
-                            'id' => 'fisioterapi',
-                            'content' => 'fisio'
+                            'content' => ''
                         ],
                     ];
 
                     echo TabsX::widget([
                         'items'=>$items,
                         'position'=>TabsX::POS_ABOVE,
-                        'encodeLabels'=>false,
-                        'id'=>'tabs-saran-anjuran-form',
-                        'pluginOptions' =>  ['enableCache'=>false],
+                        'encodeLabels'=>false
                     ]);
                 ?>
             </div>
@@ -67,7 +59,7 @@ use yii\base\View;
         <div class="panel-heading" role="tab" id="headingTwo">
             <h4 class="panel-title">
                 <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                    Collapsible Group Item #2
+                   #2
                 </a>
             </h4>
         </div>

@@ -13,7 +13,6 @@ use yii\helpers\Url;
         $items = [
             [
                 'label'=>'Diagnosa',
-                'id' => 'tab-diagnosa',
                 'content' => View::render('diagnosaTab', [
                     'model' => $model,
                     'dataProvider' => $dataProvider,
@@ -25,9 +24,8 @@ use yii\helpers\Url;
             ],
             [
                 'label'=>'Saran/Anjuran',
-                'id' => 'tab-saran-anjuran',
                 'content' => '',
-                'linkOptions'=>['data-enable-cache'=>false,'data-url'=>Url::to(['/saran-anjuran/index?id='.$_GET['id']])],
+                'linkOptions'=>['data-url'=>Url::to(['/saran-anjuran/index?id='.$_GET['id']])],
             ]
         ];
 
@@ -35,13 +33,9 @@ use yii\helpers\Url;
             'items'=>$items,
             'position'=>TabsX::POS_ABOVE,
             'sideways'=>true,
-            'encodeLabels'=>false,
-            'id'=>'tabs-diagnosa-form',
-            'pluginOptions' =>  ['enableCache'=>false],
+            'encodeLabels'=>false
         ]);
 
     ?>
 
 </div>
-
-<a href="<?= Yii::$app->urlManager->baseUrl?>/diagnosa/show-resep-obat-form?id=<?= isset($_GET['id']) ? $_GET['id'] : '' ?>">Resep Obat</a>

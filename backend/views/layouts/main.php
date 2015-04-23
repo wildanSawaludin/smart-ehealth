@@ -19,7 +19,7 @@ if (Yii::$app->controller->action->id === 'login') {
     <head>
         <meta charset="<?= Yii::$app->charset ?>"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+		<link rel="shortcut icon"  type="image/png" sizes="32x32" href="../favicon.png">
         <link rel="apple-touch-icon" sizes="57x57" href="<?= Yii::getAlias('@web') ?>/apple-icon-57x57.png">
         <link rel="apple-touch-icon" sizes="60x60" href="<?= Yii::getAlias('@web') ?>/apple-icon-60x60.png">
         <link rel="apple-touch-icon" sizes="72x72" href="<?= Yii::getAlias('@web') ?>/apple-icon-72x72.png">
@@ -84,7 +84,7 @@ if (Yii::$app->controller->action->id === 'login') {
                 <p class="pull-right"><?= Yii::powered() ?></p>
 
                 <div class="pull-right hidden-xs">
-                    <b>Version</b> 0.1 Alpha &nbsp
+                    <b>Version</b> 1.0 &nbsp
                 </div>
                 <strong>&nbspCopyright © Dottoro'ta</strong> All rights reserved.
             </footer>

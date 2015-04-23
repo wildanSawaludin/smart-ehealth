@@ -37,14 +37,24 @@ Modal::end();
             <li class=""><a href="#tab_1" data-toggle="tab" aria-expanded="false">Anamnesa</a></li>
             <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Pemeriksaan Fisik</a></li>
             <li class="active"><a href="#tab_3" data-toggle="tab" aria-expanded="true">Diagnosa</a></li>
-            <li class="pull-right header">
+            <div class="col-md-3 col-sm-6 col-xs-12 pull-right">
+              <div class="info-box">
+                <span class="info-box-icon bg-grey"><span style="margin-top:6px" class="glyphicon glyphicon-user"></span></span>
+				<!--<span class="info-box-icon bg-grey"><span class="glyphicon glyphicon-chevron-right"></span></span>-->
+                <div class="info-box-content">
+                  <span class="info-box-text">No RM :&nbsp;<?= str_pad($pasien->id, 6, '0', STR_PAD_LEFT) ?></span>
+                  <span class="info-box-name">Nama &nbsp;&nbsp;:&nbsp;<?= $pasien->nama.' / '.$pasien->getUsia().' / '.$pasien->jenkel[0] ?></span>
+                </div><!-- /.info-box-content -->
+              </div><!-- /.info-box -->
+            </div><!-- /.col -->
+			<!--<li class="pull-right header">
                 <dl class="dl-horizontal">
                     <dt>No RM</dt>
                     <dd><?= str_pad($pasien->id, 6, '0', STR_PAD_LEFT) ?></dd>
                     <dt>Nama</dt>
                     <dd><?= $pasien->nama.' / '.$pasien->getUsia().' / '.$pasien->jenkel[0] ?></dd>
                 </dl>
-            </li>
+            </li>-->
         </ul>
         <div class="tab-content" style="min-height:800px;">
             <div class="tab-pane active" id="tab_3">
@@ -90,7 +100,7 @@ Modal::end();
             })
 
             $($("#tab-main li a")[1]).bind('click', id, function(){ 
-                window.location.href = "<?= Yii::$app->urlManager->createAbsoluteUrl('/Anamnesa/pemeriksaan-fisik/update') ?>?id="+id;
+                window.location.href = "<?= Yii::$app->urlManager->createAbsoluteUrl('/Anamnesa/anamnesa/pemeriksaan-fisik') ?>?id="+id;
             })
         }
 
