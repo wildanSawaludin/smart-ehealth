@@ -35,12 +35,12 @@ use kartik\tabs\TabsX;
                    <?php
                      $items = [
     [
-        'label'=>'<i class="glyphicon glyphicon-home"></i> Keluhan Utama',
+        'label'=>'<i class="glyphicon glyphicon-edit"></i> Keluhan Utama',
         'content'=>yii\base\View::render('popup/_formkeluhanutama',['model'=>$model,'id'=>$_GET['id']]),
         'active'=>true
     ],
     [
-        'label'=>'<i class="glyphicon glyphicon-user"></i> Keluhan Tambahan',
+        'label'=>'<i class="glyphicon glyphicon-check"></i> Keluhan Tambahan',
      //   'content'=>yii\base\View::render('_keluhanLokasi',['model'=>$model]),
         'id'=>'tabs-keluhantambahan',
         'content'=>'<div id="tabkeluhantambahan"></div>',
@@ -57,7 +57,7 @@ use kartik\tabs\TabsX;
                      echo TabsX::widget([
     'items'=>$items,
     'position'=>TabsX::POS_LEFT,
-    'sideways'=>true,
+    'sideways'=>false,
     'encodeLabels'=>false,
     'pluginOptions' =>  ['enableCache'=>false],
 ]);

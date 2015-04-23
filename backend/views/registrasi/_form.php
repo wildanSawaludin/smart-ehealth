@@ -178,7 +178,7 @@ SCRIPT;
                                                                     'initSelection' => new JsExpression($initScript)
                                                                 ],
                                                                 'pluginEvents' => [
-                                                                     "change" => "function(e) { pasienInfo.getInfoByPasien( $('#registrasi-pasienid').select2(\"val\")); $('#registrasi-catatan').select2(\"data\", { id: $('#registrasi-pasienid').select2(\"val\"), text: $('#registrasi-pasienid').select2(\"val\") }) }",
+                                                                     "change" => "function(e) { pasienInfo.getInfoByPasien( $('#registrasi-pasien_id').val()); $('#registrasi-catatan').select2(\"data\", { id: $('#registrasi-pasien_id').val(), text: $('#registrasi-pasien_id').val() }) }",
                                                                 ]
                                                             ],
                                                         'columnOptions' => ['colspan' => 2, 'class' => 'col-sm-7'],

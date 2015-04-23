@@ -11,6 +11,7 @@ use backend\models\Anamnesa;
 use backend\models\AnamnesaSearch;
 use backend\models\Diagnosa;
 use backend\models\PemeriksaanFisik;
+use backend\models\UserHasFaskes;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -55,24 +56,28 @@ class RegistrasiController extends Controller {
      * @return mixed
      */
     public function actionIndex($pId = null) {
+        $faskes = UserHasFaskes::findOne(Yii::$app->user->getId())->faskes_id;
         $searchModel = new RegistrasiSearch();
+        $searchModel->faskes_id = $faskes;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $model = new Registrasi();
-        $model->setscenario('registrasi');  
         if (Yii::$app->request->post()) {
-            $noregis = (string) sprintf('%06d',$model->id);
             $model->load(Yii::$app->request->post());
             $model->tanggal_registrasi = date('Y-m-d H:i:s');
             $model->tanggal_kunjungan = date('Y-m-d');
+//            $faskes = UserHasFaskes::findOne(Yii::$app->user->getId())->faskes_id;
+            if($faskes)$model->asal_registrasi = 'Faskes';
             if ($model->asuransi_tgl_lahir)
                 $model->asuransi_tgl_lahir = Yii::$app->get('helper')->dateFormatingStrip($model->asuransi_tgl_lahir);
-            $model->no_reg= "A-".$noregis;
-            $model->asal_registrasi = 'Web';
-            $model->faskes_id = 1;
-            $model->no_antrian = $model->getNoAntrian(date('Y-m-d'), 1);
-            
+            if($faskes){
+                $model->faskes_id = $faskes;
+                $model->no_antrian = $model->getNoAntrian(date('Y-m-d'), $faskes);
+            }
+            $model->status_registrasi = 'Antrian';
             $model->save();
-            //if($model->save())return $this->redirect(['view', 'id' => $model->id]);
+            $noregis = (string) sprintf('%08d',$model->id);
+            $model->no_reg= $noregis;
+            $model->save();
         }
 
 
@@ -189,10 +194,7 @@ class RegistrasiController extends Controller {
         $model->asuransi_nama_reged=$model->asuransi_nama;
         $model->asuransi_tgl_lahir_reged=$model->asuransi_tgl_lahir;
         $model->asuransi_status_jaminan_reged=$model->asuransi_status_jaminan;
-        //var_dump($model->save());exit;
         if ($_POST) {
-//            $model = $this->findModel($id);
-//            $model->load(Yii::$app->request->post());
             $model->status_rawat=$_POST['Registrasi']['status_rawat_reged'];
             $model->dr_penanggung_jawab=$_POST['Registrasi']['dr_penanggung_jawab_reged'];
             $model->icdx_id=$_POST['Registrasi']['icdx_id_reged'];
@@ -208,10 +210,10 @@ class RegistrasiController extends Controller {
             if ($model->asuransi_tgl_lahir)
                 $model->asuransi_tgl_lahir = Yii::$app->get('helper')->dateFormatingStrip($model->asuransi_tgl_lahir);
             $model->asuransi_status_jaminan=$_POST['Registrasi']['asuransi_status_jaminan_reged'];
-            //$model->load(Yii::$app->request->post());
             
             if ($model->save()) {
-                return $this->redirect(['index', 'pasien_id' => $model->id]);
+                //return $this->redirect(['index', 'pasien_id' => $model->id]);
+                return $this->redirect(['index']);
             }
         }
         return $this->renderAjax('popup/_editRegistrasi', [

@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
 $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
 
 ?>
-
+<?php if(Yii::$app->user->can('Verifikator') || Yii::$app->user->can('Administrator')){ ?>
 <div class="registrasi-index row">
     <section class="col-sm-4">
         <div class="box box-primary">
@@ -47,6 +47,7 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
 		?>
 	</section>
 </div>
+<?php }?>
 
 <div class="row">
     <section class="col-sm-12">
@@ -113,15 +114,16 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
                         'layout' => "{items}\n{summary}\n{pager}",
                         'columns' => [
                             'no_antrian',
-                            'no_reg',
+                            'format_noreg',
                             [
                                 'label' => 'No Rm',
                                 'attribute' => 'norm',
                                 'value' => function ($model) {
-                                    return $model->pasien->id;
+                                    return str_pad($model->pasien->id, 6, '0', STR_PAD_LEFT);;
                                 },
                             ],
                             [
+                                'label' => 'Nama Pasien',
                                 'attribute' => 'pasienNama'
                             ],
                             'usia',
@@ -133,6 +135,7 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
                                 },
                             ],
                             [
+                                'label' => 'Fasilitas Kesehatan',
                                 'attribute' => 'faskesnama'
 
                             ],
@@ -157,6 +160,15 @@ $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
                                             return Html::a('<span class="glyphicon glyphicon-edit"></span>', 'javascript:void(0);', [
                                                         'title' => Yii::t('yii', 'Edit'),
                                                         'onclick'=>'editReg(\''.$model->id.'\')'
+                                            ]);
+                                        }
+                                    },
+                                    'delete' => function ($url, $model) {
+                                        if(Yii::$app->user->can('Verifikator')||Yii::$app->user->can('Administrator')){
+                                            return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, [
+                                                'title' => Yii::t('yii', 'Delete'),
+                                                'data-confirm' => Yii::t('yii', 'Are you sure to delete this item?'),
+                                                'data-method' => 'post',
                                             ]);
                                         }
                                     }
@@ -217,7 +229,7 @@ Modal::end();
 
         },
         'setSelected': function() {
-             $('#registrasi-pasienid').select2("data", { id: $('#registrasi-catatan').select2("val"), text: $('#patienName').html() });
+             $('#registrasi-pasien_id').select2("data", { id: $('#registrasi-catatan').select2("val"), text: $('#patienName').html() });
         }
     }
 
@@ -231,7 +243,7 @@ Modal::end();
 
             setTimeout(function() {
                 $('#registrasi-catatan').select2("data", {id: pasien_id, text: pasien_id});
-                $('#registrasi-pasienid').select2("data", { id: pasien_id, text: $('#patienName').html()});
+                $('#registrasi-pasien_id').select2("data", { id: pasien_id, text: $('#patienName').html()});
             }, 2000)
 
         }

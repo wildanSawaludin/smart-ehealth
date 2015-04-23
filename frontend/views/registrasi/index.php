@@ -10,6 +10,7 @@ use yii\base\View;
 $this->title = Yii::t('app', 'Registrasi');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<<<<<<< HEAD
 <style>
 hr {border:1px solid #888;}
 .col-md-2 {padding:20px;margin-left:-30px;min-height:540px;background-image:url('../frontend/web/images/bg_sidebar.png');background-color:#9e1200;margin:-20px 0 -20px -20px;}

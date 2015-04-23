@@ -11,13 +11,14 @@ use kartik\grid\GridView;
     'formConfig' => ['labelSpan' => 1, 'spanSize' => ActiveForm::SIZE_SMALL,'showLabels'=>false]
 ]);
 ?>
-<table class="table">
-    <thead>
-    <tr>
+
+<table class="table" style="width:97%;margin:0px 0">
+    <thead style="vertical-align:middle;margin-top:-20px;background-color:#efefef;">
+    <tr style="padding:20px;">
         <th>Kode</th>
         <th>Diagnosa</th>
-        <th>Action</th>
-        <th><a href="#" id="tambah-diagnosa-akhir" class="btn btn-info">+</a></th>
+        <th>Action <a href="#" id="tambah-diagnosa-akhir" style="display:inline;" class="btn btn-info">+</a></th>
+        <th></th>
     </tr>
     </thead>
     <tbody id="tbody-diagnosa-akhir">
@@ -25,12 +26,13 @@ use kartik\grid\GridView;
         <tr id="tr-diagnosa-akhir<?= $model['icdx_id'] ?>">
             <td><?= $value->icdx->kode ?></td>
             <td><?= $value->icdx->inggris ?></td>
-            <td><a class="glyphicon glyphicon-info-sign" id="view-info" onclick="informasiDiagnosa(<?= $value['icdx_id'] ?>)" class="btn btn-info"></a> </td>
+            <td><a id="view-info" onclick="informasiDiagnosa(<?= $value['icdx_id'] ?>)" class="btn btn-primary">View</a> </td>
         </tr>
     <?php endforeach; ?>
     </tbody>
 </table>
-<button class="btn btn-primary" type="submit">Simpan</button>
+<hr>
+<button class="btn btn-success" type="submit">Simpan</button>
 <?php ActiveForm::end() ?>
 
 <script>
@@ -52,11 +54,4 @@ use kartik\grid\GridView;
              );*/
         })
     });
-
-    function informasiDiagnosa(id)
-    {
-        $('#pop-info').html();
-        $('#pop-info').load(baseurl + '/diagnosa/pop-info?id='+id);
-        $('#pop-info').modal('show');
-    }
 </script>

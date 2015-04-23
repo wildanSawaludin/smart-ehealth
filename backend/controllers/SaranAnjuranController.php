@@ -14,6 +14,7 @@ use backend\models\ResepNonracikan;
 use backend\models\ResepNonracikanDetail;
 use backend\models\ResepRacikan;
 use backend\models\ResepRacikanDetail;
+use backend\models\SaranAnjuran;
 use Yii;
 use yii\db\Connection;
 use yii\db\Query;
@@ -143,6 +144,173 @@ class SaranAnjuranController extends Controller{
         }
     }
 
+    public function actionPopupLaboratorium()
+    {
+        return $this->renderAjax('_laboratorium');
+    }
+
+    public function actionLaboratorium($id)
+    {
+        $this->layout = false;
+        $model = $this->findModelSaranAnjuran($id);
+        $html = $this->render('_kelompokPemeriksaan',[
+            'model' => $model
+        ]);
+
+        return json_encode($html);
+    }
+
+    public function actionTujuanPemeriksaan($id)
+    {
+        $this->layout = false;
+        $model = $this->findModelSaranAnjuran($id);
+        if(Yii::$app->request->post()){
+            $post = Yii::$app->request->post('SaranAnjuran');
+
+            $model->registrasi_id = $id;
+            $model->tp_anemia_pil = $post['tp_anemia_pil'];
+            $model->tp_checkup_pil = $post['tp_checkup_pil'];
+            $model->tp_dnppenyakit_pil = $post['tp_dnppenyakit_pil'];
+            $model->tp_hepatitisb_pil = $post['tp_hepatitisb_pil'];
+            $model->tp_hipertensi_pil = $post['tp_hipertensi_pil'];
+            $model->tp_reproduksi_pil = $post['tp_reproduksi_pil'];
+            $model->tp_risiko_pil = $post['tp_resiko_pil'];
+            $model->tp_tumor_pil = $post['tp_tumor_pil'];
+            $model->tp_uji_pil = $post['tp_uji_pil'];
+            $model->save();
+        }else {
+            $html = $this->render('_tujuanPemeriksaan', [
+                'model' => $model
+            ]);
+        }
+
+        return json_encode($html);
+    }
+
+    public function actionMasalahKlinis($id)
+    {
+        $this->layout = false;
+        $model = $this->findModelSaranAnjuran($id);
+        if(Yii::$app->request->post()){
+            $post = Yii::$app->request->post('SaranAnjuran');
+
+            $model->registrasi_id = $id;
+            $model->mk_cesereb_pil = $post['mk_cesereb_pil'];
+            $model->mk_kolesistitis_pil = $post['mk_kolesistitis_pil'];
+            $model->mk_osteoporosis_pil = $post['mk_osteoporosis_pil'];
+            $model->mk_sirosis_pil = $post['mk_sirosis_pil'];
+            $model->mk_galjan_pil = $post['mk_galjan_pil'];
+            $model->mk_throbven_pil = $post['mk_throbven_pil'];
+            $model->mk_emfisema_pil = $post['mk_emfisema_pil'];
+            $model->mk_kanpar_pil = $post['mk_kanpar_pil'];
+            $model->mk_skleromul_pil = $post['mk_skleromul_pil'];
+            $model->mk_ami_pil = $post['mk_ami_pil'];
+            $model->mk_osteoporosis_pil = $post['mk_osteoporosis_pil'];
+            $model->mk_pankreatitis_pil = $post['mk_pankreatitis_pil'];
+            $model->mk_ulpep_pil = $post['mk_ulpep_pil'];
+            $model->mk_pneumonia_pil = $post['mk_pneumonia_pil'];
+            $model->mk_galgin_pil = $post['mk_galgin_pil'];
+            $model->mk_arthreu_pil = $post['mk_arthreu_pil'];
+            $model->mk_sle_pil = $post['mk_sle_pil'];
+            $model->save();
+        }else {
+            $html = $this->render('_masalahKlinis', [
+                'model' => $model
+            ]);
+        }
+
+        return json_encode($html);
+    }
+
+    public function actionPopupHematologi()
+    {
+        return $this->renderAjax('_hematologi');
+    }
+
+    public function actionHematologiLengkap($id)
+    {
+        $this->layout = false;
+        $model = $this->findModelSaranAnjuran($id);
+        if(Yii::$app->request->post()){
+            $post = Yii::$app->request->post('SaranAnjuran');
+            $hematologi_lengkap = implode(',',$post['kp_hematologi_lengkap']);
+
+            $model->registrasi_id = $id;
+            $model->kp_hematologi_lengkap = $hematologi_lengkap;
+            $model->save();
+        }else {
+            $kp_hematologi_lengkap = explode(',', $model->kp_hematologi_lengkap);
+            $html = $this->render('_hematologiLengkap', [
+                'model' => $model,
+                'kp_hematologi_lengkap' => $kp_hematologi_lengkap
+            ]);
+            return json_encode($html);
+        }
+    }
+
+    public function actionPopupUrinalisa($id)
+    {
+        $model = $this->findModelSaranAnjuran($id);
+        if(Yii::$app->request->post()){
+            $post = Yii::$app->request->post('SaranAnjuran');
+            $urinalisa = implode(',',$post['kp_urinalisa']);
+
+            $model->registrasi_id = $id;
+            $model->kp_urinalisa = $urinalisa;
+            $model->save();
+        }else {
+            $kp_urinalisa = explode(',', $model->kp_urinalisa);
+            return $this->renderAjax('_urinalisa', [
+                'model' => $model,
+                'kp_urinalisa' => $kp_urinalisa
+            ]);
+        }
+    }
+
+    public function actionPopupAlergi($id)
+    {
+        $model = $this->findModelSaranAnjuran($id);
+        if(Yii::$app->request->post()){
+            $post = Yii::$app->request->post('SaranAnjuran');
+
+            $model->registrasi_id = $id;
+            $model->alergi_eosinofil_pil = $post['alergi_eosinofil_pil'];
+            $model->alergi_total_pil = $post['alergi_total_pil'];
+            $model->alergi_atopy_pil = $post['alergi_atopy_pil'];
+            $model->alergi_spesifik_pil = $post['alergi_spesifik_pil'];
+            $model->save();
+        }else {
+            return $this->renderAjax('_alergi', [
+                'model' => $model
+            ]);
+        }
+    }
+
+    public function actionPopupRadiologi($id)
+    {
+        $model = $this->findModelSaranAnjuran($id);
+        if(Yii::$app->request->post()){
+            $post = Yii::$app->request->post('SaranAnjuran');
+
+            $radiologi_lain_lain = implode(',',$post['radiologi_lain_lain']);
+
+            $model->registrasi_id = $id;
+            $model->radiologi_ctscan_pil = $post['radiologi_ctscan_pil'];
+            $model->radiologi_usg_pil = $post['radiologi_usg_pil'];
+            $model->radiologi_mri_pil = $post['radiologi_mri_pil'];
+            $model->radiologi_xray_pil = $post['radiologi_xray_pil'];
+            $model->radiologi_lain_pil = $post['radiologi_lain_pil'];
+            $model->radiologi_lain_lain = $radiologi_lain_lain;
+            $model->save();
+        }else {
+            $radiologi_lain = explode(',', $model->radiologi_lain_lain);
+            return $this->renderAjax('_radiologi', [
+                'model' => $model,
+                'radiologi_lain' => $radiologi_lain
+            ]);
+        }
+    }
+
     protected function findModel($id)
     {
         if (($model = ResepNonracikan::findOne(['registrasi_id' => $id])) !== null) {
@@ -153,6 +321,16 @@ class SaranAnjuranController extends Controller{
     protected function findModelRacikan($id)
     {
         if (($model = ResepRacikan::findOne(['registrasi_id' => $id])) !== null) {
+            return $model;
+        }
+    }
+
+    protected function findModelSaranAnjuran($id)
+    {
+        if (($model = SaranAnjuran::findOne(['registrasi_id' => $id])) !== null) {
+            return $model;
+        }else{
+            $model = new SaranAnjuran;
             return $model;
         }
     }

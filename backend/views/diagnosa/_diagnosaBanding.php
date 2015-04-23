@@ -11,13 +11,14 @@ use kartik\grid\GridView;
     'formConfig' => ['labelSpan' => 1, 'spanSize' => ActiveForm::SIZE_SMALL,'showLabels'=>false]
 ]);
 ?>
-<table class="table">
-    <thead>
-    <tr>
-        <th>Kode</th>
+
+<table class="table" style="width:97%;margin:0px 0">
+    <thead style="vertical-align:middle;margin-top:-20px;background-color:#efefef;">
+    <tr style="padding:20px;">
+       <th>Kode</th>
         <th>Diagnosa</th>
         <th>Action</th>
-        <th><a href="#" id="tambah-diagnosa-banding" class="btn btn-info">+</a></th>
+         <th>Action <a href="#" id="tambah-diagnosa-banding" style="display:inline;" class="btn btn-info">+</a></th>
     </tr>
     </thead>
     <tbody id="tbody-diagnosa-banding">
@@ -25,12 +26,13 @@ use kartik\grid\GridView;
         <tr id="tr-diagnosa-awal<?= $model['icdx_id'] ?>">
             <td><?= $value->icdx->kode ?></td>
             <td><?= $value->icdx->inggris ?></td>
-            <td><a class="glyphicon glyphicon-info-sign" id="view-info" onclick="informasiDiagnosa(<?= $value['icdx_id'] ?>)" class="btn btn-info"></a> </td>
         </tr>
     <?php endforeach; ?>
     </tbody>
 </table>
-<button class="btn btn-primary" type="submit">Simpan</button>
+<hr>
+<button class="btn btn-success" type="submit">Simpan</button>
+
 <?php ActiveForm::end() ?>
 
 <script>
@@ -50,13 +52,6 @@ use kartik\grid\GridView;
              '<td><i id="info" class="glyphicon glyphicon-info-sign"></i></td>' +
              '</tr>'
              );*/
-        });
-
-        function informasiDiagnosa(id)
-        {
-            $('#pop-info').html();
-            $('#pop-info').load(baseurl + '/diagnosa/pop-info?id='+id);
-            $('#pop-info').modal('show');
-        }
+        })
     });
 </script>
