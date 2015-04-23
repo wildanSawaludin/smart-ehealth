@@ -46,8 +46,16 @@ class RegistrasiSearch extends Registrasi {
         $items = $query
                 ->select([
                     'pasien.nama as pasienNama',
-                    'date_format(registrasi.tanggal_registrasi,"%d-%m-%Y %H:%i:%s") as tanggal_registrasi_format',
+                    'date_format(registrasi.tanggal_kunjungan,"%d-%m-%Y") as tanggal_kunjungan_format',
                     'fasilitas_kesehatan.nama as faskesnama',
+                    '(
+                        case 
+                            when registrasi.asal_registrasi="Web" then concat("W-",no_reg)
+                            when registrasi.asal_registrasi="Faskes" then concat("F-",no_reg)
+                            when registrasi.asal_registrasi="Apps" then concat("M-",no_reg)
+                            else no_reg
+                        end
+                      )as format_noreg',
                     'registrasi.*'])
                 ->all();
 
@@ -62,12 +70,12 @@ class RegistrasiSearch extends Registrasi {
             // $query->where('0=1');
             return $dataProvider;
         }
-
-        if(is_null($this->tanggal_kunjungan) || $this->tanggal_kunjungan == '') {
+       
+        if(is_null($_GET['RegistrasiSearch']['tanggal_kunjungan']) || $_GET['RegistrasiSearch']['tanggal_kunjungan'] == '') {
             $currDate = new \DateTime();
 
             $this->tanggal_kunjungan = $currDate->format('Y-m-d');
-        }
+        }else $this->tanggal_kunjungan = $_GET['RegistrasiSearch']['tanggal_kunjungan'];
 
         $query->andFilterWhere([
             'id' => $this->id,
@@ -96,7 +104,7 @@ class RegistrasiSearch extends Registrasi {
                 ->andFilterWhere(['like', 'pasien.nama', $this->pasienNama]);
 
         $query->andFilterWhere(
-            ['>=', 'tanggal_registrasi',  $this->tanggal_registrasi]
+            ['>=', 'tanggal_kunjungan',  $this->tanggal_kunjungan]
         );
 
         return $dataProvider;

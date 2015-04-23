@@ -55,11 +55,13 @@ class Registrasi extends \yii\db\ActiveRecord {
      */
     public $pasienNama;
     public $tanggal_registrasi_format;
+    public $tanggal_kunjungan_format;
     public $nomorRegistrasi;
     public $jenis_kelamin;
     public $faskesnama;
     public $no_rm;
     public $fasilitas_kesehatan;
+    public $format_noreg;
     
     //edit popup registri
     public $status_rawat_reged;
@@ -119,7 +121,9 @@ class Registrasi extends \yii\db\ActiveRecord {
             'nomorRegistrasi' => 'No Registrasi',
             'no_rm' => 'No RM',
             'jenis_kelamin' => 'Jenis Kelamin',
-            'fasilitas_kesehatan' => 'Fasilitas Kesehatan'
+            'fasilitas_kesehatan' => 'Fasilitas Kesehatan',
+            'format_noreg' => 'No Registrasi',
+            'tanggal_kunjungan_format' => 'Tgl Kunjung'
         ];
     }
 

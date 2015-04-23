@@ -166,8 +166,8 @@ class ServiceController extends \yii\web\Controller
             $model->status_registrasi = 'Antrian';
             $model->asal_registrasi = 'Apps';
             if ($model->save()){
-                $noregis = (string) sprintf('%06d',$model->id);
-                $model->no_reg = "M-".$noregis;
+                $noregis = (string) sprintf('%08d',$model->id);
+                $model->no_reg = $noregis;
                 if ($model->save()){
                     $modelpasien = Pasien::find()->where('id = :norm',[':norm' => $model->pasien_id])->one();
                     $interval = date_diff(date_create(),date_create($modelpasien->tgl_lahir.' 00:00:00'));
