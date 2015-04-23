@@ -87,4 +87,9 @@ class ResepRacikan extends \yii\db\ActiveRecord
     {
         $this->no_resep = str_pad($this->id, 6, "R-000000", STR_PAD_LEFT);
     }
+
+    public function afterSave()
+    {
+        $this->no_resep = str_pad($this->id, 6, "R-000000", STR_PAD_LEFT);
+    }    
 }

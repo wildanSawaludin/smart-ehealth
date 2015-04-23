@@ -9,9 +9,12 @@ use backend\models\Icdx;
 use backend\models\IcdxSearch;
 use backend\models\Registrasi;
 use backend\models\ResepNonracikan;
-use backend\models\ResepRacikan;
 use backend\models\ResepNonracikanDetail;
+use backend\models\ResepRacikan;
+use backend\models\ResepRacikanDetail;
 use backend\models\PemeriksaanFisik;
+use backend\models\NamaObat;
+use backend\models\RacikanObat;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Json;
@@ -181,14 +184,11 @@ class DiagnosaController extends Controller
         $newResepRacikan->user_id = Yii::$app->user->identity->id;
         $newResepRacikan->registrasi_id = $registrasi->id;
         $newResepRacikan->save();
-        $newResepRacikan->no_resep = $newResepRacikan->id;//'RR-'.str_pad($newResepRacikan->id, 6, '0', STR_PAD_LEFT);
-        $newResepRacikan->save();
+        //$newResepRacikan = ResepRacikan::findOne($newResepRacikan->id);
 
         $newResepNonRacikan = new ResepNonracikan();
         $newResepNonRacikan->user_id = Yii::$app->user->identity->id;
         $newResepNonRacikan->registrasi_id = $registrasi->id;
-        $newResepNonRacikan->save();
-        $newResepNonRacikan->no_resep = $newResepNonRacikan->id;// 'RN-'.str_pad($newResepNonRacikan->id, 6, '0', STR_PAD_LEFT);
         $newResepNonRacikan->save();
 
         return $this->render('resep', [
@@ -210,4 +210,79 @@ class DiagnosaController extends Controller
         }
     }
 
+
+    public function actionAddResepNonRacikan() {
+        try {
+            $input = isset($_GET) ? $_GET : array();
+
+            //update resep non racikan table
+            $resepNonRacikan = ResepNonracikan::findOne($input['resepNonRacikanId']);
+
+            $resepNonRacikan->iter = $input['iter'];
+            $resepNonRacikan->status = $input['status'];
+            if(isset($input['label_etiket'])) {
+                $resepNonRacikan->label_etiket = $input['label_etiket'];
+            }
+            $resepNonRacikan->update();
+
+            foreach ($input['resep'] as $key => $value) {
+                $newResepNonracikanDetail = new ResepNonracikanDetail();
+                $newResepNonracikanDetail->resep_nonracikan_id = $resepNonRacikan->id;
+                $newResepNonracikanDetail->nama_obat = NamaObat::findOne($value['id_obat'])->lazim;
+                $newResepNonracikanDetail->kek_isi = $value['isi'];
+                $newResepNonracikanDetail->sediaan = $value['sediaan'];
+                $newResepNonracikanDetail->jumlah = $value['jumlah'];
+                $newResepNonracikanDetail->aturan_pakai_sehari = $value['dd_1'];
+                $newResepNonracikanDetail->aturan_pakai_jumlah = $value['dd_2'];
+                $newResepNonracikanDetail->save();
+            }
+
+            return $this->redirect(['registrasi/index']);
+            
+        }
+        catch(\Exception $e) {
+            return $this->redirect(['registrasi/index']);
+        }
+    }
+
+
+    public function actionAddResepRacikan() {
+        try {
+            $input = isset($_GET) ? $_GET : array();
+
+            //update resep racikan table
+            $resepRacikan = ResepRacikan::findOne($input['resepRacikanId']);
+            $resepRacikan->iter = $input['iter'];
+            $resepRacikan->status = $input['status'];
+            if(isset($input['label_etiket'])) {
+                $resepRacikan->label_etiket = $input['label_etiket'];
+            }
+            $resepRacikan->update();
+
+            foreach ($input['resep'] as $key => $value) {
+                $resepRacikanDetail = new ResepRacikanDetail();
+                $resepRacikanDetail->resep_racikan_id = $resepRacikan->id;
+                $resepRacikanDetail->m_f = $value['sediaan'];
+                $resepRacikanDetail->jumlah = $value['jumlah'];
+                $resepRacikanDetail->aturan_pakai_sehari = $value['dd_1'];
+                $resepRacikanDetail->aturan_pakai_jumlah = $value['dd_2'];
+                $resepRacikanDetail->save();
+
+                foreach ($value['list-obat'] as $key => $valueObat) {
+                    $racikanObat = new RacikanObat();
+                    $racikanObat->resep_racikan_detail_id = $resepRacikanDetail->id;
+                    $racikanObat->nama_obat = NamaObat::findOne($valueObat['id_obat'])->lazim;
+                    $racikanObat->kek_isi = $valueObat['isi'];
+                    $racikanObat->resep_racikan_id = $resepRacikan->id;
+                    $racikanObat->save();
+                }
+
+            }
+
+            return $this->redirect(['registrasi/index']);
+        }
+        catch(\Exception $e) {
+            return $this->redirect(['registrasi/index']);
+        }
+    }
 }
