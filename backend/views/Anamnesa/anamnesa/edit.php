@@ -21,22 +21,33 @@ $GLOBALS['page_title'] = '<h1>Anamnesa<small>Pemeriksaan Fisik</small></h1>';
             <li class=""><a href="#tab_1" data-toggle="tab" aria-expanded="false">Anamnesa</a></li>
             <li class="active"><a href="#tab_2" data-toggle="tab" aria-expanded="true">Pemeriksaan Fisik</a></li>
             <li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="false">Diagnosa</a></li>
-            <li class="pull-right header">
+            
+			<div class="col-md-3 col-sm-6 col-xs-12 pull-right">
+              <div class="info-box">
+                <span class="info-box-icon bg-grey"><span style="margin-top:6px" class="glyphicon glyphicon-user"></span></span>
+				<!--<span class="info-box-icon bg-grey"><span class="glyphicon glyphicon-chevron-right"></span></span>-->
+                <div class="info-box-content">
+                  <span class="info-box-text">No RM :&nbsp;<?= str_pad($pasien->id, 6, '0', STR_PAD_LEFT) ?></span>
+                  <span class="info-box-name">Nama &nbsp;&nbsp;:&nbsp;<?= $pasien->nama.' / '.$pasien->getUsia().' / '.$pasien->jenkel[0] ?></span>
+                </div><!-- /.info-box-content -->
+              </div><!-- /.info-box -->
+            </div><!-- /.col -->
+			
+			<!--<li class="pull-right header">
+			
                 <dl class="dl-horizontal">
-                    <dt>No RM</dt>
+                    <dt>No RM :</dt>
                     <dd><?= str_pad($pasien->id, 6, '0', STR_PAD_LEFT) ?></dd>
-                    <dt>Nama</dt>
+                    <dt>Nama :</dt>
                     <dd><?= $pasien->nama.' / '.$pasien->getUsia().' / '.$pasien->jenkel[0] ?></dd>
                 </dl>
-            </li>
+            </li>-->
         </ul>
         <div class="tab-content" style="min-height:500px;">
             <div class="tab-pane active" id="tab_2">
                 <div class="col-sm-12">
                     <div class="col-sm-4">
-                        <div style="margin:auto;">
-                            <img style="max-height:400px;" src="<?= Yii::$app->urlManager->baseUrl . '/static/front.jpg' ?>">
-                        </div>
+                        <!--<img src="https://www.google.com/images/srpr/logo11w.png">-->
                     </div>
                     <div class="col-sm-8">
                         <?= 

@@ -81,8 +81,9 @@ use kartik\grid\GridView;
 
             </tbody>
         </table>
+		<hr>
         <div class="form-group">
-            <div class="col-md-offset-10 col-md-2">
+           <div class="col-md-offset-1 col-md-4">
                 <input id="btnOk" type="button" class="btn btn-primary" value="OK">
             </div>
         </div>

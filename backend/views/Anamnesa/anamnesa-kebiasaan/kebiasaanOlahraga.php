@@ -33,35 +33,51 @@ use yii\helpers\Url;
             ]
         ]);
         ?>
-        <div class="form-group">
-            <label for="jenis" class="col-md-3">Jenis :</label>
-            <div class="col-md-3">
-                <?php
+        <div class="col-md-12"> 
+			<div class="form-group">
+				<label for="jenis" class="col-md-3">Jenis :</label>
+				<div class="col-md-3">
+					<?php
 
-                    $list = ['Jogging' => 'Jogging', 'Lari' => 'Lari', 'Bersepeda' => 'Bersepeda', 'Renang' => 'Renang', 'Senam' => 'Senam', 'Yoga' => 'Yoga',
-                    'Sepak bola' => 'Sepak bola', 'Voli' => 'Voli', 'Bola basket' => 'Bola basket', 'Sepak takraw' => 'Sepak takraw', 'Gym' => 'Gym'];
-                    $model->olahraga_jenis = $olahraga_jenis;
-                    echo $form->field($model, 'olahraga_jenis')->checkboxList($list);
-                    echo $form->field($model, 'olahraga_jenis_lainnya_pil')->checkbox(['label' => '']);
-                    echo $form->field($model, 'olahraga_jenis_lainnya')->textInput(['placeHolder' => 'Lainnya', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => 'Manual, teks maksimal 30 karakter']);
-                ?>
-            </div>
-        </div>
+						$list = ['Jogging' => 'Jogging', 'Lari' => 'Lari', 'Bersepeda' => 'Bersepeda', 'Renang' => 'Renang', 'Senam' => 'Senam', 'Yoga' => 'Yoga'];
+						$model->olahraga_jenis = $olahraga_jenis;
+						echo $form->field($model, 'olahraga_jenis')->checkboxList($list);
+						
+					?>
+				</div>
+				<div class="col-md-3">
+					<?php
+
+						$list = ['Sepak bola' => 'Sepak bola', 'Voli' => 'Voli', 'Bola basket' => 'Bola basket', 'Sepak takraw' => 'Sepak takraw', 'Gym' => 'Gym'];
+						$model->olahraga_jenis = $olahraga_jenis;
+						echo $form->field($model, 'olahraga_jenis')->checkboxList($list);
+						echo $form->field($model, 'olahraga_jenis_lainnya_pil')->checkbox(['label' => '','style' => 'position:absolute;margin-top:-10px;margin-left:-20px;',]);
+						echo $form->field($model, 'olahraga_jenis_lainnya')->textInput(['placeHolder' => 'Lainnya', 'data-toggle' => 'tooltip', 'style' => 'position:absolute;margin-top:-50px;margin-left:20px;', 'data-placement' => 'middle', 'title' => 'Manual, teks maksimal 30 karakter']);
+					?>
+				</div>
+				
+			</div>
+		</div>
+        
+		 <div class="col-md-12"> 
+			<div class="form-group">
+				<label for="frekuensi" style="margin-top:5px;" class="col-md-3">Frekuensi</label>
+				<div class="col-md-2">
+					<?= $form->field($model, 'olahraga_frekuensi_kali')->textInput(['data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => 'Manual, numerik maksimal 2 karakter']) ?>
+				</div>
+				<div class="col-md-1" style="margin-top:5px;">Kali</div>
+				<div class="col-md-4">
+					<?php
+						$listFrekuensi = ['sehari' => 'sehari', 'seminggu' => 'seminggu', 'sebulan' => 'setahun'];
+						echo $form->field($model, 'olahraga_frekuensi_lama')->dropDownList($listFrekuensi);
+					?>
+				</div>
+			</div>
+		</div>
+		&nbsp;
+		<hr>
         <div class="form-group">
-            <label for="frekuensi" class="col-md-3">Frekuensi</label>
-            <div class="col-md-2">
-                <?= $form->field($model, 'olahraga_frekuensi_kali')->textInput(['data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => 'Manual, numerik maksimal 2 karakter']) ?>
-            </div>
-            <div class="col-md-1">Kali</div>
-            <div class="col-md-4">
-                <?php
-                    $listFrekuensi = ['sehari' => 'sehari', 'seminggu' => 'seminggu', 'sebulan' => 'setahun'];
-                    echo $form->field($model, 'olahraga_frekuensi_lama')->dropDownList($listFrekuensi);
-                ?>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-offset-3 col-sm-9">
+            <div class="col-sm-offset-1 col-sm-4">
                 <input id="btnKebiasaanOlahragaOk" type="button" class="btn btn-primary" value="OK">
             </div>
         </div>

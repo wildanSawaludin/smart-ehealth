@@ -64,7 +64,14 @@ use yii\helpers\Url;
                             <?php
                                 $model->makan_pembatasan_asupan = $pembatasan_asupan;
                                 $list = ['Diet rendah garam' => 'Diet rendah garam', 'Diet rendah lemak' => 'Diet rendah lemak', 'Diet rendah purin' => 'Diet rendah purin',
-                                            'Diet rendah sisa' => 'Diet rendah sisa', 'Diet rendah kalsium' => 'Diet rendah kalsium','Diet tinggi kalori' => 'Diet tinggi kalori', 'Diet tinggi protein' => 'Diet tinggi protein', 'Diet tinggi serat' => 'Diet tinggi serat',
+                                            'Diet rendah sisa' => 'Diet rendah sisa', 'Diet rendah kalsium' => 'Diet rendah kalsium'];
+                                echo $form->field($model, 'makan_pembatasan_asupan')->checkboxList($list);
+                            ?>
+                        </div>
+						<div class="col-md-6">
+                            <?php
+                                $model->makan_pembatasan_asupan = $pembatasan_asupan;
+                                $list = ['Diet tinggi kalori' => 'Diet tinggi kalori', 'Diet tinggi protein' => 'Diet tinggi protein', 'Diet tinggi serat' => 'Diet tinggi serat',
                                 'Diet rendah kalori' => 'Diet rendah kalori', 'Diet rendah protein' => 'Diet rendah protein' ];
                                 echo $form->field($model, 'makan_pembatasan_asupan')->checkboxList($list);
                             ?>
@@ -111,8 +118,9 @@ use yii\helpers\Url;
                     </div>
                 </div>
             </div>
+			<hr>
             <div class="form-group">
-                <div class="col-sm-offset-3 col-sm-9">
+                <div class="col-sm-offset-1 col-sm-4">
                     <input id="btnKebiasaanNutrisiOk" type="button" class="btn btn-primary" value="OK">
                 </div>
             </div>
@@ -163,9 +171,11 @@ Modal::begin([
                         echo $form->field($model, 'makan_menu_pokok')->checkboxList($listMakananPokok);
                         //echo $form->field($model, 'makan_menu_pokok')->checkbox(['label' => '']);
                         ?>
-                        <?= $form->field($model, 'makan_pokok_lainnya_pil')->checkbox(['label' => '']) ?>
-                        <?= $form->field($model, 'makan_pokok_lainnya')->textInput(['placeholder' => 'Lainnya']) ?>
+                        <?= $form->field($model, 'makan_pokok_lainnya_pil')->checkbox(['label' => '','style' => 'position:absolute;margin-top:-10px;margin-left:-20px;']) ?>
+                        <?= $form->field($model, 'makan_pokok_lainnya')->textInput(['placeholder' => 'Lainnya','style' => 'position:absolute;margin-top:-50px;margin-left:20px;']) ?>
                     </div>
+					
+					
                 </div>
             </div>
             <div class="tab-pane fade" id="lauk_pauk">
@@ -176,42 +186,66 @@ Modal::begin([
                         echo $form->field($model, 'makan_menu_lauk')->checkboxList($listLaukPauk);
                         //echo $form->field($model, 'makan_menu_pokok')->checkbox(['label' => '']);
                         ?>
-                        <?= $form->field($model, 'makan_lauk_lainnya_pil')->checkbox(['label' => '']) ?>
-                        <?= $form->field($model, 'makan_lauk_lainnya')->textInput(['placeholder' => 'Lainnya']) ?>
+                        <?= $form->field($model, 'makan_lauk_lainnya_pil')->checkbox(['label' => '','style' => 'position:absolute;margin-top:-10px;margin-left:-20px;']) ?>
+                        <?= $form->field($model, 'makan_lauk_lainnya')->textInput(['placeholder' => 'Lainnya','style' => 'position:absolute;margin-top:-50px;margin-left:20px;']) ?>
                     </div>
                 </div>
             </div>
             <div class="tab-pane fade" id="sayuran">
                 <div class="form-group">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <?php
-                        $listSayuran = ['Kangkung' => 'Kangkung', 'Bayam' => 'Bayam', 'Wortel' => 'Wortel', 'Kentang' => 'Kentang', 'Daun kelor' => 'Daun kelor', 'Daun ubi' => 'Daun ubi',
-                            'Daun Pakis' => 'Daun Pakis', 'Daun kacang' => 'Daun kacang', 'Daun Singkong' => 'Daun Singkong', 'Kubis/kol' => 'Kubis/kol', 'Brokoli' => 'Brokoli'];
+                        $listSayuran = ['Kangkung' => 'Kangkung', 'Bayam' => 'Bayam', 'Wortel' => 'Wortel', 'Kentang' => 'Kentang', 'Daun kelor' => 'Daun kelor', 'Daun ubi' => 'Daun ubi'];
                         echo $form->field($model, 'makan_menu_sayur')->checkboxList($listSayuran);
 
                         ?>
-                        <?= $form->field($model, 'makan_sayuran_lainnya_pil')->checkbox(['label' => '']) ?>
-                        <?= $form->field($model, 'makan_sayuran_lainnya')->textInput(['placeholder' => 'Lainnya']) ?>
+                       
+                    </div>
+					<div class="col-md-3">
+                        <?php
+                        $listSayuran = ['Daun Pakis' => 'Daun Pakis', 'Daun kacang' => 'Daun kacang', 'Daun Singkong' => 'Daun Singkong', 'Kubis/kol' => 'Kubis/kol', 'Brokoli' => 'Brokoli'];
+                        echo $form->field($model, 'makan_menu_sayur')->checkboxList($listSayuran);
+
+                        ?>
+                      
+                    </div>
+					<div class="col-md-4">
+                        
+                        <?= $form->field($model, 'makan_sayuran_lainnya_pil')->checkbox(['label' => '','style' => 'position:absolute;margin-top:0px;margin-left:-20px;']) ?>
+                        <?= $form->field($model, 'makan_sayuran_lainnya')->textInput(['placeholder' => 'Lainnya','style' => 'position:absolute;margin-top:-40px;margin-left:20px;']) ?>
                     </div>
                 </div>
             </div>
             <div class="tab-pane fade" id="buah_buahan">
                 <div class="form-group">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <?php
                         $listBuah = ['Apel' => 'Apel', 'Jeruk' => 'Jeruk', 'Anggur' => 'Anggur', 'Pepaya' => 'Pepaya', 'Jambu' => 'Jambu', 'Mangga' => 'Mangga',
-                            'Pisang' => 'Pisang', 'Alpukat' => 'Alpukat', 'Semangka' => 'Semangka', 'Durian' => 'Durian', 'Rambutan' => 'Rambutan', 'Salak' => 'Salak',
+                            'Pisang' => 'Pisang', 'Alpukat' => 'Alpukat'];
+                        echo $form->field($model, 'makan_menu_buah')->checkboxList($listBuah);
+
+                        ?>
+                       
+                    </div>
+					 <div class="col-md-3">
+                        <?php
+                        $listBuah = ['Semangka' => 'Semangka', 'Durian' => 'Durian', 'Rambutan' => 'Rambutan', 'Salak' => 'Salak',
                             'Kelapa' => 'Kelapa', 'Melon' => 'Melon', 'Nangka' => 'Nangka', 'Pir' => 'Pir', 'Langsat' => 'langsat'];
                         echo $form->field($model, 'makan_menu_buah')->checkboxList($listBuah);
 
                         ?>
-                        <?= $form->field($model, 'makan_buah_lainnya_pil')->checkbox(['label' => '']) ?>
-                        <?= $form->field($model, 'makan_buah_lainnya')->textInput(['placeholder' => 'Lainnya']) ?>
+                      
+                    </div>
+					 <div class="col-md-3">
+                      
+                        <?= $form->field($model, 'makan_buah_lainnya_pil')->checkbox(['label' => '','style' => 'position:absolute;margin-top:0px;margin-left:-20px;']) ?>
+                        <?= $form->field($model, 'makan_buah_lainnya')->textInput(['placeholder' => 'Lainnya','style' => 'position:absolute;margin-top:-40px;margin-left:20px;']) ?>
                     </div>
                 </div>
             </div>
+			&nbsp;<hr>
             <div class="form-group">
-                <div class="col-sm-offset-3 col-sm-9">
+                <div class="col-sm-offset-1 col-sm-4">
                     <input id="btnMenuMakanOk" type="button" class="btn btn-primary" value="OK">
                 </div>
             </div>

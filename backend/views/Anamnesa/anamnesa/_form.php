@@ -36,7 +36,7 @@ use kartik\tabs\TabsX;
                      $items = [
     [
         'label'=>'<i class="glyphicon glyphicon-home"></i> Keluhan Utama',
-        'content'=>yii\base\View::render('popup/_formkeluhanutama',['model'=>$model,'id'=>$model->id]),
+        'content'=>yii\base\View::render('popup/_formkeluhanutama',['model'=>$model,'id'=>$_GET['id']]),
         'active'=>true
     ],
     [
@@ -44,7 +44,7 @@ use kartik\tabs\TabsX;
      //   'content'=>yii\base\View::render('_keluhanLokasi',['model'=>$model]),
         'id'=>'tabs-keluhantambahan',
         'content'=>'<div id="tabkeluhantambahan"></div>',
-        'linkOptions'=>['data-enable-cache'=>false,'data-url'=>\yii\helpers\Url::to(['Anamnesa/anamnesa/keluhan-tambahan','id'=>$model->id])],
+        'linkOptions'=>['data-enable-cache'=>false,'data-url'=>\yii\helpers\Url::to(['Anamnesa/anamnesa/keluhan-tambahan','id'=>$_GET['id']])],
     ],
     
     /* [
@@ -58,7 +58,6 @@ use kartik\tabs\TabsX;
     'items'=>$items,
     'position'=>TabsX::POS_LEFT,
     'sideways'=>true,
-    'id'=>'tabs-anamnesautama',
     'encodeLabels'=>false,
     'pluginOptions' =>  ['enableCache'=>false],
 ]);
@@ -141,9 +140,11 @@ use kartik\tabs\TabsX;
                                 <?= $form->field($model, 'faktor_resiko_kebiasaan_2')->checkboxList($list6); ?>
                             </div>
                         </div>
+						&nbsp;<hr/>
                         <div class="form-group">
-                            <div class="col-sm-offset-3 col-sm-9">
-                                <input id="btnFaktorResikoOk" type="button" class="btn btn-primary" value="OK">
+                            <div class="col-sm-offset-1 col-sm-4">
+							
+                                <input id="btnFaktorResikoOk" type="button" class="btn btn-danger" value="OK">
                             </div>
                         </div>
                     </form>
@@ -195,9 +196,10 @@ use kartik\tabs\TabsX;
                                 </div>
                             </div>
                         </div>
+						&nbsp;<hr/>
                         <div class="form-group">
-                            <div class="col-sm-offset-3 col-sm-9">
-                                <input id="btnPsikososialOk" type="button" class="btn btn-primary" value="OK">
+                            <div class="col-sm-offset-1 col-sm-4">
+                                <input id="btnPsikososialOk" type="button" class="btn btn-danger" value="OK">
                             </div>
                         </div>
                     </form>
@@ -299,8 +301,6 @@ Modal::begin([
 ]);
 Modal::end();
 ?>
-<script>var id = '<?php echo $model->id; ?>' </script>  
+<script>var id = '<?php echo $_GET['id']; ?>' </script>  
 <?php $this->registerJsFile('/admin/js/popupKeluhan.js'); ?>
 <?php $this->registerJsFile('/admin/js/popupFunction.js'); ?>
-
-

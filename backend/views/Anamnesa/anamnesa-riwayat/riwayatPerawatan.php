@@ -57,8 +57,9 @@ use kartik\widgets\DatePicker;
                 <?= $form->field($model, 'riwayat_perawatan_lama')->dropDownList(['hari' => 'hari', 'minggu' => 'minggu', 'bulan' => 'bulan', 'tahun' => 'tahun']) ?>
             </div>
         </div>
+		<hr>
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-4">
+            <div class="col-md-offset-1 col-md-4">
                 <input id="btnOk" type="button" class="btn btn-primary" value="OK">
             </div>
         </div>
