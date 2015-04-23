@@ -26,7 +26,7 @@ use yii\bootstrap\Modal;
         ?>
 
               <div class="form-group">
-            <label for="kesadaran_umum" class="col-md-4">Kesadaran Umum :</label>
+            <label for="kesadaran_umum" class="col-md-4">Keadaaan Umum :</label>
             <div class="col-md-4">
                 
                          <?=    $form->field($model, 'st_keadaan_umum')->dropDownList($model->options); ?>
@@ -59,14 +59,16 @@ use yii\bootstrap\Modal;
             <div class="col-md-2">
                 
                          <?=    $form->field($model, 'st_bb')->textInput(['maxlength'=>'5']); ?>
-            </div>
+               
+            </div> <label for="kesadaran" class="col-md-1">Kg</label>
         </div>
 <div class="form-group">
             <label for="kesadaran" class="col-md-4">Tinggi Badan :</label>
             <div class="col-md-2">
                 
                          <?=    $form->field($model, 'st_tb')->textInput(['maxlength'=>'5']); ?>
-            </div>
+                 
+            </div><label for="kesadaran" class="col-md-1">Cm</label>
         </div>
 
 <div class="form-group">
@@ -78,7 +80,7 @@ use yii\bootstrap\Modal;
         </div>
 
 <div class="form-group">
-            <label for="kesadaran" class="col-md-4">Kesadaran :</label>
+            <label for="kesadaran" class="col-md-4">Status Gizi :</label>
             <div class="col-md-4">
                 
                          <?=    $form->field($model, 'st_status_gizi')->dropDownList($model->optionsStatusgizi); ?>
@@ -86,10 +88,10 @@ use yii\bootstrap\Modal;
         </div>
 
 <div class="form-group">
-            <label for="kesadaran" class="col-md-4">Kesadaran :</label>
+            <label for="kesadaran" class="col-md-4">Habitus :</label>
             <div class="col-md-4">
                 
-                         <?=    $form->field($model, 'st_habitus')->dropDownList($model->optionsHabitus); ?>
+                         <?=    $form->field($model, 'st_habitus')->dropDownList($model->optionsHabitus,['prompt' => '']); ?>
             </div>
         </div>
     <div class="form-group">

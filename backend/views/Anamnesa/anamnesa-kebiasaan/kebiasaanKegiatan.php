@@ -33,25 +33,31 @@ use yii\helpers\Url;
             ]
         ]);
         ?>
-        <div class="form-group">
-            <label for="jenis_kegiatan" class="col-md-4">Jenis Kegiatan :</label>
-            <div class="col-md-4">
-                <?= $form->field($model, 'kegiatan_jenis')->textInput(['data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => 'Manual, teks maksimal 30 karakter']) ?>
-            </div>
+		<div class="col-md-12">
+			<div class="form-group">
+				<label for="jenis_kegiatan" class="col-md-4">Jenis Kegiatan :</label>
+				<div class="col-md-4">
+					<?= $form->field($model, 'kegiatan_jenis')->textInput(['data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => 'Manual, teks maksimal 30 karakter']) ?>
+				</div>
+			</div>
         </div>
-        <div class="form-group">
-            <label for="frekuensi" class="col-md-4">Frekuensi :</label>
-            <div class="col-md-2">
-                <?= $form->field($model, 'kegiatan_frekuensi_kali')->textInput(['class' => 'numeric', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => 'Manual, numerik maksimal 2 karakter']) ?>
-            </div>
-            <div class="col-md-1">Kali</div>
-            <div class="col-md-4">
-                <?php
-                $listFrekuensi = ['sehari' => 'sehari', 'seminggu' => 'seminggu', 'sebulan' => 'setahun'];
-                echo $form->field($model, 'kegiatan_frekuensi_lama')->dropDownList($listFrekuensi);
-                ?>
-            </div>
-        </div>
+		<div class="col-md-12">
+			<div class="form-group">
+				<label for="frekuensi" style="margin-top:5px;" class="col-md-4">Frekuensi :</label>
+				<div class="col-md-2">
+					<?= $form->field($model, 'kegiatan_frekuensi_kali')->textInput(['class' => 'numeric', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => 'Manual, numerik maksimal 2 karakter']) ?>
+				</div>
+				<div class="col-md-1" style="margin-top:5px;">Kali</div>
+				<div class="col-md-4">
+					<?php
+					$listFrekuensi = ['sehari' => 'sehari', 'seminggu' => 'seminggu', 'sebulan' => 'setahun'];
+					echo $form->field($model, 'kegiatan_frekuensi_lama')->dropDownList($listFrekuensi);
+					?>
+				</div>
+			</div>
+		</div>
+		&nbsp;
+		<hr>
         <div class="form-group">
             <div class="col-sm-offset-3 col-sm-9">
                 <input id="btnKebiasaanKegiatanOk" type="button" class="btn btn-primary" value="OK">
@@ -60,6 +66,7 @@ use yii\helpers\Url;
 
         <?php ActiveForm::end(); ?>
     </div>
+
 </div>
 
 <script>var id = '<?php echo $_GET['id']; ?>' </script>

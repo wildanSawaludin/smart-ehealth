@@ -9,6 +9,9 @@ use yii\helpers\ArrayHelper;
 /* @var $model backend\models\Registrasi */
 /* @var $form yii\widgets\ActiveForm */
 ?>
+<style>
+label {color:#ffffff;}
+</style>
 
 <div class="registrasi-form">
 
@@ -33,8 +36,8 @@ use yii\helpers\ArrayHelper;
     
     <?= $form->field($model, 'status_pelayanan')->radioList([ 'Rawat Jalan' => 'Rawat Jalan','Rawat Inap' => 'Rawat Inap'], ['inline' => true]) ?>
 
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+    <div class="form-group text-center">
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

@@ -22,25 +22,39 @@ use yii\helpers\Url;
     
     $items = [
     [
-        'label'=>'<i class="glyphicon glyphicon-home"></i> Rincian',
+        'label'=>'<i class="glyphicon glyphicon-tasks"></i> Rincian',
         'content'=>yii\base\View::render('_keluhanRincian',['model'=>$model]),
         'active'=>true
     ],
     [
-        'label'=>'<i class="glyphicon glyphicon-user"></i> Lokasi',
+        'label'=>'<i class="glyphicon glyphicon-pushpin"></i> Lokasi',
      //   'content'=>yii\base\View::render('_keluhanLokasi',['model'=>$model]),
         'id'=>'tabs-keluhanlokasi',
         'content'=>'<div id="tablokasi"></div>',
         'linkOptions'=>['data-enable-cache'=>false,'data-url'=>\yii\helpers\Url::to(['/Anamnesa/anamnesa/popup-lokasi',['id'=>$_GET['id'],'datakeluhan'=>str_replace("_"," ",$_GET['param'])]])],
     ],
     [
-        'label'=>'<i class="glyphicon glyphicon-user"></i> Anamnesa Terpimpin',
+        'label'=>'<i class="glyphicon glyphicon-flag"></i> Anamnesa Terpimpin',
      //   'content'=>yii\base\View::render('_keluhanLokasi',['model'=>$model]),
         'id'=>'tabs-keluhanterpimpin',
         'content'=>'<div id="tabanamnesa_terpimpin"></div>',
         'linkOptions'=>['data-enable-cache'=>false,'data-url'=>\yii\helpers\Url::to(['/Anamnesa/anamnesa/anamnesa-terpimpin','id'=>$_GET['id']])],
     ],
-   
+   /* [
+        'label'=>'<i class="glyphicon glyphicon-list-alt"></i> Dropdown',
+        'items'=>[
+             [
+                 'label'=>'<i class="glyphicon glyphicon-chevron-right"></i> Option 1',
+                 'encode'=>false,
+                 'content'=>'test4',
+             ],
+             [
+                 'label'=>'<i class="glyphicon glyphicon-chevron-right"></i> Option 2',
+                 'encode'=>false,
+                 'content'=>'content4',
+             ],
+        ],
+    ],*/
 ];
     
     echo TabsX::widget([
@@ -48,7 +62,7 @@ use yii\helpers\Url;
     'position'=>TabsX::POS_ABOVE,
     'bordered'=>true,
     'encodeLabels'=>false,
-    'id'=>'tabs-keluhandetail',
+    'id'=>'tabs-keluhan',
     'pluginOptions' =>  ['enableCache'=>false],
   //  'enableCache'=>false,
    //  'pluginEvents' => ["tabsX.beforeSend" => "$('#tabs-keluhanlokasi').on('tabsX.beforeSend', function (event) {

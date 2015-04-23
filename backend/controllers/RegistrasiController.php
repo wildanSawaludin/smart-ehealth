@@ -58,14 +58,15 @@ class RegistrasiController extends Controller {
         $searchModel = new RegistrasiSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $model = new Registrasi();
+        $model->setscenario('registrasi');  
         if (Yii::$app->request->post()) {
-
+            $noregis = (string) sprintf('%06d',$model->id);
             $model->load(Yii::$app->request->post());
             $model->tanggal_registrasi = date('Y-m-d H:i:s');
             $model->tanggal_kunjungan = date('Y-m-d');
             if ($model->asuransi_tgl_lahir)
                 $model->asuransi_tgl_lahir = Yii::$app->get('helper')->dateFormatingStrip($model->asuransi_tgl_lahir);
-            $model->no_reg= (string)sprintf('%08d', $model->id);
+            $model->no_reg= "A-".$noregis;
             $model->asal_registrasi = 'Web';
             $model->faskes_id = 1;
             $model->no_antrian = $model->getNoAntrian(date('Y-m-d'), 1);
@@ -169,7 +170,52 @@ class RegistrasiController extends Controller {
             //return $this->redirect(['view', 'id' => $model->id]);
         }
         return $this->renderAjax('popup/_addPasien', [
-                    'model' => $model,
+            'model' => $model,
+        ]);
+    }
+    
+    public function actionMdeditreg($id) {
+        $model = $this->findModel($id);
+        $model->status_rawat_reged=$model->status_rawat;
+        $model->dr_penanggung_jawab_reged=$model->dr_penanggung_jawab;
+        $model->icdx_id_reged=$model->icdx_id;
+        $model->catatan_reged=$model->catatan;
+        $model->status_asuransi_reged=$model->status_asuransi;
+        $model->asuransi_provider_id_reged=$model->asuransi_provider_id;
+        $model->asuransi_penanggung_jawab_reged=$model->asuransi_penanggung_jawab;
+        $model->asuransi_alamat_reged=$model->asuransi_alamat;
+        $model->asuransi_notelp_reged=$model->asuransi_notelp;
+        $model->asuransi_noreg_reged=$model->asuransi_noreg;
+        $model->asuransi_nama_reged=$model->asuransi_nama;
+        $model->asuransi_tgl_lahir_reged=$model->asuransi_tgl_lahir;
+        $model->asuransi_status_jaminan_reged=$model->asuransi_status_jaminan;
+        //var_dump($model->save());exit;
+        if ($_POST) {
+//            $model = $this->findModel($id);
+//            $model->load(Yii::$app->request->post());
+            $model->status_rawat=$_POST['Registrasi']['status_rawat_reged'];
+            $model->dr_penanggung_jawab=$_POST['Registrasi']['dr_penanggung_jawab_reged'];
+            $model->icdx_id=$_POST['Registrasi']['icdx_id_reged'];
+            $model->catatan=$_POST['Registrasi']['catatan_reged'];
+            $model->status_asuransi=$_POST['Registrasi']['status_asuransi_reged'];
+            $model->asuransi_provider_id=$_POST['Registrasi']['asuransi_provider_id_reged'];
+            $model->asuransi_penanggung_jawab=$_POST['Registrasi']['asuransi_penanggung_jawab_reged'];
+            $model->asuransi_alamat=$_POST['Registrasi']['asuransi_alamat_reged'];
+            $model->asuransi_notelp=$_POST['Registrasi']['asuransi_notelp_reged'];
+            $model->asuransi_noreg=$_POST['Registrasi']['asuransi_noreg_reged'];
+            $model->asuransi_nama=$_POST['Registrasi']['asuransi_nama_reged'];
+            $model->asuransi_tgl_lahir=$_POST['Registrasi']['asuransi_tgl_lahir_reged'];
+            if ($model->asuransi_tgl_lahir)
+                $model->asuransi_tgl_lahir = Yii::$app->get('helper')->dateFormatingStrip($model->asuransi_tgl_lahir);
+            $model->asuransi_status_jaminan=$_POST['Registrasi']['asuransi_status_jaminan_reged'];
+            //$model->load(Yii::$app->request->post());
+            
+            if ($model->save()) {
+                return $this->redirect(['index', 'pasien_id' => $model->id]);
+            }
+        }
+        return $this->renderAjax('popup/_editRegistrasi', [
+            'model' => $model,
         ]);
     }
     
@@ -270,7 +316,7 @@ class RegistrasiController extends Controller {
             $data = $command->queryAll();
             $out['results'] = array_values($data);
         } elseif ($id > 0) {
-            $out['results'] = ['id' => $id, 'text' => Icdx::find($id)->nama];
+            $out['results'] = ['id' => $id, 'text' => Icdx::findOne($id)->inggris];
         } else {
             $out['results'] = ['id' => 0, 'text' => 'Icdx tidak ditemukan'];
         }

@@ -52,7 +52,7 @@ use backend\models\Lookup;
         <?php ActiveForm::end(); ?>
     
         
-    </div>
+</div>
 <?php
 //Yii::app()->clientScript->registerScriptFile(
   //  $this->getAssetsBase() . '/admin/js/popupRincian.js'

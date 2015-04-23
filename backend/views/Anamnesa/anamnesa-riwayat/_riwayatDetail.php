@@ -50,7 +50,7 @@ use yii\helpers\Url;
                 ]);
                 ?>
             </div>
-            <div class="col-md-7">
+            <div class="col-md-6">
                 <?php
                 echo $form->field($modelAnamnesa, 'riwayatsakit_icdx_id')->widget(Typeahead::classname(), [
                     'options' => ['placeholder' => 'Nama Penyakit', 'id' => 'nama',  'value' => ($modelAnamnesa->riwayatsakit_icdx_id != null) ? $modelAnamnesa->riwayatsakitIcdx->inggris : ''],
@@ -79,8 +79,9 @@ use yii\helpers\Url;
                 <?= $form->field($modelAnamnesa, 'riwayat_penyakit_lama')->dropDownList(['hari' => 'hari', 'minggu' => 'minggu', 'bulan' => 'bulan', 'tahun' => 'tahun']) ?>
             </div>
         </div>
+		<hr>
         <div class="form-group">
-            <div class="col-sm-offset-3 col-sm-9">
+           <div class="col-md-offset-1 col-md-4">
                 <input id="btnOk" type="button" class="btn btn-primary" value="OK">
             </div>
         </div>
