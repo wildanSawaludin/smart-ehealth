@@ -286,6 +286,31 @@ class SaranAnjuranController extends Controller{
         }
     }
 
+    public function actionPopupRadiologi($id)
+    {
+        $model = $this->findModelSaranAnjuran($id);
+        if(Yii::$app->request->post()){
+            $post = Yii::$app->request->post('SaranAnjuran');
+
+            $radiologi_lain_lain = implode(',',$post['radiologi_lain_lain']);
+
+            $model->registrasi_id = $id;
+            $model->radiologi_ctscan_pil = $post['radiologi_ctscan_pil'];
+            $model->radiologi_usg_pil = $post['radiologi_usg_pil'];
+            $model->radiologi_mri_pil = $post['radiologi_mri_pil'];
+            $model->radiologi_xray_pil = $post['radiologi_xray_pil'];
+            $model->radiologi_lain_pil = $post['radiologi_lain_pil'];
+            $model->radiologi_lain_lain = $radiologi_lain_lain;
+            $model->save();
+        }else {
+            $radiologi_lain = explode(',', $model->radiologi_lain_lain);
+            return $this->renderAjax('_radiologi', [
+                'model' => $model,
+                'radiologi_lain' => $radiologi_lain
+            ]);
+        }
+    }
+
     protected function findModel($id)
     {
         if (($model = ResepNonracikan::findOne(['registrasi_id' => $id])) !== null) {

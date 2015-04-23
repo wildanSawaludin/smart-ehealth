@@ -77,12 +77,32 @@ use yii\web\View;
         </div>
         <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
             <div class="panel-body">
-                <div class="form-group">
-                    <div class="col-md-4">
-                        <input id="laboratorium" type="checkbox" name="pemeriksaan_penunjang">Laboratorium
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <input id="laboratorium" type="checkbox" name="pemeriksaan_penunjang">Laboratorium
+                        </div>
                     </div>
-                    <div class="col-md-4">
-                        <input id="non-laboratorium" type="checkbox" name="pemeriksaan_penunjang">Non-Laboratorium
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <input id="non-laboratorium" type="checkbox" name="pemeriksaan_penunjang">Non-Laboratorium
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div style="margin-left: 40px;">
+                            <div class="col-md-4">
+                                <input id="radiologi" type="checkbox" name="pemeriksaan_penunjang">Radiologi
+                            </div>
+                            <div class="col-md-4">
+                                <input id="ekg" type="checkbox" name="pemeriksaan_penunjang">Elektrokardiografi (EKG)
+                            </div>
+                            <div class="col-md-4">
+                                <input id="uljb" type="checkbox" name="pemeriksaan_penunjang">ULJB/Treadmill Test
+                            </div>
+                            <div class="col-md-4">
+                                <input id="Echocardiographhy" type="checkbox" name="pemeriksaan_penunjang">Echocardiographhy
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -109,6 +129,12 @@ Modal::begin([
 //    'header' => '<h7>Tambah Pasien</h7>'
 ]);
 Modal::end();
+
+Modal::begin([
+    'id' => 'm_radiologi',
+//    'header' => '<h7>Tambah Pasien</h7>'
+]);
+Modal::end();
 ?>
 <script>var id = '<?php echo $_GET['id'] ?>' </script>
 <script>
@@ -118,5 +144,10 @@ Modal::end();
           $('#m_laboratorium').load(baseurl + '/saran-anjuran/popup-laboratorium?id='+id+'&param='+$(this).val());
           $('#m_laboratorium').modal('show');
        });
+        $('#radiologi').click(function(){
+            $('#m_radiologi').html('');
+            $('#m_radiologi').load(baseurl + '/saran-anjuran/popup-radiologi?id='+id+'&param='+$(this).val());
+            $('#m_radiologi').modal('show');
+        });
     });
 </script>
