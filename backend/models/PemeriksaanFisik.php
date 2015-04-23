@@ -1268,5 +1268,21 @@ class PemeriksaanFisik extends \yii\db\ActiveRecord
 
        );
  }
+ 
+     public function getOptionsMataPalpasi()
+{ 
+   return array(
+     'Tidak ada pembesaran'=>'Tidak ada pembesaran','Membesar'=>'Membesar',
+
+       );
+ }
+ 
+      public function getOptionsMataUjiKonf()
+{ 
+   return array(
+     'NORMAL'=>'NORMAL','Defek Kuadrantik'=>'Defek Kuadrantik',
+
+       );
+ }
 
 }

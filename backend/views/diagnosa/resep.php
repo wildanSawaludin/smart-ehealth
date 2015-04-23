@@ -60,13 +60,13 @@ Modal::end();
 				        </ul>
 				        <div class="tab-content" style="min-height:800px;">
 				            <div class="tab-pane active" id="tab_1">
-				                <form class="form-horizontal" id="formRr">
+				                <form class="form-horizontal" id="formRr" metod="post" action="<?= Yii::$app->urlManager->baseUrl?>/diagnosa/add-resep-non-racikan">
 								  	<div class="col-sm-10">
 								  		<div class="form-group">
 								    		<label class="col-sm-2 control-label">No Resep</label>
 								    		<div class="col-sm-10">
 								      			<p class="form-control-static"><?= $resepRacikan->no_resep ?></p>
-								      			<input type="number" class="hide" name="resepRacikanId" value="<?= $resepRacikan->id ?>">
+								      			<input type="number" class="hide" name="resepNonRacikanId" value="<?= $resepNonRacikan->id ?>">
 								    		</div>
 								  		</div>
 								  		<div class="form-group">
@@ -93,6 +93,7 @@ Modal::end();
 								  			R/ <?= Select2::widget([
 												    'name' => 'resep[seed][id_obat]', 
 												    'data' => $data,
+												    'hideSearch' => true,
 												    'options' => [
 												        'placeholder' => 'nama obat',
 												        'class' => 'select2-select'
@@ -125,13 +126,13 @@ Modal::end();
 								    			<input type="checkbox" name="label_etiket" value="1"> Label / Etiket<br>
 								    		</div>
 								    		<div class="col-sm-2 pull-right">  
-								    			<input type="button" value="Ok" id="sumbitRr" class="btn btn-primary">
+								    			<input type="submit" value="Ok" id="sumbitRr" class="btn btn-primary">
 								    		</div>
 								  		</div>
 								</form>
 				            </div><!-- /.tab-pane -->
 				            <div class="tab-pane" id="tab_2">
-				                <form class="form-horizontal" id="formRn">
+				                <form class="form-horizontal" id="formRn" metod="post" action="<?= Yii::$app->urlManager->baseUrl?>/diagnosa/add-resep-racikan">
 								  	<div class="col-sm-10">
 								  		<div class="form-group">
 								    		<label class="col-sm-2 control-label">No Resep</label>
@@ -161,35 +162,42 @@ Modal::end();
 								  	</div>
 								  	<ul class="col-sm-12 list-unstyled list-rn">
 								  		<li style="">
-								  			
+								  			R/ 
 											<ul class="list-obat list-unstyled">
 												<li>
 													<p style="">
-														R/ <?= Select2::widget([
-														    'name' => 'resep[seed][delimeter][id_obat]', 
+														<?= Select2::widget([
+														    'name' => 'resep[seed][list-obat][delimeter][id_obat]', 
 														    'data' => $data,
+														    'hideSearch' => true,
 														    'options' => [
 														        'placeholder' => 'nama obat',
 														        'class' => 'select2-select'
 														    ],
 														]) ?> 
-													<input type="text" name="resep[seed][delimeter][isi]" placeholder="kek. isi">
+													<input type="text" name="resep[seed][list-obat][delimeter][isi]" placeholder="kek. isi">
 													<span class="fa fa-plus fa-2x btnTambahObat"></span> 
 													<span class="fa fa-minus fa-2x btnRemoveObat hide"></span>
+													
 													</p>
 													
-														<p style="">
-													m.f. <input type="text" name="resep[seed][sediaan]" placeholder="sediaan"> 
+												</li>
+														
+											</ul>
+											<p style="">
+													m.f. 
+														 <select class="form=control" name="resep[seed][sediaan]">
+														 	<option value="1">Pulveres</option>
+														 	<option value="2">Pulvis</option>
+														 	<option value="3">Caps</option>
+														 	<option value="4">Ungt</option>
+														 	<option value="5">Cream</option>
+														 </select>
 													dtd. No. <input type="text" name="resep[seed][jumlah]" placeholder="jumlah"> 
 													</p>
-												</li>
-											</ul>
-											
 
-								  			<p style="display:block;">&#8747; <input type="text" name="resep[seed][dd_1]"> dd <input type="text" name="resep[seed][dd_2]"> </p>
-
-								  			<span class="fa fa-plus fa-2x btnTambah"></span> 
-								  			<span class="fa fa-minus fa-2x btnRemove hide"></span>
+								  			<p style="display:block;">&#8747; <input type="text" name="resep[seed][dd_1]"> dd <input type="text" name="resep[seed][dd_2]"> <span class="fa fa-plus fa-2x btnTambah"></span> 
+								  			<span class="fa fa-minus fa-2x btnRemove hide"></span> </p>
 								  		</li>
 								  	</ul>
 
@@ -207,11 +215,12 @@ Modal::end();
 								  	</div>
 
 								  	<div class="form-group">
-								    	<div class="col-sm-2">
-								    		<input type="checkbox" name="label_etiket" value="1"> Label / Etiket<br>
-								    	</div>
+								    	<div class="col-sm-2" style="text-align: right;">
+											<input type="checkbox" value="1" name="label_etiket"> 							    		
+										</div>
+										<div class="col-sm-2 "> Label / Etiket<br> </div>
 								    	<div class="col-sm-2 pull-right">  
-								    		<input type="button" value="Ok" id="sumbitRn" class="btn btn-primary">
+								    		<input type="submit" value="Ok" id="sumbitRn" class="btn btn-primary">
 								    	</div>
 								  	</div>
 								</form>
@@ -316,6 +325,8 @@ Modal::end();
 
 			});
 
+			//if already have many list then remove them all
+			newItem.find('ul.list-obat li').not(':first').remove();
 
 			$('.list-rn').append(newItem);
 			$('.list-rn li:last').find('.select2-select').select2();
@@ -323,7 +334,7 @@ Modal::end();
 		});
 
 		$('.list-rn').delegate('.btnTambahObat', 'click', function() {
-			var newItem = $(this).parents('ul').find('li:first').clone();
+			var newItem = $(this).parents('ul.list-obat').find('li:first').clone();
 			newItem.find('.select2-container.form-control.input-md').remove();
 			newItem.find('.btnRemoveObat').removeClass('hide');
 			newItem.find('.select2-select').select2();
@@ -334,15 +345,19 @@ Modal::end();
 				var currName = $(this).attr('name');
 
 				if(currName != undefined) {
-					var newName = currName.replace("seed", newSeed);
+					var newName = currName.replace("delimeter", newSeed);
 					$(this).attr('name', newName);
 				}
 
 			});
 
 
-			$('.list-rn').append(newItem);
+			$(this).parents('ul.list-obat').append(newItem);
 			$('.list-rn li:last').find('.select2-select').select2();
+		});
+
+		$('.list-rn').delegate('.btnRemoveObat', 'click', function() {
+			$(this).parent('li').remove();
 		});
 
 		$('.list-rr, .list-rn').delegate('.btnRemove', 'click', function() {

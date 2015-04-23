@@ -223,17 +223,29 @@ use kartik\checkbox\CheckboxX;
                          <?=    $form->field($model, 'mata_disop_kiri')->dropDownList($model->optionsMataDisopKiri); ?>
             </div>
         </div>
+  <div class="form-group">
+        <?= Html::Button('Submit', ['class' => 'btn btn-primary','id'=>'submit_matainspeksi']) ?>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+    </div> 
  <?php ActiveForm::end(); ?>
 
 <?php
 
 $this->registerJs("$(document).ready(function () {
-   
-
-
-   
+  
+     $('#submit_matainspeksi').click(function(){
+   $.ajax({
+        type     :'POST',
+        cache    : false,
+        dataType : 'json',
+        data    : $('#mataInspeksi-form').serialize(),
+        url  : 'save-statusterkini?id='+".$model->id.",
+            success  : function(response) {
+               alert('data berhasil disimpan');
+    }
+    });
+});
    
 
     });");
 ?>
-
