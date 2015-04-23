@@ -56,14 +56,16 @@ class RegistrasiController extends Controller {
      * @return mixed
      */
     public function actionIndex($pId = null) {
+        $faskes = UserHasFaskes::findOne(Yii::$app->user->getId())->faskes_id;
         $searchModel = new RegistrasiSearch();
+        $searchModel->faskes_id = $faskes;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $model = new Registrasi();
         if (Yii::$app->request->post()) {
             $model->load(Yii::$app->request->post());
             $model->tanggal_registrasi = date('Y-m-d H:i:s');
             $model->tanggal_kunjungan = date('Y-m-d');
-            $faskes = UserHasFaskes::findOne(Yii::$app->user->getId())->faskes_id;
+//            $faskes = UserHasFaskes::findOne(Yii::$app->user->getId())->faskes_id;
             if($faskes)$model->asal_registrasi = 'Faskes';
             if ($model->asuransi_tgl_lahir)
                 $model->asuransi_tgl_lahir = Yii::$app->get('helper')->dateFormatingStrip($model->asuransi_tgl_lahir);

@@ -57,13 +57,16 @@ use yii\bootstrap\Nav;
                 </a>
             </li>
             
+            <?php if(Yii::$app->user->can('Administrator') || Yii::$app->user->can('Verifikator')) { ?>
             <li>
                 <a href="<?= Yii::$app->urlManager->baseUrl?>/pasien/index">
                     <i class="fa fa-child"></i>
                     <span class="text-info">Pasien</span>
                 </a>
             </li>
-
+            <?php } ?>
+            
+            <?php if(Yii::$app->user->can('Administrator')) { ?>
             <li class="treeview">
                 <a href="#" class="navbar-link">
                     <i class="fa fa-users"></i>
@@ -158,7 +161,8 @@ use yii\bootstrap\Nav;
                         ]
                     );
                     ?>
-            </li>              
+            </li>
+            <?php } ?>
         </ul>
     </section>
 </aside>
