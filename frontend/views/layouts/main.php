@@ -35,6 +35,7 @@ AppAsset::register($this);
             ]);
             $menuItems = [
                 ['label' => 'Beranda', 'url' => ['/registrasi/index']],
+                ['label' => 'Fasilitas Kesehatan', 'url' => ['/fasilitas-kesehatan/index']],
 //                ['label' => 'About', 'url' => ['/site/about']],
 //                ['label' => 'Contact', 'url' => ['/site/contact']],
             ];

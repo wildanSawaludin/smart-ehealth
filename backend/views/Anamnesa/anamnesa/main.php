@@ -19,8 +19,9 @@ $GLOBALS['page_title'] = '<h1>Anamnesa<small>Anamnesa</small></h1>';
         <ul id="tab-main" class="nav nav-tabs">
             <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">Anamnesa</a></li>
             <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Pemeriksaan Fisik</a></li>
+            <?php if(Yii::$app->user->can('Dokter') || Yii::$app->user->can('Administrator')){ ?>
             <li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="false">Diagnosa</a></li>
-            
+            <?php }?>
 			<div class="col-md-4 col-sm-6 col-xs-12 pull-right">
               <div class="info-box">
                 <span class="info-box-icon bg-grey"><span style="margin-top:6px" class="glyphicon glyphicon-user"></span></span>

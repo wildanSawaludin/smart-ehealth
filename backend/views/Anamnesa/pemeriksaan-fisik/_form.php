@@ -17,6 +17,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 $GLOBALS['page_title'] = '<h1>Anamnesa<small>Pemeriksaan Fisik</small></h1>';
 //$GLOBALS['collapse'] = true;
 
+if(Yii::$app->user->can('Dokter') || Yii::$app->user->can('Administrator')){
 $items = [
     [
         'label'=>'<i class="glyphicon glyphicon-home"></i> Status Terkini',
@@ -38,6 +39,23 @@ $items = [
         'linkOptions'=>['data-enable-cache'=>false,'data-url'=>\yii\helpers\Url::to(['/Anamnesa/pemeriksaan-fisik/evaluasi','id'=>$model->id])],//,'datakeluhan'=>str_replace("_"," ",$_GET['param'])]])],
     ],
 ];
+}
+else{
+    $items = [
+    [
+        'label'=>'<i class="glyphicon glyphicon-home"></i> Status Terkini',
+        'content'=>yii\base\View::render('_statusTerkini',['model'=>$model,'pasien'=>$pasien, 'registrasi' => $registrasi]),
+        'active'=>true
+    ],
+    [
+        'label'=>'<i class="glyphicon glyphicon-user"></i> Tanda tanda vital',
+     //   'content'=>yii\base\View::render('_keluhanLokasi',['model'=>$model]),
+        'id'=>'tabs-tandavital',
+        'content'=>'<div id="tabtandavital"></div>',
+        'linkOptions'=>['data-enable-cache'=>false,'data-url'=>\yii\helpers\Url::to(['/Anamnesa/pemeriksaan-fisik/tanda-vital','id'=>$model->id])],//,'datakeluhan'=>str_replace("_"," ",$_GET['param'])]])],
+    ],
+        ];
+}
 
 ?>
 
@@ -47,7 +65,9 @@ $items = [
         <ul id="tab-main" class="nav nav-tabs">
             <li class=""><a href="#tab_1" data-toggle="tab" aria-expanded="false">Anamnesa</a></li>
             <li class="active"><a href="#tab_2" data-toggle="tab" aria-expanded="true">Pemeriksaan Fisik</a></li>
+            <?php if(Yii::$app->user->can('Dokter') || Yii::$app->user->can('Administrator')){ ?>
             <li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="false">Diagnosa</a></li>
+            <?php }?>
             <li class="pull-right header">
                 <dl class="dl-horizontal">
                     <dt>No RM</dt>
