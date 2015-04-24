@@ -35,7 +35,6 @@ AppAsset::register($this);
             ]);
             $menuItems = [
                 ['label' => 'Beranda', 'url' => ['/registrasi/index']],
-                ['label' => 'Fasilitas Kesehatan', 'url' => ['/fasilitas-kesehatan/index']],
 //                ['label' => 'About', 'url' => ['/site/about']],
 //                ['label' => 'Contact', 'url' => ['/site/contact']],
             ];
@@ -43,6 +42,7 @@ AppAsset::register($this);
                 $menuItems[] = ['label' => 'Signup', 'url' => ['/user/registration/register']];
                 $menuItems[] = ['label' => 'Login', 'url' => ['/user/security/login']];
             } else {
+                $menuItems[] = ['label' => 'Fasilitas Kesehatan', 'url' => ['/fasilitas-kesehatan/index']];
                 $menuItems[] = ['label' => 'Setting', 'url' => ['/user/settings/profile']];
                 $menuItems[] = [
                     'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
