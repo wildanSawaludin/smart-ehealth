@@ -9,50 +9,11 @@ use backend\models\NamaObat;
 /* @var $this yii\web\View */
 /* @var $registrasi backend\models\Anamnesa */
 
-$this->title = Yii::t('app', 'Update {modelClass}: ', [
-        'modelClass' => 'Anamnesa',
-    ]) . ' ' . $registrasi->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Diagnosa'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $registrasi->id, 'url' => ['view', 'id' => $registrasi->id]];
-$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
-
-$GLOBALS['page_title'] = '<h1>Anamnesa<small>Diagnosa</small></h1>';
-
 $data = ArrayHelper::map(NamaObat::find()->all(), 'id', 'lazim');
 
-Modal::begin([
-     'id' => 'pop-diagnosa',
-     'header' => 'Pilih Diagnosa'
-]);
-
-Modal::end();
-
-Modal::begin([
-    'id' => 'pop-info',
-    'header' => 'Pilih Diagnosa'
-]);
-
-Modal::end();
 ?>
 
-<div class="row">
-    <div class="nav-tabs-custom">
-        <ul id="tab-main" class="nav nav-tabs">
-            <li class=""><a href="#tab_1" data-toggle="tab" aria-expanded="false">Anamnesa</a></li>
-            <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Pemeriksaan Fisik</a></li>
-            <li class="active"><a href="#tab_3" data-toggle="tab" aria-expanded="true">Diagnosa</a></li>
-            <li class="pull-right header">
-                <dl class="dl-horizontal">
-                    <dt>No RM</dt>
-                    <dd><?= str_pad($pasien->id, 6, '0', STR_PAD_LEFT) ?></dd>
-                    <dt>Nama</dt>
-                    <dd><?= $pasien->nama.' / '.$pasien->getUsia().' / '.$pasien->jenkel[0] ?></dd>
-                </dl>
-            </li>
-        </ul>
-        <div class="tab-content" style="min-height:800px;">
-            <div class="tab-pane active" id="tab_3">
-                <div class="col-sm-12">
+ <div class="col-sm-12">
                     <div class="nav nav-tabs">
 				        <ul id="tab-main" class="nav nav-tabs">
 				            <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="false">Resep Obat Non-Racikan</a></li>
@@ -228,20 +189,17 @@ Modal::end();
 				        </div><!-- /.tab-content -->
 				    </div>
                 </div>
-            </div><!-- /.tab-pane -->
-            <div class="tab-pane" id="tab_1">
-                
-            </div><!-- /.tab-pane -->
-        </div><!-- /.tab-content -->
-    </div>
-</div>
-
 
 <style type="text/css">
 
 	.select2-container.form-control {
 		display: inline-table !important;
 		width: 10% !important;
+	}
+
+	.select2-container {
+		display: inline-table !important;
+		width: 41% !important;
 	}
 
 	.select2-chosen {
@@ -286,6 +244,7 @@ Modal::end();
 		$('.list-rr').delegate('.btnTambah', 'click', function() {
 			var newItem = $(this).parents('ul').find('li:first').clone();
 			newItem.find('.select2-container.form-control.input-md').remove();
+			newItem.find('.select2-container').remove();
 			newItem.find('.btnRemove').removeClass('hide');
 			newItem.find('.select2-select').select2();
 			//change all seed in name of input
@@ -310,6 +269,7 @@ Modal::end();
 		$('.list-rn').delegate('.btnTambah', 'click', function() {
 			var newItem = $(this).parents('ul').find('li:first').clone();
 			newItem.find('.select2-container.form-control.input-md').remove();
+			newItem.find('.select2-container').remove();
 			newItem.find('.btnRemove').removeClass('hide');
 			newItem.find('.select2-select').select2();
 			//change all seed in name of input
@@ -336,6 +296,7 @@ Modal::end();
 		$('.list-rn').delegate('.btnTambahObat', 'click', function() {
 			var newItem = $(this).parents('ul.list-obat').find('li:first').clone();
 			newItem.find('.select2-container.form-control.input-md').remove();
+			newItem.find('.select2-container').remove();
 			newItem.find('.btnRemoveObat').removeClass('hide');
 			newItem.find('.select2-select').select2();
 			//change all seed in name of input

@@ -33,7 +33,10 @@ use yii\helpers\Url;
             'items'=>$items,
             'position'=>TabsX::POS_ABOVE,
             'sideways'=>true,
-            'encodeLabels'=>false
+            'encodeLabels'=>false,
+            'pluginEvents' => [
+                "tabsX.success" => "function() { setTimeout(function(){ $('.select2-select').select2();}, 1000) }",
+            ] 
         ]);
 
     ?>

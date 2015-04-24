@@ -15,6 +15,7 @@ use backend\models\ResepNonracikanDetail;
 use backend\models\ResepRacikan;
 use backend\models\ResepRacikanDetail;
 use backend\models\SaranAnjuran;
+use backend\models\Registrasi;
 use Yii;
 use yii\db\Connection;
 use yii\db\Query;
@@ -316,12 +317,32 @@ class SaranAnjuranController extends Controller{
         if (($model = ResepNonracikan::findOne(['registrasi_id' => $id])) !== null) {
             return $model;
         }
+        else {
+            $registrasi = Registrasi::findOne($id);
+            $newResepNonRacikan = new ResepNonracikan();
+            $newResepNonRacikan->user_id = Yii::$app->user->identity->id;
+            $newResepNonRacikan->registrasi_id = $registrasi->id;
+            $newResepNonRacikan->save();
+
+            return $newResepNonRacikan;
+        }
     }
 
     protected function findModelRacikan($id)
     {
+
+
         if (($model = ResepRacikan::findOne(['registrasi_id' => $id])) !== null) {
             return $model;
+        }
+        else {
+            $registrasi = Registrasi::findOne($id);
+
+            $newResepRacikan = new ResepRacikan();
+            $newResepRacikan->user_id = Yii::$app->user->identity->id;
+            $newResepRacikan->registrasi_id = $registrasi->id;
+            $newResepRacikan->save();
+            return $newResepRacikan;
         }
     }
 

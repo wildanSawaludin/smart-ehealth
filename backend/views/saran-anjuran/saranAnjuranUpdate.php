@@ -3,8 +3,29 @@ use kartik\tabs\TabsX;
 use yii\bootstrap\Modal;
 use yii\helpers\Url;
 use yii\web\View;
+use kartik\widgets\Select2;
+use backend\models\Registrasi;
+
+
 
 ?>
+
+<div class="hide">
+<?=
+Select2::widget([
+                                                    'name' => 'dummy', 
+                                                    'data' => [],
+                                                    'hideSearch' => true,
+                                                    'options' => [
+                                                        'placeholder' => 'nama obat',
+                                                        'class' => 'select2-select'
+                                                    ],
+                                                ])
+                                                ?>
+</div>
+
+<link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0-rc.2/css/select2.min.css" rel="stylesheet" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0-rc.2/js/select2.min.js"></script>
 
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
     <div class="panel panel-default">
@@ -18,17 +39,27 @@ use yii\web\View;
         <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
             <div class="panel-body">
                 <?php
+
+                    $registrasi = Registrasi::findOne($_GET['id']);
+
                     $items = [
                         [
                             'label'=>'Obat-obatan',
                             'id' => 'obat-update',
-                            'content' => View::render('obatTabUpdate',[
+                            'content' => View::render('//diagnosa/resep',[
+                                /*
                                 'resepNonracikanIsi' => $resepNonracikanIsi,
                                 'resepNonracikanDetailIsi' => $resepNonracikanDetailIsi,
                                 'resepRacikan' => $resepRacikan,
                                 'resepRacikanDetail' => $resepRacikanDetail,
                                 'racikanObat' => $racikanObat,
                                 'id' => $_GET['id']
+                                */
+                                'registrasi' => $registrasi,
+                                'user' => Yii::$app->user->identity,
+                                'pasien' => $registrasi->pasien,
+                                'resepRacikan' => $resepRacikan,
+                                'resepNonRacikan' => $resepNonracikanIsi
                             ]),
                             'active' => true,
                             'linkOptions'=>['data-url'=>Url::to(['/saran-anjuran/index?id='.$_GET['id']])],
