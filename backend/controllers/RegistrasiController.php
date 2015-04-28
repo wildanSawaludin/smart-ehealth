@@ -226,7 +226,7 @@ class RegistrasiController extends Controller {
 
         $model = $this->findModel($id);
 
-        if($model->status_registrasi != 'Resume') {
+        if($model->status_registrasi != 'Pemeriksaan') {
             
             //insert anamnesa
             $modelResume = new Anamnesa;
@@ -243,7 +243,7 @@ class RegistrasiController extends Controller {
             $modelPemeriksaanFisik->registrasi_id = $id;
             $modelPemeriksaanFisik->save();
 
-            $model->status_registrasi = 'Resume';
+            $model->status_registrasi = 'Pemeriksaan';
             $model->save();
         }
 
