@@ -19,7 +19,24 @@ use yii\helpers\Url;
 <div class="modal-body">
 
     <?php
-    
+    if($_GET['param']== "Batuk" || $_GET['param']== "Gangguan_Buang_Air_Besar" || $_GET['param']== "Gangguan_Buang_Air_Kecil" || $_GET['param']== "Gangguan_Tenggorokan" || $_GET['param']== "Masalah_pada_Hidung/Pernapasan"
+                || $_GET['param']== "Masalah_pada_Perut" || $_GET['param']== "Masalah_Kewanitaan" || $_GET['param']== "Masalah_Reproduksi_Pria" || $_GET['param']== "Lainnya"){
+        $items = [
+        [
+            'label'=>'<i class="glyphicon glyphicon-tasks"></i> Rincian',
+            'content'=>yii\base\View::render('_keluhanRincian',['model'=>$model]),
+            'active'=>true
+        ],
+        [
+            'label'=>'<i class="glyphicon glyphicon-flag"></i> Anamnesa Terpimpin',
+         //   'content'=>yii\base\View::render('_keluhanLokasi',['model'=>$model]),
+            'id'=>'tabs-keluhanterpimpin',
+            'content'=>'<div id="tabanamnesa_terpimpin"></div>',
+            'linkOptions'=>['data-enable-cache'=>false,'data-url'=>\yii\helpers\Url::to(['/Anamnesa/anamnesa/anamnesa-terpimpin','id'=>$_GET['id']])],
+        ],
+        ];
+    }
+    else {      
     $items = [
     [
         'label'=>'<i class="glyphicon glyphicon-tasks"></i> Rincian',
@@ -39,7 +56,7 @@ use yii\helpers\Url;
         'id'=>'tabs-keluhanterpimpin',
         'content'=>'<div id="tabanamnesa_terpimpin"></div>',
         'linkOptions'=>['data-enable-cache'=>false,'data-url'=>\yii\helpers\Url::to(['/Anamnesa/anamnesa/anamnesa-terpimpin','id'=>$_GET['id']])],
-    ],
+    ],        
    /* [
         'label'=>'<i class="glyphicon glyphicon-list-alt"></i> Dropdown',
         'items'=>[
@@ -56,6 +73,7 @@ use yii\helpers\Url;
         ],
     ],*/
 ];
+    }
     
     echo TabsX::widget([
     'items'=>$items,
