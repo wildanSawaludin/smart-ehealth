@@ -24,7 +24,7 @@ else {
     $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
 }
 ?>
-<?php if(!Yii::$app->user->can('Perawat') && !Yii::$app->user->can('Pasien')){ ?>
+<?php if(!Yii::$app->user->can('Perawat') && !Yii::$app->user->can('Apoteker')){ ?>
 <div class="registrasi-index row">
     <section class="col-sm-4">
         <div class="box box-primary">
@@ -153,7 +153,7 @@ else {
                                 'buttons' =>
                                 [
                                     'resume' => function ($url, $model) {
-                                        if(Yii::$app->user->can('Dokter')||Yii::$app->user->can('Perawat')||Yii::$app->user->can('Administrator')){
+                                        if(!Yii::$app->user->can('Verifikator') && !Yii::$app->user->can('Pasien')){
                                             return Html::a('<span class="glyphicon glyphicon-zoom-in"></span>', $url, [
                                                         'title' => Yii::t('yii', 'Resume'),
                                                     //  'data-confirm' => Yii::t('yii', 'Apa Anda yakin?'),

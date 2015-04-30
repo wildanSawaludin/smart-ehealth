@@ -250,8 +250,11 @@ class RegistrasiController extends Controller {
         if(Yii::$app->user->can('Perawat')){
             return $this->redirect(['Anamnesa/pemeriksaan-fisik/update', 'id' => $model->id]);
         }
+        elseif (Yii::$app->user->can('Apoteker')) {
+            return $this->redirect(['diagnosa/show-resep-obat-form', 'id' => $model->id]);
+        }
         else {
-        return $this->redirect(['Anamnesa/anamnesa/main', 'id' => $model->id]);
+            return $this->redirect(['Anamnesa/anamnesa/main', 'id' => $model->id]);
         }
             
     }

@@ -40,11 +40,13 @@ Modal::end();
 <div class="row">
     <div class="nav-tabs-custom">
         <ul id="tab-main" class="nav nav-tabs">
-            <?php if(!Yii::$app->user->can('Perawat')){ ?>
+            <?php if(!Yii::$app->user->can('Perawat') && !Yii::$app->user->can('Apoteker')){ ?>
             <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">Anamnesa</a></li>
             <?php }?>
+            <?php if(!Yii::$app->user->can('Apoteker')){ ?>
             <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Pemeriksaan Fisik</a></li>
-            <?php if(Yii::$app->user->can('Dokter') || Yii::$app->user->can('Bidan') || Yii::$app->user->can('Administrator')){ ?>
+            <?php }?>
+            <?php if(!Yii::$app->user->can('Perawat') && !Yii::$app->user->can('Verifikator')){ ?>
             <li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="false">Diagnosa</a></li>
             <?php }?>
             <div class="col-md-3 col-sm-6 col-xs-12 pull-right">
