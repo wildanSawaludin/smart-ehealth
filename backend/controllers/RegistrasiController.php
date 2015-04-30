@@ -58,7 +58,7 @@ class RegistrasiController extends Controller {
     public function actionIndex($pId = null) {
         $faskes = UserHasFaskes::findOne(Yii::$app->user->getId())->faskes_id;
         $searchModel = new RegistrasiSearch();
-        $searchModel->faskes_id = $faskes;
+//        $searchModel->faskes_id = $faskes;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $model = new Registrasi();
         if (Yii::$app->request->post()) {
@@ -247,8 +247,12 @@ class RegistrasiController extends Controller {
             $model->save();
         }
 
-        
+        if(Yii::$app->user->can('Perawat')){
+            return $this->redirect(['Anamnesa/pemeriksaan-fisik/update', 'id' => $model->id]);
+        }
+        else {
         return $this->redirect(['Anamnesa/anamnesa/main', 'id' => $model->id]);
+        }
             
     }
 

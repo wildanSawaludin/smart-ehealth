@@ -7,14 +7,20 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Anamnesa */
 
-$this->title = Yii::t('app', 'Update {modelClass}: ', [
-        'modelClass' => 'Anamnesa',
-    ]) . ' ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Diagnosa'), 'url' => ['index']];
+//$this->title = Yii::t('app', 'Update {modelClass}: ', [
+//        'modelClass' => 'Anamnesa',
+//    ]) . ' ' . $model->id;
+//$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Diagnosa'), 'url' => ['index']];
+//$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+//$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
+//
+//$GLOBALS['page_title'] = '<h1>Anamnesa<small>Diagnosa</small></h1>';
+
+$this->title = Yii::t('app', 'Resume Kesehatan');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Resume Kesehatan'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
-
-$GLOBALS['page_title'] = '<h1>Anamnesa<small>Diagnosa</small></h1>';
+$GLOBALS['page_title'] = '<h1>Resume<small>Kesehatan</small></h1>';
 
 Modal::begin([
      'id' => 'pop-diagnosa',
@@ -34,9 +40,13 @@ Modal::end();
 <div class="row">
     <div class="nav-tabs-custom">
         <ul id="tab-main" class="nav nav-tabs">
-            <li class=""><a href="#tab_1" data-toggle="tab" aria-expanded="false">Anamnesa</a></li>
+            <?php if(!Yii::$app->user->can('Perawat')){ ?>
+            <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">Anamnesa</a></li>
+            <?php }?>
             <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Pemeriksaan Fisik</a></li>
-            <li class="active"><a href="#tab_3" data-toggle="tab" aria-expanded="true">Diagnosa</a></li>
+            <?php if(Yii::$app->user->can('Dokter') || Yii::$app->user->can('Bidan') || Yii::$app->user->can('Administrator')){ ?>
+            <li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="false">Diagnosa</a></li>
+            <?php }?>
             <div class="col-md-3 col-sm-6 col-xs-12 pull-right">
               <div class="info-box">
                 <span class="info-box-icon bg-grey"><span style="margin-top:6px" class="glyphicon glyphicon-user"></span></span>

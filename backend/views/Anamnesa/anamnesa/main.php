@@ -4,13 +4,19 @@ use kartik\tabs\TabsX;
 use yii\helpers\Url;
 use yii\helpers\Html;
 
-$this->title = Yii::t('app', 'Update {modelClass}: ', [
-    'modelClass' => 'Anamnesa',
-]) . ' ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Anamnesas'), 'url' => ['index']];
+//$this->title = Yii::t('app', 'Update {modelClass}: ', [
+//    'modelClass' => 'Anamnesa',
+//]) . ' ' . $model->id;
+//$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Anamnesas'), 'url' => ['index']];
+//$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+//$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
+//$GLOBALS['page_title'] = '<h1>Anamnesa<small>Anamnesa</small></h1>';
+
+$this->title = Yii::t('app', 'Resume Kesehatan');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Resume Kesehatan'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
-$GLOBALS['page_title'] = '<h1>Anamnesa<small>Anamnesa</small></h1>';
+$GLOBALS['page_title'] = '<h1>Resume<small>Kesehatan</small></h1>';
 
 ?>
 
@@ -19,7 +25,7 @@ $GLOBALS['page_title'] = '<h1>Anamnesa<small>Anamnesa</small></h1>';
         <ul id="tab-main" class="nav nav-tabs">
             <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">Anamnesa</a></li>
             <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Pemeriksaan Fisik</a></li>
-            <?php if(Yii::$app->user->can('Dokter') || Yii::$app->user->can('Administrator')){ ?>
+            <?php if(Yii::$app->user->can('Dokter') || Yii::$app->user->can('Bidan') || Yii::$app->user->can('Administrator')){ ?>
             <li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="false">Diagnosa</a></li>
             <?php }?>
 			<div class="col-md-4 col-sm-6 col-xs-12 pull-right">

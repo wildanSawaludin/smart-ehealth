@@ -13,12 +13,18 @@ use yii\bootstrap\Modal;
 /* @var $searchModel backend\models\RegistrasiSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Registrasi Pendaftaran');
-$this->params['breadcrumbs'][] = $this->title;
-$GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
-
+if(Yii::$app->user->can('Perawat') || Yii::$app->user->can('Dokter') || Yii::$app->user->can('Bidan')){
+    $this->title = Yii::t('app', 'Resume Kesehatan');
+    $this->params['breadcrumbs'][] = $this->title;
+    $GLOBALS['page_title'] = '<h1>Resume<small>Kesehatan</small></h1>';
+}
+else {
+    $this->title = Yii::t('app', 'Registrasi Pendaftaran');
+    $this->params['breadcrumbs'][] = $this->title;
+    $GLOBALS['page_title'] = '<h1>Registrasi<small>Pendaftaran</small></h1>';
+}
 ?>
-<?php if(Yii::$app->user->can('Verifikator') || Yii::$app->user->can('Administrator')){ ?>
+<?php if(!Yii::$app->user->can('Perawat') && !Yii::$app->user->can('Pasien')){ ?>
 <div class="registrasi-index row">
     <section class="col-sm-4">
         <div class="box box-primary">
