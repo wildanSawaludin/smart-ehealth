@@ -27,33 +27,19 @@ use dosamigos\ckeditor\CKEditor;
         <div class="tab-content">
 
             <div class="tab-pane fade in active" id="klinis">
-                <p>
-                    Anamnesa : <br>
-                    <pre>
-                        <?= $model['anamnesa']; ?>
-                    </pre>
-                </p>
-                <p>
-                    Pemeriksaan Fisik : <br>
-                    <pre>
-                        <?= $model['pemeriksaan_fisik']; ?>
-                    </pre>
-                </p>
+                Anamnesa : <br>
+                <pre><?= $model['anamnesa']; ?> </pre>
+                Pemeriksaan Fisik : <br>
+                <pre><?= $model['pemeriksaan_fisik']; ?></pre>
             </div>
             <div class="tab-pane fade" id="penunjang">
-                <pre>
-                    <?= $model['pemeriksaan_penunjang']; ?>
-                </pre>
+                <pre><?= $model['pemeriksaan_penunjang']; ?></pre>
             </div>
             <div class="tab-pane fade" id="tindakan">
-                <pre>
-                    <?= $model['terapi_tindakan']; ?>
-                </pre>
+                <pre><?= $model['terapi_tindakan']; ?></pre>
             </div>
             <div class="tab-pane fade" id="gizi">
-                <pre>
-                    <?= $model['gizi_nutrisi']; ?>
-                </pre>
+                <pre><?= $model['gizi_nutrisi']; ?></pre>
             </div>
         </div>
         <?php ActiveForm::end(); ?>
