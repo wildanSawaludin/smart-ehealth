@@ -108,7 +108,7 @@ class DiagnosaController extends Controller
 
             for($i=0;$i<count($kode);$i++){
                 $model = new Diagnosa();
-                $model->registrasi_id = '1';
+                $model->registrasi_id = $id;
                 $model->jenis_diagnosa = $param;
                 $model->icdx_id = $kode[$i];
                 $model->save();

@@ -36,7 +36,7 @@ use yii\helpers\Html;
                             return "<a class='glyphicon glyphicon-info-sign' onclick='informasiDiagnosa(".$model['id'].")' id='view-info'></a>";
                         },
                         'select' => function($url, $model){
-                            return Html::checkbox('pilih', false, ['value' => $model['id'].'#'.$model['kode'].'#'.$model['inggris']]);
+                            return Html::checkbox('pilih', false, ['class' => 'pilih', 'value' => $model['id'].'#'.$model['kode'].'#'.$model['inggris']]);
                         }
                     ]
                 ],
@@ -47,7 +47,7 @@ use yii\helpers\Html;
                     'enablePushState'=>false,
                 ],
                 'neverTimeout'=>true,
-                'afterGrid'=>'<a id="pilih-diagnosa" class="btn btn-success">Pilih</a>',
+                'afterGrid'=>'<a id="pilih-diagnosa" onclick="pilihDiagnosa()" class="btn btn-success">Pilih</a>',
             ],
             'responsive'=>true,
             'hover'=>true,
@@ -56,13 +56,32 @@ use yii\helpers\Html;
     </div>
 </div>
 <script>
-    $(document).ready(function(){
+    function pilihDiagnosa()
+    {
+        $('input:checkbox:checked.pilih').each(function(){
+            var value = $(this).val();
+            var data = value.split('#');
+
+            $('#tbody-diagnosa-<?= $diagnosa ?>').append(
+                '<tr id="trdiagnosa'+data[0]+'">' +
+                '<td><input type="text" name="diagnosa_kode[]" readonly="true" value="'+data[1]+'"></td>' +
+                '<td><input type="text" name="diagnosa_nama[]" readonly="true" value="'+data[2]+'"></td>' +
+                '<td>view</td>' +
+                '<td><a class="btn btn-danger" onclick="hapusDiagnosaAwal('+data[0]+')">Hapus</a> </td>' +
+                '</tr>'+
+                '<input type="hidden" name="icdx_id[]" value="'+data[0]+'">'
+            );
+            $('#pop-diagnosa').modal('hide');
+        });
+    }
+    /*$(document).ready(function(){
        $('#pilih-diagnosa').click(function(){
+           alert('aaa');
          $('input:checkbox:checked').each(function(){
              var value = $(this).val();
              var data = value.split('#');
 
-             $('#tbody-diagnosa-<?= $diagnosa ?>').append(
+             $('#tbody-diagnosa-<?php //$diagnosa ?>').append(
                  '<tr id="trdiagnosa'+data[0]+'">' +
                     '<td><input type="text" name="diagnosa_kode[]" readonly="true" value="'+data[1]+'"></td>' +
                     '<td><input type="text" name="diagnosa_nama[]" readonly="true" value="'+data[2]+'"></td>' +
@@ -74,5 +93,5 @@ use yii\helpers\Html;
              $('#pop-diagnosa').modal('hide');
          });
        });
-    });
+    });*/
 </script>
