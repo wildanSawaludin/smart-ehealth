@@ -17,7 +17,7 @@ class RegistrasiSearch extends Registrasi {
      */
     public function rules() {
         return [
-            [['id', 'pasienId', 'icdx_id', 'asuransi_provider_id', 'faskes_id'], 'integer'],
+            [['id', 'pasien_id', 'icdx_id', 'asuransi_provider_id', 'faskes_id'], 'integer'],
             [['no_reg', 'tanggal_registrasi', 'status_registrasi', 'asal_registrasi', 'status_pelayanan', 'status_rawat', 'dr_penanggung_jawab', 'status_asuransi', 'catatan', 'asuransi_noreg', 'asuransi_nama', 'asuransi_tgl_lahir', 'asuransi_status_jaminan', 'asuransi_penanggung_jawab', 'asuransi_alamat', 'asuransi_notelp', 'pasienNama', 'tanggal_registrasi_format'], 'safe'],
         ];
     }
@@ -39,12 +39,23 @@ class RegistrasiSearch extends Registrasi {
      */
     public function search($params) {
         $query = Registrasi::find()
-                ->joinWith(['pasien']);
+                ->joinWith(['pasien'])
+                ->joinWith(['faskes'])
+                ;
 
         $items = $query
                 ->select([
                     'pasien.nama as pasienNama',
-                    'date_format(registrasi.tanggal_registrasi,"%d-%m-%Y %H:%i:%s") as tanggal_registrasi_format',
+                    'date_format(registrasi.tanggal_kunjungan,"%d-%m-%Y") as tanggal_kunjungan_format',
+                    'fasilitas_kesehatan.nama as faskesnama',
+                    '(
+                        case 
+                            when registrasi.asal_registrasi="Web" then concat("W-",no_reg)
+                            when registrasi.asal_registrasi="Faskes" then concat("F-",no_reg)
+                            when registrasi.asal_registrasi="Apps" then concat("M-",no_reg)
+                            else no_reg
+                        end
+                      )as format_noreg',
                     'registrasi.*'])
                 ->all();
 
@@ -59,16 +70,16 @@ class RegistrasiSearch extends Registrasi {
             // $query->where('0=1');
             return $dataProvider;
         }
-
-        if(is_null($this->tanggal_registrasi) || $this->tanggal_registrasi == '') {
+       
+        if(is_null($_GET['RegistrasiSearch']['tanggal_kunjungan']) || $_GET['RegistrasiSearch']['tanggal_kunjungan'] == '') {
             $currDate = new \DateTime();
 
-            $this->tanggal_registrasi = $currDate->format('Y-m-d 00:00');
-        }
+            $this->tanggal_kunjungan = $currDate->format('Y-m-d');
+        }else $this->tanggal_kunjungan = $_GET['RegistrasiSearch']['tanggal_kunjungan'];
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'pasienId' => $this->pasienId,
+            'pasien_id' => $this->pasien_id,
             'icdx_id' => $this->icdx_id,
             'asuransi_tgl_lahir' => $this->asuransi_tgl_lahir,
             'asuransi_provider_id' => $this->asuransi_provider_id,
@@ -93,7 +104,7 @@ class RegistrasiSearch extends Registrasi {
                 ->andFilterWhere(['like', 'pasien.nama', $this->pasienNama]);
 
         $query->andFilterWhere(
-            ['>=', 'tanggal_registrasi',  $this->tanggal_registrasi]
+            ['>=', 'tanggal_kunjungan',  $this->tanggal_kunjungan]
         );
 
         return $dataProvider;

@@ -104,8 +104,9 @@ use yii\helpers\Url;
                 </tr>
             </tbody>
         </table>
+		<hr>
         <div class="form-group">
-            <div class="col-sm-offset-3 col-sm-9">
+            <div class="col-sm-offset-1 col-sm-4">
                 <input id="btnKebiasaanPerawatanOk" type="button" class="btn btn-primary" value="OK">
             </div>
         </div>

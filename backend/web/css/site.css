@@ -103,3 +103,11 @@ a.desc:after {
 .no-margin-botom {
     margin-bottom: 0px !important;
 }
+
+.selected-row {
+    background: rgba(45, 199, 35, 0.87) !important;
+}
+
+#select2-chosen-1 {
+    width: 75px !important;
+}

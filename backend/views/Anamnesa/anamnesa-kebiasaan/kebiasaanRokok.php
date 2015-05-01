@@ -51,7 +51,7 @@ use yii\helpers\Url;
                 <?= $form->field($model, 'kebiasaan_rokok_lama')->dropDownList(['hari' => 'hari', 'minggu' => 'minggu', 'bulan' => 'bulan', 'tahun' => 'tahun']) ?>
             </div>
             <div class="col-md-1">
-                <a href="#" class="lama_pemakaian_popup"><span class="glyphicon glyphicon-edit"></span></a>
+                <a href="#" class="lama_pemakaian_popup"><span style="font-size:24px;" class="glyphicon glyphicon-edit"></span></a>
             </div>
         </div>
         <div class="form-group">
@@ -72,8 +72,9 @@ use yii\helpers\Url;
                 ?>
             </div>
         </div>
+		<hr>
         <div class="form-group">
-            <div class="col-sm-offset-3 col-sm-9">
+            <div class="col-sm-offset-1 col-sm-4">
                 <input id="btnKebiasaanRokokOk" type="button" class="btn btn-primary" value="OK">
             </div>
         </div>
@@ -95,8 +96,9 @@ use yii\helpers\Url;
                 <?= $form->field($model, 'kebiasaan_rokok_berhenti')->dropDownList(['' => '', 'Usia < 10 tahun' => 'Usia < 10 tahun','Usia 10 – 20 tahun' => 'Usia 10 – 20 tahun','Usia 20 – 30 tahun' => 'Usia 20 – 30 tahun','Usia > 30 tahun' => 'Usia > 30 tahun']) ?>
             </div>
         </div>
+		<hr>
         <div class="form-group">
-            <div class="col-sm-offset-3 col-sm-9">
+            <div class="col-sm-offset-1 col-sm-4">
                 <input id="btnLamaPemakaian" type="button" class="btn btn-primary" value="OK">
             </div>
         </div>

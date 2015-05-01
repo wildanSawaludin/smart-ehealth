@@ -8,14 +8,15 @@ use yii\grid\GridView;
 
 $this->title = 'Kabkotas';
 $this->params['breadcrumbs'][] = $this->title;
+$GLOBALS['page_title'] = '<h2>Kabupaten/Kota&nbsp;&nbsp;<i class="glyphicon glyphicon-tasks"></i> </h2>';
 ?>
-<div class="kabkota-index">
+<div class="box box-primary">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <!--<h1><?= Html::encode($this->title) ?></h1>-->
 
-    <p>
+     <div style="float:right;padding:4px;">
         <?= Html::a('Create Kabkota', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    </div><br/></br/><br/>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

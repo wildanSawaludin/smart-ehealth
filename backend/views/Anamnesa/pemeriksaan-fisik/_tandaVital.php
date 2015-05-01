@@ -60,8 +60,12 @@ use yii\bootstrap\Modal;
                 
                           <?=    $form->field($model, 'ttv_suhu')->textInput(['maxlength'=>'3']); ?>
             </div>
-            <label for="kesadaran_umum" class="col-md-2">C</label>
+            <label for="kesadaran_umum" class="col-md-2">&deg;C</label>
         </div>
+ <div class="form-group">
+        <?= Html::Button('Submit', ['class' => 'btn btn-primary','id'=>'submit_tandavital']) ?>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+    </div>  
  <?php ActiveForm::end(); ?>
 <?php
 
@@ -121,18 +125,29 @@ use yii\bootstrap\Modal;
 $this->registerJs("$(document).ready(function () {
    
 $('#pemeriksaanfisik-ttv_nadi').change(function(){
-     $('#m_Nadi').modal('show').find('#modalNadi').load(baseurl + '/Anamnesa/pemeriksaan-fisik/popup-nadi');
+     $('#m_Nadi').modal('show').find('#modalNadi').load(baseurl + '/Anamnesa/pemeriksaan-fisik/popup-nadi?id=".$model->id."');
 });
 
 $('#pemeriksaanfisik-ttv_pernapasan').change(function(){
-     $('#m_Pernapasan').modal('show').find('#modalPernapasan').load(baseurl + '/Anamnesa/pemeriksaan-fisik/popup-pernapasan');
+     $('#m_Pernapasan').modal('show').find('#modalPernapasan').load(baseurl + '/Anamnesa/pemeriksaan-fisik/popup-pernapasan?id=".$model->id."');
 });
 
 $('#pemeriksaanfisik-ttv_suhu').change(function(){
-     $('#m_Suhu').modal('show').find('#modalSuhu').load(baseurl + '/Anamnesa/pemeriksaan-fisik/popup-suhu');
+     $('#m_Suhu').modal('show').find('#modalSuhu').load(baseurl + '/Anamnesa/pemeriksaan-fisik/popup-suhu?id=".$model->id."');
 });
       
-
+  $('#submit_tandavital').click(function(){
+   $.ajax({
+        type     :'POST',
+        cache    : false,
+        dataType : 'json',
+        data    : $('#tandaVital-form').serialize(),
+        url  : 'save-statusterkini?id='+".$model->id.",
+            success  : function(response) {
+               alert('data berhasil disimpan');
+    }
+    });
+});
     });");
 ?>
 

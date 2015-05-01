@@ -5,6 +5,7 @@ namespace backend\controllers;
 use Yii;
 use backend\models\Pasien;
 use backend\models\PasienSearch;
+use dektrium\user\models\User;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -77,8 +78,8 @@ class PasienController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
-    {
+    public function actionUpdate($id) {
+
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -88,6 +89,7 @@ class PasienController extends Controller
                 'model' => $model,
             ]);
         }
+        
     }
 
     /**
@@ -101,6 +103,51 @@ class PasienController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+    
+    public function actionActivation($id)
+    {
+        $user = Yii::createObject([
+            'class'    => User::className(),
+            'scenario' => 'create',
+        ]);
+        
+        if (Yii::$app->request->post()) {
+            $user->load(Yii::$app->request->post());
+            $user->username = str_pad($id, 6, "0", STR_PAD_LEFT);
+//          $user->email = 'username'.$id.'@example.com';
+            $user->password = 'segeradiubah';
+            if($user->create()){
+                $model = $this->findModel($id);
+                $model->user_id = $user->id;
+                $model->save();
+        
+                $access = Yii::$app->authManager;
+                $item = $access->getRole('Pasien');
+                $access->assign($item,$user->id);
+                
+                return $this->redirect(['index']);}
+        }
+//        return $this->redirect(['index']);
+        return $this->render('_user',['user'=>$user]);
+
+    }
+    
+    public function actionDeactivation($id)
+    {
+        $model = $this->findModel($id);
+        $modelUser = User::findOne($model->user_id);
+        $model->user_id = NULL;
+        $model->save();
+        $access = Yii::$app->authManager;
+        $item = $access->getRole('Pasien');
+        $access->revoke($item,$modelUser->id);
+        $modelUser->delete();
+        
+        
+        
+        return $this->redirect(['index']);
+
     }
 
     /**

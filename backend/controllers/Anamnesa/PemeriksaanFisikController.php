@@ -3,23 +3,49 @@
 namespace backend\controllers\Anamnesa;
 
 use Yii;
-use yii\web\Response;
 use backend\models\PemeriksaanFisik;
-use yii\db\Query;
+use backend\models\Registrasi;
+use yii\web\Controller;
+use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
 use yii\helpers\Json;
+use yii\db\Query;
+use yii\web\Response;
 
-class PemeriksaanFisikController extends AnamnesaController{
+class PemeriksaanFisikController extends Controller{
 
- public function actionCreate($id){
-     $model = $this->findModel($id);
-       
+   //  public $layout = 'anamnesa';
+
+    public function behaviors()
+    {
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['post'],
+                ],
+            ],
+        ];
+    }
+    
+ public function actionUpdate($id){
+
+     $modelRegistrasi = $this->findRegistrasi($id);
+     $model = $this->findModel($modelRegistrasi->id);
+     //  Yii::$app->response->format = Response::FORMAT_JSON; 
+     $registrasi = $this->findPasien($id);
+     // $model = $this->findModel($id);
+      
+    //  $registrasi = Registrasi::findOne($model->registrasi_id);
+        
+
      //   if ($model->load(Yii::$app->request->post()) && $model->save()) {
        //     return $this->redirect(['view', 'id' => $model->id]);
        // } else {
             return $this->render('create', [
                 'model' => $model,
-               
-                
+                'pasien' =>  $registrasi->pasien,
+                'registrasi' => $registrasi,
             ]);
         //}
      
@@ -27,6 +53,7 @@ class PemeriksaanFisikController extends AnamnesaController{
  
  public function actionSaveStatusterkini($id){
      $model = $this->findModel($id);
+    
        $return =0;
       if ($model->load(Yii::$app->request->post()) && $model->validate()) {
         $model->save();
@@ -101,8 +128,9 @@ class PemeriksaanFisikController extends AnamnesaController{
      
  }
  
-    public function actionPopupNadi(){
-     $model = new PemeriksaanFisik();
+    public function actionPopupNadi($id){
+         $model = $this->findModel($id);
+    
        
      //   if ($model->load(Yii::$app->request->post()) && $model->save()) {
        //     return $this->redirect(['view', 'id' => $model->id]);
@@ -116,8 +144,8 @@ class PemeriksaanFisikController extends AnamnesaController{
      
  }
  
-  public function actionPopupPernapasan(){
-     $model = new PemeriksaanFisik();
+  public function actionPopupPernapasan($id){
+      $model = $this->findModel($id);
        
      //   if ($model->load(Yii::$app->request->post()) && $model->save()) {
        //     return $this->redirect(['view', 'id' => $model->id]);
@@ -132,8 +160,8 @@ class PemeriksaanFisikController extends AnamnesaController{
  }
  
   
-  public function actionPopupSuhu(){
-     $model = new PemeriksaanFisik();
+  public function actionPopupSuhu($id){
+     $model = $this->findModel($id);
        
      //   if ($model->load(Yii::$app->request->post()) && $model->save()) {
        //     return $this->redirect(['view', 'id' => $model->id]);
@@ -162,8 +190,8 @@ class PemeriksaanFisikController extends AnamnesaController{
      
  }
  
-  public function actionPopupKulit(){
-     $model = new PemeriksaanFisik();
+  public function actionPopupKulit($id){
+       $model = $this->findModel($id);
        
             return $this->renderAjax('_popupKulit', [
                 'model' => $model,
@@ -173,8 +201,8 @@ class PemeriksaanFisikController extends AnamnesaController{
         
  }
  
-   public function actionPopupKepala(){
-     $model = new PemeriksaanFisik();
+   public function actionPopupKepala($id){
+      $model = $this->findModel($id);
        
             return $this->renderAjax('_popupKepala', [
                 'model' => $model,
@@ -195,12 +223,31 @@ class PemeriksaanFisikController extends AnamnesaController{
         
  }
  
- 
+
  
  
      protected function findModel($id)
     {
         if (($model = PemeriksaanFisik::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+    
+    
+       protected function findRegistrasi($id)
+    {
+        if (($model = PemeriksaanFisik::findOne(['registrasi_id'=>$id])) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+    
+     protected function findPasien($id)
+    {
+        if (($model = Registrasi::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

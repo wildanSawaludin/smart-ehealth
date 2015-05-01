@@ -292,7 +292,8 @@ AppAsset::register($this);
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="<?php echo Yii::$app->urlManager->createAbsoluteUrl('user/admin/update-profile?id='.Yii::$app->user->id); ?>" class="btn btn-default btn-flat">Profile</a>
+<!--                                    <a href="<?php //  echo Yii::$app->urlManager->createAbsoluteUrl('user/admin/update-profile?id='.Yii::$app->user->id); ?>" class="btn btn-default btn-flat">Profile</a>-->
+                                        <a href="<?php echo Yii::$app->urlManager->createAbsoluteUrl('user/settings/profile'); ?>" class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-right">
                                     <?=

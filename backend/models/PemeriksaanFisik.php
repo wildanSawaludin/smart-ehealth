@@ -15,6 +15,7 @@ use Yii;
  * @property string $kesadaran_gcs_e
  * @property string $kesadaran_gcs_v
  * @property string $kesadaran_gcs_m
+ * @property string $keterangan_khusus
  * @property string $st_bb
  * @property string $st_tb
  * @property integer $tb_lengan_pil
@@ -444,7 +445,7 @@ class PemeriksaanFisik extends \yii\db\ActiveRecord
     {
         return [
             [['registrasi_id', 'user_id', 'tb_lengan_pil', 'tb_kepala_pil', 'tb_dada_pil', 'tb_perut_pil', 'ttv_td_dias', 'ttv_td_sis', 'ttv_nadi', 'nadi_irama_pil', 'nadi_kuang_pil', 'nadi_kika_pil', 'nadi_amplitudo_pil', 'ttv_pernapasan', 'pernapasan_irama_pil', 'suhu_axilla_pil', 'suhu_oral_pil', 'suhu_rectal_pil', 'evaluasi_kulit_pil', 'kulit_inspwarna_pil', 'kulit_insplembab_pil', 'kulit_insplesi_pil', 'kulit_leslok_pil', 'kulit_lestuk_pil', 'kulit_lestip_pil', 'kulit_leswarna_pil', 'kulit_palptem_pil', 'kulit_palpteks_pil', 'kulit_palptur_pil', 'evaluasi_kepala_pil', 'kepala_inspben_pil', 'kepala_inspkul_pil', 'kepala_leslok_pil', 'kepala_lestuk_pil', 'kepala_lestip_pil', 'kepala_leswarna_pil', 'kepala_inspwaram_pil', 'kepala_inspkuaram_pil', 'kepala_inspdisram_pil', 'kepala_inspbenjah_pil', 'kepala_inspkuljah_pil', 'kepala_inspekspresi_pil', 'kepala_inspsutalis_pil', 'kepala_inspfonan_pil', 'kepala_palpfonan_pil', 'kepala_palprambut_pil', 'kepala_palptekstur_pil', 'kepala_palpkulkep_pil', 'kepala_palpkuljah_pil', 'evaluasi_mata_pil', 'mata_inspposisi_pil', 'mata_inspkelopak_pil', 'mata_inspebra_pil', 'mata_inspkonjung_pil', 'mata_inspsklera_pil', 'mata_inspkornea_pil', 'mata_inspirlen_pil', 'mata_insppupil_pil', 'mata_inspretina_pil', 'mata_inspoeo_pil', 'mata_inspmekmus_pil', 'mata_inspreffun_pil', 'mata_inspdisop_pil', 'mata_ujivisus_kanan1', 'mata_ujivisus_kanan2', 'mata_ujivisus_kiri1', 'mata_ujivisus_kiri2', 'mata_ujitonom_kanan', 'mata_ujitonom_kiri', 'evaluasi_telinga_pil', 'evaluasi_hidung_pil', 'evaluasi_mulut_pil', 'mulut_inspbibir_pil', 'mulut_inspgusi_pil', 'mulut_inspgigi_pil', 'mulut_insplidah_pil', 'lidah_leslok_pil', 'lidah_lestuk_pil', 'lidah_lestip_pil', 'lidah_leswarna_pil', 'mulut_insptonsil_pil', 'mulut_inspfaring_pil', 'evaluasi_leher_pil', 'leher_inspleher_pil', 'leher_insptrakea_pil', 'leher_inspkeltir_pil', 'leher_inspkaduk_pil', 'leher_palpkellim_pil', 'leher_palpkeltir_pil', 'leher_palptumor_pil', 'leher_palptrakea_pil', 'evaluasi_punggung_pil', 'evaluasi_thopar_pil', 'evaluasi_jantung_pil', 'evaluasi_payudara_pil', 'evaluasi_abdomen_pil', 'abdomen_palpleo1_pil', 'abdomen_palpleo2_pil', 'abdomen_palpleo3_pil', 'abdomen_palpleo4_pil', 'abdomen_ausleo2_pil', 'auskultasi_leopoldii_denyut', 'abdomen_ausperista_pil', 'evaluasi_genitalia_pil', 'evaluasi_ekstrimitas_pil', 'ekstrimitas_atas_pil', 'ekstrimitas_bawah_pil', 'ekstrimitas_refleks_pil', 'refleks_biceps_pil', 'refleks_triceps_pil', 'refleks_achilles_pil', 'refleks_knee_pil', 'refleks_babynsky_pil', 'refleks_babynskyi_pil', 'refleks_babynskyii_pil', 'refleks_kernig_pil', 'refleks_laseque_pil', 'refleks_menghisap_pil', 'refleks_menggenggam_pil', 'refleks_moro_pil', 'refleks_mencari_pil', 'refleks_leher_pil'], 'integer'],
-            [['st_keadaan_umum', 'st_kesadaran', 'kesadaran_gcs_e', 'kesadaran_gcs_v', 'kesadaran_gcs_m', 'st_status_gizi', 'st_habitus', 'nadi_irama', 'nadi_kuang', 'nadi_kika', 'nadi_amplitudo', 'pernapasan_irama', 'evaluasi_kulit', 'kulit_inspeksi_warna', 'kulit_inspeksi_kelembaban', 'kulit_lesi_lokasi', 'kulit_lesi_bentuk', 'kulit_lesi_tipe', 'kulit_lesi_warna', 'kulit_palpasi_temperatur', 'kulit_palpasi_tekstur', 'kulit_palpasi_turgor', 'evaluasi_kepala', 'kepala_inspeksi_bentuk', 'kepala_lesi_lokasi', 'kepala_lesi_bentuk', 'kepala_lesi_tipe', 'kepala_lesi_warna', 'kepala_inspeksi_waram', 'kepala_inspeksi_kuaram', 'kepala_inspeksi_disram', 'kepala_inspesksi_benjah', 'kepala_inspeksi_ekspresi', 'kepala_inspeksi_sutalis', 'kepala_inspeksi_fonan', 'kepala_palpasi_fonan', 'kepala_palpasi_rambut', 'evaluasi_mata', 'mata_posisi_kanan', 'mata_posisi_kiri', 'mata_kelopak_kanan', 'mata_kelopak_kiri', 'mata_alis_kanan', 'mata_alis_kiri', 'mata_palpebra_kanan', 'mata_palpebra_kiri', 'mata_aparlak_kanan', 'mata_aparlak_kiri', 'mata_konjungtiva_kanan', 'mata_konjungtiva_kiri', 'mata_sklera_kanan', 'mata_sklera_kiri', 'mata_kornea_kanan', 'mata_kornea_kiri', 'mata_iris_kanan', 'mata_iris_kiri', 'mata_pupil_kanan', 'mata_pupil_kiri', 'mata_refcah_kanan', 'mata_refcah_kiri', 'mata_retina_kanan', 'mata_retina_kiri', 'mata_oeo_kanan', 'mata_oeo_kiri', 'mata_mekmus_kanan', 'mata_mekmus_kiri', 'mata_reffun_kanan', 'mata_reffun_kiri', 'mata_disop_kanan', 'mata_disop_kiri', 'mata_palpglan_kanan', 'mata_palpglan_kiri', 'mata_ujifront_kanan', 'mata_ujifront_kiri', 'evaluasi_telinga', 'telinga_inspeksi_aurikula', 'telinga_uji_bisik', 'telinga_uji_garputala', 'telinga_uji_audiogram', 'telinga_uji_tympanogram', 'telinga_uji_vestibulogram', 'evaluasi_hidung', 'evaluasi_mulut', 'lidah_lesi_lokasi', 'lidah_lesi_bentuk', 'lidah_lesi_tipe', 'lidah_lesi_warna', 'tonsil_membesar_kanan', 'tonsil_membesar_kiri', 'evaluasi_leher', 'leher_inspeksi_kuduk', 'limfe_pembesaran_lokasi', 'limfe_pembesaran_bentuk', 'tiroid_pembesaran_tepi', 'tiroid_pembesaran_permukaan', 'leher_palpasi_tumor', 'leher_tumor_jenis', 'leher_tumor_tepi', 'leher_tumor_permukaan', 'leher_tumor_gerak', 'leher_palpasi_trakea', 'leher_kanan_dvs', 'leher_kanan_caratis', 'leher_kiri_dvs', 'leher_kirii_caratis', 'leher_auskultasi_arteri', 'leher_auskultasi_tiroid', 'evaluasi_punggung', 'punggung_inspeksi_bentuk', 'punggung_perkusi', 'evaluasi_thoraks_paru', 'paru_inspeksi_dada', 'paru_inspeksi_bentuk', 'palpasi_tumor_lokasi', 'palpasi_tumor_konsistensi', 'palpasi_tumor_permukaan', 'palpasi_tumor_pulsasi', 'paru_palpasi_ekspansi', 'paru_palpasi_taktil', 'paru_batas_belkiri', 'paru_batas_belkanan', 'paru_perkusi_dada', 'paru_perkusi_kiri', 'paru_perkusi_kanan', 'paru_auskultasi_frekuensi', 'paru_auskultasi_irama', 'paru_auskultasi_napas', 'auskultasi_napas_tambahan', 'paru_auskultasi_lokasi', 'paru_auskultasi_transmisi', 'evaluasi_jantung', 'jantung_inspeksi_ictus', 'jantung_palpasi_ictus', 'jantung_perkusi_atas', 'jantung_perkusi_bawah', 'jantung_perkusi_kanan', 'jantung_perkusi_kiri', 'auskultasi_bunyi_splittings1', 'auskultasi_bunyi_splittings2', 'jantung_auskultasi_tambahan', 'auskultasi_tambahan_jenis', 'auskultasi_tambahan_lokalisasi', 'auskultasi_tambahan_intensitas', 'auskultasi_tambahan_pitch', 'auskultasi_tambahan_konfig', 'auskultasi_tambahan_kualitas', 'auskultasi_tambahan_penjalaran', 'evaluasi_payudara', 'payudara_inspeksi_payudara', 'inspeksi_kulit_kontur', 'evaluasi_abdomen', 'abdomen_inspeksi_pulsasi', 'abdomen_inspeksi_gerakan', 'palpasi_leopoldii_letak', 'palpasi_leopoldiii_presentasi', 'palpasi_leopoldvi_presentasi', 'abdomen_tumor_lokalisasi', 'abdomen_tumor_konsistensi', 'abdomen_tumor_pergerakan', 'abdomen_palpasi_ascites', 'abdomen_palpasi_hati', 'palpasi_hati_derajat', 'palpasi_hati_permukaan', 'palpasi_hati_konsistensi', 'palpasi_hati_tepi', 'abdomen_palpasi_limpa', 'palpasi_limpa_derajat', 'palpasi_limpa_permukaan', 'palpasi_limpa_konsistensi', 'palpasi_limpa_tepi', 'abdomen_palpasi_ginjal', 'abdomen_perkusi_abdomen', 'abdomen_perkusi_ascites', 'auskultasi_leopoldii_irama', 'abdomen_auskultasi_peristaltik', 'abdomen_auskultasi_bising', 'evaluasi_genitalia', 'inspeksi_vagina_cairan', 'evaluasi_ekstrimitas', 'ekstrimitas_atas', 'atas_inspkuku_warna', 'atas_inspkuku_bentuk', 'atas_inspkuku_lesi', 'atas_palpasi_kuku', 'ekstrimitas_bawah', 'bawah_inspkuku_warna', 'bawah_inspkuku_bentuk', 'bawah_inspkuku_lesi', 'bawah_palpasi_kuku', 'refleks_biceps', 'refleks_triceps', 'refleks_achilles', 'refleks_knee', 'refleks_babynsky', 'refleks_babynskyi', 'refleks_babynskyii', 'refleks_kernig', 'refleks_laseque', 'refleks_menghisap', 'refleks_menggenggam', 'refleks_moro', 'refleks_mencari', 'refleks_leher'], 'string'],
+            [['st_keadaan_umum', 'st_kesadaran', 'kesadaran_gcs_e', 'kesadaran_gcs_v', 'kesadaran_gcs_m', 'keterangan_khusus','st_status_gizi', 'st_habitus', 'nadi_irama', 'nadi_kuang', 'nadi_kika', 'nadi_amplitudo', 'pernapasan_irama', 'evaluasi_kulit', 'kulit_inspeksi_warna', 'kulit_inspeksi_kelembaban', 'kulit_lesi_lokasi', 'kulit_lesi_bentuk', 'kulit_lesi_tipe', 'kulit_lesi_warna', 'kulit_palpasi_temperatur', 'kulit_palpasi_tekstur', 'kulit_palpasi_turgor', 'evaluasi_kepala', 'kepala_inspeksi_bentuk', 'kepala_lesi_lokasi', 'kepala_lesi_bentuk', 'kepala_lesi_tipe', 'kepala_lesi_warna', 'kepala_inspeksi_waram', 'kepala_inspeksi_kuaram', 'kepala_inspeksi_disram', 'kepala_inspesksi_benjah', 'kepala_inspeksi_ekspresi', 'kepala_inspeksi_sutalis', 'kepala_inspeksi_fonan', 'kepala_palpasi_fonan', 'kepala_palpasi_rambut', 'evaluasi_mata', 'mata_posisi_kanan', 'mata_posisi_kiri', 'mata_kelopak_kanan', 'mata_kelopak_kiri', 'mata_alis_kanan', 'mata_alis_kiri', 'mata_palpebra_kanan', 'mata_palpebra_kiri', 'mata_aparlak_kanan', 'mata_aparlak_kiri', 'mata_konjungtiva_kanan', 'mata_konjungtiva_kiri', 'mata_sklera_kanan', 'mata_sklera_kiri', 'mata_kornea_kanan', 'mata_kornea_kiri', 'mata_iris_kanan', 'mata_iris_kiri', 'mata_pupil_kanan', 'mata_pupil_kiri', 'mata_refcah_kanan', 'mata_refcah_kiri', 'mata_retina_kanan', 'mata_retina_kiri', 'mata_oeo_kanan', 'mata_oeo_kiri', 'mata_mekmus_kanan', 'mata_mekmus_kiri', 'mata_reffun_kanan', 'mata_reffun_kiri', 'mata_disop_kanan', 'mata_disop_kiri', 'mata_palpglan_kanan', 'mata_palpglan_kiri', 'mata_ujifront_kanan', 'mata_ujifront_kiri', 'evaluasi_telinga', 'telinga_inspeksi_aurikula', 'telinga_uji_bisik', 'telinga_uji_garputala', 'telinga_uji_audiogram', 'telinga_uji_tympanogram', 'telinga_uji_vestibulogram', 'evaluasi_hidung', 'evaluasi_mulut', 'lidah_lesi_lokasi', 'lidah_lesi_bentuk', 'lidah_lesi_tipe', 'lidah_lesi_warna', 'tonsil_membesar_kanan', 'tonsil_membesar_kiri', 'evaluasi_leher', 'leher_inspeksi_kuduk', 'limfe_pembesaran_lokasi', 'limfe_pembesaran_bentuk', 'tiroid_pembesaran_tepi', 'tiroid_pembesaran_permukaan', 'leher_palpasi_tumor', 'leher_tumor_jenis', 'leher_tumor_tepi', 'leher_tumor_permukaan', 'leher_tumor_gerak', 'leher_palpasi_trakea', 'leher_kanan_dvs', 'leher_kanan_caratis', 'leher_kiri_dvs', 'leher_kirii_caratis', 'leher_auskultasi_arteri', 'leher_auskultasi_tiroid', 'evaluasi_punggung', 'punggung_inspeksi_bentuk', 'punggung_perkusi', 'evaluasi_thoraks_paru', 'paru_inspeksi_dada', 'paru_inspeksi_bentuk', 'palpasi_tumor_lokasi', 'palpasi_tumor_konsistensi', 'palpasi_tumor_permukaan', 'palpasi_tumor_pulsasi', 'paru_palpasi_ekspansi', 'paru_palpasi_taktil', 'paru_batas_belkiri', 'paru_batas_belkanan', 'paru_perkusi_dada', 'paru_perkusi_kiri', 'paru_perkusi_kanan', 'paru_auskultasi_frekuensi', 'paru_auskultasi_irama', 'paru_auskultasi_napas', 'auskultasi_napas_tambahan', 'paru_auskultasi_lokasi', 'paru_auskultasi_transmisi', 'evaluasi_jantung', 'jantung_inspeksi_ictus', 'jantung_palpasi_ictus', 'jantung_perkusi_atas', 'jantung_perkusi_bawah', 'jantung_perkusi_kanan', 'jantung_perkusi_kiri', 'auskultasi_bunyi_splittings1', 'auskultasi_bunyi_splittings2', 'jantung_auskultasi_tambahan', 'auskultasi_tambahan_jenis', 'auskultasi_tambahan_lokalisasi', 'auskultasi_tambahan_intensitas', 'auskultasi_tambahan_pitch', 'auskultasi_tambahan_konfig', 'auskultasi_tambahan_kualitas', 'auskultasi_tambahan_penjalaran', 'evaluasi_payudara', 'payudara_inspeksi_payudara', 'inspeksi_kulit_kontur', 'evaluasi_abdomen', 'abdomen_inspeksi_pulsasi', 'abdomen_inspeksi_gerakan', 'palpasi_leopoldii_letak', 'palpasi_leopoldiii_presentasi', 'palpasi_leopoldvi_presentasi', 'abdomen_tumor_lokalisasi', 'abdomen_tumor_konsistensi', 'abdomen_tumor_pergerakan', 'abdomen_palpasi_ascites', 'abdomen_palpasi_hati', 'palpasi_hati_derajat', 'palpasi_hati_permukaan', 'palpasi_hati_konsistensi', 'palpasi_hati_tepi', 'abdomen_palpasi_limpa', 'palpasi_limpa_derajat', 'palpasi_limpa_permukaan', 'palpasi_limpa_konsistensi', 'palpasi_limpa_tepi', 'abdomen_palpasi_ginjal', 'abdomen_perkusi_abdomen', 'abdomen_perkusi_ascites', 'auskultasi_leopoldii_irama', 'abdomen_auskultasi_peristaltik', 'abdomen_auskultasi_bising', 'evaluasi_genitalia', 'inspeksi_vagina_cairan', 'evaluasi_ekstrimitas', 'ekstrimitas_atas', 'atas_inspkuku_warna', 'atas_inspkuku_bentuk', 'atas_inspkuku_lesi', 'atas_palpasi_kuku', 'ekstrimitas_bawah', 'bawah_inspkuku_warna', 'bawah_inspkuku_bentuk', 'bawah_inspkuku_lesi', 'bawah_palpasi_kuku', 'refleks_biceps', 'refleks_triceps', 'refleks_achilles', 'refleks_knee', 'refleks_babynsky', 'refleks_babynskyi', 'refleks_babynskyii', 'refleks_kernig', 'refleks_laseque', 'refleks_menghisap', 'refleks_menggenggam', 'refleks_moro', 'refleks_mencari', 'refleks_leher'], 'string'],
             [['st_bb', 'st_tb', 'tb_lengan_nil', 'tb_kepala_nil', 'tb_dada_nil', 'tb_perut_nil', 'st_tmt', 'ttv_suhu', 'suhu_axilla', 'suhu_oral', 'suhu_rectal', 'limfe_pembesaran_ukuran', 'tiroid_pembesaran_ukuran', 'leher_tumor_ukuran', 'palpasi_leopoldi_tinggi', 'palpasi_leopoldi_lingkar', 'palpasi_leopoldi_tafsiran', 'abdomen_tumor_ukuran'], 'number'],
             [['kepala_inspeksi_kulit', 'kepala_inspeksi_kuljah', 'telinga_inspeksi_gendang', 'telinga_palpasi_tragus', 'telinga_palpasi_mastoid', 'telinga_palpasi_aurikula', 'hidung_inspeksi_luar', 'mulut_inspeksi_bibir', 'abdomen_tumor_regio', 'abdomen_tekan_regio', 'genetalia_inspeksi_vagina'], 'string', 'max' => 200],
             [['kepala_palpasi_tekstur', 'mulut_inspeksi_gusi', 'mulut_inspeksi_dasar', 'leher_inspeksi_trakea', 'leher_inspeksi_tiroid', 'payudara_inspeksi_aksilla', 'payudara_palpasi_payudara', 'payudara_palpasi_aksilla', 'abdomen_inspeksi_umbilikus', 'genetalia_inspeksi_scrotum', 'genetalia_inspeksi_anus', 'genetalia_palpasi_kulit', 'genetalia_palpasi_penis', 'genetalia_palpasi_scrotum', 'atas_inspeksi_kuku', 'bawah_inspeksi_pinggul', 'bawah_inspeksi_lutut'], 'string', 'max' => 50],
@@ -469,6 +470,7 @@ class PemeriksaanFisik extends \yii\db\ActiveRecord
             'kesadaran_gcs_e' => 'Kesadaran Gcs E',
             'kesadaran_gcs_v' => 'Kesadaran Gcs V',
             'kesadaran_gcs_m' => 'Kesadaran Gcs M',
+            'keterangan_khusus' => 'keterangan_khusus',
             'st_bb' => 'St Bb',
             'st_tb' => 'St Tb',
             'tb_lengan_pil' => 'Tb Lengan Pil',
@@ -898,169 +900,174 @@ class PemeriksaanFisik extends \yii\db\ActiveRecord
     public function getOptions()
 { 
    return array(
-      'Tidak tampak sakit',
-      'Sakit ringan',
-      'Sakit sedang',
-      'Sakit berat',
+      'Tidak tampak sakit'=>'Tidak tampak sakit',
+      'Sakit ringan'=> 'Sakit ringan',
+      'Sakit sedang'=>'Sakit sedang',
+      'Sakit berat'=>'Sakit berat',
    );
 }
 
     public function getOptionsKesadaran()
 { 
    return array(
-    'Composmentis','Apatis','Delirium','Somnolen','Stupor','Koma',
+    'Composmentis'=>'Composmentis',
+    'Apatis'=>'Apatis',
+    'Delirium'=>'Delirium',
+    'Somnolen'=>'Somnolen',
+    'Stupor'=>'Stupor',
+    'Koma'=>'Koma',
    );
 }
        
   public function getOptionsStatusgizi()
 { 
    return array(
-   'Gizi lebih','Gizi baik','Gizi kurang','Gizi buruk',
+   'Gizi lebih'=>'Gizi lebih','Gizi baik'=>'Gizi baik','Gizi kurang'=>'Gizi kurang','Gizi buruk'=>'Gizi buruk',
    );
 } 
 
   public function getOptionsHabitus()
 { 
    return array(
-  'Asthenicus','Athleticus','Pyknicus',
+  'Asthenicus'=>'Asthenicus','Athleticus'=>'Athleticus','Pyknicus'=>'Pyknicus',
    );
 }
 
   public function getOptionsGcse()
 { 
    return array(
-  '1','2','3','4',
+  '1'=>'1','2'=>'2','3'=>'3','4'=>'4',
    );
 }
 
   public function getOptionsGcsv()
 { 
    return array(
-  '1','2','3','4','5',
+  '1'=>'1','2'=>'2','3'=>'3','4'=>'4','5'=>'5',
    );
 }
 
   public function getOptionsGcsm()
 { 
    return array(
- '1','2','3','4','5','6',
+ '1'=>'1','2'=>'2','3'=>'3','4'=>'4','5'=>'5','6'=>'6',
    );
 }
 
   public function getOptionsNadiIrama()
 { 
    return array(
-'Reguler','Irreguler',
+'Reguler'=>'Reguler','Irreguler'=>'Irreguler',
    );
 }
 
       public function getOptionsNadiKuang()
 { 
    return array(
-'Ya','Tidak',
+'Ya'=>'Ya','Tidak'=>'Tidak',
    );
 }
 
   public function getOptionsNadiKika()
 { 
    return array(
-'Ya','Tidak',
+'Ya'=>'Ya','Tidak'=>'Tidak',
    );
 }
 
       public function getOptionsNadiAmplitudo()
 { 
    return array(
-'Pulsus Magnus','Pulsus Parvus','Pulsus Paradoksus, Dinamicus','Pulsus Paradoksus, Mechanicus','Pulsus Alternans','Pulsus Deficiens','Pulsus Bigeminus','Pulsus Shot Sound','Pulsus Celer','Pulsus Dikrotik','Pulsus Parvus et Tardus','Pulsus Bisferiens',
+'Pulsus Magnus'=>'Pulsus Magnus','Pulsus Parvus'=>'Pulsus Parvus','Pulsus Paradoksus, Dinamicus'=>'Pulsus Paradoksus, Dinamicus','Pulsus Paradoksus, Mechanicus'=>'Pulsus Paradoksus, Mechanicus','Pulsus Alternans'=>'Pulsus Alternans','Pulsus Deficiens'=>'Pulsus Deficiens','Pulsus Bigeminus'=>'Pulsus Bigeminus','Pulsus Shot Sound'=>'Pulsus Shot Sound','Pulsus Celer'=>'Pulsus Celer','Pulsus Dikrotik'=>'Pulsus Dikrotik','Pulsus Parvus et Tardus'=>'Pulsus Parvus et Tardus','Pulsus Bisferiens'=>'Pulsus Bisferiens',
    );
 }
 
   public function getOptionsPernapasan()
 { 
    return array(
-'NORMAL','Thorakal','Abdominal','Thorakoabdominal','Takipnea','Bradipnea','Hiperpnea','Cheyne-Stokes','Biot’s / Ataksik','Mendesau','Apnea',
+'NORMAL'=>'NORMAL','Thorakal'=>'Thorakal','Abdominal'=>'Abdominal','Thorakoabdominal'=>'Thorakoabdominal','Takipnea'=>'Takipnea','Bradipnea'=>'Bradipnea','Hiperpnea'=>'Hiperpnea','Cheyne-Stokes'=>'Cheyne-Stokes','Biot’s / Ataksik'=>'Biot’s / Ataksik','Mendesau'=>'Mendesau','Apnea'=>'Apnea',
    );
 }
 
        public function getOptionsKulit()
 { 
    return array(
-'NORMAL','Tidak ada kelainan','Abnormal','Tidak dievaluasi',
+'NORMAL'=>'NORMAL','Tidak ada kelainan'=>'Tidak ada kelainan','Abnormal'=>'Abnormal','Tidak dievaluasi'=>'Tidak dievaluasi',
    );
 }   
 
    public function getOptionsKulitWarna()
 { 
    return array(
-'Sawo matang','Hitam','Sianosis perifer','Sianosis sentral','Kuning (ikterus)','Karotenemia','Pucat',
+'Sawo matang'=>'Sawo matang','Hitam'=>'Hitam','Sianosis perifer'=>'Sianosis perifer','Sianosis sentral'=>'Sianosis sentral','Kuning (ikterus)'=>'Kuning (ikterus)','Karotenemia'=>'Karotenemia','Pucat'=>'Pucat',
    );
 }   
 
    public function getOptionsKulitKelembaban()
 { 
    return array(
-'Lembab','Kering','Berminyak',
+'Lembab'=>'Lembab','Kering'=>'Kering','Berminyak'=>'Berminyak',
    );
 } 
    public function getOptionsKulitPalpasiTemp()
 { 
    return array(
-'NORMAL','Lebih hangat','Lebih dingin',
+'NORMAL'=>'NORMAL','Lebih hangat'=>'Lebih hangat','Lebih dingin'=>'Lebih dingin',
    );
 } 
 
    public function getOptionsKulitPalpasiTeks()
 { 
    return array(
-'Licin','Kasar',
+'Licin'=>'Licin','Kasar'=>'Kasar',
    );
 }
    public function getOptionsKulitPalpasiTur()
 { 
    return array(
-'NORMAL','Menurun',
+'NORMAL'=>'NORMAL','Menurun'=>'Menurun',
    );
 }
 
    public function getOptionsKepala()
 { 
    return array(
-'NORMAL','Tidak ada kelainan','Abnormal','Tidak dievaluasi',
+'NORMAL'=>'NORMAL','Tidak ada kelainan'=>'Tidak ada kelainan','Abnormal'=>'Abnormal','Tidak dievaluasi'=>'Tidak dievaluasi',
    );
 }
 
    public function getOptionsKepalaBentuk()
 { 
    return array(
-'NORMAL','Mesocephalus','Hydrocephalus','Depresi tulang tengkorak',
+'NORMAL'=>'NORMAL','Mesocephalus'=>'Mesocephalus','Hydrocephalus'=>'Hydrocephalus','Depresi tulang tengkorak'=>'Depresi tulang tengkorak',
    );
 }
 
    public function getOptionsKepalaWarnaRambut()
 { 
    return array(
-'Hitam','Putih/beruban','Pirang',
+'Hitam'=>'Hitam','Putih/beruban'=>'Putih/beruban','Pirang'=>'Pirang',
    );
 }
 
    public function getOptionsKepalaKuantitasRambut()
 { 
    return array(
-'lebat','jarang',
+'lebat'=>'lebat','jarang'=>'jarang',
    );
 }
 
    public function getOptionsKepalaBentukWajah()
 { 
    return array(
-'NORMAL','Dismorfisme','Cushingoid','Malar flush','Akromegali','Miopatik',
+'NORMAL'=>'NORMAL','Dismorfisme'=>'Dismorfisme','Cushingoid'=>'Cushingoid','Malar flush'=>'Malar flush','Akromegali'=>'Akromegali','Miopatik'=>'Miopatik',
    );
 }
 
    public function getOptionsKepalaPalpasiRambut()
 { 
    return array(
-'Sukar dicabut','Mudah dicabut',
+'Sukar dicabut'=>'Sukar dicabut','Mudah dicabut'=>'Mudah dicabut',
    );
 }
 
@@ -1068,188 +1075,213 @@ class PemeriksaanFisik extends \yii\db\ActiveRecord
    public function getOptionsMata()
 { 
    return array(
-'NORMAL','Tidak ada kelainan','Abnormal','Tidak dievaluasi',
+'NORMAL'=>'NORMAL','Tidak ada kelainan'=>'Tidak ada kelainan','Abnormal'=>'Abnormal','Tidak dievaluasi'=>'Tidak dievaluasi',
    );
 }
 
    public function getOptionsMataPosisiKanan()
 { 
    return array(
-'NORMAL','Eksoftalmus','Enoftalmus','Strabismus','Gerakan Nigtamus','Arcus Serilis','Hipertelorisme',
+'NORMAL'=>'NORMAL','Eksoftalmus'=>'Eksoftalmus','Enoftalmus'=>'Enoftalmus','Strabismus'=>'Strabismus','Gerakan Nigtamus'=>'Gerakan Nigtamus','Arcus Serilis'=>'Arcus Serilis','Hipertelorisme'=>'Hipertelorisme',
    );
 }
 
    public function getOptionsMataPosisiKiri()
 { 
    return array(
-'NORMAL','Eksoftalmus','Enoftalmus','Strabismus','Gerakan Nigtamus','Arcus Serilis','Hipertelorisme'
+'NORMAL'=>'NORMAL','Eksoftalmus'=>'Eksoftalmus','Enoftalmus'=>'Enoftalmus','Strabismus'=>'Strabismus','Gerakan Nigtamus'=>'Gerakan Nigtamus','Arcus Serilis'=>'Arcus Serilis','Hipertelorisme'=>'Hipertelorisme'
    );
 }
 
    public function getOptionsMataKelopakKanan()
 { 
    return array(
-'NORMAL','Bengkak','Kalazion','Ektropion','Entropion','Ptosis','Xantelasma',
+'NORMAL'=>'NORMAL','Bengkak'=>'Bengkak','Kalazion'=>'Kalazion','Ektropion'=>'Ektropion','Entropion'=>'Entropion','Ptosis'=>'Ptosis','Xantelasma'=>'Xantelasma',
    );
 }
 
    public function getOptionsMataKelopakKiri()
 { 
    return array(
-'NORMAL','Bengkak','Kalazion','Ektropion','Entropion','Ptosis','Xantelasma',
+'NORMAL'=>'NORMAL','Bengkak'=>'Bengkak','Kalazion'=>'Kalazion','Ektropion'=>'Ektropion','Entropion'=>'Entropion','Ptosis'=>'Ptosis','Xantelasma'=>'Xantelasma',
    );
 }
 
    public function getOptionsMataPalpebraKanan()
 { 
    return array(
-'NORMAL','Bengkak',
+'NORMAL'=>'NORMAL','Bengkak'=>'Bengkak',
    );
 }
 
    public function getOptionsMataPalpebraKiri()
 { 
    return array(
-'NORMAL','Bengkak',
+'NORMAL'=>'NORMAL','Bengkak'=>'Bengkak',
    );
 }
    public function getOptionsMataKonjungtivaKanan()
 { 
    return array(
-'NORMAL','Merah','Anemis','Sianosis','Pinquekula','Selaput pteriqium',
+'NORMAL'=>'NORMAL','Merah'=>'Merah','Anemis'=>'Anemis','Sianosis'=>'Sianosis','Pinquekula'=>'Pinquekula','Selaput pteriqium'=>'Selaput pteriqium',
    );
 }
 
    public function getOptionsMataKonjungtivaKiri()
 { 
    return array(
-'NORMAL','Merah','Anemis','Sianosis','Pinquekula','Selaput pteriqium',
+'NORMAL'=>'NORMAL','Merah'=>'Merah','Anemis'=>'Anemis','Sianosis'=>'Sianosis','Pinquekula'=>'Pinquekula','Selaput pteriqium'=>'Selaput pteriqium',
    );
 }
 
    public function getOptionsMataSkleraKanan()
 { 
    return array(
-'NORMAL','Merah','Anemis','Sianosis','Pinquekula','Selaput pteriqium',
+       'NORMAL'=> 'NORMAL','Ikterus'=>'Ikterus','Hemoragik'=>'Hemoragik',
    );
 }
 
    public function getOptionsMataSkleraKiri()
 { 
    return array(
-'NORMAL','Merah','Anemis','Sianosis','Pinquekula','Selaput pteriqium',
+       'NORMAL'=> 'NORMAL','Ikterus'=>'Ikterus','Hemoragik'=>'Hemoragik',
+
    );
 }
 
    public function getOptionsMataKorneaKanan()
 { 
    return array(
-'Opasitas','Jernih','Keruh',
+'Opasitas'=>'Opasitas','Jernih'=>'Jernih','Keruh'=>'Keruh',
    );
 }
 
    public function getOptionsMataKorneaKiri()
 { 
    return array(
-'Opasitas','Jernih','Keruh',
+'Opasitas'=>'Opasitas','Jernih'=>'Jernih','Keruh'=>'Keruh',
    );
 }
 
    public function getOptionsMataIrisKanan()
 { 
    return array(
-'Jernih','Keruh','Sublukasi lensa','Dislokasi lensa','Tidak ada',
+'Jernih'=>'Jernih','Keruh'=>'Keruh','Sublukasi lensa'=>'Sublukasi lensa','Dislokasi lensa'=>'Dislokasi lensa','Tidak ada'=>'Tidak ada',
    );
 }
 
    public function getOptionsMataIrisKiri()
 { 
    return array(
-'Jernih','Keruh','Sublukasi lensa','Dislokasi lensa','Tidak ada',
+'Jernih'=>'Jernih','Keruh'=>'Keruh','Sublukasi lensa'=>'Sublukasi lensa','Dislokasi lensa'=>'Dislokasi lensa','Tidak ada'=>'Tidak ada',
    );
 }
 
    public function getOptionsMataPupilKanan()
 { 
    return array(
-'Isokor','Anisokor',
+'Isokor'=>'Isokor','Anisokor'=>'Anisokor',
    );
 }
 
    public function getOptionsMataPupilKiri()
 { 
    return array(
-'Isokor','Anisokor',
+'Isokor'=>'Isokor','Anisokor'=>'Anisokor',
    );
 }
 
    public function getOptionsMataRetinaKanan()
 { 
    return array(
-'NORMAL','Hemoragik','Eksudat','Cotton-wool patches','Mikroaneurisma','Pigmentasi',
+'NORMAL'=>'NORMAL','Hemoragik'=>'Hemoragik','Eksudat'=>'Eksudat','Cotton-wool patches'=>'Cotton-wool patches','Mikroaneurisma'=>'Mikroaneurisma','Pigmentasi'=>'Pigmentasi',
    );
 }
 
    public function getOptionsMataRetinaKiri()
 { 
    return array(
-'NORMAL','Hemoragik','Eksudat','Cotton-wool patches','Mikroaneurisma','Pigmentasi',
+'NORMAL'=>'NORMAL','Hemoragik'=>'Hemoragik','Eksudat'=>'Eksudat','Cotton-wool patches'=>'Cotton-wool patches','Mikroaneurisma'=>'Mikroaneurisma','Pigmentasi'=>'Pigmentasi',
    );
 }
 
    public function getOptionsMataOeoKanan()
 { 
    return array(
-'Ada reaksi cahaya','Tidak ada reaksi cahaya',
+'Ada reaksi cahaya'=>'Ada reaksi cahaya','Tidak ada reaksi cahaya'=>'Tidak ada reaksi cahaya',
    );
 }
 
    public function getOptionsMataOeoKiri()
 { 
    return array(
-'Ada reaksi cahaya','Tidak ada reaksi cahaya',
+'Ada reaksi cahaya'=>'Ada reaksi cahaya','Tidak ada reaksi cahaya'=>'Tidak ada reaksi cahaya',
    );
 }
 
    public function getOptionsMataMekmusKanan()
 { 
    return array(
-'NORMAL ke segala arah','Tidak normal',
+'NORMAL ke segala arah'=>'NORMAL ke segala arah','Tidak normal'=>'Tidak normal',
    );
 }
 
    public function getOptionsMataMekmusKiri()
 { 
    return array(
-'Ada reaksi cahaya','Tidak ada reaksi cahaya',
+'NORMAL ke segala arah'=>'NORMAL ke segala arah','Tidak normal'=>'Tidak normal',
    );
 }
 
    public function getOptionsMataReffunKanan()
 { 
    return array(
-'Ada','Tidak ada',
+'Ada'=>'Ada','Tidak ada'=>'Tidak ada',
    );
 }
 
    public function getOptionsMataReffunKiri()
 { 
    return array(
-'Ada','Tidak ada',
+'Ada'=>'Ada','Tidak ada'=>'Tidak ada',
    );
 }
 
    public function getOptionsMataDisopKanan()
 { 
    return array(
-'NORMAL','Papiledema','Glucomatous cupping','Atrofi optik',
+'NORMAL'=>'NORMAL','Papiledema'=>'Papiledema','Glucomatous cupping'=>'Glucomatous cupping','Atrofi optik'=>'Atrofi optik',
    );
 }
 
    public function getOptionsMataDisopKiri()
 { 
    return array(
-'NORMAL','Papiledema','Glucomatous cupping','Atrofi optik'
+'NORMAL'=>'NORMAL','Papiledema'=>'Papiledema','Glucomatous cupping'=>'Glucomatous cupping','Atrofi optik'=>'Atrofi optik',
+       );
+ }
+ 
+    public function getOptionsKeteranganKhusus()
+{ 
+   return array(
+       ''=>'','Ibu hamil'=>'Ibu hamil',
+
+       );
+ }
+ 
+     public function getOptionsMataPalpasi()
+{ 
+   return array(
+     'Tidak ada pembesaran'=>'Tidak ada pembesaran','Membesar'=>'Membesar',
+
+       );
+ }
+ 
+      public function getOptionsMataUjiKonf()
+{ 
+   return array(
+     'NORMAL'=>'NORMAL','Defek Kuadrantik'=>'Defek Kuadrantik',
+
        );
  }
 

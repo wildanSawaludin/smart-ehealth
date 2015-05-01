@@ -51,6 +51,109 @@ use kartik\checkbox\CheckboxX;
                          <?=    $form->field($model, 'evaluasi_mata')->dropDownList($model->optionsMata); ?>
             </div>
         </div>
+
+<div class="form-group">
+           <div class="col-md-1">
+             <?=    $form->field($model, 'evaluasi_telinga_pil')->widget(CheckboxX::classname(), ['pluginOptions'=>['threeState'=>false]]); ?></div> <label for="kesadaran" class="col-md-2">Telinga :</label>
+            <div class="col-md-4">
+                
+                         <?=    $form->field($model, 'evaluasi_telinga')->dropDownList($model->optionsMata); ?>
+            </div>
+        </div>
+
+<div class="form-group">
+           <div class="col-md-1">
+             <?=    $form->field($model, 'evaluasi_hidung_pil')->widget(CheckboxX::classname(), ['pluginOptions'=>['threeState'=>false]]); ?></div> <label for="kesadaran" class="col-md-2">Hidung  :</label>
+            <div class="col-md-4">
+                
+                         <?=    $form->field($model, 'evaluasi_hidung')->dropDownList($model->optionsMata); ?>
+            </div>
+        </div>
+
+<div class="form-group">
+           <div class="col-md-1">
+             <?=    $form->field($model, 'evaluasi_mulut_pil')->widget(CheckboxX::classname(), ['pluginOptions'=>['threeState'=>false]]); ?></div> <label for="kesadaran" class="col-md-2">Mulut, Faring  :</label>
+            <div class="col-md-4">
+                
+                         <?=    $form->field($model, 'evaluasi_mulut')->dropDownList($model->optionsMata); ?>
+            </div>
+        </div>
+
+<div class="form-group">
+           <div class="col-md-1">
+             <?=    $form->field($model, 'evaluasi_leher_pil')->widget(CheckboxX::classname(), ['pluginOptions'=>['threeState'=>false]]); ?></div> <label for="kesadaran" class="col-md-2">Leher  :</label>
+            <div class="col-md-4">
+                
+                         <?=    $form->field($model, 'evaluasi_leher')->dropDownList($model->optionsMata); ?>
+            </div>
+        </div>
+
+<div class="form-group">
+           <div class="col-md-1">
+             <?=    $form->field($model, 'evaluasi_punggung_pil')->widget(CheckboxX::classname(), ['pluginOptions'=>['threeState'=>false]]); ?></div> <label for="kesadaran" class="col-md-2">Punggung  :</label>
+            <div class="col-md-4">
+                
+                         <?=    $form->field($model, 'evaluasi_punggung')->dropDownList($model->optionsMata); ?>
+            </div>
+        </div>
+
+<div class="form-group">
+           <div class="col-md-1">
+             <?=    $form->field($model, 'evaluasi_thopar_pil')->widget(CheckboxX::classname(), ['pluginOptions'=>['threeState'=>false]]); ?></div> <label for="kesadaran" class="col-md-2">Thoraks, Paru  :</label>
+            <div class="col-md-4">
+                
+                         <?=    $form->field($model, 'evaluasi_thoraks_paru')->dropDownList($model->optionsMata); ?>
+            </div>
+        </div>
+
+<div class="form-group">
+           <div class="col-md-1">
+             <?=    $form->field($model, 'evaluasi_jantung_pil')->widget(CheckboxX::classname(), ['pluginOptions'=>['threeState'=>false]]); ?></div> <label for="kesadaran" class="col-md-2">Jantung  :</label>
+            <div class="col-md-4">
+                
+                         <?=    $form->field($model, 'evaluasi_jantung')->dropDownList($model->optionsMata); ?>
+            </div>
+        </div>
+
+<div class="form-group">
+           <div class="col-md-1">
+             <?=    $form->field($model, 'evaluasi_payudara_pil')->widget(CheckboxX::classname(), ['pluginOptions'=>['threeState'=>false]]); ?></div> <label for="kesadaran" class="col-md-2">Payudara  :</label>
+            <div class="col-md-4">
+                
+                         <?=    $form->field($model, 'evaluasi_payudara')->dropDownList($model->optionsMata); ?>
+            </div>
+        </div>
+
+<div class="form-group">
+           <div class="col-md-1">
+             <?=    $form->field($model, 'evaluasi_abdomen_pil')->widget(CheckboxX::classname(), ['pluginOptions'=>['threeState'=>false]]); ?></div> <label for="kesadaran" class="col-md-2">Abdomen  :</label>
+            <div class="col-md-4">
+                
+                         <?=    $form->field($model, 'evaluasi_abdomen')->dropDownList($model->optionsMata); ?>
+            </div>
+        </div>
+
+<div class="form-group">
+           <div class="col-md-1">
+             <?=    $form->field($model, 'evaluasi_genitalia_pil')->widget(CheckboxX::classname(), ['pluginOptions'=>['threeState'=>false]]); ?></div> <label for="kesadaran" class="col-md-2">Genitalia  :</label>
+            <div class="col-md-4">
+                
+                         <?=    $form->field($model, 'evaluasi_genitalia')->dropDownList($model->optionsMata); ?>
+            </div>
+        </div>
+
+<div class="form-group">
+           <div class="col-md-1">
+             <?=    $form->field($model, 'evaluasi_ekstrimitas_pil')->widget(CheckboxX::classname(), ['pluginOptions'=>['threeState'=>false]]); ?></div> <label for="kesadaran" class="col-md-2">Ekstrimitas  :</label>
+            <div class="col-md-4">
+                
+                         <?=    $form->field($model, 'evaluasi_ekstrimitas')->dropDownList($model->optionsMata); ?>
+            </div>
+        </div>
+ <div class="form-group">
+        <?= Html::Button('Submit', ['class' => 'btn btn-primary','id'=>'submit_pemerevaluasi']) ?>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+    </div> 
  <?php ActiveForm::end(); ?>
 <?php
 
@@ -110,12 +213,26 @@ use kartik\checkbox\CheckboxX;
 
 $this->registerJs("$(document).ready(function () {
    
+ $('#submit_pemerevaluasi').click(function(){
+   $.ajax({
+        type     :'POST',
+        cache    : false,
+        dataType : 'json',
+        data    : $('#fisikEvaluasi-form').serialize(),
+        url  : 'save-statusterkini?id='+".$model->id.",
+            success  : function(response) {
+               alert('data berhasil disimpan');
+    }
+    });
+});
+
+
 $('#pemeriksaanfisik-evaluasi_kulit').change(function(){
-     $('#m_Kulit').modal('show').find('#modalKulit').load(baseurl + '/Anamnesa/pemeriksaan-fisik/popup-kulit');
+     $('#m_Kulit').modal('show').find('#modalKulit').load(baseurl + '/Anamnesa/pemeriksaan-fisik/popup-kulit?id=".$model->id."');
 });
 
 $('#pemeriksaanfisik-evaluasi_kepala').change(function(){
-     $('#m_Kepala').modal('show').find('#modalKepala').load(baseurl + '/Anamnesa/pemeriksaan-fisik/popup-kepala');
+     $('#m_Kepala').modal('show').find('#modalKepala').load(baseurl + '/Anamnesa/pemeriksaan-fisik/popup-kepala?id=".$model->id."');
 });
 
 

@@ -99,34 +99,6 @@ class helper extends  \yii\web\Request {
         return floatval($number);
     }
 
-    function hotele_code($length = 10, $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890') {
-        $chars_length = (strlen($chars) - 1);
-        $string = $chars{rand(0, $chars_length)};
-        for ($i = 1; $i < $length; $i = strlen($string)) {
-            $r = $chars{rand(0, $chars_length)};
-            if ($r != $string{$i - 1})
-                $string .= $r;
-        }
-        return $string;
-    }
-
-    function formating_numb($value, $threshold = 2) {
-        return sprintf('%0' . $threshold . 's', $value);
-    }
-
-    function numb_code($length, $tabels, $fields) {
-        $sql = "SELECT max(cast(SUBSTRING($fields,-3) AS SIGNED )) as max_id FROM $tabels";
-        $rs = Yii::app()->db->createCommand($sql)->queryAll();
-        return $this->formating_numb(($rs[0]['max_id'] + 1), $length);
-    }
-
-    function removeIDRCurrencyAndDecimal($string) {
-        $priceOnInt = substr_replace(str_replace("Rp ", "", $string), "", -2); //result ex: 10.000
-        $priceOnInt = $this->decomMoney($priceOnInt);
-
-        return $priceOnInt;
-    }
-
 }
 
 ?>

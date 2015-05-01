@@ -20,7 +20,7 @@ use yii\bootstrap\Modal;
         <a class="close" data-dismiss="modal">&times;</a>
     </div>
 
-    <div class="modal-body">
+    <div class="modal-body" style="margin:0px 10px;">
         <?php $form = ActiveForm::begin([
             'id' => 'riwayatTransfusi-form',
             'enableAjaxValidation' => false,
@@ -126,8 +126,9 @@ use yii\bootstrap\Modal;
                 </div>
             </div>
         </div>
+		&nbsp;<hr>
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-4">
+            <div class="col-md-offset-1 col-md-4">
                 <input id="btnTransfusiOk" type="button" class="btn btn-primary" value="OK">
             </div>
         </div>

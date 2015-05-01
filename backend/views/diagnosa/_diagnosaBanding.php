@@ -4,42 +4,37 @@ use kartik\grid\GridView;
 
 ?>
 
-<div class="diagnosa-awal-form">
+<?php $form = ActiveForm::begin([
+    'id' => 'diagnosa-form',
+    'type' => ActiveForm::TYPE_HORIZONTAL,
+    'action' => ['diagnosa/save?id='.$_GET['id'].'&param=Banding'],
+    'formConfig' => ['labelSpan' => 1, 'spanSize' => ActiveForm::SIZE_SMALL,'showLabels'=>false]
+]);
+?>
 
-    <div class="row">
-        <div class="col-md-12">
-            <?php $form = ActiveForm::begin([
-                'id' => 'diagnosa-form',
-                'type' => ActiveForm::TYPE_HORIZONTAL,
-                'action' => ['diagnosa/save?id='.$_GET['id'].'&param=Banding'],
-                'formConfig' => ['labelSpan' => 1, 'spanSize' => ActiveForm::SIZE_SMALL,'showLabels'=>false]
-            ]);
-            ?>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>Kode</th>
-                    <th>Diagnosa</th>
-                    <th>Action</th>
-                    <th><a href="#" id="tambah-diagnosa-banding" class="btn btn-info">+</a></th>
-                </tr>
-                </thead>
-                <tbody id="tbody-diagnosa-banding">
-                <?php foreach ($modelDiagnosa as $value):?>
-                    <tr id="tr-diagnosa-awal<?= $model['icdx_id'] ?>">
-                        <td><?= $value->icdx->kode ?></td>
-                        <td><?= $value->icdx->inggris ?></td>
-                    </tr>
-                <?php endforeach; ?>
-                </tbody>
-            </table>
-            <button class="btn btn-primary" type="submit">Simpan</button>
-            <?php ActiveForm::end() ?>
-        </div>
+<table class="table" style="width:97%;margin:0px 0">
+    <thead style="vertical-align:middle;margin-top:-20px;background-color:#efefef;">
+    <tr style="padding:20px;">
+       <th>Kode</th>
+        <th>Diagnosa</th>
+        <th>Action</th>
+         <th>Action <a href="#" id="tambah-diagnosa-banding" style="display:inline;" class="btn btn-info">+</a></th>
+    </tr>
+    </thead>
+    <tbody id="tbody-diagnosa-banding">
+    <?php foreach ($modelDiagnosa as $value):?>
+        <tr id="tr-diagnosa-awal<?= $model['icdx_id'] ?>">
+            <td><?= $value->icdx->kode ?></td>
+            <td><?= $value->icdx->inggris ?></td>
+        </tr>
+    <?php endforeach; ?>
+    </tbody>
+</table>
+<hr>
+<button class="btn btn-success" type="submit">Simpan</button>
 
-    </div>
+<?php ActiveForm::end() ?>
 
-</div>
 <script>
     $(document).ready(function(){
         /*$('#info').click(function(){

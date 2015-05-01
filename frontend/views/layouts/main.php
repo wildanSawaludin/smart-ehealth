@@ -19,6 +19,7 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
+	<link rel="shortcut icon" href="<?= Yii::getAlias('@web') ?>/frontend/web/images/favicon.png">
     <?php $this->head() ?>
 </head>
 <body>
@@ -33,14 +34,15 @@ AppAsset::register($this);
                 ],
             ]);
             $menuItems = [
-                ['label' => 'Beranda', 'url' => ['/site/index']],
-                ['label' => 'About', 'url' => ['/site/about']],
-                ['label' => 'Contact', 'url' => ['/site/contact']],
+                ['label' => 'Beranda', 'url' => ['/registrasi/index']],
+//                ['label' => 'About', 'url' => ['/site/about']],
+//                ['label' => 'Contact', 'url' => ['/site/contact']],
             ];
             if (Yii::$app->user->isGuest) {
                 $menuItems[] = ['label' => 'Signup', 'url' => ['/user/registration/register']];
                 $menuItems[] = ['label' => 'Login', 'url' => ['/user/security/login']];
             } else {
+                $menuItems[] = ['label' => 'Fasilitas Kesehatan', 'url' => ['/fasilitas-kesehatan/index']];
                 $menuItems[] = ['label' => 'Setting', 'url' => ['/user/settings/profile']];
                 $menuItems[] = [
                     'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
@@ -56,21 +58,21 @@ AppAsset::register($this);
         ?>
 
         <div class="container">
-        <?= Breadcrumbs::widget([
+        <!--<?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
+        ]) ?> -->
         <?= Alert::widget() ?>
         <?= $content ?>
         </div>
     </div>
-
-    <footer class="footer">
+	<img class="pull-right" style="position:;clear:both;bottom:150px;" src="<?= Yii::getAlias('@web') ?>/frontend/web/images/logo-white.png">
+    <footer class="footer ">
         <div class="container">
         <p class="pull-left">&copy; <?= Yii::$app->name . ' ' .date('Y') ?></p>
-        <p class="pull-right"><?= Yii::powered() ?></p>
+       
         </div>
     </footer>
-
+ 
     <?php $this->endBody() ?>
 </body>
 </html>

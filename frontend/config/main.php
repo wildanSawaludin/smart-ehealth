@@ -9,6 +9,7 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
+    'defaultRoute' => 'registrasi/index',
     'components' => [
 //        'user' => [
 //            'identityClass' => 'common\models\User',
@@ -35,19 +36,31 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        'view' => [
-            'theme' => [
-                'pathMap' => [
-                    '@app/views' => '@webroot/themes/material-default'
-                ],
-                'baseUrl' => '@web/themes/material-default'
-            ],
-        ],
+//        'view' => [
+//            'theme' => [
+//                'pathMap' => [
+//                    '@app/views' => '
+//                    @webroot/themes/material-default'
+//                ],
+//                'baseUrl' => '@web/themes/material-default'
+//            ],
+//        ],
     ],
     'modules' => [/*
         'user' => [
             'as frontend' => 'dektrium\user\filters\FrontendFilter',
         ],*/
+    ],
+    'as access' => [
+        'class' => 'mdm\admin\components\AccessControl',
+        'allowActions' => [
+            'rbac/*', // add or remove allowed actions to this list
+            'site/*',
+            'user/*',
+            'site/error',
+            'debug/*',
+            'service/*'
+        ]
     ],
     'params' => $params,
 ];

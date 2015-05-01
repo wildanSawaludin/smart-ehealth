@@ -7,6 +7,8 @@ use yii\filters\AccessControl;
 use backend\models\Anamnesa;
 use backend\models\AnamnesaSearch;
 use backend\models\Lookup;
+use backend\models\Registrasi;
+use backend\models\PemeriksaanFisik;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -88,7 +90,7 @@ class AnamnesaController extends Controller
      */
     public function actionUpdate($id)
     {
-        
+        //$id = $_POST['id'];
         $model = $this->findModel($id);
 
         
@@ -100,13 +102,27 @@ class AnamnesaController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
        } else {
-            return $this->render('update', [
-                'model' => $model,      
-                'faktor_resiko_riwayat' => $faktor_resiko_riwayat,
-                'faktor_resiko_kebiasaan' => $faktor_resiko_kebiasaan,
-                'psikososial_tingber' => $psikososial_tingber
 
-            ]);
+            if(Yii::$app->request->isAjax) {
+                $html = $this->renderPartial('update', [
+                    'model' => $model,      
+                    'faktor_resiko_riwayat' => $faktor_resiko_riwayat,
+                    'faktor_resiko_kebiasaan' => $faktor_resiko_kebiasaan,
+                    'psikososial_tingber' => $psikososial_tingber
+
+                ]);
+
+                return Json::encode($html);
+            }
+            else {
+                return $this->render('update', [
+                    'model' => $model,      
+                    'faktor_resiko_riwayat' => $faktor_resiko_riwayat,
+                    'faktor_resiko_kebiasaan' => $faktor_resiko_kebiasaan,
+                    'psikososial_tingber' => $psikososial_tingber
+
+                ]);    
+            }
        }
           
     }
@@ -126,10 +142,10 @@ class AnamnesaController extends Controller
     
     public function actionPopupKeluhan($id) {
        $model = $this->findModel($id);
-       if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            return ActiveForm::validate($model);
-        }
+      // if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+        //    Yii::$app->response->format = Response::FORMAT_JSON;
+         //   return ActiveForm::validate($model);
+    //    }
 //        if ($_POST) {
 //            $model->load(Yii::$app->request->post());
 //            if ($model->save()) {
@@ -353,11 +369,11 @@ $model->save();
         $model = $this->findModel($id);
     
         $modelTambahan = $this->findModelTambahan($id);
-      //  if(count($modelTambahan)<1){
-      //      $modelTambahan = new Anamnesa;
-     //   }else{
+        $countTambahan = Anamnesa::find()->where('parent_id = :id and parent_id != id', ['id'=>$id])->count();
+     
         $keluhan =[];
-            if(!empty($modelTambahan))
+     
+            if($countTambahan > 0)
         {
                 foreach($modelTambahan as $row)
                 {
@@ -417,6 +433,15 @@ $model->save();
      * @return Anamnesa the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
+    protected function findRegistrasi($id)
+    {
+        if (($model = Anamnesa::findOne(['registrasi_id'=>$id])) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+    
     protected function findModel($id)
     {
         if (($model = Anamnesa::findOne($id)) !== null) {
@@ -428,11 +453,46 @@ $model->save();
     
      protected function findModelTambahan($id)
     {
-        if (($model = Anamnesa::findAll(['parent_id'=>$id])) !== null) {
+        if ($model = Anamnesa::find()->where('parent_id = :id and parent_id != id', ['id'=>$id])->all()) {
             return $model;
         } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+            $model = new Anamnesa;
+            return $model;
         }
     }
     
+    /**
+     * The main view to load all anamnesa view using ajax.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionMain($id)
+    {
+        $this->layout = 'main';
+        $modelRegistrasi = $this->findRegistrasi($id);
+        $model = $this->findModel($modelRegistrasi->id);
+
+        $registrasi = Registrasi::findOne($model->registrasi_id);
+        $pemeriksaan_fisik = PemeriksaanFisik::findOne(['registrasi_id' => $registrasi->id]);
+        $faktor_resiko_riwayat = explode(',', $model->faktor_resiko_riwayat);
+        $faktor_resiko_kebiasaan = explode(',', $model->faktor_resiko_kebiasaan);
+        $psikososial_tingber = explode(',', $model->psikososial_tingber);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+       } else {
+
+            //$GLOBALS['collapse'] = true;
+            return $this->render('main', [
+                    'model' => $model,      
+                    'faktor_resiko_riwayat' => $faktor_resiko_riwayat,
+                    'faktor_resiko_kebiasaan' => $faktor_resiko_kebiasaan,
+                    'psikososial_tingber' => $psikososial_tingber,
+                    'pasien' => $registrasi->pasien,
+                  //  'resgistrasi' =
+                    'pemeriksaan_fisik' => $pemeriksaan_fisik->id
+                ]);    
+       }
+    }    
+
 }

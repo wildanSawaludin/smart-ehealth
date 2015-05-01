@@ -29,26 +29,12 @@ use yii\helpers\Url;
                     ]
                     ]); 
         ?>
-        <?php
-        $url = Url::to(['Anamnesa/anamnesa-riwayat/icdx-list']);
-        // Script to initialize the selection based on the value of the select2 element
-        $initScript = <<< SCRIPT
-            function (element, callback) {
-            var id=\$(element).val();
-            if (id !== "") {
-               \$.ajax("{$url}?id=" + id, {
-                 dataType: "json"
-               }).done(function(data) { callback(data.results);});
-            }
 
-        }
-SCRIPT;
-        ?>
         <div class="form-group">
             <label class="col-md-3 control-label" for="Diagnosa">Diagnosa :</label>
             <div class="col-md-2">
                 <?php
-                ;
+
                 echo $form->field($modelAnamnesa, 'riwayatsakit_icdx_id')->widget(Typeahead::classname(), [
                     'options' => ['placeholder' => 'ICD X', 'id' => 'kode', 'value' => ($modelAnamnesa->riwayatsakit_icdx_id != null) ? $modelAnamnesa->riwayatsakitIcdx->kode : ''],
                     'pluginOptions' => ['highlight'=>true],
@@ -64,7 +50,7 @@ SCRIPT;
                 ]);
                 ?>
             </div>
-            <div class="col-md-7">
+            <div class="col-md-6">
                 <?php
                 echo $form->field($modelAnamnesa, 'riwayatsakit_icdx_id')->widget(Typeahead::classname(), [
                     'options' => ['placeholder' => 'Nama Penyakit', 'id' => 'nama',  'value' => ($modelAnamnesa->riwayatsakit_icdx_id != null) ? $modelAnamnesa->riwayatsakitIcdx->inggris : ''],
@@ -93,8 +79,9 @@ SCRIPT;
                 <?= $form->field($modelAnamnesa, 'riwayat_penyakit_lama')->dropDownList(['hari' => 'hari', 'minggu' => 'minggu', 'bulan' => 'bulan', 'tahun' => 'tahun']) ?>
             </div>
         </div>
+		<hr>
         <div class="form-group">
-            <div class="col-sm-offset-3 col-sm-9">
+           <div class="col-md-offset-1 col-md-4">
                 <input id="btnOk" type="button" class="btn btn-primary" value="OK">
             </div>
         </div>

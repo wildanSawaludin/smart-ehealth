@@ -31,7 +31,7 @@ use kartik\checkbox\CheckboxX;
                 
                          <?=    $form->field($model, 'suhu_axilla')->textInput(['maxlengrh'=>'5']) ?>
             </div>
-             <label for="kesadaran" class="col-md-1">C</label>
+             <label for="kesadaran" class="col-md-1">&deg;C</label>
         </div>
 
   <div class="form-group">
@@ -41,7 +41,7 @@ use kartik\checkbox\CheckboxX;
                 
                          <?=    $form->field($model, 'suhu_oral')->textInput(['maxlengrh'=>'5']) ?>
             </div>
-             <label for="kesadaran" class="col-md-1">C</label>
+             <label for="kesadaran" class="col-md-1">&deg;C</label>
         </div>
      <div class="form-group">
        <div class="col-md-1">
@@ -50,8 +50,35 @@ use kartik\checkbox\CheckboxX;
                 
                          <?=    $form->field($model, 'suhu_rectal')->textInput(['maxlengrh'=>'5']) ?>
             </div>
-             <label for="kesadaran" class="col-md-1">C</label>
+             <label for="kesadaran" class="col-md-1">&deg;C</label>
         </div>
-   
+     <div class="form-group">
+        <?= Html::Button('Submit', ['class' => 'btn btn-primary','id'=>'submit_popupsuhu']) ?>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+    </div>  
      <?php ActiveForm::end(); ?>
 </div>
+
+<?php
+
+$this->registerJs("$(document).ready(function () {
+   
+       
+
+
+
+     $('#submit_popupsuhu').click(function(){
+   $.ajax({
+        type     :'POST',
+        cache    : false,
+        dataType : 'json',
+        data    : $('#popupSuhu-form').serialize(),
+        url  : 'save-statusterkini?id='+".$model->id.",
+            success  : function(response) {
+               alert('data berhasil disimpan');
+    }
+    });
+});
+   
+
+    });");

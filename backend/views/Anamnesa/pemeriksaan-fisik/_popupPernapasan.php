@@ -33,7 +33,34 @@ use kartik\checkbox\CheckboxX;
             </div>
            
         </div>
-
+  <div class="form-group">
+        <?= Html::Button('Submit', ['class' => 'btn btn-primary','id'=>'submit_popuppernapasan']) ?>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+    </div>  
  
      <?php ActiveForm::end(); ?>
 </div>
+
+<?php
+
+$this->registerJs("$(document).ready(function () {
+   
+       
+
+
+
+     $('#submit_popuppernapasan').click(function(){
+   $.ajax({
+        type     :'POST',
+        cache    : false,
+        dataType : 'json',
+        data    : $('#popupPernapasan-form').serialize(),
+        url  : 'save-statusterkini?id='+".$model->id.",
+            success  : function(response) {
+               alert('data berhasil disimpan');
+    }
+    });
+});
+   
+
+    });");

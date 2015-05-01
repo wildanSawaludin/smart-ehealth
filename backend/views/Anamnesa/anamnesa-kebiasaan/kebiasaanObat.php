@@ -91,8 +91,9 @@ use yii\helpers\Url;
                     <?php endforeach; ?>
                 </tbody>
             </table>
+			<hr>
             <div class="form-group">
-                <div class="col-sm-offset-3 col-sm-9">
+               <div class="col-md-offset-1 col-md-4">
                     <input id="btnKebiasaanOk" type="button" class="btn btn-primary" value="OK">
                 </div>
             </div>

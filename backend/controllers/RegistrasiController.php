@@ -9,6 +9,9 @@ use backend\models\Icdx;
 use backend\models\RegistrasiSearch;
 use backend\models\Anamnesa;
 use backend\models\AnamnesaSearch;
+use backend\models\Diagnosa;
+use backend\models\PemeriksaanFisik;
+use backend\models\UserHasFaskes;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -53,24 +56,33 @@ class RegistrasiController extends Controller {
      * @return mixed
      */
     public function actionIndex($pId = null) {
+        $faskes = UserHasFaskes::findOne(Yii::$app->user->getId())->faskes_id;
         $searchModel = new RegistrasiSearch();
+//        $searchModel->faskes_id = $faskes;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $model = new Registrasi();
         if (Yii::$app->request->post()) {
-
             $model->load(Yii::$app->request->post());
             $model->tanggal_registrasi = date('Y-m-d H:i:s');
+            $model->tanggal_kunjungan = date('Y-m-d');
+//            $faskes = UserHasFaskes::findOne(Yii::$app->user->getId())->faskes_id;
+            if($faskes)$model->asal_registrasi = 'Faskes';
             if ($model->asuransi_tgl_lahir)
                 $model->asuransi_tgl_lahir = Yii::$app->get('helper')->dateFormatingStrip($model->asuransi_tgl_lahir);
+            if($faskes){
+                $model->faskes_id = $faskes;
+                $model->no_antrian = $model->getNoAntrian(date('Y-m-d'), $faskes);
+            }
+            $model->status_registrasi = 'Antrian';
             $model->save();
-            $model->no_reg= (string)sprintf('%08d', $model->id);
+            $noregis = (string) sprintf('%08d',$model->id);
+            $model->no_reg= $noregis;
             $model->save();
-            //if($model->save())return $this->redirect(['view', 'id' => $model->id]);
         }
 
 
         $queryParams = Yii::$app->request->queryParams;
-        $input = isset($queryParams['RegistrasiSearch']) && isset($queryParams['RegistrasiSearch']['tanggal_registrasi']) ? $queryParams['RegistrasiSearch']['tanggal_registrasi'] : null; 
+        $input = isset($queryParams['RegistrasiSearch']) && isset($queryParams['RegistrasiSearch']['tanggal_kunjungan']) ? $queryParams['RegistrasiSearch']['tanggal_kunjungan'] : null; 
         
         return $this->render('index', [
                     'searchModel' => $searchModel,
@@ -158,33 +170,92 @@ class RegistrasiController extends Controller {
         if ($_POST) {
             $model->load(Yii::$app->request->post());
             if ($model->save()) {
-                return $this->redirect(['index', 'pasienId' => $model->id]);
+                return $this->redirect(['index', 'pasien_id' => $model->id]);
             }
             //return $this->redirect(['view', 'id' => $model->id]);
         }
         return $this->renderAjax('popup/_addPasien', [
-                    'model' => $model,
+            'model' => $model,
+        ]);
+    }
+    
+    public function actionMdeditreg($id) {
+        $model = $this->findModel($id);
+        $model->status_rawat_reged=$model->status_rawat;
+        $model->dr_penanggung_jawab_reged=$model->dr_penanggung_jawab;
+        $model->icdx_id_reged=$model->icdx_id;
+        $model->catatan_reged=$model->catatan;
+        $model->status_asuransi_reged=$model->status_asuransi;
+        $model->asuransi_provider_id_reged=$model->asuransi_provider_id;
+        $model->asuransi_penanggung_jawab_reged=$model->asuransi_penanggung_jawab;
+        $model->asuransi_alamat_reged=$model->asuransi_alamat;
+        $model->asuransi_notelp_reged=$model->asuransi_notelp;
+        $model->asuransi_noreg_reged=$model->asuransi_noreg;
+        $model->asuransi_nama_reged=$model->asuransi_nama;
+        $model->asuransi_tgl_lahir_reged=$model->asuransi_tgl_lahir;
+        $model->asuransi_status_jaminan_reged=$model->asuransi_status_jaminan;
+        if ($_POST) {
+            $model->status_rawat=$_POST['Registrasi']['status_rawat_reged'];
+            $model->dr_penanggung_jawab=$_POST['Registrasi']['dr_penanggung_jawab_reged'];
+            $model->icdx_id=$_POST['Registrasi']['icdx_id_reged'];
+            $model->catatan=$_POST['Registrasi']['catatan_reged'];
+            $model->status_asuransi=$_POST['Registrasi']['status_asuransi_reged'];
+            $model->asuransi_provider_id=$_POST['Registrasi']['asuransi_provider_id_reged'];
+            $model->asuransi_penanggung_jawab=$_POST['Registrasi']['asuransi_penanggung_jawab_reged'];
+            $model->asuransi_alamat=$_POST['Registrasi']['asuransi_alamat_reged'];
+            $model->asuransi_notelp=$_POST['Registrasi']['asuransi_notelp_reged'];
+            $model->asuransi_noreg=$_POST['Registrasi']['asuransi_noreg_reged'];
+            $model->asuransi_nama=$_POST['Registrasi']['asuransi_nama_reged'];
+            $model->asuransi_tgl_lahir=$_POST['Registrasi']['asuransi_tgl_lahir_reged'];
+            if ($model->asuransi_tgl_lahir)
+                $model->asuransi_tgl_lahir = Yii::$app->get('helper')->dateFormatingStrip($model->asuransi_tgl_lahir);
+            $model->asuransi_status_jaminan=$_POST['Registrasi']['asuransi_status_jaminan_reged'];
+            
+            if ($model->save()) {
+                //return $this->redirect(['index', 'pasien_id' => $model->id]);
+                return $this->redirect(['index']);
+            }
+        }
+        return $this->renderAjax('popup/_editRegistrasi', [
+            'model' => $model,
         ]);
     }
     
     public function actionResume($id)
     {
-       
-        $modelResume = new Anamnesa;
-        $modelResume->registrasi_id = $id;
-        $modelResume->save();
-        
+
         $model = $this->findModel($id);
-        $model->status_registrasi = 'Resume';
-        $model->save();
-        
-        
-        if($modelResume->save()){
-            return $this->redirect(['Anamnesa/anamnesa/update', 'id' => $modelResume->id]);
+
+        if($model->status_registrasi != 'Pemeriksaan') {
+            
+            //insert anamnesa
+            $modelResume = new Anamnesa;
+            $modelResume->registrasi_id = $id;
+            $modelResume->save();
+
+            //insert diagnosa
+            $modelDiagnosa = new Diagnosa();
+            $modelDiagnosa->registrasi_id = $id;
+            $modelDiagnosa->save();
+
+            //insert pemeriksaan fisik
+            $modelPemeriksaanFisik = new PemeriksaanFisik();
+            $modelPemeriksaanFisik->registrasi_id = $id;
+            $modelPemeriksaanFisik->save();
+
+            $model->status_registrasi = 'Pemeriksaan';
+            $model->save();
         }
-//        var_dump($modelResume);
-//                exit();
-        
+
+        if(Yii::$app->user->can('Perawat')){
+            return $this->redirect(['Anamnesa/pemeriksaan-fisik/update', 'id' => $model->id]);
+        }
+        elseif (Yii::$app->user->can('Apoteker')) {
+            return $this->redirect(['diagnosa/show-resep-obat-form', 'id' => $model->id]);
+        }
+        else {
+            return $this->redirect(['Anamnesa/anamnesa/main', 'id' => $model->id]);
+        }
             
     }
 
@@ -207,9 +278,9 @@ class RegistrasiController extends Controller {
         $out = ['more' => false];
         if (!is_null($search)) {
             $query = new Query;
-            $query->select(['id', 'concat(nama,"||",id) as text'])
+            $query->select(['id', 'nama as text'])
                     ->from('pasien')
-                    ->where('concat(nama,"||",id) LIKE "%' . $search . '%"')
+                    ->where('nama LIKE "%' . $search . '%"')
                     ->limit(20);
             $command = $query->createCommand();
             $data = $command->queryAll();
@@ -219,6 +290,26 @@ class RegistrasiController extends Controller {
         } else {
             $out['results'] = ['id' => 0, 'text' => 'Pasien tidak ditemukan'];
         }
+        echo Json::encode($out);
+    }
+
+    public function actionIdList($search = null, $id = null) {
+        $out = ['more' => false];
+        if (!is_null($search)) {
+            $query = new Query;
+            $query->select(['id', 'id as text'])
+                    ->from('pasien')
+                    ->where('id LIKE "%' . $search . '%"')
+                    ->limit(20);
+            $command = $query->createCommand();
+            $data = $command->queryAll();
+            $out['results'] = array_values($data);
+        } elseif ($id > 0) {
+            $out['results'] = ['id' => $id, 'text' => Pasien::find($id)->nama];
+        } else {
+            $out['results'] = ['id' => 0, 'text' => 'Pasien tidak ditemukan'];
+        }
+
         echo Json::encode($out);
     }
     
@@ -234,17 +325,71 @@ class RegistrasiController extends Controller {
             $data = $command->queryAll();
             $out['results'] = array_values($data);
         } elseif ($id > 0) {
-            $out['results'] = ['id' => $id, 'text' => Icdx::find($id)->nama];
+            $out['results'] = ['id' => $id, 'text' => Icdx::findOne($id)->inggris];
         } else {
             $out['results'] = ['id' => 0, 'text' => 'Icdx tidak ditemukan'];
         }
         echo Json::encode($out);
     }
 
-    public function actionPasien($id){
-        $registrasi = Registrasi::findOne($id);
+    private function showInfo($pasien) {
 
-        var_dump($registrasi->getAttribute($registrasi->safeAttributeNames));
-        exit();
+        $tempat = is_null($pasien->tempat_lahir) ? '-' : $pasien->tempat_lahir;
+        $tanggal = is_null($pasien->tgl_lahir) ? '-' : $pasien->tgl_lahir;
+
+        return '<div class="form-group no-margin-botom">
+                    <label class="col-sm-3 col-md-offset-1 control-label">No RM</label>
+                    <div class="col-sm-7">
+                        <p class="form-control-static">'.str_pad($pasien->id, 6, '0', STR_PAD_LEFT).'</p>
+                    </div>
+                </div>
+                <div class="form-group no-margin-botom">
+                    <label class="col-sm-3 col-md-offset-1 control-label">Nama</label>
+                    <div class="col-sm-7">
+                        <p id="patienName" class="form-control-static">'.$pasien->nama.'</p>
+                    </div>
+                </div>
+                <div class="form-group no-margin-botom">
+                    <label class="col-sm-3 col-md-offset-1 control-label">Gender</label>
+                    <div class="col-sm-7">
+                        <p class="form-control-static">'.$pasien->jenkel.'</p>
+                    </div>
+                </div>
+                <div class="form-group no-margin-botom">
+                    <label class="col-sm-3 col-md-offset-1 control-label">TTL</label>
+                    <div class="col-sm-7">
+                        <p class="form-control-static">'.$tempat.', '.$tangal.'</p>
+                    </div>
+                </div>
+                <div class="form-group no-margin-botom">
+                    <label class="col-sm-3 col-md-offset-1 control-label">Usia</label>
+                    <div class="col-sm-7">
+                        <p class="form-control-static">'.$pasien->getUsia().' Tahun</p>
+                    </div>
+                </div>
+                <div class="form-group no-margin-botom">
+                    <label class="col-sm-3 col-md-offset-1 control-label">Alamat</label>
+                    <div class="col-sm-7">
+                        <p class="form-control-static">'.$pasien->alamat.'</p>
+                    </div>
+                </div>
+                <div class="form-group no-margin-botom">
+                    <div class="col-sm-offset-4 col-sm-4">
+                        <button type="button" id="btnUpdate" data-pasien="'.$pasien->id.'" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span> Update</button>                        </div>
+                    </div>
+                </div>';
+    }
+
+    public function actionRegistrasi($id){
+        $registrasi = Registrasi::findOne($id);
+        $pasien = $registrasi->pasien;
+        
+        echo $this->showInfo($pasien);
+    }
+
+    public function actionPasien($id) {
+        $pasien = Pasien::findOne($id);
+
+        echo $this->showInfo($pasien);
     }
 }

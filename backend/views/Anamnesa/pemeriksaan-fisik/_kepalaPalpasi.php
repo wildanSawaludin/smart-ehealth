@@ -54,15 +54,28 @@ use kartik\checkbox\CheckboxX;
                         <?=    $form->field($model, 'kepala_palpasi_kuljah')->radioList($listPalpasiKulitWajah); ?>
             </div>
         </div>
+  <div class="form-group">
+        <?= Html::Button('Submit', ['class' => 'btn btn-primary','id'=>'submit_kepalapalpasi']) ?>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+    </div> 
  <?php ActiveForm::end(); ?>
 
 <?php
 
 $this->registerJs("$(document).ready(function () {
-   
-
-
-   
+  
+     $('#submit_kepalapalpasi').click(function(){
+   $.ajax({
+        type     :'POST',
+        cache    : false,
+        dataType : 'json',
+        data    : $('#kepalaPalpasi-form').serialize(),
+        url  : 'save-statusterkini?id='+".$model->id.",
+            success  : function(response) {
+               alert('data berhasil disimpan');
+    }
+    });
+});
    
 
     });");

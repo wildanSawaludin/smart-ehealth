@@ -3,9 +3,12 @@ return [
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=smart_ehealth_db',
-            'username' => 'root',
-            'password' => 'root',
+            'dsn' => 'mysql:host=103.27.206.187;dbname=smart_ehealth_db',
+            'username' => 'developer',
+            'password' => 'dev123',
+       //   'dsn' => 'mysql:host=127.0.0.1;dbname=smart_ehealth_db',
+       //   'username' => 'root',
+       //   'password' => '',
             'charset' => 'utf8',
         ],
         'mailer' => [
@@ -18,8 +21,8 @@ return [
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
                 'host' => 'smtp.gmail.com',
-                'username' => 'aman.rohiman@gmail.com',
-                'password' => 'b!smill4h161183',
+                'username' => 'dottorota.dev@gmail.com',
+                'password' => 'developer123',
                 'port' => '587',
                 'encryption' => 'tls',
             ],

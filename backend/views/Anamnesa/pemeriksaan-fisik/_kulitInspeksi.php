@@ -47,15 +47,28 @@ use kartik\checkbox\CheckboxX;
              <?=    $form->field($model, 'kulit_insplesi_pil')->widget(CheckboxX::classname(), ['pluginOptions'=>['threeState'=>false]]); ?></div> <label for="kesadaran" class="col-md-2">Lesi :</label>
           
         </div>
+  <div class="form-group">
+        <?= Html::Button('Submit', ['class' => 'btn btn-primary','id'=>'submit_kulitinspeksi']) ?>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+    </div>  
  <?php ActiveForm::end(); ?>
 
 <?php
 
 $this->registerJs("$(document).ready(function () {
-   
-
-
-   
+  
+     $('#submit_kulitinspeksi').click(function(){
+   $.ajax({
+        type     :'POST',
+        cache    : false,
+        dataType : 'json',
+        data    : $('#kulitInspeksi-form').serialize(),
+        url  : 'save-statusterkini?id='+".$model->id.",
+            success  : function(response) {
+               alert('data berhasil disimpan');
+    }
+    });
+});
    
 
     });");

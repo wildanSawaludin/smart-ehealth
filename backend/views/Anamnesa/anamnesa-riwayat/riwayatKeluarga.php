@@ -50,7 +50,7 @@ use yii\helpers\Url;
                 ]);
                 ?>
             </div>
-            <div class="col-md-7">
+            <div class="col-md-6">
                 <?php
                 echo $form->field($model, 'riwayatkel_icdx_id')->widget(Typeahead::classname(), [
                     'options' => ['placeholder' => 'Nama Penyakit', 'id' => 'nama', 'value' => ($model->riwayatkel_icdx_id != null) ? $model->riwayatsakitIcdxKel->inggris : ''],
@@ -70,9 +70,9 @@ use yii\helpers\Url;
         </div>
         <input type="hidden" id="idicdx">
 
-
+		<hr>
         <div class="form-group">
-            <div class="col-sm-offset-3 col-sm-9">
+            <div class="col-sm-offset-1 col-sm-4">
                 <input id="btnOk" type="button" class="btn btn-primary" value="OK">
             </div>
         </div>

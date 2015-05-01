@@ -2,6 +2,8 @@
 
 use yii\base\View;
 use kartik\tabs\TabsX;
+use yii\helpers\Url;
+
 ?>
 
 <div class="diagnosa-form">
@@ -22,7 +24,8 @@ use kartik\tabs\TabsX;
             ],
             [
                 'label'=>'Saran/Anjuran',
-                'content' => 'sdsdsds',
+                'content' => '',
+                'linkOptions'=>['data-url'=>Url::to(['/saran-anjuran/index?id='.$_GET['id']])],
             ]
         ];
 
@@ -30,7 +33,10 @@ use kartik\tabs\TabsX;
             'items'=>$items,
             'position'=>TabsX::POS_ABOVE,
             'sideways'=>true,
-            'encodeLabels'=>false
+            'encodeLabels'=>false,
+            'pluginEvents' => [
+                "tabsX.success" => "function() { setTimeout(function(){ $('.select2-select').select2();}, 1000) }",
+            ] 
         ]);
 
     ?>
