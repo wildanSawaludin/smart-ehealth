@@ -57,18 +57,26 @@ class RegistrasiController extends Controller {
      */
     public function actionIndex($pId = null) {
         $faskes = UserHasFaskes::findOne(Yii::$app->user->getId())->faskes_id;
-        $searchModel = new RegistrasiSearch();
-//        $searchModel->faskes_id = $faskes;
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        if(Yii::$app->user->can('Perawat')){
+            $searchModel = new RegistrasiSearch();
+            $searchModel->status_registrasi = 'Antrian';
+//            $searchModel->status_registrasi = 'Pemeriksaan';
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        }
+        else {
+            $searchModel = new RegistrasiSearch();
+    //        $searchModel->faskes_id = $faskes;
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        }
         $model = new Registrasi();
         if (Yii::$app->request->post()) {
             $model->load(Yii::$app->request->post());
             $model->tanggal_registrasi = date('Y-m-d H:i:s');
             $model->tanggal_kunjungan = date('Y-m-d');
 //            $faskes = UserHasFaskes::findOne(Yii::$app->user->getId())->faskes_id;
-            if($faskes)$model->asal_registrasi = 'Faskes';
-            if ($model->asuransi_tgl_lahir)
-                $model->asuransi_tgl_lahir = Yii::$app->get('helper')->dateFormatingStrip($model->asuransi_tgl_lahir);
+            if($faskes){$model->asal_registrasi = 'Faskes';}
+            if ($model->asuransi_tgl_lahir){
+            $model->asuransi_tgl_lahir = Yii::$app->get('helper')->dateFormatingStrip($model->asuransi_tgl_lahir);}
             if($faskes){
                 $model->faskes_id = $faskes;
                 $model->no_antrian = $model->getNoAntrian(date('Y-m-d'), $faskes);
@@ -78,6 +86,21 @@ class RegistrasiController extends Controller {
             $noregis = (string) sprintf('%08d',$model->id);
             $model->no_reg= $noregis;
             $model->save();
+            if($model->save()){
+                $modelResume = new Anamnesa;
+                $modelResume->registrasi_id = $model->id;
+                $modelResume->save();
+
+                //insert diagnosa
+                $modelDiagnosa = new Diagnosa();
+                $modelDiagnosa->registrasi_id = $model->id;
+                $modelDiagnosa->save();
+
+                //insert pemeriksaan fisik
+                $modelPemeriksaanFisik = new PemeriksaanFisik();
+                $modelPemeriksaanFisik->registrasi_id = $model->id;
+                $modelPemeriksaanFisik->save();
+            }
         }
 
 
@@ -226,26 +249,26 @@ class RegistrasiController extends Controller {
 
         $model = $this->findModel($id);
 
-        if($model->status_registrasi != 'Pemeriksaan') {
-            
-            //insert anamnesa
-            $modelResume = new Anamnesa;
-            $modelResume->registrasi_id = $id;
-            $modelResume->save();
-
-            //insert diagnosa
-            $modelDiagnosa = new Diagnosa();
-            $modelDiagnosa->registrasi_id = $id;
-            $modelDiagnosa->save();
-
-            //insert pemeriksaan fisik
-            $modelPemeriksaanFisik = new PemeriksaanFisik();
-            $modelPemeriksaanFisik->registrasi_id = $id;
-            $modelPemeriksaanFisik->save();
-
-            $model->status_registrasi = 'Pemeriksaan';
-            $model->save();
-        }
+//        if($model->status_registrasi != 'Pemeriksaan') {
+//            
+//            //insert anamnesa
+//            $modelResume = new Anamnesa;
+//            $modelResume->registrasi_id = $id;
+//            $modelResume->save();
+//
+//            //insert diagnosa
+//            $modelDiagnosa = new Diagnosa();
+//            $modelDiagnosa->registrasi_id = $id;
+//            $modelDiagnosa->save();
+//
+//            //insert pemeriksaan fisik
+//            $modelPemeriksaanFisik = new PemeriksaanFisik();
+//            $modelPemeriksaanFisik->registrasi_id = $id;
+//            $modelPemeriksaanFisik->save();
+//
+//            $model->status_registrasi = 'Pemeriksaan';
+//            $model->save();
+//        }
 
         if(Yii::$app->user->can('Perawat')){
             return $this->redirect(['Anamnesa/pemeriksaan-fisik/update', 'id' => $model->id]);

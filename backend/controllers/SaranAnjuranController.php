@@ -312,6 +312,14 @@ class SaranAnjuranController extends Controller{
         }
     }
 
+    public function actionExit($id) {
+     $modelRegistrasi = $this->findRegistrasi($id);
+     $modelRegistrasi->status_registrasi = 'Selesai';
+     $modelRegistrasi->save();
+     
+     return $this->redirect(['/registrasi/index']);        
+ }
+    
     protected function findModel($id)
     {
         if (($model = ResepNonracikan::findOne(['registrasi_id' => $id])) !== null) {
@@ -353,6 +361,15 @@ class SaranAnjuranController extends Controller{
         }else{
             $model = new SaranAnjuran;
             return $model;
+        }
+    }
+    
+    protected function findRegistrasi($id)
+    {
+        if (($model = Registrasi::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
 }

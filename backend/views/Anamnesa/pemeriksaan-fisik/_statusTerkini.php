@@ -95,8 +95,11 @@ use yii\bootstrap\Modal;
             </div>
         </div>
     <div class="form-group">
-        <?= Html::Button('Submit', ['class' => 'btn btn-primary','id'=>'submit_statusterkini']) ?>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+        <?= Html::Button('Simpan', ['class' => 'btn btn-primary','id'=>'submit_statusterkini']) ?>
+<!--        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+        <?php if(Yii::$app->user->can('Perawat')){ ?>
+        <?= Html::a('Selesai', ['exit','id' => $model->registrasi_id], ['class'=>'btn btn-primary']) ?>
+        <?php } ?>
     </div>  
  <?php ActiveForm::end(); ?>
 <?php

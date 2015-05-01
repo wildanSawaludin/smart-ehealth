@@ -51,7 +51,15 @@ class PemeriksaanFisikController extends Controller{
      
  }
  
- public function actionSaveStatusterkini($id){
+ public function actionExit($id) {
+     $modelRegistrasi = $this->findPasien($id);
+     $modelRegistrasi->status_registrasi = 'Pemeriksaan';
+     $modelRegistrasi->save();
+     
+     return $this->redirect(['/registrasi/index']);        
+ }
+
+  public function actionSaveStatusterkini($id){
      $model = $this->findModel($id);
     
        $return =0;

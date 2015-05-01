@@ -87,7 +87,9 @@ $data = ArrayHelper::map(NamaObat::find()->all(), 'id', 'lazim');
 								    			<input type="checkbox" name="label_etiket" value="1"> Label / Etiket<br>
 								    		</div>
 								    		<div class="col-sm-2 pull-right">  
-								    			<input type="submit" value="Ok" id="sumbitRr" class="btn btn-primary">
+<!--								    			<input type="submit" value="Ok" id="sumbitRr" class="btn btn-primary">-->
+                                                                                    <?= Html::a('Selesai', ['exit','id' => $resepRacikan->registrasi_id], ['class'=>'btn btn-primary']) ?>
+                                                                                    
 								    		</div>
 								  		</div>
 								</form>
@@ -181,7 +183,8 @@ $data = ArrayHelper::map(NamaObat::find()->all(), 'id', 'lazim');
 										</div>
 										<div class="col-sm-2 "> Label / Etiket<br> </div>
 								    	<div class="col-sm-2 pull-right">  
-								    		<input type="submit" value="Ok" id="sumbitRn" class="btn btn-primary">
+<!--								    		<input type="submit" value="Ok" id="sumbitRn" class="btn btn-primary">-->
+                                                                            <?= Html::a('Selesai', ['exit','id' => $resepRacikan->registrasi_id], ['class'=>'btn btn-primary']) ?>
 								    	</div>
 								  	</div>
 								</form>
@@ -325,13 +328,13 @@ $data = ArrayHelper::map(NamaObat::find()->all(), 'id', 'lazim');
 			$(this).parents('li').remove();
 		});
 
-		$("#sumbitRr").click(function() {
-			console.log($('#formRr').serializeObject());
-		});
-
-		$("#sumbitRn").click(function() {
-			console.log($('#formRn').serializeObject());
-		})
+//		$("#sumbitRr").click(function() {
+//			console.log($('#formRr').serializeObject());
+//		});
+//
+//		$("#sumbitRn").click(function() {
+//			console.log($('#formRn').serializeObject());
+//		})
 
 	});
 
