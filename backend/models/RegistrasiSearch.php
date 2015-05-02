@@ -113,9 +113,9 @@ class RegistrasiSearch extends Registrasi {
             ['>=', 'tanggal_kunjungan',  $this->tanggal_kunjungan]
         );
         
-        $query->andFilterWhere(
-            ['=', 'status_registrasi',  'Antrian']
-        );
+//        $query->andFilterWhere(
+//            ['=', 'status_registrasi',  'Antrian']
+//        );
 
         return $dataProvider;
     }
