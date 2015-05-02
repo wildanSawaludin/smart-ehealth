@@ -224,7 +224,10 @@ class DiagnosaController extends Controller
                 $resepNonRacikan->label_etiket = $input['label_etiket'];
             }
             $resepNonRacikan->update();
-
+            $modelRegistrasi = Registrasi::findOne($resepNonRacikan->registrasi_id);
+            $modelRegistrasi->status_registrasi = 'Selesai';
+            $modelRegistrasi->save();
+            
             foreach ($input['resep'] as $key => $value) {
                 $newResepNonracikanDetail = new ResepNonracikanDetail();
                 $newResepNonracikanDetail->resep_nonracikan_id = $resepNonRacikan->id;
@@ -258,6 +261,10 @@ class DiagnosaController extends Controller
                 $resepRacikan->label_etiket = $input['label_etiket'];
             }
             $resepRacikan->update();
+            
+            $modelRegistrasi = Registrasi::findOne($resepRacikan->registrasi_id);
+            $modelRegistrasi->status_registrasi = 'Selesai';
+            $modelRegistrasi->save();
 
             foreach ($input['resep'] as $key => $value) {
                 $resepRacikanDetail = new ResepRacikanDetail();
