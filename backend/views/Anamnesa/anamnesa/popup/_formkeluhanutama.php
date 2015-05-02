@@ -37,3 +37,14 @@ background-color:#fafafa;padding:2px;
                     </div>
 
 <?php ActiveForm::end(); ?>
+    <?php
+//$this->registerJsFile('/admin/js/popupLokasi.js');
+$this->registerJs("$(document).ready(function () {  
+        $('input[name=\"Anamnesa[keluhan]\"]').change(function () {
+        $('#m_keluhanDetail').html('');
+        $('#m_keluhanDetail').load(baseurl + '/Anamnesa/anamnesa/popup-keluhan?id='+".$model->id."+'&param='+$(this).val());
+        $('#m_keluhanDetail').modal('show');
+
+    });
+    
+    });");

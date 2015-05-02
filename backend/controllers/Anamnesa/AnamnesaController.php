@@ -470,8 +470,10 @@ $model->save();
     {
         $this->layout = 'main';
         $modelRegistrasi = $this->findRegistrasi($id);
-        $model = $this->findModel($modelRegistrasi->id);
-
+       // $model = $this->findRegistrasi($id);
+	   
+		$model =Anamnesa::findOne(['registrasi_id'=>$id]);
+	
         $registrasi = Registrasi::findOne($model->registrasi_id);
         $pemeriksaan_fisik = PemeriksaanFisik::findOne(['registrasi_id' => $registrasi->id]);
         $faktor_resiko_riwayat = explode(',', $model->faktor_resiko_riwayat);
