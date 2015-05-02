@@ -42,7 +42,6 @@ AppAsset::register($this);
                 $menuItems[] = ['label' => 'Signup', 'url' => ['/user/registration/register']];
                 $menuItems[] = ['label' => 'Login', 'url' => ['/user/security/login']];
             } else {
-                $menuItems[] = ['label' => 'Fasilitas Kesehatan', 'url' => ['/fasilitas-kesehatan/index']];
                 $menuItems[] = ['label' => 'Setting', 'url' => ['/user/settings/profile']];
                 $menuItems[] = [
                     'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
@@ -65,7 +64,7 @@ AppAsset::register($this);
         <?= $content ?>
         </div>
     </div>
-	<img class="pull-right" style="position:;clear:both;bottom:150px;" src="<?= Yii::getAlias('@web') ?>/frontend/web/images/logo-white.png">
+	<!--<img class="pull-right" style="position:;clear:both;bottom:150px;" src="<?= Yii::getAlias('@web') ?>/frontend/web/images/logo-white.png">-->
     <footer class="footer ">
         <div class="container">
         <p class="pull-left">&copy; <?= Yii::$app->name . ' ' .date('Y') ?></p>
