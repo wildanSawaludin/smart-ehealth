@@ -66,8 +66,23 @@ use kartik\checkbox\CheckboxX;
              <?=    $form->field($model, 'mata_ujifront_kiri')->dropDownList($model->optionsMataUjiKonf); ?></div>
         </div>
 
+ <div class="form-group">
+         
+             <div class="col-md-2">
+               
+             <?=    $form->field($model, 'mata_ujitonom_kanan')->textInput(); ?></div>
+         <label for="kesadaran" class="col-md-2">mmHg </label>
+        
+           
+            <label for="kesadaran" class="col-md-3">Tonometri Visus </label>
+       <div class="col-md-2">
+               
+             <?=    $form->field($model, 'mata_ujitonom_kiri')->textInput(); ?></div>
+         <label for="kesadaran" class="col-md-2">mmHg </label>
+</div>
+
   <div class="form-group">
-        <?= Html::Button('Submit', ['class' => 'btn btn-primary','id'=>'submit_matapalpasi']) ?>
+        <?= Html::Button('Submit', ['class' => 'btn btn-primary','id'=>'submit_matauji']) ?>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
     </div> 
  <?php ActiveForm::end(); ?>
@@ -77,12 +92,12 @@ use kartik\checkbox\CheckboxX;
 
 $this->registerJs("$(document).ready(function () {
   
-     $('#submit_matapalpasi').click(function(){
+     $('#submit_matauji').click(function(){
    $.ajax({
         type     :'POST',
         cache    : false,
         dataType : 'json',
-        data    : $('#mataPalpasi-form').serialize(),
+        data    : $('#mataUji-form').serialize(),
         url  : 'save-statusterkini?id='+".$model->id.",
             success  : function(response) {
                alert('data berhasil disimpan');

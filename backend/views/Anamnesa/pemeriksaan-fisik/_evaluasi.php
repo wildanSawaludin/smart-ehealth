@@ -208,6 +208,59 @@ use kartik\checkbox\CheckboxX;
 
 
 ?> 
+<?php
+
+    Modal::begin([
+            'id' => 'm_Telinga',
+             'size' => 'modal-lg',
+             'header'=>'
+   Telinga
+       '
+        ]);
+ 
+    echo "<div id='modalTelinga'></div>";
+ 
+    Modal::end();
+
+
+
+?> 
+
+<?php
+
+    Modal::begin([
+            'id' => 'm_Hidung',
+             'size' => 'modal-lg',
+             'header'=>'
+   Hidung
+       '
+        ]);
+ 
+    echo "<div id='modalHidung'></div>";
+ 
+    Modal::end();
+
+
+
+?>
+
+<?php
+
+    Modal::begin([
+            'id' => 'm_Mulut',
+             'size' => 'modal-lg',
+             'header'=>'
+   Mulut
+       '
+        ]);
+ 
+    echo "<div id='modalMulut'></div>";
+ 
+    Modal::end();
+
+
+
+?>
 
 <?php
 
@@ -240,6 +293,17 @@ $('#pemeriksaanfisik-evaluasi_mata').change(function(){
      $('#m_Mata').modal('show').find('#modalMata').load(baseurl + '/Anamnesa/pemeriksaan-fisik/popup-mata?id=".$model->id."');
 });
 
+$('#pemeriksaanfisik-evaluasi_telinga').change(function(){
+     $('#m_Telinga').modal('show').find('#modalTelinga').load(baseurl + '/Anamnesa/pemeriksaan-fisik/popup-telinga?id=".$model->id."');
+});
+
+$('#pemeriksaanfisik-evaluasi_hidung').change(function(){
+     $('#m_Hidung').modal('show').find('#modalHidung').load(baseurl + '/Anamnesa/pemeriksaan-fisik/popup-hidung?id=".$model->id."');
+});
+
+$('#pemeriksaanfisik-evaluasi_mulut').change(function(){
+     $('#m_Mulut').modal('show').find('#modalMulut').load(baseurl + '/Anamnesa/pemeriksaan-fisik/popup-mulut?id=".$model->id."');
+});
 
       
 
