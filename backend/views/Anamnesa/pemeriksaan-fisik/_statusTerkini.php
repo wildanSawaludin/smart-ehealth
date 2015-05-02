@@ -58,7 +58,7 @@ use yii\bootstrap\Modal;
             <label for="kesadaran" class="col-md-4">Berat Badan :</label>
             <div class="col-md-2">
                 
-                         <?=    $form->field($model, 'st_bb')->textInput(['maxlength'=>'5']); ?>
+                         <?=    $form->field($model, 'st_bb')->textInput(['maxlength'=>'5','class'=>'allownumericwithdecimal']); ?>
                
             </div> <label for="kesadaran" class="col-md-1">Kg</label>
         </div>
@@ -66,7 +66,7 @@ use yii\bootstrap\Modal;
             <label for="kesadaran" class="col-md-4">Tinggi Badan :</label>
             <div class="col-md-2">
                 
-                         <?=    $form->field($model, 'st_tb')->textInput(['maxlength'=>'5']); ?>
+                         <?=    $form->field($model, 'st_tb')->textInput(['maxlength'=>'5','class'=>'allownumericwithdecimal']); ?>
                  
             </div><label for="kesadaran" class="col-md-1">Cm</label>
         </div>
@@ -172,6 +172,13 @@ $('#pemeriksaanfisik-st_tb').blur(function () {
     });
 });
    
+ $('.allownumericwithdecimal').on('keypress keyup blur',function (event) {
+           
+     $(this).val($(this).val().replace(/[^0-9\.]/g,''));
+            if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+        });
 
     });");
 ?>
