@@ -38,11 +38,17 @@ class RegistrasiSearch extends Registrasi {
      * @return ActiveDataProvider
      */
     public function search($params) {
+        if(Yii::$app->user->can('Dokter')){
+            $query = Registrasi::find()->where('status_registrasi <> "Selesai"')
+                    ->joinWith(['pasien'])
+                    ->joinWith(['faskes']);
+        }
+        else {
         $query = Registrasi::find()
                 ->joinWith(['pasien'])
                 ->joinWith(['faskes'])
                 ;
-
+        }
         $items = $query
                 ->select([
                     'pasien.nama as pasienNama',

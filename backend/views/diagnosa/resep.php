@@ -11,6 +11,10 @@ use backend\models\NamaObat;
 
 $data = ArrayHelper::map(NamaObat::find()->all(), 'id', 'lazim');
 
+if(Yii::$app->user->can('Apoteker')){
+$this->title = Yii::t('app', 'Resume Kesehatan');
+$GLOBALS['page_title'] = '<h1>Resume<small>Kesehatan</small></h1>';
+}
 ?>
 
  <div class="col-sm-12">
@@ -18,6 +22,16 @@ $data = ArrayHelper::map(NamaObat::find()->all(), 'id', 'lazim');
 				        <ul id="tab-main" class="nav nav-tabs">
 				            <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="false">Resep Obat Non-Racikan</a></li>
 				            <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Resep Obat Racikan</a></li>
+                                            <?php if(Yii::$app->user->can('Apoteker')){ ?>
+                                            <li class="pull-right header">
+                                                <dl class="dl-horizontal">
+                                                    <dt>No RM</dt>
+                                                    <dd><?= str_pad($pasien->id, 6, '0', STR_PAD_LEFT) ?></dd>
+                                                    <dt>Nama</dt>
+                                                    <dd><?= $pasien->nama.' / '.$pasien->getUsia().' / '.$pasien->jenkel[0] ?></dd>
+                                                </dl>
+                                            </li>
+                                            <?php }?>
 				        </ul>
 				        <div class="tab-content" style="min-height:800px;">
 				            <div class="tab-pane active" id="tab_1">
@@ -41,6 +55,7 @@ $data = ArrayHelper::map(NamaObat::find()->all(), 'id', 'lazim');
 								  		<div class="form-group">
 								    		<div class="col-sm-10">
 								    			<select class="form-control" name="status">
+                                                                                                <option></option>
 								    				<option value="1">CITO!</option> 
 								    				<option value="2">Statim</option> 
 								    				<option value="3">Urgent</option> 
@@ -73,6 +88,7 @@ $data = ArrayHelper::map(NamaObat::find()->all(), 'id', 'lazim');
 								    	<label class="col-sm-2 control-label">Iter</label>
 								    	<div class="col-sm-2">
 								    		<select class="form-control" name="iter">
+                                                                                        <option></option>
 								    			<option value="1">n.i</option> 
 								    			<option value="2">1x</option> 
 								    			<option value="3">2x</option> 
@@ -86,11 +102,18 @@ $data = ArrayHelper::map(NamaObat::find()->all(), 'id', 'lazim');
 								    		<div class="col-sm-2">
 								    			<input type="checkbox" name="label_etiket" value="1"> Label / Etiket<br>
 								    		</div>
-								    		<div class="col-sm-2 pull-right">  
-<!--								    			<input type="submit" value="Ok" id="sumbitRr" class="btn btn-primary">-->
+								    		<?php if(!Yii::$app->user->can('Apoteker')){ ?>
+                                                                                <div class="col-sm-2 pull-right">  
+<!--        								    		<input type="submit" value="Ok" id="sumbitRn" class="btn btn-primary">-->
                                                                                     <?= Html::a('Selesai', ['exit','id' => $resepRacikan->registrasi_id], ['class'=>'btn btn-primary']) ?>
-                                                                                    
-								    		</div>
+                                                                                </div>
+                                                                                <?php }?>
+                                                                                <?php if(Yii::$app->user->can('Apoteker')){ ?>
+                                                                                <div class="col-sm-2 pull-right">  
+        								    		<!--<input type="submit" value="Ok" id="sumbitRn" class="btn btn-primary">-->
+                                                                                    <?= Html::a('Selesai', ['/registrasi/index'], ['class'=>'btn btn-primary']) ?>
+                                                                                </div>
+                                                                                <?php }?>
 								  		</div>
 								</form>
 				            </div><!-- /.tab-pane -->
@@ -115,6 +138,7 @@ $data = ArrayHelper::map(NamaObat::find()->all(), 'id', 'lazim');
 								  		<div class="form-group">
 								    		<div class="col-sm-10">
 								    			<select class="form-control" name="status">
+                                                                                                <option></option>
 								    				<option value="1">CITO!</option> 
 								    				<option value="2">Statim</option> 
 								    				<option value="3">Urgent</option> 
@@ -182,10 +206,18 @@ $data = ArrayHelper::map(NamaObat::find()->all(), 'id', 'lazim');
 											<input type="checkbox" value="1" name="label_etiket"> 							    		
 										</div>
 										<div class="col-sm-2 "> Label / Etiket<br> </div>
+                                                                        <?php if(!Yii::$app->user->can('Apoteker')){ ?>
 								    	<div class="col-sm-2 pull-right">  
 <!--								    		<input type="submit" value="Ok" id="sumbitRn" class="btn btn-primary">-->
-                                                                            <?= Html::a('Selesai', ['exit','id' => $resepRacikan->registrasi_id], ['class'=>'btn btn-primary']) ?>
+                                                                            <?= Html::a('Selesai', ['exit','id' => $resepRacikan->registrasi_id], ['class'=>'btn btn-primary','id'=>'sumbitRn']) ?>
 								    	</div>
+                                                                        <?php }?>
+                                                                        <?php if(Yii::$app->user->can('Apoteker')){ ?>
+                                                                                <div class="col-sm-2 pull-right">  
+<!--        								    		<input type="submit" value="Ok" id="sumbitRn" class="btn btn-primary">-->
+                                                                                    <?= Html::a('Selesai', ['/registrasi/index'], ['class'=>'btn btn-primary']) ?>
+                                                                                </div>
+                                                                        <?php }?>        
 								  	</div>
 								</form>
 				            </div><!-- /.tab-pane -->
