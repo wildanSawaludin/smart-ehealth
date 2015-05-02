@@ -381,7 +381,7 @@ class RegistrasiController extends Controller {
                 <div class="form-group no-margin-botom">
                     <label class="col-sm-3 col-md-offset-1 control-label">TTL</label>
                     <div class="col-sm-7">
-                        <p class="form-control-static">'.$tempat.', '.$tangal.'</p>
+                        <p class="form-control-static">'.$tempat.', '.$tanggal.'</p>
                     </div>
                 </div>
                 <div class="form-group no-margin-botom">
