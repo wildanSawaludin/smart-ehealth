@@ -87,7 +87,7 @@ class RegistrasiSearch extends Registrasi {
         ]);
 
         $query->andFilterWhere(['like', 'no_reg', $this->no_reg])
-                ->andFilterWhere(['like', 'status_registrasi', $this->status_registrasi])
+                //->andFilterWhere(['like', 'status_registrasi', ''])
                 ->andFilterWhere(['like', 'asal_registrasi', $this->asal_registrasi])
                 ->andFilterWhere(['like', 'status_pelayanan', $this->status_pelayanan])
                 ->andFilterWhere(['like', 'status_rawat', $this->status_rawat])
@@ -105,6 +105,10 @@ class RegistrasiSearch extends Registrasi {
 
         $query->andFilterWhere(
             ['>=', 'tanggal_kunjungan',  $this->tanggal_kunjungan]
+        );
+        
+        $query->andFilterWhere(
+            ['=', 'status_registrasi',  'Antrian']
         );
 
         return $dataProvider;
