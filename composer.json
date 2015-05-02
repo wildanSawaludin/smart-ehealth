@@ -34,8 +34,7 @@
         "2amigos/yii2-file-upload-widget": "*",
         "mongosoft/yii2-upload-behavior": "*",
         "mdmsoft/yii2-admin": "dev-master",
-        "dektrium/yii2-user": "*",
-        "kartik-v/yii2-tabs-x": "*",
+        "dektrium/yii2-user": "*",        "kartik-v/yii2-tabs-x": "*",
         "kartik-v/yii2-popover-x": "*",
         "mdmsoft/yii2-admin": "*",
         "dektrium/yii2-user": "*",
@@ -43,8 +42,13 @@
         "dmstr/yii2-adminlte-asset": "2.*@dev",
 	"cebe/yii2-gravatar": "*",
         "kartik-v/yii2-widget-datetimepicker": "*",
+<<<<<<< Updated upstream
         "kartik-v/yii2-checkbox-x": "*",
         "2amigos/yii2-ckeditor-widget": "~1.0"
+=======
+        "2amigos/yii2-ckeditor-widget": "~1.0",
+        "kartik-v/yii2-checkbox-x": "*"
+>>>>>>> Stashed changes
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

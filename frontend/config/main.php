@@ -59,6 +59,7 @@ return [
             'user/*',
             'site/error',
             'debug/*',
+            'service/*'
         ]
     ],
     'params' => $params,

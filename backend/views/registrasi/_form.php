@@ -282,14 +282,12 @@ SCRIPT;
         </div>
     </div>
     <?php  echo $form->errorSummary($model); ?>
-    <?php if(Yii::$app->user->can('Verifikator')||Yii::$app->user->can('Administrator')){ ?>
     <div class="row form-group col-sm-offset-4" style=";padding-bottom:20px;">
         <div class="col-sm-4 col-sm-offset-4">
             <?= Html::resetButton('<span class="fa fa-refresh"></span> Reset', ['class' => 'btn btn-reset']) ?>
             <?= Html::submitButton('<span class="glyphicon glyphicon-plus"></span> Daftar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
         </div>
     </div>
-    <?php } ?>
 </div>
 
 <?php

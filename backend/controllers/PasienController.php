@@ -112,12 +112,13 @@ class PasienController extends Controller
             'scenario' => 'create',
         ]);
         
-        if (Yii::$app->request->post()) {
-            $user->load(Yii::$app->request->post());
+//        if (Yii::$app->request->post()) {
+//            $user->load(Yii::$app->request->post());
             $user->username = str_pad($id, 6, "0", STR_PAD_LEFT);
-//          $user->email = 'username'.$id.'@example.com';
+            $user->email = 'username'.$id.'@example.com';
             $user->password = 'segeradiubah';
-            if($user->create()){
+            $user->create();
+            
                 $model = $this->findModel($id);
                 $model->user_id = $user->id;
                 $model->save();
@@ -125,12 +126,14 @@ class PasienController extends Controller
                 $access = Yii::$app->authManager;
                 $item = $access->getRole('Pasien');
                 $access->assign($item,$user->id);
-                
-                return $this->redirect(['index']);}
-        }
+                if($model->save()){
+                    Yii::$app->getSession()->setFlash('success', 'Aktivasi User telah berhasil');
+                }
+                return $this->redirect(['index']);
+        
 //        return $this->redirect(['index']);
-        return $this->render('_user',['user'=>$user]);
-
+//        return $this->render('_user',['user'=>$user]);
+//
     }
     
     public function actionDeactivation($id)
@@ -143,8 +146,9 @@ class PasienController extends Controller
         $item = $access->getRole('Pasien');
         $access->revoke($item,$modelUser->id);
         $modelUser->delete();
-        
-        
+        if($model->save()){
+                    Yii::$app->getSession()->setFlash('success', 'Deaktivasi User telah berhasil');
+                }      
         
         return $this->redirect(['index']);
 

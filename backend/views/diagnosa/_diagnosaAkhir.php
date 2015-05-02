@@ -54,4 +54,11 @@ use kartik\grid\GridView;
              );*/
         })
     });
+
+    function informasiDiagnosa(id)
+    {
+        $('#pop-info').html();
+        $('#pop-info').load(baseurl + '/diagnosa/pop-info?id='+id);
+        $('#pop-info').modal('show');
+    }
 </script>

@@ -25,8 +25,7 @@ use kartik\grid\GridView;
     <tr style="padding:20px;">
        <th>Kode</th>
         <th>Diagnosa</th>
-        <th>Action</th>
-         <th>Action <a href="#" id="tambah-diagnosa-kerja" style="display:inline;" class="btn btn-info">+</a></th>
+        <th>Action <a href="#" id="tambah-diagnosa-kerja" style="display:inline;" class="btn btn-info">+</a></th>
     </tr>
     </thead>
     <tbody id="tbody-diagnosa-kerja">
@@ -34,6 +33,7 @@ use kartik\grid\GridView;
         <tr id="tr-diagnosa-kerja<?= $model['icdx_id'] ?>">
             <td><?= $value->icdx->kode ?></td>
             <td><?= $value->icdx->inggris ?></td>
+            <td><a id="view-info" onclick="informasiDiagnosa(<?= $value['icdx_id'] ?>)" class="btn btn-primary">View</a> </td>
         </tr>
     <?php endforeach; ?>
     </tbody>
@@ -62,4 +62,11 @@ use kartik\grid\GridView;
              );*/
         })
     });
+
+    function informasiDiagnosa(id)
+    {
+        $('#pop-info').html();
+        $('#pop-info').load(baseurl + '/diagnosa/pop-info?id='+id);
+        $('#pop-info').modal('show');
+    }
 </script>

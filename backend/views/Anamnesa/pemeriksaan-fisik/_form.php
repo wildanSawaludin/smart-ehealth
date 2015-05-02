@@ -7,15 +7,21 @@ use kartik\tabs\TabsX;
 use backend\models\Lookup;
 use yii\helpers\Url;
 
-$this->title = Yii::t('app', 'Update {modelClass}: ', [
-    'modelClass' => 'Anamnesa',
-]) . ' ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Anamnesas'), 'url' => ['index']];
+//$this->title = Yii::t('app', 'Update {modelClass}: ', [
+//    'modelClass' => 'Anamnesa',
+//]) . ' ' . $model->id;
+//$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Anamnesas'), 'url' => ['index']];
+//$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+//$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
+//
+//$GLOBALS['page_title'] = '<h1>Anamnesa<small>Pemeriksaan Fisik</small></h1>';
+//$GLOBALS['collapse'] = true;
+
+$this->title = Yii::t('app', 'Resume Kesehatan');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Resume Kesehatan'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
-
-$GLOBALS['page_title'] = '<h1>Anamnesa<small>Pemeriksaan Fisik</small></h1>';
-//$GLOBALS['collapse'] = true;
+$GLOBALS['page_title'] = '<h1>Resume<small>Kesehatan</small></h1>';
 
 if(Yii::$app->user->can('Dokter') || Yii::$app->user->can('Administrator')){
 $items = [
@@ -63,7 +69,9 @@ else{
 <div class="row">
     <div class="nav-tabs-custom">
         <ul id="tab-main" class="nav nav-tabs">
+            <?php if(!Yii::$app->user->can('Perawat')){ ?>
             <li class=""><a href="#tab_1" data-toggle="tab" aria-expanded="false">Anamnesa</a></li>
+            <?php } ?>
             <li class="active"><a href="#tab_2" data-toggle="tab" aria-expanded="true">Pemeriksaan Fisik</a></li>
             <?php if(Yii::$app->user->can('Dokter') || Yii::$app->user->can('Administrator')){ ?>
             <li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="false">Diagnosa</a></li>
