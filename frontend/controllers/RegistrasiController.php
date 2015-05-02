@@ -7,6 +7,10 @@ use backend\models\Registrasi;
 use backend\models\RegistrasiSearch;
 use backend\models\Pasien;
 use backend\models\FasilitasKesehatan;
+use backend\models\Anamnesa;
+use backend\models\AnamnesaSearch;
+use backend\models\Diagnosa;
+use backend\models\PemeriksaanFisik;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -50,6 +54,21 @@ class RegistrasiController extends Controller
             $model->save();
             $model->no_reg= str_pad($model->id, 8, '0', STR_PAD_LEFT);
             $model->save();
+            if($model->save()){
+                $modelResume = new Anamnesa;
+                $modelResume->registrasi_id = $model->id;
+                $modelResume->save();
+
+                //insert diagnosa
+                $modelDiagnosa = new Diagnosa();
+                $modelDiagnosa->registrasi_id = $model->id;
+                $modelDiagnosa->save();
+
+                //insert pemeriksaan fisik
+                $modelPemeriksaanFisik = new PemeriksaanFisik();
+                $modelPemeriksaanFisik->registrasi_id = $model->id;
+                $modelPemeriksaanFisik->save();
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         }
 //        var_dump($model);
