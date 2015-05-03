@@ -231,7 +231,38 @@ class PemeriksaanFisikController extends Controller{
         
  }
  
-
+ public function actionPopupTelinga($id){
+       $model = $this->findModel($id);
+       
+            return $this->renderAjax('_popupTelinga', [
+                'model' => $model,
+               
+                
+            ]);
+        
+ }
+ 
+  public function actionPopupHidung($id){
+       $model = $this->findModel($id);
+       
+            return $this->renderAjax('_popupHidung', [
+                'model' => $model,
+               
+                
+            ]);
+        
+ }
+ 
+   public function actionPopupMulut($id){
+       $model = $this->findModel($id);
+       
+            return $this->renderAjax('_popupMulut', [
+                'model' => $model,
+               
+                
+            ]);
+        
+ }
  
  
      protected function findModel($id)

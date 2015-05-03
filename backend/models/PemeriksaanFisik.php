@@ -1284,5 +1284,52 @@ class PemeriksaanFisik extends \yii\db\ActiveRecord
 
        );
  }
+ 
+  public function getOptionsTelingaInsAurikula()
+{ 
+   return array(
+     'NORMAL'=>'NORMAL','Keloid'=>'Keloid','Kista dermoid'=>'Kista dermoid','Kista epidermoid'=>'Kista epidermoid','Cauliflower'=>'Cauliflower',
 
+       );
+ }
+ 
+   public function getOptionsTelingaIUjiPendBisik()
+{ 
+   return array(
+     '(+)'=>'(+)','(-)'=>'(-)',
+
+       );
+ }
+ 
+    public function getOptionsTelingaIUjiPendGarpu()
+{ 
+   return array(
+     '(+)'=>'(+)','(-)'=>'(-)',
+
+       );
+ }
+
+     public function getOptionsTelingaIUjiPendAudio()
+{ 
+   return array(
+     '(+)'=>'(+)','(-)'=>'(-)',
+
+       );
+ }
+ 
+      public function getOptionsTelingaIUjiPendTympa()
+{ 
+   return array(
+     '(+)'=>'(+)','(-)'=>'(-)',
+
+       );
+ }
+ 
+       public function getOptionsTelingaIUjiPendVesti()
+{ 
+   return array(
+     '(+)'=>'(+)','(-)'=>'(-)',
+
+       );
+ }
 }

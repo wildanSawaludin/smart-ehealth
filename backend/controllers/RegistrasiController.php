@@ -60,7 +60,11 @@ class RegistrasiController extends Controller {
         if(Yii::$app->user->can('Perawat')){
             $searchModel = new RegistrasiSearch();
             $searchModel->status_registrasi = 'Antrian';
-//            $searchModel->status_registrasi = 'Pemeriksaan';
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        }
+        elseif(Yii::$app->user->can('Apoteker')){
+            $searchModel = new RegistrasiSearch();
+            $searchModel->status_registrasi = 'Selesai';
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         }
         else {
@@ -274,7 +278,8 @@ class RegistrasiController extends Controller {
             return $this->redirect(['Anamnesa/pemeriksaan-fisik/update', 'id' => $model->id]);
         }
         elseif (Yii::$app->user->can('Apoteker')) {
-            return $this->redirect(['diagnosa/show-resep-obat-form', 'id' => $model->id]);
+            $modelAnamnesa = Anamnesa::findOne(['registrasi_id'=>$id]);
+            return $this->redirect(['diagnosa/show-resep-obat-form', 'id' => $modelAnamnesa->id]);
         }
         else {
             return $this->redirect(['Anamnesa/anamnesa/main', 'id' => $model->id]);
@@ -381,7 +386,7 @@ class RegistrasiController extends Controller {
                 <div class="form-group no-margin-botom">
                     <label class="col-sm-3 col-md-offset-1 control-label">TTL</label>
                     <div class="col-sm-7">
-                        <p class="form-control-static">'.$tempat.', '.$tangal.'</p>
+                        <p class="form-control-static">'.$tempat.', '.$tanggal.'</p>
                     </div>
                 </div>
                 <div class="form-group no-margin-botom">
