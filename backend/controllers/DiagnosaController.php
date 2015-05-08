@@ -207,9 +207,9 @@ class DiagnosaController extends Controller
             'resepRacikanDetail' => ResepRacikanDetail::findAll(['resep_racikan_id' => $rese])
         ];
 
-        var_dump($resepRacikan);
+//        var_dump($resepRacikan);
         //var_dump($resepNonRacikan);
-        exit();
+//        exit();
 
         return $this->render('showResep', [
             'registrasi' => $registrasi,

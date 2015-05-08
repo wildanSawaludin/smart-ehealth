@@ -26,7 +26,7 @@ use yii\bootstrap\Modal;
         <div class="content">
 		    <div class="form-group">  
                         <label class="col-lg-4 control-label" for="lama_perlangsungan">Lama Perlangsungan :</label>
-                    <div class="col-sm-3">
+                    <div class="col-sm-2">
                         <?= $form->field($model, 'keluhan_berlangsung_nil')->textInput(['maxlength'=>'2']); ?>
                        </div>
                         <div class="col-sm-2">
@@ -45,31 +45,36 @@ use yii\bootstrap\Modal;
              <div class="form-group">    
                      <label class="col-lg-4 control-label" for="sifat_perlangsungan">Sifat Perlangsungan:</label>
                      <label class="col-lg-2 control-label" for="durasi">Durasi :</label>
-                    <div class="col-sm-3">
+                    <div class="col-sm-2">
                           <?= $form->field($model, 'keluhan_durasi_nil')->textInput(['maxlength'=>'2']); ?>
                        </div>
                         <div class="col-sm-2">
-                             <?= $form->field($model, 'keluhan_durasi_lama')->dropDownList($model->optionsKeluhanDurasilama) ?>
+                             <?= $form->field($model, 'keluhan_durasi_lama')->dropDownList($model->optionsKeluhanDurasilama, ['prompt' => '']) ?>
+                            
                         </div>
+                        <?= Html::Button('adv', [ 'class' => 'btn btn-primary', 'id' => 'perlangsungan_adv' ]); ?>
                      
                
              </div>
             
                <div class="form-group">  
-                         <label class="col-lg-4 control-label" for="frekuensi">Frekuens2i :</label>
+                        <label class="col-lg-2 control-label" for="frekuensi"></label>
+                         <label class="col-lg-4 control-label" for="frekuensi">Frekuensi :</label>
                           <div class="col-sm-4">
                        
                         
-                        <?= $form->field($model, 'keluhan_frekuensi')->dropDownList($model->optionsKeluhanFrekuensi)?>
+                        <?= $form->field($model, 'keluhan_frekuensi')->dropDownList($model->optionsKeluhanFrekuensi, ['prompt' => ''])?>
                     </div>
                     </div>
             
              <div class="form-group">  
+                        <label class="col-lg-2 control-label" for="frekuensi"></label>
                          <label class="col-lg-4 control-label" for="frekuensi">Penyebaran :</label>
                           <div class="col-sm-4">
+                        <?= $form->field($model, 'keluhan_menjalar_pil')->checkbox(); ?>
+                        <?= $form->field($model, 'kel_tembus_pil')->checkbox(); ?>
                         
-                        
-                        <?= $form->field($model, 'keluhan_durasi_jenis')->radioList(['1'=>'Menjalar','2'=>'Tembus ke belakang']); ?>
+                        <?php // $form->field($model, 'keluhan_durasi_jenis')->radioList(['1'=>'Menjalar','2'=>'Tembus ke belakang']); ?>
                     </div>
                     </div>
            
@@ -96,10 +101,11 @@ use yii\bootstrap\Modal;
    
                         ?>
                         
-                        <?= $form->field($model, 'kel_kemunculan')->dropDownList($model->optionsKeluhanKemunculan)?>
+                        <?= $form->field($model, 'kel_kemunculan')->dropDownList($model->optionsKeluhanKemunculan, ['prompt' => ''])?>
                           <?= $form->field($model, 'kel_kemunculan_saat')->hiddenInput()?>
                               
                     </div>
+                         <?= Html::Button('adv', [ 'class' => 'btn btn-primary', 'id' => 'kemunculan_adv' ]); ?>
                     </div>
             
             
@@ -113,7 +119,8 @@ use yii\bootstrap\Modal;
                
              </div>
 
-            <div class="form-group">    
+            <div class="form-group">
+                    <label class="col-lg-2 control-label" for="durasi"></label>
                      <label class="col-lg-4 control-label" for="durasi">Kemudian :</label>
                     <div class="col-sm-3">
                           <?= $form->field($model, 'kel_penjelasan_kemudian')->textInput(['maxlength'=>'2000']); ?>
@@ -123,6 +130,7 @@ use yii\bootstrap\Modal;
              </div>
 
             <div class="form-group">    
+                    <label class="col-lg-2 control-label" for="durasi"></label>
                      <label class="col-lg-4 control-label" for="durasi">Saat ini :</label>
                     <div class="col-sm-3">
                           <?= $form->field($model, 'kel_penjelasan_saat')->textInput(['maxlength'=>'2000']); ?>
@@ -206,21 +214,21 @@ $this->registerJs("$(document).ready(function () {
 
 $this->registerJs("$(document).ready(function () {
   
-     $('input[name=\"Anamnesa[keluhan_durasi_jenis]\"]').change(function () {
-      if($('input[name=\"Anamnesa[keluhan_durasi_jenis]\"]:checked').val() == '1'){
+     $('input[name=\"Anamnesa[keluhan_menjalar_pil]\"]').change(function () {
+      if(this.checked){
            $('#m_popupmenjalar').modal('show').find('#modalMenjalarrinci').load(baseurl + '/Anamnesa/anamnesa/popup-menjalar?id='+".$_GET['id'].");
             }
        
    }); 
    
-     $('#anamnesa-kel_kemunculan').change(function () {
+     $('#kemunculan_adv').click(function () {
       
            $('#m_popupkemunculan').modal('show').find('#modalKemunculanrinci').load(baseurl + '/Anamnesa/anamnesa/popup-kemunculan?id=".$_GET['id']."&param='+$(this).val());
             
        
    }); 
    
-$('#anamnesa-keluhan_durasi_lama').change(function(){
+$('#perlangsungan_adv').click(function(){
  $('#m_popupperlangsungan').modal('show').find('#modalPerlangsungan').load(baseurl + '/Anamnesa/anamnesa/sifat-kelangsungan?id=".$_GET['id']."');
 });
 

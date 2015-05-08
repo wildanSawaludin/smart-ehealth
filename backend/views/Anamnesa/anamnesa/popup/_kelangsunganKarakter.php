@@ -25,9 +25,14 @@ use backend\models\Anamnesa;
         ?>
 <div class="form-group">
                  <div  class="col-lg-3">    
-                            <?php 
-                            $keluh = Anamnesa::findOne(['id'=>  $model->id ])->keluhan_rincian;   
-                          
+                            <?php
+                            if($model->keluhan_rincian != NULL){
+                                $keluh = Anamnesa::findOne(['id'=>  $model->id ])->keluhan_rincian;  
+                            }
+                            if($model->keluhan_rincian == NUll && $model->keluhan_lokasi_umum){
+                                $keluh = Anamnesa::findOne(['id'=>  $model->id ])->keluhan_lokasi_umum; 
+                            }
+                            
                             $rinci_karakter = Lookup::items2($keluh,'rincian_karakter');
                        
                             ?>
