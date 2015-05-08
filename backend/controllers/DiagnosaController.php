@@ -177,26 +177,46 @@ class DiagnosaController extends Controller
     public function actionShowResepObatForm($id) {
 
         $this->layout = 'main';
-        $modelAnamnesa = Anamnesa::findOne($id);
-        $registrasi = Registrasi::findOne($modelAnamnesa->registrasi_id);
+        $registrasi = Registrasi::findOne($id);
 
-        $newResepRacikan = new ResepRacikan();
-        $newResepRacikan->user_id = Yii::$app->user->identity->id;
-        $newResepRacikan->registrasi_id = $registrasi->id;
-        $newResepRacikan->save();
-        //$newResepRacikan = ResepRacikan::findOne($newResepRacikan->id);
+        //create array of resep non racikan
+        $resepNonRacikan = array();
+        $resepNonRacikan['resepNonRacikan'] = ResepNonracikan::findOne(['registrasi_id' => $id]);
 
-        $newResepNonRacikan = new ResepNonracikan();
-        $newResepNonRacikan->user_id = Yii::$app->user->identity->id;
-        $newResepNonRacikan->registrasi_id = $registrasi->id;
-        $newResepNonRacikan->save();
+        //if resep non racikan is found then then find all resep non racikan detail
+        if(!empty($resepNonRacikan['resepNonRacikan'])) {
+            $resepNonRacikan['resepNonRacikanDetail'] = ResepNonracikanDetail::findAll(['resep_nonracikan_id' => $resepNonRacikan['resepNonRacikan']->id]);
+        }
+        //array of resep non racikan was completed 
 
-        return $this->render('resep', [
+        //create array of resep racikan
+        $resepRacikan = array();
+        $resepRacikan['resepRacikan'] = ResepRacikan::findOne(['registrasi_id' => $id]);
+
+        //if resep racikan is found then then find all resep racikan detail
+        $resepRacikanDetail = ResepRacikanDetail::findAll(['resep_racikan_id' => $resepRacikan['resepRacikan']->id]);
+        foreach ($resepRacikanDetail as $key => $value) {
+            $resepRacikan['resepRacikanDetail'][] = [
+                'resepRacikanDetail' => $value,
+                'resepObat' => RacikanObat::findAll(['resep_racikan_detail_id' => $value->id])
+            ];
+        }
+
+        $resepRacikan = [
+            'resepRacikan' => ResepRacikan::findOne(['registrasi_id' => $id]),
+            'resepRacikanDetail' => ResepRacikanDetail::findAll(['resep_racikan_id' => $rese])
+        ];
+
+        var_dump($resepRacikan);
+        //var_dump($resepNonRacikan);
+        exit();
+
+        return $this->render('showResep', [
             'registrasi' => $registrasi,
             'user' => Yii::$app->user->identity,
             'pasien' => $registrasi->pasien,
-            'resepRacikan' => $newResepRacikan,
-            'resepNonRacikan' => $newResepNonRacikan
+            'resepRacikan' => $resepRacikan,
+            'resepNonRacikan' => $resepNonRacikan
         ]);
 
     }

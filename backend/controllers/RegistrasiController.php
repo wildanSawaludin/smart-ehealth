@@ -278,8 +278,9 @@ class RegistrasiController extends Controller {
             return $this->redirect(['Anamnesa/pemeriksaan-fisik/update', 'id' => $model->id]);
         }
         elseif (Yii::$app->user->can('Apoteker')) {
-            $modelAnamnesa = Anamnesa::findOne(['registrasi_id'=>$id]);
-            return $this->redirect(['diagnosa/show-resep-obat-form', 'id' => $modelAnamnesa->id]);
+            //$modelAnamnesa = Anamnesa::findOne(['registrasi_id'=>$id]);
+            //return $this->redirect(['diagnosa/show-resep-obat-form', 'id' => $modelAnamnesa->id]);
+            return $this->redirect(['diagnosa/show-resep-obat-form', 'id' => $model->id]);
         }
         else {
             return $this->redirect(['Anamnesa/anamnesa/main', 'id' => $model->id]);
